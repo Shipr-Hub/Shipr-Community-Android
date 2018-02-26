@@ -20,6 +20,11 @@
             android:id="@+id/chat_resource"
             android:icon="@drawable/ic_menu_manage"
             android:title="Resources" />
+
+        <item
+            android:id="@+id/nav_workshop"
+            android:icon="@drawable/ic_menu_send"
+            android:title="Workshop" />
     </group>
 <!--
     <item android:title="Communicate">

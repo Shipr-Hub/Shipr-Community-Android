@@ -25,6 +25,8 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -34,7 +36,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -45,7 +46,6 @@ import io.github.yhdesai.devprops.DeveloperMessage;
 import io.github.yhdesai.devprops.MessageAdapter;
 import io.github.yhdesai.devprops.R;
 
-import java.util.Calendar;
 
 public class general extends Fragment   {
     private static final String TAG = "general";
@@ -70,11 +70,16 @@ public class general extends Fragment   {
     private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
 
+    private AdView mAdView;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_workshop, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_general, container, false);
 
+      //  mAdView = (AdView) rootView.findViewById(R.id.adView);
+      //  AdRequest adRequest = new AdRequest.Builder().build();
+    //    mAdView.loadAd(adRequest);
         FirebaseApp.initializeApp(getActivity());
 
 
@@ -178,6 +183,9 @@ public void onClick(View view) {
             }
         };
         return rootView;
+
+
+
     }
 
     private void onSignedInInitialize(String username) {

@@ -17,7 +17,6 @@ import android.view.MenuItem;
 
 import com.google.firebase.FirebaseApp;
 
-import io.github.yhdesai.devprops.Fragments.workshop;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -83,9 +82,7 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_chat) {
             Intent chat = new Intent(MainActivity.this, chat.class);
             startActivity(chat);
-       } else if (id == R.id.nav_workshop) {
-            FragmentManager todo = getFragmentManager();
-           todo.beginTransaction().replace(R.id.content_frame, new workshop()).commit(); /**
+       }  /**
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_manage) {
@@ -94,7 +91,7 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_send) {**/
 
-        }
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

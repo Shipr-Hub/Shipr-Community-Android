@@ -6,7 +6,8 @@
 
     <string name="action_settings">Alpha</string>
     <string name="title_activity_chat">chat</string>
-    <string name="banner_ad_unit_id"></string>
+
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

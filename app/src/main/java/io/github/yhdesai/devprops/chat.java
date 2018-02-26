@@ -15,6 +15,7 @@ import io.github.yhdesai.devprops.Fragments.Ideas;
 import io.github.yhdesai.devprops.Fragments.general;
 import io.github.yhdesai.devprops.Fragments.help;
 import io.github.yhdesai.devprops.Fragments.resources;
+import io.github.yhdesai.devprops.Fragments.workshop;
 
 public class chat extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -25,6 +26,8 @@ public class chat extends AppCompatActivity
         setContentView(R.layout.activity_chat);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        FragmentManager general = getFragmentManager();
+        general.beginTransaction().replace(R.id.content_chat_frame, new general()).commit();
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -35,6 +38,8 @@ public class chat extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
     }
 
     @Override
@@ -77,18 +82,20 @@ public class chat extends AppCompatActivity
 
         if (id == R.id.chat_general) {
             FragmentManager general = getFragmentManager();
-            general.beginTransaction().replace(R.id.content_frame, new general()).commit();
+            general.beginTransaction().replace(R.id.content_chat_frame, new general()).commit();
         } else if(id == R.id.chat_ideas){
             FragmentManager ideas = getFragmentManager();
-            ideas.beginTransaction().replace(R.id.content_frame, new Ideas()).commit();
+            ideas.beginTransaction().replace(R.id.content_chat_frame, new Ideas()).commit();
         } else if(id == R.id.chat_help) {
             FragmentManager help = getFragmentManager();
-            help.beginTransaction().replace(R.id.content_frame, new help()).commit();
+            help.beginTransaction().replace(R.id.content_chat_frame, new help()).commit();
         } else if(id == R.id.chat_resource) {
             FragmentManager res = getFragmentManager();
-            res.beginTransaction().replace(R.id.content_frame, new resources()).commit();
+            res.beginTransaction().replace(R.id.content_chat_frame, new resources()).commit();
+        }else if (id == R.id.nav_workshop) {
+            FragmentManager todo = getFragmentManager();
+            todo.beginTransaction().replace(R.id.content_chat_frame, new workshop()).commit();
         }
-
 
             DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
