@@ -159,8 +159,7 @@ public void onClick(View view) {
                 if (user != null) {
                     //User is signed in
                     onSignedInInitialize(user.getDisplayName());
-                    Toast.makeText(getActivity(), "You're now signed in. Welcome to Tech.", Toast.LENGTH_SHORT).show();
-                } else {
+                      } else {
                     // User is signed out
                     onSignedOutCleanup();
                     startActivityForResult(

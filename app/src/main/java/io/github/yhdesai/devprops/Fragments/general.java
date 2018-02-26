@@ -164,7 +164,6 @@ public void onClick(View view) {
                 if (user != null) {
                     //User is signed in
                     onSignedInInitialize(user.getDisplayName());
-                    Toast.makeText(getActivity(), "You're now signed in. Welcome to Tech.", Toast.LENGTH_SHORT).show();
                 } else {
                     // User is signed out
                     onSignedOutCleanup();
@@ -172,8 +171,15 @@ public void onClick(View view) {
                             AuthUI.getInstance()
                                     .createSignInIntentBuilder()
                                     .setAvailableProviders(
-                                            Arrays.asList(new AuthUI.IdpConfig.Builder(AuthUI.EMAIL_PROVIDER).build(),
-                                                    new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build()))
+                                            Arrays.asList(
+                                                 //   new AuthUI.IdpConfig.Builder(AuthUI.TWITTER_PROVIDER).build(),
+                                                    new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build(),
+                                                //    new AuthUI.IdpConfig.Builder(AuthUI.FACEBOOK_PROVIDER).build(),
+                                                    new AuthUI.IdpConfig.Builder(AuthUI.EMAIL_PROVIDER).build(),
+                                                    new AuthUI.IdpConfig.Builder(AuthUI.PHONE_VERIFICATION_PROVIDER).build()
+
+
+                                            ))
                                     .build(),
                             RC_SIGN_IN);
 
