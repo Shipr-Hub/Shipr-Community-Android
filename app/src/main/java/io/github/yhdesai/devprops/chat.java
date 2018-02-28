@@ -70,10 +70,12 @@ public class chat extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_logout) {
             FirebaseAuth.getInstance().signOut();
             Intent signout = new Intent(chat.this, MainActivity.class);
             startActivity(signout);
+            return true;
+        }else if(id == R.id.action_settings){
             return true;
         }
 
