@@ -17,6 +17,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import io.github.yhdesai.devprops.Fragments.Ideas;
 import io.github.yhdesai.devprops.Fragments.general;
 import io.github.yhdesai.devprops.Fragments.help;
+import io.github.yhdesai.devprops.Fragments.intro;
 import io.github.yhdesai.devprops.Fragments.resources;
 import io.github.yhdesai.devprops.Fragments.workshop;
 
@@ -91,7 +92,10 @@ public class chat extends AppCompatActivity
         if (id == R.id.chat_general) {
             FragmentManager general = getFragmentManager();
             general.beginTransaction().replace(R.id.content_chat_frame, new general()).commit();
-        } else if(id == R.id.chat_ideas){
+        }else if(id == R.id.chat_intro){
+            FragmentManager intro = getFragmentManager();
+            intro.beginTransaction().replace(R.id.content_chat_frame, new intro()).commit();
+        }else if(id == R.id.chat_ideas){
             FragmentManager ideas = getFragmentManager();
             ideas.beginTransaction().replace(R.id.content_chat_frame, new Ideas()).commit();
         } else if(id == R.id.chat_help) {
