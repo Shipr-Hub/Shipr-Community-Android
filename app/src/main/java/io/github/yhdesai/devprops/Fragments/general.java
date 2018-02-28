@@ -41,6 +41,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 import io.github.yhdesai.devprops.DeveloperMessage;
 import io.github.yhdesai.devprops.MessageAdapter;
@@ -145,7 +146,7 @@ public void onClick(View view) {
             public void onClick(View view) {
 
                 SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-
+                sdf.setTimeZone(TimeZone.getTimeZone("IST"));
                 DeveloperMessage developerMessage = new DeveloperMessage(mMessageEditText.getText().toString(), mUsername, null, sdf.format(new Date()).toString());
                 mMessagesDatabaseReference.push().setValue(developerMessage);
 
