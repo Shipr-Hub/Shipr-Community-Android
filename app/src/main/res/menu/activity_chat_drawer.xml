@@ -24,9 +24,7 @@
             android:id="@+id/chat_resource"
             android:title="Resources" />
 
-        <item
-            android:id="@+id/chat_workshop"
-            android:title="Workshop" />
+
     </group>
 <!--
     <item android:title="Communicate">

@@ -104,9 +104,6 @@ public class chat extends AppCompatActivity
         } else if (id == R.id.chat_resource) {
             FragmentManager res = getFragmentManager();
             res.beginTransaction().replace(R.id.content_chat_frame, new resources()).commit();
-        } else if (id == R.id.chat_workshop) {
-            FragmentManager todo = getFragmentManager();
-            todo.beginTransaction().replace(R.id.content_chat_frame, new workshop()).commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
