@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/hc_announ"
+            android:title="Announcements" />
+        <item
+            android:id="@+id/hc_general"
+            android:title="General" />
+        <item
+            android:id="@+id/hc_poster"
+            android:title="Notice" />
+        <item
+            android:id="@+id/hc_form"
+            android:title="Form"/>
+
+    </group>
+</menu>
