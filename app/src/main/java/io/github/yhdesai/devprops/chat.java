@@ -76,7 +76,7 @@ public class chat extends AppCompatActivity
             Intent signout = new Intent(chat.this, MainActivity.class);
             startActivity(signout);
             return true;
-        }else if(id == R.id.action_settings){
+        } else if (id == R.id.action_settings) {
             return true;
         }
 
@@ -92,24 +92,24 @@ public class chat extends AppCompatActivity
         if (id == R.id.chat_general) {
             FragmentManager general = getFragmentManager();
             general.beginTransaction().replace(R.id.content_chat_frame, new general()).commit();
-        }else if(id == R.id.chat_intro){
+        } else if (id == R.id.chat_intro) {
             FragmentManager intro = getFragmentManager();
             intro.beginTransaction().replace(R.id.content_chat_frame, new intro()).commit();
-        }else if(id == R.id.chat_ideas){
+        } else if (id == R.id.chat_ideas) {
             FragmentManager ideas = getFragmentManager();
             ideas.beginTransaction().replace(R.id.content_chat_frame, new Ideas()).commit();
-        } else if(id == R.id.chat_help) {
+        } else if (id == R.id.chat_help) {
             FragmentManager help = getFragmentManager();
             help.beginTransaction().replace(R.id.content_chat_frame, new help()).commit();
-        } else if(id == R.id.chat_resource) {
+        } else if (id == R.id.chat_resource) {
             FragmentManager res = getFragmentManager();
             res.beginTransaction().replace(R.id.content_chat_frame, new resources()).commit();
-        }else if (id == R.id.nav_workshop) {
+        } else if (id == R.id.chat_workshop) {
             FragmentManager todo = getFragmentManager();
             todo.beginTransaction().replace(R.id.content_chat_frame, new workshop()).commit();
         }
 
-            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
