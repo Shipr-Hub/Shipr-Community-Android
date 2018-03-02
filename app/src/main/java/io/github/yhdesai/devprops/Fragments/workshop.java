@@ -15,7 +15,6 @@ import io.github.yhdesai.devprops.R;
 import io.github.yhdesai.devprops.hackclubs.announcements;
 import io.github.yhdesai.devprops.hackclubs.hc_form;
 import io.github.yhdesai.devprops.hackclubs.hc_general;
-import io.github.yhdesai.devprops.hackclubs.hc_poster;
 
 public class workshop extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -85,9 +84,6 @@ public class workshop extends AppCompatActivity
         } else if (id == R.id.hc_form) {
             FragmentManager form = getFragmentManager();
             form.beginTransaction().replace(R.id.workshop_frame, new hc_form()).commit();
-        } else if (id == R.id.hc_poster) {
-            FragmentManager poster = getFragmentManager();
-            poster.beginTransaction().replace(R.id.workshop_frame, new hc_poster()).commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

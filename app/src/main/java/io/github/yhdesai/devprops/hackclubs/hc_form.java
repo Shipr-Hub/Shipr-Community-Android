@@ -13,6 +13,9 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import io.github.yhdesai.devprops.R;
 
@@ -24,9 +27,21 @@ public class hc_form extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_general, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_hc_form, container, false);
+        WebView mywebview = rootView.findViewById(R.id.form);
+        mywebview.loadUrl(getString(R.string.hc_form_link));
+        WebSettings webSettings = mywebview.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        mywebview.setWebViewClient(new WebViewClient() {
+            public boolean shouldOverrideUrlLoading(WebView viewx, String urlx) {
+                viewx.loadUrl(urlx);
+                return false;
+            }
+        });
         return rootView;
     }
+
+
 
 
 }

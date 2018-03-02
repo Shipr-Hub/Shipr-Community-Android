@@ -75,7 +75,7 @@ public class announcements extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_general, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_announcements, container, false);
 
         //  mAdView = (AdView) rootView.findViewById(R.id.adView);
         //  AdRequest adRequest = new AdRequest.Builder().build();

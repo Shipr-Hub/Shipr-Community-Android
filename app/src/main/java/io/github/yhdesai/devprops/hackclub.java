@@ -18,7 +18,6 @@ import io.github.yhdesai.devprops.R;
 import io.github.yhdesai.devprops.hackclubs.announcements;
 import io.github.yhdesai.devprops.hackclubs.hc_form;
 import io.github.yhdesai.devprops.hackclubs.hc_general;
-import io.github.yhdesai.devprops.hackclubs.hc_poster;
 
 public class hackclub extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -84,10 +83,7 @@ public class hackclub extends AppCompatActivity
         } else if (id == R.id.hc_general) {
             FragmentManager general = getFragmentManager();
             general.beginTransaction().replace(R.id.content_chat_frame, new hc_general()).commit();
-        } else if (id == R.id.hc_poster) {
-            FragmentManager general = getFragmentManager();
-            general.beginTransaction().replace(R.id.content_chat_frame, new hc_poster()).commit();
-        } else if (id == R.id.hc_form) {
+        }  else if (id == R.id.hc_form) {
             FragmentManager general = getFragmentManager();
             general.beginTransaction().replace(R.id.content_chat_frame, new hc_form()).commit();
         }

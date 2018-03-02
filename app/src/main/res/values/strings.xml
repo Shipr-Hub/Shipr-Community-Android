@@ -14,4 +14,5 @@
     <string name="username">Dev Props</string>
     <string name="user_email">devprops@yashdesai.me</string>
     <string name="title_activity_workshop">workshop</string>
+    <string name="hc_form_link">https://goo.gl/forms/UtP7WobEjJAvjxlH2</string>
 </resources>
