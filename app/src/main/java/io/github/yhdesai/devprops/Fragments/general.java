@@ -48,7 +48,7 @@ import io.github.yhdesai.devprops.MessageAdapter;
 import io.github.yhdesai.devprops.R;
 
 
-public class general extends Fragment   {
+public class general extends Fragment {
     private static final String TAG = "general";
 
     public static final String ANONYMOUS = "anonymous";
@@ -78,9 +78,9 @@ public class general extends Fragment   {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_general, container, false);
 
-      //  mAdView = (AdView) rootView.findViewById(R.id.adView);
-      //  AdRequest adRequest = new AdRequest.Builder().build();
-    //    mAdView.loadAd(adRequest);
+        //  mAdView = (AdView) rootView.findViewById(R.id.adView);
+        //  AdRequest adRequest = new AdRequest.Builder().build();
+        //    mAdView.loadAd(adRequest);
         FirebaseApp.initializeApp(getActivity());
 
 
@@ -90,8 +90,6 @@ public class general extends Fragment   {
         mFirebaseAuth = FirebaseAuth.getInstance();
 
         mMessagesDatabaseReference = mFirebaseDatabase.getReference().child("general");
-
-
 
 
         // Initialize references to views
@@ -113,8 +111,7 @@ public class general extends Fragment   {
 /**
  // ImagePickerButton shows an image picker to upload a image for a message
  mPhotoPickerButton.setOnClickListener(new View.OnClickListener() {
-@Override
-public void onClick(View view) {
+@Override public void onClick(View view) {
 // Fire an intent to show an image picker
 //        }
 });
@@ -156,8 +153,6 @@ public void onClick(View view) {
         });
 
 
-
-
         mAuthStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -173,9 +168,9 @@ public void onClick(View view) {
                                     .createSignInIntentBuilder()
                                     .setAvailableProviders(
                                             Arrays.asList(
-                                                 //   new AuthUI.IdpConfig.Builder(AuthUI.TWITTER_PROVIDER).build(),
+                                                    //   new AuthUI.IdpConfig.Builder(AuthUI.TWITTER_PROVIDER).build(),
                                                     new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build(),
-                                                //    new AuthUI.IdpConfig.Builder(AuthUI.FACEBOOK_PROVIDER).build(),
+                                                    //    new AuthUI.IdpConfig.Builder(AuthUI.FACEBOOK_PROVIDER).build(),
                                                     new AuthUI.IdpConfig.Builder(AuthUI.EMAIL_PROVIDER).build()
                                             ))
                                     .build(),
@@ -189,7 +184,6 @@ public void onClick(View view) {
         return rootView;
 
 
-
     }
 
     private void onSignedInInitialize(String username) {
@@ -197,24 +191,19 @@ public void onClick(View view) {
         attachDatabaseReadListener();
     }
 
-
-    private void onSignedOutCleanup(){
+    private void onSignedOutCleanup() {
         mUsername = ANONYMOUS;
         mMessageAdapter.clear();
         detachDatabaseReadListener();
 
     }
 
-
-
-    public void form (View view){
+    public void form(View view) {
         String url = "https://goo.gl/forms/KTIHsTM7efZyv88p1";
         Intent i = new Intent(Intent.ACTION_VIEW);
         i.setData(Uri.parse(url));
         startActivity(i);
     }
-
-
 
     private void attachDatabaseReadListener() {
 
@@ -244,22 +233,13 @@ public void onClick(View view) {
             mMessagesDatabaseReference.addChildEventListener(mChildEventListener);
         }
     }
-    private void detachDatabaseReadListener(){
-        if(mChildEventListener != null) {
+
+    private void detachDatabaseReadListener() {
+        if (mChildEventListener != null) {
             mMessagesDatabaseReference.removeEventListener(mChildEventListener);
             mChildEventListener = null;
         }
     }
-
-
-
-
-
-
-
-
-
-
 
     @Override
     public void onResume() {
@@ -276,6 +256,4 @@ public void onClick(View view) {
         detachDatabaseReadListener();
         mMessageAdapter.clear();
     }
-
-
 }

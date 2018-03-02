@@ -13,4 +13,5 @@
     <string name="title_activity_hackclub">hackclub</string>
     <string name="username">Dev Props</string>
     <string name="user_email">devprops@yashdesai.me</string>
+    <string name="title_activity_workshop">workshop</string>
 </resources>

@@ -4,18 +4,22 @@ package io.github.yhdesai.devprops;
  * Created by yash on 26/2/18.
  */
 
-        import android.app.Activity;
-        import android.content.Context;
-        import android.view.View;
-        import android.view.ViewGroup;
-        import android.widget.ArrayAdapter;
-        import android.widget.ImageView;
-        import android.widget.TextView;
+import android.app.Activity;
+import android.content.Context;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 
-        import org.w3c.dom.Text;
+import org.w3c.dom.Text;
 
-        import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
 
 public class MessageAdapter extends ArrayAdapter<DeveloperMessage> {
     public MessageAdapter(Context context, int resource, List<DeveloperMessage> objects) {
@@ -28,7 +32,7 @@ public class MessageAdapter extends ArrayAdapter<DeveloperMessage> {
             convertView = ((Activity) getContext()).getLayoutInflater().inflate(R.layout.item_message, parent, false);
         }
 
-       // ImageView photoImageView = (ImageView) convertView.findViewById(R.id.photoImageView);
+        // ImageView photoImageView = (ImageView) convertView.findViewById(R.id.photoImageView);
         TextView messageTextView = (TextView) convertView.findViewById(R.id.messageTextView);
         TextView authorTextView = (TextView) convertView.findViewById(R.id.nameTextView);
         TextView dateTextView = (TextView) convertView.findViewById(R.id.dateTextView);
@@ -37,12 +41,23 @@ public class MessageAdapter extends ArrayAdapter<DeveloperMessage> {
 
 
         messageTextView.setVisibility(View.VISIBLE);
-    //    photoImageView.setVisibility(View.GONE);
+        //    photoImageView.setVisibility(View.GONE);
         messageTextView.setText(message.getText());
 
         authorTextView.setText(message.getName());
-        dateTextView.setText(message.getTime());
 
+
+        String time = message.getTime();
+        try {
+            SimpleDateFormat mTime = new SimpleDateFormat("HH:mm", Locale.ENGLISH);
+            mTime.setTimeZone(TimeZone.getTimeZone("UTC"));
+            Date date = mTime.parse(time);
+            mTime.setTimeZone(TimeZone.getDefault());
+            String formattedDate = mTime.format(date);
+            dateTextView.setText(formattedDate);
+        } catch (java.text.ParseException e) {
+            e.printStackTrace();
+        }
         return convertView;
     }
 }

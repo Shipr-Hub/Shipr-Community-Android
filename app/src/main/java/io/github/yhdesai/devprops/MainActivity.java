@@ -84,8 +84,10 @@ public class MainActivity extends AppCompatActivity
             Intent chat = new Intent(MainActivity.this, chat.class);
             startActivity(chat);
        } else if (id == R.id.nav_workshop) {
-            FragmentManager todo = getFragmentManager();
-           todo.beginTransaction().replace(R.id.content_frame, new workshop()).commit(); /**
+            Intent hc = new Intent(MainActivity.this, workshop.class);
+            startActivity(hc);
+
+            /**
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_manage) {

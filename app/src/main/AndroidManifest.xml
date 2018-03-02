@@ -40,6 +40,10 @@
         <activity
             android:name=".Fragments.hackclub"
             android:label="@string/title_activity_hackclub"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Fragments.workshop"
+            android:label="@string/title_activity_workshop"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
