@@ -35,6 +35,8 @@ public class workshop extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        FragmentManager general = getFragmentManager();
+        general.beginTransaction().replace(R.id.workshop_frame, new hc_general()).commit();
     }
 
     @Override

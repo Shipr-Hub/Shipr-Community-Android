@@ -12,12 +12,5 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"></FrameLayout>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:textSize="20dp"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:layout_height="match_parent"
-        android:text="Thanks for testing out the Alpha Version \n \n To get started \nCheck the Navigation Drawer"/>
 
 </LinearLayout>

@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import com.google.firebase.auth.FirebaseAuth;
 
 import io.github.yhdesai.devprops.Fragments.Ideas;
+import io.github.yhdesai.devprops.Fragments.bug;
 import io.github.yhdesai.devprops.Fragments.general;
 import io.github.yhdesai.devprops.Fragments.help;
 import io.github.yhdesai.devprops.Fragments.intro;
@@ -104,6 +105,9 @@ public class chat extends AppCompatActivity
         } else if (id == R.id.chat_resource) {
             FragmentManager res = getFragmentManager();
             res.beginTransaction().replace(R.id.content_chat_frame, new resources()).commit();
+        } else if (id == R.id.chat_bug){
+            FragmentManager bug = getFragmentManager();
+            bug.beginTransaction().replace(R.id.content_chat_frame, new bug()).commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
