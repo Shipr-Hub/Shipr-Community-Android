@@ -1,12 +1,16 @@
 package io.github.yhdesai.devprops.Fragments;
 
 import android.app.Fragment;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.InputFilter;
@@ -47,6 +51,8 @@ import io.github.yhdesai.devprops.DeveloperMessage;
 import io.github.yhdesai.devprops.MessageAdapter;
 import io.github.yhdesai.devprops.R;
 
+import static android.content.Context.NOTIFICATION_SERVICE;
+
 
 public class general extends Fragment {
     private static final String TAG = "general";
@@ -63,6 +69,7 @@ public class general extends Fragment {
     private Button mSendButton;
 
     private String mUsername;
+    private String mPlatform;
 
     // Firebase instance variable
     private FirebaseDatabase mFirebaseDatabase;
@@ -85,6 +92,7 @@ public class general extends Fragment {
 
 
         mUsername = ANONYMOUS;
+        mPlatform = "Android";
         // Initialize Firebase components
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mFirebaseAuth = FirebaseAuth.getInstance();
@@ -144,7 +152,7 @@ public class general extends Fragment {
 
                 SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
                 sdf.setTimeZone(TimeZone.getTimeZone("IST"));
-                DeveloperMessage developerMessage = new DeveloperMessage(mMessageEditText.getText().toString(), mUsername, null, sdf.format(new Date()).toString());
+                DeveloperMessage developerMessage = new DeveloperMessage(mMessageEditText.getText().toString(), mUsername, null, sdf.format(new Date()).toString(), mPlatform);
                 mMessagesDatabaseReference.push().setValue(developerMessage);
 
                 // Clear input box
@@ -215,6 +223,32 @@ public class general extends Fragment {
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                     DeveloperMessage developerMessage = dataSnapshot.getValue(DeveloperMessage.class);
                     mMessageAdapter.add(developerMessage);
+
+                    //adding notification
+
+                   /** NotificationCompat.Builder mBuilder =   new NotificationCompat.Builder(getActivity())
+                            .setSmallIcon(R.drawable.ic_launcher_background) // notification icon
+                            .setContentTitle("Notification!") // title for notification
+                            .setContentText("Hello word") // message for notification
+                            .setAutoCancel(true); // clear notification after click
+                    Intent intent = new Intent(this, MainActivity.class);
+                    PendingIntent pi = PendingIntent.getActivity(getActivity(),0,intent,Intent.FLAG_ACTIVITY_NEW_TASK);
+                    mBuilder.setContentIntent(pi);
+                    NotificationManager mNotificationManager =
+                            (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                    mNotificationManager.notify(0, mBuilder.build());
+*/
+                    NotificationCompat.Builder builder = new NotificationCompat.Builder(getActivity());
+                    builder
+                            .setContentTitle("Title")
+                            .setContentText("content")
+                            .setSmallIcon(R.mipmap.ic_launcher)
+                            .setVisibility(NotificationCompat.VISIBILITY_PUBLIC);//to show content in lock scree
+
+
+
+
+
                 }
 
                 public void onChildChanged(DataSnapshot dataSnapshot, String s) {
@@ -256,4 +290,6 @@ public class general extends Fragment {
         detachDatabaseReadListener();
         mMessageAdapter.clear();
     }
+
+
 }

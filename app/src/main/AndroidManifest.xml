@@ -34,11 +34,16 @@
             tools:replace="android:value" />
         <meta-data
             android:name="com.android.support:customtabs:25.4.0"
-            android:value=""
+            android:value="26.1.0"
             tools:replace="android:value" />
 
+        <meta-data
+            android:name="com.android.support:support-compat:26.1.0"
+            android:value="26.1.0"
+            tools:replace="android:value"/>
+
         <activity
-            android:name=".Fragments.hackclub"
+            android:name=".hackclub"
             android:label="@string/title_activity_hackclub"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity

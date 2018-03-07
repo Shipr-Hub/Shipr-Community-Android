@@ -141,7 +141,7 @@ public void onClick(View view) {
 
                 SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
 
-                DeveloperMessage developerMessage = new DeveloperMessage(mMessageEditText.getText().toString(), mUsername, null, sdf.format(new Date()).toString());
+                DeveloperMessage developerMessage = new DeveloperMessage(mMessageEditText.getText().toString(), mUsername, null, sdf.format(new Date()).toString(), "Android");
                 mMessagesDatabaseReference.push().setValue(developerMessage);
 
                 // Clear input box
