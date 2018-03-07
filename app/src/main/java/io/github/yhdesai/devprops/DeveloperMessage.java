@@ -10,15 +10,17 @@ public class DeveloperMessage {
     private String name;
     private String photoUrl;
     private String time;
+    private String platform;
 
     public DeveloperMessage() {
     }
 
-    public DeveloperMessage(String text, String name, String photoUrl, String time) {
+    public DeveloperMessage(String text, String name, String photoUrl, String time, String platform) {
         this.text = text;
         this.name = name;
         this.photoUrl = photoUrl;
         this.time = time;
+        this.platform = platform;
     }
 
     public String getText() {
@@ -52,4 +54,14 @@ public class DeveloperMessage {
     public void setTime(String time) {
         this.time = time;
     }
+
+    public String getPlatform() {
+        return platform;
+    }
+
+    public void setPlatform(String platform) {
+        this.platform = platform;
+    }
+
+
 }
