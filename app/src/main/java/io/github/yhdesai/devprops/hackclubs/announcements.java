@@ -1,32 +1,16 @@
 package io.github.yhdesai.devprops.hackclubs;
 
 import android.app.Fragment;
-import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
-import android.text.InputFilter;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -36,12 +20,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
-import java.util.TimeZone;
 
 import io.github.yhdesai.devprops.DeveloperMessage;
 import io.github.yhdesai.devprops.MessageAdapter;
@@ -49,37 +30,28 @@ import io.github.yhdesai.devprops.R;
 
 
 public class announcements extends Fragment {
-    private static final String TAG = "general";
-
     public static final String ANONYMOUS = "anonymous";
     public static final int DEFAULT_MSG_LENGTH_LIMIT = 1000;
     public static final int RC_SIGN_IN = 1;
-
+    private static final String TAG = "general";
     private ListView mMessageListView;
     private MessageAdapter mMessageAdapter;
     private ProgressBar mProgressBar;
-    //  private ImageButton mPhotoPickerButton;
-
 
     private String mUsername;
 
-    // Firebase instance variable
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mMessagesDatabaseReference;
     private ChildEventListener mChildEventListener;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
 
-    private AdView mAdView;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_announcements, container, false);
 
-        //  mAdView = (AdView) rootView.findViewById(R.id.adView);
-        //  AdRequest adRequest = new AdRequest.Builder().build();
-        //    mAdView.loadAd(adRequest);
         FirebaseApp.initializeApp(getActivity());
 
 
@@ -92,12 +64,10 @@ public class announcements extends Fragment {
 
 
         // Initialize references to views
-        mProgressBar = (ProgressBar) rootView.findViewById(R.id.progressBar);
-        mMessageListView = (ListView) rootView.findViewById(R.id.messageListView);
-        //  mPhotoPickerButton = (ImageButton) rootView.findViewById(R.id.photoPickerButton);
+        mProgressBar = rootView.findViewById(R.id.progressBar);
+        mMessageListView = rootView.findViewById(R.id.messageListView);
 
         // Initialize message ListView and its adapter
-
         List<DeveloperMessage> friendlyMessages = new ArrayList<>();
         mMessageAdapter = new MessageAdapter(getActivity(), R.layout.item_message, friendlyMessages);
         mMessageListView.setAdapter(mMessageAdapter);
@@ -105,17 +75,9 @@ public class announcements extends Fragment {
 
         // Initialize progress bar
         mProgressBar.setVisibility(ProgressBar.INVISIBLE);
-/**
- // ImagePickerButton shows an image picker to upload a image for a message
- mPhotoPickerButton.setOnClickListener(new View.OnClickListener() {
-@Override public void onClick(View view) {
-// Fire an intent to show an image picker
-//        }
-});
- */
+
+
         // Enable Send button when there's text to send
-
-
         mAuthStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -162,13 +124,6 @@ public class announcements extends Fragment {
 
     }
 
-
-    public void form(View view) {
-        String url = "https://goo.gl/forms/KTIHsTM7efZyv88p1";
-        Intent i = new Intent(Intent.ACTION_VIEW);
-        i.setData(Uri.parse(url));
-        startActivity(i);
-    }
 
 
     private void attachDatabaseReadListener() {

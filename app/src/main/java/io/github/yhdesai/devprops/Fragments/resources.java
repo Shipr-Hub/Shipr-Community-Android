@@ -1,28 +1,19 @@
 package io.github.yhdesai.devprops.Fragments;
 
 import android.app.Fragment;
-import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
 import com.google.firebase.FirebaseApp;
@@ -34,30 +25,26 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 import io.github.yhdesai.devprops.DeveloperMessage;
 import io.github.yhdesai.devprops.MessageAdapter;
 import io.github.yhdesai.devprops.R;
 
-import java.util.Calendar;
-
-public class resources extends Fragment   {
-    private static final String TAG = "resources";
-
+public class resources extends Fragment {
     public static final String ANONYMOUS = "anonymous";
     public static final int DEFAULT_MSG_LENGTH_LIMIT = 1000;
     public static final int RC_SIGN_IN = 1;
-
+    private static final String TAG = "resources";
     private ListView mMessageListView;
     private MessageAdapter mMessageAdapter;
     private ProgressBar mProgressBar;
-    //  private ImageButton mPhotoPickerButton;
     private EditText mMessageEditText;
     private Button mSendButton;
 
@@ -82,21 +69,15 @@ public class resources extends Fragment   {
         // Initialize Firebase components
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mFirebaseAuth = FirebaseAuth.getInstance();
-
         mMessagesDatabaseReference = mFirebaseDatabase.getReference().child("resources");
 
-
-
-
         // Initialize references to views
-        mProgressBar = (ProgressBar) rootView.findViewById(R.id.progressBar);
-        mMessageListView = (ListView) rootView.findViewById(R.id.messageListView);
-        //  mPhotoPickerButton = (ImageButton) rootView.findViewById(R.id.photoPickerButton);
-        mMessageEditText = (EditText) rootView.findViewById(R.id.messageEditText);
-        mSendButton = (Button) rootView.findViewById(R.id.sendButton);
+        mProgressBar = rootView.findViewById(R.id.progressBar);
+        mMessageListView = rootView.findViewById(R.id.messageListView);
+        mMessageEditText = rootView.findViewById(R.id.messageEditText);
+        mSendButton = rootView.findViewById(R.id.sendButton);
 
         // Initialize message ListView and its adapter
-
         List<DeveloperMessage> friendlyMessages = new ArrayList<>();
         mMessageAdapter = new MessageAdapter(getActivity(), R.layout.item_message, friendlyMessages);
         mMessageListView.setAdapter(mMessageAdapter);
@@ -104,15 +85,7 @@ public class resources extends Fragment   {
 
         // Initialize progress bar
         mProgressBar.setVisibility(ProgressBar.INVISIBLE);
-/**
- // ImagePickerButton shows an image picker to upload a image for a message
- mPhotoPickerButton.setOnClickListener(new View.OnClickListener() {
-@Override
-public void onClick(View view) {
-// Fire an intent to show an image picker
-//        }
-});
- */
+
         // Enable Send button when there's text to send
         mMessageEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -139,17 +112,27 @@ public void onClick(View view) {
             @Override
             public void onClick(View view) {
 
+                // Getting the time
                 SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+                sdf.setTimeZone(TimeZone.getTimeZone("IST"));
 
-                DeveloperMessage developerMessage = new DeveloperMessage(mMessageEditText.getText().toString(), mUsername, null, sdf.format(new Date()).toString(), "Android");
+                // Getting the date
+                final Calendar c = Calendar.getInstance();
+                int year = c.get(Calendar.YEAR);
+                int month = c.get(Calendar.MONTH);
+                int day = c.get(Calendar.DAY_OF_MONTH);
+                String mDate = String.valueOf(day) + "-" + String.valueOf(month) + "-" + String.valueOf(year);
+
+
+                // Sending the Message
+                DeveloperMessage developerMessage = new DeveloperMessage(mMessageEditText.getText().toString(), mUsername, null, sdf.format(new Date()).toString(), mDate, "Android");
                 mMessagesDatabaseReference.push().setValue(developerMessage);
+
 
                 // Clear input box
                 mMessageEditText.setText("");
             }
         });
-
-
 
 
         mAuthStateListener = new FirebaseAuth.AuthStateListener() {
@@ -159,7 +142,7 @@ public void onClick(View view) {
                 if (user != null) {
                     //User is signed in
                     onSignedInInitialize(user.getDisplayName());
-                       } else {
+                } else {
                     // User is signed out
                     onSignedOutCleanup();
                     startActivityForResult(
@@ -185,22 +168,12 @@ public void onClick(View view) {
     }
 
 
-    private void onSignedOutCleanup(){
+    private void onSignedOutCleanup() {
         mUsername = ANONYMOUS;
         mMessageAdapter.clear();
         detachDatabaseReadListener();
 
     }
-
-
-
-    public void form (View view){
-        String url = "https://goo.gl/forms/KTIHsTM7efZyv88p1";
-        Intent i = new Intent(Intent.ACTION_VIEW);
-        i.setData(Uri.parse(url));
-        startActivity(i);
-    }
-
 
 
     private void attachDatabaseReadListener() {
@@ -231,21 +204,13 @@ public void onClick(View view) {
             mMessagesDatabaseReference.addChildEventListener(mChildEventListener);
         }
     }
-    private void detachDatabaseReadListener(){
-        if(mChildEventListener != null) {
+
+    private void detachDatabaseReadListener() {
+        if (mChildEventListener != null) {
             mMessagesDatabaseReference.removeEventListener(mChildEventListener);
             mChildEventListener = null;
         }
     }
-
-
-
-
-
-
-
-
-
 
 
     @Override
