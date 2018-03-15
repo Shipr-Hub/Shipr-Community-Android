@@ -46,6 +46,7 @@ import io.github.yhdesai.devprops.MessageAdapter;
 import io.github.yhdesai.devprops.R;
 
 import java.util.Calendar;
+import java.util.TimeZone;
 
 public class help extends Fragment   {
     private static final String TAG = "help";
@@ -139,10 +140,22 @@ public void onClick(View view) {
             @Override
             public void onClick(View view) {
 
+                // Getting the time
                 SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+                sdf.setTimeZone(TimeZone.getTimeZone("IST"));
 
-                DeveloperMessage developerMessage = new DeveloperMessage(mMessageEditText.getText().toString(), mUsername, null, sdf.format(new Date()).toString(), "Android");
+                // Getting the date
+                final Calendar c = Calendar.getInstance();
+                int year = c.get(Calendar.YEAR);
+                int month = c.get(Calendar.MONTH);
+                int day = c.get(Calendar.DAY_OF_MONTH);
+                String mDate = String.valueOf(day) + "-"+ String.valueOf(month)+"-"+String.valueOf(year);
+
+
+                // Sending the Message
+                DeveloperMessage developerMessage = new DeveloperMessage(mMessageEditText.getText().toString(), mUsername, null, sdf.format(new Date()).toString(), mDate, "Android");
                 mMessagesDatabaseReference.push().setValue(developerMessage);
+
 
                 // Clear input box
                 mMessageEditText.setText("");

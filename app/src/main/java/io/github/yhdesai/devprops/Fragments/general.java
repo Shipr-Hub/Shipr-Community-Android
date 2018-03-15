@@ -43,6 +43,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
@@ -116,6 +117,7 @@ public class general extends Fragment {
 
         // Initialize progress bar
         mProgressBar.setVisibility(ProgressBar.INVISIBLE);
+        mSendButton.setEnabled(false);
 /**
  // ImagePickerButton shows an image picker to upload a image for a message
  mPhotoPickerButton.setOnClickListener(new View.OnClickListener() {
@@ -150,10 +152,23 @@ public class general extends Fragment {
             @Override
             public void onClick(View view) {
 
+
+                // Getting the time
                 SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
                 sdf.setTimeZone(TimeZone.getTimeZone("IST"));
-                DeveloperMessage developerMessage = new DeveloperMessage(mMessageEditText.getText().toString(), mUsername, null, sdf.format(new Date()).toString(), mPlatform);
+
+                // Getting the date
+                final Calendar c = Calendar.getInstance();
+                int year = c.get(Calendar.YEAR);
+                int month = c.get(Calendar.MONTH);
+                int day = c.get(Calendar.DAY_OF_MONTH);
+                String mDate = String.valueOf(day) + "-"+ String.valueOf(month)+"-"+String.valueOf(year);
+
+
+                // Sending the Message
+                DeveloperMessage developerMessage = new DeveloperMessage(mMessageEditText.getText().toString(), mUsername, null, sdf.format(new Date()).toString(), mDate, mPlatform);
                 mMessagesDatabaseReference.push().setValue(developerMessage);
+
 
                 // Clear input box
                 mMessageEditText.setText("");
@@ -206,12 +221,6 @@ public class general extends Fragment {
 
     }
 
-    public void form(View view) {
-        String url = "https://goo.gl/forms/KTIHsTM7efZyv88p1";
-        Intent i = new Intent(Intent.ACTION_VIEW);
-        i.setData(Uri.parse(url));
-        startActivity(i);
-    }
 
     private void attachDatabaseReadListener() {
 
@@ -223,32 +232,6 @@ public class general extends Fragment {
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                     DeveloperMessage developerMessage = dataSnapshot.getValue(DeveloperMessage.class);
                     mMessageAdapter.add(developerMessage);
-
-                    //adding notification
-
-                   /** NotificationCompat.Builder mBuilder =   new NotificationCompat.Builder(getActivity())
-                            .setSmallIcon(R.drawable.ic_launcher_background) // notification icon
-                            .setContentTitle("Notification!") // title for notification
-                            .setContentText("Hello word") // message for notification
-                            .setAutoCancel(true); // clear notification after click
-                    Intent intent = new Intent(this, MainActivity.class);
-                    PendingIntent pi = PendingIntent.getActivity(getActivity(),0,intent,Intent.FLAG_ACTIVITY_NEW_TASK);
-                    mBuilder.setContentIntent(pi);
-                    NotificationManager mNotificationManager =
-                            (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-                    mNotificationManager.notify(0, mBuilder.build());
-*/
-                    NotificationCompat.Builder builder = new NotificationCompat.Builder(getActivity());
-                    builder
-                            .setContentTitle("Title")
-                            .setContentText("content")
-                            .setSmallIcon(R.mipmap.ic_launcher)
-                            .setVisibility(NotificationCompat.VISIBILITY_PUBLIC);//to show content in lock scree
-
-
-
-
-
                 }
 
                 public void onChildChanged(DataSnapshot dataSnapshot, String s) {

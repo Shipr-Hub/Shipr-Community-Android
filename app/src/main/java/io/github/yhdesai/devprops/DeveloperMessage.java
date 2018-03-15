@@ -10,16 +10,18 @@ public class DeveloperMessage {
     private String name;
     private String photoUrl;
     private String time;
+    private String date;
     private String platform;
 
     public DeveloperMessage() {
     }
 
-    public DeveloperMessage(String text, String name, String photoUrl, String time, String platform) {
+    public DeveloperMessage(String text, String name, String photoUrl, String time, String date, String platform) {
         this.text = text;
         this.name = name;
         this.photoUrl = photoUrl;
         this.time = time;
+        this.date = date;
         this.platform = platform;
     }
 
@@ -53,6 +55,14 @@ public class DeveloperMessage {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public String getPlatform() {
