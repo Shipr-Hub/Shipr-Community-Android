@@ -9,11 +9,7 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
-
-
-import org.w3c.dom.Text;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -31,17 +27,14 @@ public class MessageAdapter extends ArrayAdapter<DeveloperMessage> {
         if (convertView == null) {
             convertView = ((Activity) getContext()).getLayoutInflater().inflate(R.layout.item_message, parent, false);
         }
-
-        // ImageView photoImageView = (ImageView) convertView.findViewById(R.id.photoImageView);
-        TextView messageTextView = (TextView) convertView.findViewById(R.id.messageTextView);
-        TextView authorTextView = (TextView) convertView.findViewById(R.id.nameTextView);
-        TextView dateTextView = (TextView) convertView.findViewById(R.id.dateTextView);
+        TextView messageTextView = convertView.findViewById(R.id.messageTextView);
+        TextView authorTextView = convertView.findViewById(R.id.nameTextView);
+        TextView dateTextView = convertView.findViewById(R.id.dateTextView);
 
         DeveloperMessage message = getItem(position);
 
 
         messageTextView.setVisibility(View.VISIBLE);
-        //    photoImageView.setVisibility(View.GONE);
         messageTextView.setText(message.getText());
 
         authorTextView.setText(message.getName());

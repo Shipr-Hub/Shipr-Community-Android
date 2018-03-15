@@ -1,32 +1,21 @@
 package io.github.yhdesai.devprops.hackclubs;
 
 import android.app.Fragment;
-import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -39,6 +28,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
@@ -49,16 +39,13 @@ import io.github.yhdesai.devprops.R;
 
 
 public class hc_general extends Fragment   {
-    private static final String TAG = "general";
-
     public static final String ANONYMOUS = "anonymous";
     public static final int DEFAULT_MSG_LENGTH_LIMIT = 1000;
     public static final int RC_SIGN_IN = 1;
-
+    private static final String TAG = "general";
     private ListView mMessageListView;
     private MessageAdapter mMessageAdapter;
     private ProgressBar mProgressBar;
-    //  private ImageButton mPhotoPickerButton;
     private EditText mMessageEditText;
     private Button mSendButton;
 
@@ -71,16 +58,11 @@ public class hc_general extends Fragment   {
     private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
 
-    private AdView mAdView;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_hc_general, container, false);
-
-        //  mAdView = (AdView) rootView.findViewById(R.id.adView);
-        //  AdRequest adRequest = new AdRequest.Builder().build();
-        //    mAdView.loadAd(adRequest);
         FirebaseApp.initializeApp(getActivity());
 
 
@@ -95,11 +77,10 @@ public class hc_general extends Fragment   {
 
 
         // Initialize references to views
-        mProgressBar = (ProgressBar) rootView.findViewById(R.id.progressBar);
-        mMessageListView = (ListView) rootView.findViewById(R.id.messageListView);
-        //  mPhotoPickerButton = (ImageButton) rootView.findViewById(R.id.photoPickerButton);
-        mMessageEditText = (EditText) rootView.findViewById(R.id.messageEditText);
-        mSendButton = (Button) rootView.findViewById(R.id.sendButton);
+        mProgressBar = rootView.findViewById(R.id.progressBar);
+        mMessageListView = rootView.findViewById(R.id.messageListView);
+        mMessageEditText = rootView.findViewById(R.id.messageEditText);
+        mSendButton = rootView.findViewById(R.id.sendButton);
 
         // Initialize message ListView and its adapter
 
@@ -110,15 +91,6 @@ public class hc_general extends Fragment   {
 
         // Initialize progress bar
         mProgressBar.setVisibility(ProgressBar.INVISIBLE);
-/**
- // ImagePickerButton shows an image picker to upload a image for a message
- mPhotoPickerButton.setOnClickListener(new View.OnClickListener() {
-@Override
-public void onClick(View view) {
-// Fire an intent to show an image picker
-//        }
-});
- */
         // Enable Send button when there's text to send
         mMessageEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -145,16 +117,27 @@ public void onClick(View view) {
             @Override
             public void onClick(View view) {
 
+                // Getting the time
                 SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
                 sdf.setTimeZone(TimeZone.getTimeZone("IST"));
-                DeveloperMessage developerMessage = new DeveloperMessage(mMessageEditText.getText().toString(), mUsername, null, sdf.format(new Date()).toString(), "Android");
+
+                // Getting the date
+                final Calendar c = Calendar.getInstance();
+                int year = c.get(Calendar.YEAR);
+                int month = c.get(Calendar.MONTH);
+                int day = c.get(Calendar.DAY_OF_MONTH);
+                String mDate = String.valueOf(day) + "-"+ String.valueOf(month)+"-"+String.valueOf(year);
+
+
+                // Sending the Message
+                DeveloperMessage developerMessage = new DeveloperMessage(mMessageEditText.getText().toString(), mUsername, null, sdf.format(new Date()).toString(), mDate, "Android");
                 mMessagesDatabaseReference.push().setValue(developerMessage);
+
 
                 // Clear input box
                 mMessageEditText.setText("");
             }
         });
-
 
 
 
@@ -207,12 +190,6 @@ public void onClick(View view) {
 
 
 
-    public void form (View view){
-        String url = "https://goo.gl/forms/KTIHsTM7efZyv88p1";
-        Intent i = new Intent(Intent.ACTION_VIEW);
-        i.setData(Uri.parse(url));
-        startActivity(i);
-    }
 
 
 
