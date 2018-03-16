@@ -35,11 +35,20 @@
             android:name="com.android.support:customtabs:25.4.0"
             android:value="26.1.0"
             tools:replace="android:value" />
-
         <meta-data
             android:name="com.android.support:support-compat:26.1.0"
             android:value="26.1.0"
-            tools:replace="android:value"/>
+            tools:replace="android:value" />
+        <!-- Set custom default icon. This is used when no icon is set for incoming notification messages.
+     See README(https://goo.gl/l4GJaQ) for more. -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_menu_send" />
+        <!-- Set color used with incoming notification messages. This is used when no color is set for the incoming
+             notification message. See README(https://goo.gl/6BKBk7) for more. -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/colorAccent" />
 
         <activity
             android:name=".hackclub"
@@ -48,7 +57,14 @@
         <activity
             android:name=".Fragments.workshop"
             android:label="@string/title_activity_workshop"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <service android:name=".MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
     </application>
 
 </manifest>
