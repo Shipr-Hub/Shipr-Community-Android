@@ -1,39 +1,31 @@
 package io.github.yhdesai.devprops;
 
-import android.app.Fragment;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.util.Log;
-import android.view.LayoutInflater;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ListView;
-import android.widget.ProgressBar;
+import android.widget.Button;
+import android.widget.EditText;
 
 import com.firebase.ui.auth.AuthUI;
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
+public class addTodo extends AppCompatActivity {
 
-public class todo extends Fragment {
+    public static final String ANONYMOUS = "anonymous";
     public static final int RC_SIGN_IN = 1;
-    private static final String TAG = "general";
-    private ListView mMessageListView;
-    private ToDoAdapter ToDoAdapter;
-    private ProgressBar mProgressBar;
+    private static final String TAG = "add_todo";
+    private EditText todoDesc;
+    private Button mSendButton;
+
     private String mUsername;
+    private EditText todoName;
 
     // Firebase instance variable
     private FirebaseDatabase mFirebaseDatabase;
@@ -42,15 +34,38 @@ public class todo extends Fragment {
     private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
 
-    @Nullable
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_todo, container, false);
-        mProgressBar.setVisibility(ProgressBar.VISIBLE);
-        FirebaseApp.initializeApp(getActivity());
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_add_todo);
+        mUsername = ANONYMOUS;
         // Initialize Firebase components
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mFirebaseAuth = FirebaseAuth.getInstance();
+
+
+        // Initialize references to views
+        todoName = findViewById(R.id.todoName);
+        todoDesc = findViewById(R.id.todoDesc);
+        mSendButton = findViewById(R.id.sendButton);
+
+
+        // Send button sends a message and clears the EditText
+        mSendButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                // Sending the Message
+                DeveloperToDo developerToDo = new DeveloperToDo(todoName.getText().toString(), todoDesc.getText().toString());
+                mMessagesDatabaseReference.push().setValue(developerToDo);
+
+                // Clear input box
+                todoName.setText("");
+                todoDesc.setText("");
+            }
+        });
+
 
         mAuthStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -74,73 +89,26 @@ public class todo extends Fragment {
                                             ))
                                     .build(),
                             RC_SIGN_IN);
+
+
                 }
+
             }
         };
-
-        // Initialize references to views
-        mProgressBar = rootView.findViewById(R.id.progressBar);
-        mMessageListView = rootView.findViewById(R.id.todoListView);
-
-        // Initialize message ListView and its adapter
-        List<DeveloperToDo> friendlyTodo = new ArrayList<>();
-        ToDoAdapter = new ToDoAdapter(getActivity(), R.layout.item_todo, friendlyTodo);
-        mMessageListView.setAdapter(ToDoAdapter);
-
-        // Initialize progress bar
-        mProgressBar.setVisibility(ProgressBar.INVISIBLE);
-        return rootView;
     }
 
     private void onSignedInInitialize(String username) {
         mUsername = username;
         String todoLoc = "todo/" + mUsername;
         todoLoc = todoLoc.replaceAll(" ", "_").toLowerCase();
-        Log.i("test", todoLoc);
         mMessagesDatabaseReference = mFirebaseDatabase.getReference().child(todoLoc);
-        attachDatabaseReadListener();
     }
 
     private void onSignedOutCleanup() {
-        mUsername = "ANONYMOUS";
-        ToDoAdapter.clear();
-        detachDatabaseReadListener();
+        mUsername = ANONYMOUS;
 
     }
 
-    private void attachDatabaseReadListener() {
-        if (mChildEventListener == null) {
-            mChildEventListener = new ChildEventListener() {
-                @Override
-                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                    DeveloperToDo developerTodo = dataSnapshot.getValue(DeveloperToDo.class);
-                    Log.i("test1", developerTodo.toString());
-                    ToDoAdapter.add(developerTodo);
-                }
-
-                public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                }
-
-                public void onChildRemoved(DataSnapshot dataSnapshot) {
-                }
-
-                public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-                }
-
-                public void onCancelled(DatabaseError databaseError) {
-                }
-            };
-
-            mMessagesDatabaseReference.addChildEventListener(mChildEventListener);
-        }
-    }
-
-    private void detachDatabaseReadListener() {
-        if (mChildEventListener != null) {
-            mMessagesDatabaseReference.removeEventListener(mChildEventListener);
-            mChildEventListener = null;
-        }
-    }
 
     @Override
     public void onResume() {
@@ -154,12 +122,7 @@ public class todo extends Fragment {
         if (mAuthStateListener != null) {
             mFirebaseAuth.removeAuthStateListener(mAuthStateListener);
         }
-        detachDatabaseReadListener();
-        ToDoAdapter.clear();
-    }
 
-    public void addToDo(View view) {
-        startActivity(new Intent(getActivity(), addTodo.class));
     }
 
 

@@ -1,5 +1,6 @@
 package io.github.yhdesai.devprops;
 
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -10,10 +11,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.google.firebase.FirebaseApp;
-
-import io.github.yhdesai.devprops.Fragments.workshop;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -72,15 +72,18 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_chat) {
-            Intent chat = new Intent(MainActivity.this, chat.class);
-            startActivity(chat);
-       } else if (id == R.id.nav_workshop) {
-            Intent hc = new Intent(MainActivity.this, workshop.class);
-            startActivity(hc);
+            startActivity(new Intent(MainActivity.this, chat.class));
+        } else if (id == R.id.todo) {
+            FragmentManager help = getFragmentManager();
+            help.beginTransaction().replace(R.id.content_frame, new todo()).commit();
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void addToDo(View view) {
+        startActivity(new Intent(MainActivity.this, addTodo.class));
     }
 }
