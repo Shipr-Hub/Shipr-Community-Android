@@ -10,15 +10,19 @@
 
     <FrameLayout
         android:id="@+id/content_frame"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"></FrameLayout>
-
-    <TextView
         android:layout_width="match_parent"
-        android:textSize="20dp"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:layout_height="match_parent"
-        android:text="Thanks for testing out the Alpha Version \n \n To get started \nCheck the Navigation Drawer"/>
+        android:layout_height="match_parent">
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Button android:text="CHAT" />
+
+            <Button android:text="ToDo (WIP)" />
+        </GridLayout>
+    </FrameLayout>
+
 
 </LinearLayout>
