@@ -13,15 +13,37 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <GridLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
-            <Button android:text="CHAT" />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="16dp"
+                android:layout_weight="1">
 
-            <Button android:text="ToDo (WIP)" />
-        </GridLayout>
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:onClick="chat"
+                    android:text="Chat" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="16dp"
+                android:layout_weight="1">
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:onClick="todo"
+                    android:text="ToDo (WIP)" />
+            </LinearLayout>
+        </LinearLayout>
     </FrameLayout>
 
 

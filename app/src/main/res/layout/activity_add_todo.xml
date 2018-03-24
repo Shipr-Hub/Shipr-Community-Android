@@ -13,24 +13,24 @@
 
     <EditText
         android:id="@+id/todoName"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Enter ToDo Name here" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Desc" />
+        android:text="Description" />
 
     <EditText
         android:id="@+id/todoDesc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter Desc here" />
+        android:hint="Enter Description here" />
 
     <Button
         android:id="@+id/sendButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Send" />
+        android:text="Add ToDo" />
 </LinearLayout>

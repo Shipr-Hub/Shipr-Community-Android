@@ -46,7 +46,6 @@ public class todo extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_todo, container, false);
-        mProgressBar.setVisibility(ProgressBar.VISIBLE);
         FirebaseApp.initializeApp(getActivity());
         // Initialize Firebase components
         mFirebaseDatabase = FirebaseDatabase.getInstance();
