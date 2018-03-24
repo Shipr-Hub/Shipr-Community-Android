@@ -86,4 +86,13 @@ public class MainActivity extends AppCompatActivity
     public void addToDo(View view) {
         startActivity(new Intent(MainActivity.this, addTodo.class));
     }
+
+    public void chat(View view) {
+        startActivity(new Intent(MainActivity.this, chat.class));
+    }
+
+    public void todo(View view) {
+        FragmentManager help = getFragmentManager();
+        help.beginTransaction().replace(R.id.content_frame, new todo()).commit();
+    }
 }
