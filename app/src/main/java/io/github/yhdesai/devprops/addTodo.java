@@ -97,6 +97,7 @@ public class addTodo extends AppCompatActivity {
         };
     }
 
+
     private void onSignedInInitialize(String username) {
         mUsername = username;
         String todoLoc = "todo/" + mUsername;

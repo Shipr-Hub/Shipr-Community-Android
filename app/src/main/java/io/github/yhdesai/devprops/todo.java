@@ -89,6 +89,8 @@ public class todo extends Fragment {
         // Initialize progress bar
         mProgressBar.setVisibility(ProgressBar.INVISIBLE);
         return rootView;
+
+
     }
 
     private void onSignedInInitialize(String username) {
@@ -140,6 +142,7 @@ public class todo extends Fragment {
             mChildEventListener = null;
         }
     }
+
 
     @Override
     public void onResume() {
