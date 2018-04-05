@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Dev Props</string>
+    <string name="app_name">Maker ToolBox</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -7,7 +7,7 @@
     <string name="action_settings">Alpha</string>
     <string name="title_activity_chat">chat</string>
 
-    <string name="username">Dev Props</string>
-    <string name="user_email">devprops@yashdesai.me</string>
+    <string name="username">Maker ToolBox</string>
+    <string name="user_email">makertoolbox@yashdesai.me</string>
 
 </resources>

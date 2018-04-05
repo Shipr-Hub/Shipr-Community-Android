@@ -1,1 +1,19 @@
-[{"outputType":{"type":"APK"},"apkInfo":{"type":"MAIN","splits":[],"versionCode":2},"path":"app-release.apk","properties":{"packageId":"io.github.yhdesai.devprops","split":"","minSdkVersion":"16"}}]
+[
+  {
+    "outputType": {
+      "type": "APK"
+    },
+    "apkInfo": {
+      "type": "MAIN",
+      "splits": [],
+      "versionCode": 1,
+      "versionName": "0.1",
+      "enabled": true,
+      "outputFile": "app-release.apk",
+      "fullName": "release",
+      "baseName": "release"
+    },
+    "path": "app-release.apk",
+    "properties": {}
+  }
+]
