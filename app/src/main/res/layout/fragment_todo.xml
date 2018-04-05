@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/chatBG"
+    android:background="@color/todoBG"
     tools:context=".todo">
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -13,13 +13,14 @@
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
-        tools:context="io.github.yhdesai.devprops.todo">
+        tools:context="io.github.yhdesai.makertoolbox.todo">
 
         <ListView
             android:id="@+id/todoListView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:divider="@android:color/transparent"
+            android:divider="@color/todoBG"
+            android:dividerHeight="5dp"
             android:transcriptMode="alwaysScroll"
             tools:listitem="@layout/item_todo" />
 

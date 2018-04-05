@@ -3,8 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="16dp"
     android:orientation="vertical"
-    tools:context="io.github.yhdesai.devprops.addTodo">
+    tools:context="io.github.yhdesai.makertoolbox.addTodo">
 
     <TextView
         android:layout_width="match_parent"
@@ -27,10 +28,59 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Enter Description here" />
+    <!--
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Date"
+           />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/dateEditText"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Plaform"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/platform"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Type"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/type"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Priority"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/priority"/> -->
+    <!--
+
+    NAME
+    DESCRIPTION
+    DEADLINE
+    PLATFORM-MADE
+    TODO-TYPE
+    PRIORITY
+
+
+
+    -->
     <Button
         android:id="@+id/sendButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Add ToDo" />
+
 </LinearLayout>
