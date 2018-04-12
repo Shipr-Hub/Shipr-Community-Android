@@ -8,12 +8,20 @@ Basic features:
 3) Learning Resources
 4) Awesome Libraries
 5) Awesome Projects
+6) Awesome UI
+7) Animations
+8) Tech Wallpaper
+9) Podcasts
+10) Ebook
+11) Community Projects
+
 
 Advanced Features :
 1) IDE
 2) Compiler
 3) FTP Client
 4) SSH Client
+5) Git Client
 and more Dev Tools....
 
 Play Store : https://play.google.com/store/apps/details?id=io.github.yhdesai.makertoolbox
