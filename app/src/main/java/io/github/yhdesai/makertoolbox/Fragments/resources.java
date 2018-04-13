@@ -69,7 +69,7 @@ public class resources extends Fragment {
         // Initialize Firebase components
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mFirebaseAuth = FirebaseAuth.getInstance();
-        mMessagesDatabaseReference = mFirebaseDatabase.getReference().child("resources");
+        mMessagesDatabaseReference = mFirebaseDatabase.getReference().child("chat/resources");
 
         // Initialize references to views
         mProgressBar = rootView.findViewById(R.id.progressBar);

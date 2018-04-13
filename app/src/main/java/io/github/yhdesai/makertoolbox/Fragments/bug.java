@@ -74,7 +74,7 @@ public class bug extends Fragment {
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mFirebaseAuth = FirebaseAuth.getInstance();
 
-        mMessagesDatabaseReference = mFirebaseDatabase.getReference().child("bug");
+        mMessagesDatabaseReference = mFirebaseDatabase.getReference().child("bugs");
 
 
         // Initialize references to views
