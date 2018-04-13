@@ -60,7 +60,7 @@ public class intro extends android.app.Fragment {
             mFirebaseDatabase = FirebaseDatabase.getInstance();
             mFirebaseAuth = FirebaseAuth.getInstance();
 
-            mMessagesDatabaseReference = mFirebaseDatabase.getReference().child("chat/intro");
+            mMessagesDatabaseReference = mFirebaseDatabase.getReference().child("intro");
 
 
 

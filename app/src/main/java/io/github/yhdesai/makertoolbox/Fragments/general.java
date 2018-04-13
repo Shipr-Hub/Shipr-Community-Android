@@ -80,7 +80,7 @@ public class general extends Fragment {
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mFirebaseAuth = FirebaseAuth.getInstance();
 
-        mMessagesDatabaseReference = mFirebaseDatabase.getReference().child("chat/general");
+        mMessagesDatabaseReference = mFirebaseDatabase.getReference().child("general");
 
 
         // Initialize references to views

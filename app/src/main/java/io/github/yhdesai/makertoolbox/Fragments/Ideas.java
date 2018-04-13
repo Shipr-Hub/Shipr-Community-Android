@@ -70,7 +70,7 @@ public class Ideas extends Fragment   {
         // Initialize Firebase components
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mFirebaseAuth = FirebaseAuth.getInstance();
-        mMessagesDatabaseReference = mFirebaseDatabase.getReference().child("chat/ideas");
+        mMessagesDatabaseReference = mFirebaseDatabase.getReference().child("ideas");
 
         // Initialize references to views
         mProgressBar = rootView.findViewById(R.id.progressBar);

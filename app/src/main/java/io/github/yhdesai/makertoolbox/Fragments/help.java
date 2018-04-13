@@ -68,7 +68,7 @@ public class help extends Fragment   {
         // Initialize Firebase components
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mFirebaseAuth = FirebaseAuth.getInstance();
-        mMessagesDatabaseReference = mFirebaseDatabase.getReference().child("chat/help");
+        mMessagesDatabaseReference = mFirebaseDatabase.getReference().child("help");
 
         // Initialize references to views
         mProgressBar = rootView.findViewById(R.id.progressBar);

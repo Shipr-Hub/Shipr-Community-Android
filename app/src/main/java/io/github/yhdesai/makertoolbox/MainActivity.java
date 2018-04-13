@@ -7,6 +7,8 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,12 +17,11 @@ import com.firebase.ui.auth.AuthUI;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import android.view.View.OnTouchListener;
 
 import java.util.Arrays;
 
-//import android.support.v4.view.GravityCompat;
-//import android.support.v4.widget.DrawerLayout;
-//import android.support.v7.app.ActionBarDrawerToggle;
+// This is the MainActivity which opens when the App is opened
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity
     private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
     private String mUsername;
+    private String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,9 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+        FirebaseApp.initializeApp(this);
 
 
 /**
@@ -46,9 +51,10 @@ public class MainActivity extends AppCompatActivity
  drawer.addDrawerListener(toggle);
  toggle.syncState();
  **/
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-        FirebaseApp.initializeApp(this);
+
+
+
+        //Check if the User is signed in
 
         mAuthStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -66,21 +72,17 @@ public class MainActivity extends AppCompatActivity
                                     .setAvailableProviders(
                                             Arrays.asList(
                                                     //   new AuthUI.IdpConfig.Builder(AuthUI.TWITTER_PROVIDER).build(),
-                                                    new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build(),
+                                                    //   new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build(),
                                                     //    new AuthUI.IdpConfig.Builder(AuthUI.FACEBOOK_PROVIDER).build(),
                                                     new AuthUI.IdpConfig.Builder(AuthUI.EMAIL_PROVIDER).build()
                                             ))
                                     .build(),
                             RC_SIGN_IN);
-
-
                 }
-
             }
 
             private void onSignedInInitialize(String username) {
                 mUsername = username;
-
             }
 
             private void onSignedOutCleanup() {
@@ -103,15 +105,16 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-     /*   if (id == R.id.action_settings) {
+       /*  int id = item.getItemId();
+       if (id == R.id.action_settings) {
             return true;
         }
 */
@@ -138,6 +141,8 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+
+
     public void addToDo(View view) {
         startActivity(new Intent(MainActivity.this, addTodo.class));
     }
@@ -150,4 +155,10 @@ public class MainActivity extends AppCompatActivity
         FragmentManager help = getFragmentManager();
         help.beginTransaction().replace(R.id.content_frame, new todo()).commit();
     }
+
+    public void dev(View view){
+        startActivity(new Intent(MainActivity.this, Dev.class));
+    }
+
+
 }
