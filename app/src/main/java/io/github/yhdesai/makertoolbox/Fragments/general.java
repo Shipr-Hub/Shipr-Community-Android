@@ -31,7 +31,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.TimeZone;
 
 import io.github.yhdesai.makertoolbox.DeveloperMessage;
@@ -52,10 +54,15 @@ public class general extends Fragment {
 
     private String mUsername;
     private String mPlatform;
+    private String mChannel = "general";
+    private String mDate;
+    private String mTime;
+    private String mMessage;
 
     // Firebase instance variable
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mMessagesDatabaseReference;
+    private DatabaseReference mNotificationsDatabaseReference;
     private ChildEventListener mChildEventListener;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
@@ -73,7 +80,7 @@ public class general extends Fragment {
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mFirebaseAuth = FirebaseAuth.getInstance();
 
-        mMessagesDatabaseReference = mFirebaseDatabase.getReference().child("general");
+        mMessagesDatabaseReference = mFirebaseDatabase.getReference().child("chat/general");
 
 
         // Initialize references to views
@@ -125,18 +132,23 @@ public class general extends Fragment {
                 // Getting the time
                 SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
                 sdf.setTimeZone(TimeZone.getTimeZone("IST"));
+                String mTime = sdf.format(new Date()).toString();
 
                 // Getting the date
                 final Calendar c = Calendar.getInstance();
                 int year = c.get(Calendar.YEAR);
                 int month = c.get(Calendar.MONTH);
                 int day = c.get(Calendar.DAY_OF_MONTH);
-                String mDate = String.valueOf(day) + "-"+ String.valueOf(month)+"-"+String.valueOf(year);
+                mDate = String.valueOf(day) + "-" + String.valueOf(month) + "-" + String.valueOf(year);
+
+                mMessage = mMessageEditText.getText().toString();
 
 
                 // Sending the Message
-                DeveloperMessage developerMessage = new DeveloperMessage(mMessageEditText.getText().toString(), mUsername, null, sdf.format(new Date()).toString(), mDate, mPlatform);
+                DeveloperMessage developerMessage = new DeveloperMessage(mMessage, mUsername, null, mTime, mDate, mPlatform);
                 mMessagesDatabaseReference.push().setValue(developerMessage);
+
+                sendNotificationToUser(mChannel, null, mMessageEditText.getText().toString());
 
 
                 // Clear input box
@@ -176,6 +188,18 @@ public class general extends Fragment {
         return rootView;
 
 
+    }
+
+    private void sendNotificationToUser(String channel, String user, final String message) {
+        mNotificationsDatabaseReference = mFirebaseDatabase.getReference().child("notificationRequests");
+
+
+        Map notification = new HashMap<>();
+        notification.put("channel", channel);
+        notification.put("username", user);
+        notification.put("message", message);
+
+        mNotificationsDatabaseReference.push().setValue(notification);
     }
 
     private void onSignedInInitialize(String username) {

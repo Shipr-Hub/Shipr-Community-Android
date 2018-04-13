@@ -4,10 +4,10 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="action_settings">Alpha</string>
     <string name="title_activity_chat">chat</string>
 
     <string name="username">Maker ToolBox</string>
     <string name="user_email">makertoolbox@yashdesai.me</string>
-
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
 </resources>
