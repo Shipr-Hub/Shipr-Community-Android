@@ -37,6 +37,7 @@ import io.github.yhdesai.makertoolbox.DeveloperMessage;
 import io.github.yhdesai.makertoolbox.MessageAdapter;
 import io.github.yhdesai.makertoolbox.R;
 
+// Remove this once Awesome Resources has been added
 public class resources extends Fragment {
     public static final String ANONYMOUS = "anonymous";
     public static final int DEFAULT_MSG_LENGTH_LIMIT = 1000;
@@ -69,7 +70,7 @@ public class resources extends Fragment {
         // Initialize Firebase components
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mFirebaseAuth = FirebaseAuth.getInstance();
-        mMessagesDatabaseReference = mFirebaseDatabase.getReference().child("chat/resources");
+        mMessagesDatabaseReference = mFirebaseDatabase.getReference().child("resources");
 
         // Initialize references to views
         mProgressBar = rootView.findViewById(R.id.progressBar);

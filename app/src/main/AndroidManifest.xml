@@ -63,7 +63,12 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".Dev"></activity>
+        <activity android:name=".Dev" />
+        <activity android:name=".Awesome_Libraries" />
+        <activity android:name=".Edit_Profile" />
+        <activity android:name=".Profile" />
+        <activity android:name=".Github" />
+        <activity android:name=".Welcome_Screen"></activity>
     </application>
 
 </manifest>
