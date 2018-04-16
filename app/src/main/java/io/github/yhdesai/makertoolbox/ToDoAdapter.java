@@ -33,8 +33,9 @@ public class ToDoAdapter extends ArrayAdapter<DeveloperToDo> {
         titleTextView.setText(todo.gettName());
         descTextView.setText(todo.gettDesc());
 
-        Boolean isFeature = todo.getFeature();
+
         try {
+            Boolean isFeature = todo.getFeature();
             if (isFeature != null & isFeature) {
                 featureTextView.setVisibility(TextView.INVISIBLE);
             } else {
@@ -44,8 +45,9 @@ public class ToDoAdapter extends ArrayAdapter<DeveloperToDo> {
             System.out.println(e.getMessage());
         }
 
-        Boolean isBug = todo.getBug();
+
         try {
+            Boolean isBug = todo.getBug();
             if (isBug != null & isBug) {
                 bugTextView.setVisibility(TextView.INVISIBLE);
             } else {
