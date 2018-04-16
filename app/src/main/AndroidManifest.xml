@@ -68,7 +68,8 @@
         <activity android:name=".Edit_Profile" />
         <activity android:name=".Profile" />
         <activity android:name=".Github" />
-        <activity android:name=".Welcome_Screen"></activity>
+        <activity android:name=".Welcome_Screen" />
+        <activity android:name=".Resources"></activity>
     </application>
 
 </manifest>

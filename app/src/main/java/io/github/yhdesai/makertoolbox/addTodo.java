@@ -3,6 +3,7 @@ package io.github.yhdesai.makertoolbox;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,7 +21,7 @@ public class addTodo extends AppCompatActivity {
 
     public static final String ANONYMOUS = "anonymous";
     public static final int RC_SIGN_IN = 1;
-    private static final String TAG = "add_todo";
+    private static final String TAG = "addTodo";
     private EditText todoDesc;
     private Button mSendButton;
 
@@ -57,12 +58,20 @@ public class addTodo extends AppCompatActivity {
             public void onClick(View view) {
 
                 // Sending the Message
-                DeveloperToDo developerToDo = new DeveloperToDo(todoName.getText().toString(), todoDesc.getText().toString());
-                mMessagesDatabaseReference.push().setValue(developerToDo);
+                String sTodoName = todoName.getText().toString();
+                if (sTodoName.equals("")){
+                    Log.i(TAG, "ToDo Name can't be empty");}
+                else{
 
-                // Clear input box
-                todoName.setText("");
-                todoDesc.setText("");
+
+                        DeveloperToDo developerToDo = new DeveloperToDo(todoName.getText().toString(), todoDesc.getText().toString());
+                        mMessagesDatabaseReference.push().setValue(developerToDo);
+
+                        // Clear input box
+                        todoName.setText("");
+                        todoDesc.setText("");
+                        finish();
+                }
             }
         });
 
