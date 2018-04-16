@@ -30,14 +30,14 @@ import java.util.List;
 public class todo extends Fragment {
     public static final int RC_SIGN_IN = 1;
     private static final String TAG = "general";
-    private ListView mMessageListView;
+    private ListView mTodoListView;
     private ToDoAdapter ToDoAdapter;
     private ProgressBar mProgressBar;
     private String mUsername;
 
     // Firebase instance variable
     private FirebaseDatabase mFirebaseDatabase;
-    private DatabaseReference mMessagesDatabaseReference;
+    private DatabaseReference mTodoDatabaseReference;
     private ChildEventListener mChildEventListener;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
@@ -79,12 +79,12 @@ public class todo extends Fragment {
 
         // Initialize references to views
         mProgressBar = rootView.findViewById(R.id.progressBar);
-        mMessageListView = rootView.findViewById(R.id.todoListView);
+        mTodoListView = rootView.findViewById(R.id.todoListView);
 
-        // Initialize message ListView and its adapter
+        // Initialize To-Do ListView and its adapter
         List<DeveloperToDo> friendlyTodo = new ArrayList<>();
         ToDoAdapter = new ToDoAdapter(getActivity(), R.layout.item_todo, friendlyTodo);
-        mMessageListView.setAdapter(ToDoAdapter);
+        mTodoListView.setAdapter(ToDoAdapter);
 
         // Initialize progress bar
         mProgressBar.setVisibility(ProgressBar.INVISIBLE);
@@ -98,7 +98,7 @@ public class todo extends Fragment {
         String todoLoc = "todo/" + mUsername;
         todoLoc = todoLoc.replaceAll(" ", "_").toLowerCase();
         Log.i("test", todoLoc);
-        mMessagesDatabaseReference = mFirebaseDatabase.getReference().child(todoLoc);
+        mTodoDatabaseReference = mFirebaseDatabase.getReference().child(todoLoc);
         attachDatabaseReadListener();
     }
 
@@ -132,13 +132,13 @@ public class todo extends Fragment {
                 }
             };
 
-            mMessagesDatabaseReference.addChildEventListener(mChildEventListener);
+            mTodoDatabaseReference.addChildEventListener(mChildEventListener);
         }
     }
 
     private void detachDatabaseReadListener() {
         if (mChildEventListener != null) {
-            mMessagesDatabaseReference.removeEventListener(mChildEventListener);
+            mTodoDatabaseReference.removeEventListener(mChildEventListener);
             mChildEventListener = null;
         }
     }
