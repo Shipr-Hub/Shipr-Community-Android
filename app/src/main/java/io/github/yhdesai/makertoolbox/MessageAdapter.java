@@ -33,17 +33,14 @@ public class MessageAdapter extends ArrayAdapter<DeveloperMessage> {
 
         DeveloperMessage message = getItem(position);
 
-
         messageTextView.setVisibility(View.VISIBLE);
         messageTextView.setText(message.getText());
-
         authorTextView.setText(message.getName());
-
 
         String time = message.getTime();
         try {
             SimpleDateFormat mTime = new SimpleDateFormat("HH:mm", Locale.ENGLISH);
-            mTime.setTimeZone(TimeZone.getTimeZone("UTC"));
+            mTime.setTimeZone(TimeZone.getTimeZone("IST"));
             Date date = mTime.parse(time);
             mTime.setTimeZone(TimeZone.getDefault());
             String formattedDate = mTime.format(date);
