@@ -28,6 +28,32 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Enter Description here" />
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/descTextView"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/checkbox_feature"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/feature_label"
+            android:onClick="onCheckboxClicked"
+            android:text="Feature "
+            android:textColor="@color/white" />
+
+        <CheckBox
+            android:id="@+id/checkbox_bug"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="6dp"
+            android:background="@drawable/bug_label"
+            android:onClick="onCheckboxClicked"
+            android:text="Bug "
+            android:textColor="@color/white" />
+    </LinearLayout>
     <!--
 
         <TextView
@@ -79,6 +105,7 @@
     -->
     <Button
         android:id="@+id/sendButton"
+        android:layout_marginTop="26dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Add ToDo" />

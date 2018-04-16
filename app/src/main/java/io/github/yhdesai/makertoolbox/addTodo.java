@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 
 import com.firebase.ui.auth.AuthUI;
@@ -27,6 +28,9 @@ public class addTodo extends AppCompatActivity {
 
     private String mUsername;
     private EditText todoName;
+
+    private Boolean isFeature;
+    private Boolean isBug;
 
     // Firebase instance variable
     private FirebaseDatabase mFirebaseDatabase;
@@ -64,7 +68,7 @@ public class addTodo extends AppCompatActivity {
                 else{
 
 
-                        DeveloperToDo developerToDo = new DeveloperToDo(todoName.getText().toString(), todoDesc.getText().toString());
+                    DeveloperToDo developerToDo = new DeveloperToDo(todoName.getText().toString(), todoDesc.getText().toString(), isFeature, isBug);
                         mMessagesDatabaseReference.push().setValue(developerToDo);
 
                         // Clear input box
@@ -133,6 +137,29 @@ public class addTodo extends AppCompatActivity {
             mFirebaseAuth.removeAuthStateListener(mAuthStateListener);
         }
 
+    }
+
+    public void onCheckboxClicked(View view) {
+        // Is the view now checked?
+        boolean checked = ((CheckBox) view).isChecked();
+
+        // Check which checkbox was clicked
+        switch (view.getId()) {
+            case R.id.checkbox_feature:
+                if (checked) {
+
+                    isFeature = true;
+                } else
+                    isFeature = false;
+                break;
+            case R.id.checkbox_bug:
+                if (checked) {
+                    isBug = true;
+                } else
+                    isBug = false;
+                break;
+
+        }
     }
 
 
