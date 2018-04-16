@@ -115,7 +115,6 @@ public class todo extends Fragment {
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                     DeveloperToDo developerTodo = dataSnapshot.getValue(DeveloperToDo.class);
-                    Log.i("test1", developerTodo.toString());
                     ToDoAdapter.add(developerTodo);
                 }
 

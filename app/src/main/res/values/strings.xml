@@ -6,8 +6,8 @@
 
     <string name="title_activity_chat">chat</string>
 
-    <string name="username">Maker ToolBox</string>
-    <string name="user_email">makertoolbox@yashdesai.me</string>
+    <string name="user_name">Maker</string>
+    <string name="user_email">MakerToolbox@yashdesai.me</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 </resources>

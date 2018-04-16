@@ -5,6 +5,7 @@
     android:layout_height="@dimen/nav_header_height"
     android:background="@drawable/side_nav_bar"
     android:gravity="bottom"
+    android:id="@+id/navView"
     android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -22,12 +23,13 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/nUserName"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:text="@string/username"
+        android:text="@string/user_name"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/nUserEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/user_email" />

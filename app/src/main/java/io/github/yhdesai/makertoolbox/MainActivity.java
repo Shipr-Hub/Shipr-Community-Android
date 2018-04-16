@@ -5,6 +5,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -17,9 +20,15 @@ import com.firebase.ui.auth.AuthUI;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
 import android.view.View.OnTouchListener;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import java.util.Arrays;
+
+import android.content.res.Resources;
+
 
 // This is the MainActivity which opens when the App is opened
 
@@ -41,16 +50,15 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
         FirebaseApp.initializeApp(this);
 
 
-/**
- DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
  ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
  this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
  drawer.addDrawerListener(toggle);
  toggle.syncState();
- **/
 
 
 
@@ -63,6 +71,16 @@ public class MainActivity extends AppCompatActivity
                 if (user != null) {
                     //User is signed in
                     onSignedInInitialize(user.getDisplayName());
+                    NavigationView navigationView = findViewById(R.id.nav_view);
+                    navigationView.setNavigationItemSelectedListener(MainActivity.this);
+                    View hView = navigationView.getHeaderView(0);
+                    TextView user_email = hView.findViewById(R.id.nUserEmail);
+                    user_email.setText(user.getEmail());
+                    TextView user_name = hView.findViewById(R.id.nUserName);
+                    user_name.setText(user.getDisplayName());
+
+
+
                 } else {
                     // User is signed out
                     onSignedOutCleanup();
@@ -83,6 +101,7 @@ public class MainActivity extends AppCompatActivity
 
             private void onSignedInInitialize(String username) {
                 mUsername = username;
+
             }
 
             private void onSignedOutCleanup() {
@@ -91,16 +110,18 @@ public class MainActivity extends AppCompatActivity
 
             }
         };
+
+
     }
 
     @Override
     public void onBackPressed() {
-        //     DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        //    if (drawer.isDrawerOpen(GravityCompat.START)) {
-        //         drawer.closeDrawer(GravityCompat.START);
-        //     } else {
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
         super.onBackPressed();
-        //    }
+        }
     }
 
     @Override
@@ -132,15 +153,24 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.todo) {
             FragmentManager help = getFragmentManager();
             help.beginTransaction().replace(R.id.content_frame, new todo()).addToBackStack("general").commit();
+        } else if (id == R.id.nav_awe_lib) {
+            startActivity(new Intent(MainActivity.this, Awesome_Libraries.class));
+        } else if (id == R.id.nav_profile) {
+            startActivity(new Intent(MainActivity.this, Profile.class));
+        } else if (id == R.id.nav_edit_profile) {
+            startActivity(new Intent(MainActivity.this, Edit_Profile.class));
+        } else if (id == R.id.nav_intro) {
+            startActivity(new Intent(MainActivity.this, Welcome_Screen.class));
+        } else if (id == R.id.nav_git) {
+            startActivity(new Intent(MainActivity.this, Github.class));
         }
 
         //   getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).addToBackStack("my_fragment").commit();
 
-        //  DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        //  drawer.closeDrawer(GravityCompat.START);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
 
 
     public void addToDo(View view) {
@@ -156,7 +186,7 @@ public class MainActivity extends AppCompatActivity
         help.beginTransaction().replace(R.id.content_frame, new todo()).commit();
     }
 
-    public void dev(View view){
+    public void dev(View view) {
         startActivity(new Intent(MainActivity.this, Dev.class));
     }
 
