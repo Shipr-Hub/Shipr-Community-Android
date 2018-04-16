@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,54 +10,16 @@
     tools:context="io.github.yhdesai.makertoolbox.Awesome_Libraries">
 
     <ListView
-        android:id="@+id/messageListView"
+        android:id="@+id/libraryListView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/linearLayout"
         android:divider="@android:color/transparent"
         android:stackFromBottom="true"
         android:transcriptMode="alwaysScroll"
-        tools:listitem="@layout/item_library"/>
+        tools:listitem="@layout/item_library" />
 
-    <!--
 
-            <LinearLayout
-                android:id="@+id/linearLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:orientation="horizontal">
-
-                <ImageButton
-                    android:id="@+id/photoPickerButton"
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:background="@android:drawable/ic_menu_gallery" />
-
-                <EditText
-                    android:id="@+id/messageEditText"
-                    android:hint="Enter message"
-                    android:background="@android:color/transparent"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
-                    android:layout_width="0dp"
-
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
-
-                <Button
-                    android:id="@+id/sendButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:enabled="false"
-                    android:text="send"/>
-
-            </LinearLayout>
-    -->
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
@@ -68,20 +29,37 @@
         android:layout_alignParentStart="true"
         android:background="#ffffff"
         android:minHeight="48dp"
-        android:orientation="horizontal"
-        >
+        android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/messageEditText"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:hint="Enter message"
-            android:maxLines="6"/>
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/titleEditText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:hint="Enter Title"
+                android:maxLines="6" />
+
+            <EditText
+                android:id="@+id/subTitleEditText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:hint="Enter SubTitle"
+                android:maxLines="6" />
+        </LinearLayout>
 
         <Button
             android:id="@+id/sendButton"
@@ -102,5 +80,5 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"/>
+        android:layout_centerVertical="true" />
 </RelativeLayout>

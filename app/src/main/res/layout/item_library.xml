@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/messageLayout"
     android:layout_width="match_parent"
@@ -11,24 +11,76 @@
     android:paddingBottom="16dp"
     android:radius="20dp">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/blue" />
+
+        <TextView
+            android:id="@+id/titleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/subTitleTextView"
+            android:layout_marginLeft="24dp"
+            android:textColor="#111111"
+            tools:text="Name" />
+
+        <TextView
+            android:id="@+id/subTitleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/imageView"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="24dp"
+            android:textColor="#111111"
+            tools:text="Message" />
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/wikiTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:textColor="#111111"
+            tools:text="wiki" />
+
+        <Button
+            android:id="@+id/docsTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:textColor="#111111"
+            tools:text="Docs" />
+
+        <Button
+            android:id="@+id/gitTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:textColor="#111111"
+            tools:text="Github" />
+    </LinearLayout>
+
     <TextView
-        android:id="@+id/titleTextView"
+        android:id="@+id/photoURLTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
-        android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#111111"
-        tools:text="Name" />
-
-    <TextView
-        android:id="@+id/descTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/titleTextView"
-        android:layout_marginLeft="16dp"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="#111111"
-        tools:text="Message" />
-
-
-</RelativeLayout>
+        tools:text="url" />
+</LinearLayout>

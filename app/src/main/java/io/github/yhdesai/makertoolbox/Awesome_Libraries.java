@@ -25,37 +25,29 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import java.util.TimeZone;
-
-import io.github.yhdesai.makertoolbox.DeveloperMessage;
-import io.github.yhdesai.makertoolbox.MessageAdapter;
 import io.github.yhdesai.makertoolbox.R;
 
 
 public class Awesome_Libraries extends AppCompatActivity {
 
     public static final String ANONYMOUS = "anonymous";
-    public static final int DEFAULT_MSG_LENGTH_LIMIT = 1000;
     public static final int RC_SIGN_IN = 1;
-    private static final String TAG = "bug";
-    private ListView mMessageListView;
-    private MessageAdapter mMessageAdapter;
+    private static final String TAG = "Awesome_Libraries";
+    private ListView mLibraryListView;
+    private LibraryAdapter LibraryAdapter;
     private ProgressBar mProgressBar;
-    //  private ImageButton mPhotoPickerButton;
-    private EditText mMessageEditText;
+    private EditText mTitleEditText;
+    private EditText mSubTitleEditText;
     private Button mSendButton;
 
     private String mUsername;
 
     // Firebase instance variable
     private FirebaseDatabase mFirebaseDatabase;
-    private DatabaseReference mMessagesDatabaseReference;
+    private DatabaseReference mLibrariesDatabaseReference;
     private ChildEventListener mChildEventListener;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
@@ -70,27 +62,35 @@ public class Awesome_Libraries extends AppCompatActivity {
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mFirebaseAuth = FirebaseAuth.getInstance();
 
-        mMessagesDatabaseReference = mFirebaseDatabase.getReference().child("libraries");
+        mLibrariesDatabaseReference = mFirebaseDatabase.getReference().child("libraries");
 
 
         // Initialize references to views
         mProgressBar = findViewById(R.id.progressBar);
-        mMessageListView = findViewById(R.id.messageListView);
-        mMessageEditText = findViewById(R.id.messageEditText);
+        mLibraryListView = findViewById(R.id.libraryListView);
         mSendButton = findViewById(R.id.sendButton);
+        mTitleEditText = findViewById(R.id.titleEditText);
+        mSubTitleEditText = findViewById(R.id.subTitleEditText);
 
         // Initialize message ListView and its adapter
 
-        List<DeveloperMessage> friendlyMessages = new ArrayList<>();
-        mMessageAdapter = new MessageAdapter(Awesome_Libraries.this, R.layout.item_message, friendlyMessages);
-        mMessageListView.setAdapter(mMessageAdapter);
+        List<DeveloperAwesomeLibraries> developerLibrary = new ArrayList<>();
+        LibraryAdapter = new LibraryAdapter(Awesome_Libraries.this, R.layout.item_library, developerLibrary);
+        mLibraryListView.setAdapter(LibraryAdapter);
+
+        /*
+
+         List<DeveloperToDo> friendlyTodo = new ArrayList<>();
+        ToDoAdapter = new ToDoAdapter(getActivity(), R.layout.item_todo, friendlyTodo);
+        mMessageListView.setAdapter(ToDoAdapter);
+         */
 
 
         // Initialize progress bar
         mProgressBar.setVisibility(ProgressBar.INVISIBLE);
 
         // Enable Send button when there's text to send
-        mMessageEditText.addTextChangedListener(new TextWatcher() {
+        mTitleEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
             }
@@ -108,32 +108,22 @@ public class Awesome_Libraries extends AppCompatActivity {
             public void afterTextChanged(Editable editable) {
             }
         });
-        mMessageEditText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(DEFAULT_MSG_LENGTH_LIMIT)});
 
         // Send button sends a message and clears the EditText
         mSendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                // Getting the time
-                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-                sdf.setTimeZone(TimeZone.getTimeZone("IST"));
-
-                // Getting the date
-                final Calendar c = Calendar.getInstance();
-                int year = c.get(Calendar.YEAR);
-                int month = c.get(Calendar.MONTH);
-                int day = c.get(Calendar.DAY_OF_MONTH);
-                String mDate = String.valueOf(day) + "-"+ String.valueOf(month)+"-"+String.valueOf(year);
 
 
                 // Sending the Message
-                DeveloperMessage developerMessage = new DeveloperMessage(mMessageEditText.getText().toString(), mUsername, null, sdf.format(new Date()).toString(), mDate, "Android");
-                mMessagesDatabaseReference.push().setValue(developerMessage);
+                DeveloperAwesomeLibraries developerLibrary = new DeveloperAwesomeLibraries(mTitleEditText.getText().toString(), mSubTitleEditText.getText().toString(), "url to the image", "wiki", "docs", "git");
+                mLibrariesDatabaseReference.push().setValue(developerLibrary);
 
 
                 // Clear input box
-                mMessageEditText.setText("");
+                mTitleEditText.setText("");
+                mSubTitleEditText.setText("");
             }
         });
 
@@ -181,7 +171,7 @@ public class Awesome_Libraries extends AppCompatActivity {
 
     private void onSignedOutCleanup() {
         mUsername = ANONYMOUS;
-        mMessageAdapter.clear();
+        LibraryAdapter.clear();
         detachDatabaseReadListener();
 
     }
@@ -194,8 +184,8 @@ public class Awesome_Libraries extends AppCompatActivity {
             mChildEventListener = new ChildEventListener() {
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                    DeveloperMessage developerMessage = dataSnapshot.getValue(DeveloperMessage.class);
-                    mMessageAdapter.add(developerMessage);
+                    DeveloperAwesomeLibraries developerAwesomeLibraries = dataSnapshot.getValue(DeveloperAwesomeLibraries.class);
+                    LibraryAdapter.add(developerAwesomeLibraries);
                 }
 
                 public void onChildChanged(DataSnapshot dataSnapshot, String s) {
@@ -211,13 +201,13 @@ public class Awesome_Libraries extends AppCompatActivity {
                 }
             };
 
-            mMessagesDatabaseReference.addChildEventListener(mChildEventListener);
+            mLibrariesDatabaseReference.addChildEventListener(mChildEventListener);
         }
     }
 
     private void detachDatabaseReadListener() {
         if (mChildEventListener != null) {
-            mMessagesDatabaseReference.removeEventListener(mChildEventListener);
+            mLibrariesDatabaseReference.removeEventListener(mChildEventListener);
             mChildEventListener = null;
         }
     }
@@ -235,6 +225,6 @@ public class Awesome_Libraries extends AppCompatActivity {
             mFirebaseAuth.removeAuthStateListener(mAuthStateListener);
         }
         detachDatabaseReadListener();
-        mMessageAdapter.clear();
+        LibraryAdapter.clear();
     }
 }
