@@ -84,6 +84,8 @@ public class Ideas extends Fragment   {
         mMessageAdapter = new MessageAdapter(getActivity(), R.layout.item_message, friendlyMessages);
         mMessageListView.setAdapter(mMessageAdapter);
 
+         mSendButton.setEnabled(false);
+
 
         // Initialize progress bar
         mProgressBar.setVisibility(ProgressBar.INVISIBLE);

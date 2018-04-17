@@ -83,6 +83,8 @@ public class bug extends Fragment {
         mMessageEditText = rootView.findViewById(R.id.messageEditText);
         mSendButton = rootView.findViewById(R.id.sendButton);
 
+         mSendButton.setEnabled(false);
+
         // Initialize message ListView and its adapter
 
         List<DeveloperMessage> friendlyMessages = new ArrayList<>();

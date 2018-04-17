@@ -76,6 +76,8 @@ public class help extends Fragment   {
         mMessageEditText = rootView.findViewById(R.id.messageEditText);
         mSendButton = rootView.findViewById(R.id.sendButton);
 
+         mSendButton.setEnabled(false);
+
         // Initialize message ListView and its adapter
         List<DeveloperMessage> friendlyMessages = new ArrayList<>();
         mMessageAdapter = new MessageAdapter(getActivity(), R.layout.item_message, friendlyMessages);
