@@ -1,5 +1,6 @@
 package io.github.yhdesai.makertoolbox;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -39,9 +40,6 @@ public class Awesome_Libraries extends AppCompatActivity {
     private ListView mLibraryListView;
     private LibraryAdapter LibraryAdapter;
     private ProgressBar mProgressBar;
-    private EditText mTitleEditText;
-    private EditText mSubTitleEditText;
-    private Button mSendButton;
 
     private String mUsername;
 
@@ -68,9 +66,7 @@ public class Awesome_Libraries extends AppCompatActivity {
         // Initialize references to views
         mProgressBar = findViewById(R.id.progressBar);
         mLibraryListView = findViewById(R.id.libraryListView);
-        mSendButton = findViewById(R.id.sendButton);
-        mTitleEditText = findViewById(R.id.titleEditText);
-        mSubTitleEditText = findViewById(R.id.subTitleEditText);
+
 
         // Initialize message ListView and its adapter
 
@@ -88,49 +84,6 @@ public class Awesome_Libraries extends AppCompatActivity {
 
         // Initialize progress bar
         mProgressBar.setVisibility(ProgressBar.INVISIBLE);
-
-        // Enable Send button when there's text to send
-        mTitleEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (charSequence.toString().trim().length() > 0) {
-                    mSendButton.setEnabled(true);
-                } else {
-                    mSendButton.setEnabled(false);
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-            }
-        });
-
-        // Send button sends a message and clears the EditText
-        mSendButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-
-
-                // Sending the Message
-                DeveloperAwesomeLibraries developerLibrary = new DeveloperAwesomeLibraries(mTitleEditText.getText().toString(), mSubTitleEditText.getText().toString(), "url to the image", "wiki", "docs", "git");
-                mLibrariesDatabaseReference.push().setValue(developerLibrary);
-
-
-                // Clear input box
-                mTitleEditText.setText("");
-                mSubTitleEditText.setText("");
-            }
-        });
-
-
-
-
-
 
         mAuthStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -226,5 +179,9 @@ public class Awesome_Libraries extends AppCompatActivity {
         }
         detachDatabaseReadListener();
         LibraryAdapter.clear();
+    }
+
+    public void add_library(View view) {
+        startActivity(new Intent(Awesome_Libraries.this, addLibrary.class));
     }
 }

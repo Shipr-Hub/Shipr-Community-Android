@@ -63,14 +63,13 @@ private com.google.firebase.auth.FirebaseAuth mFirebaseAuth;
 
             }
         };
-        setProfile();
+        setValueOnView();
 
     }
 
 
-
-        public void setProfile(){
-            TextView nameEditText = findViewById(R.id.pNameTextView);
+    public void setValueOnView() {
+        EditText nameEditText = findViewById(R.id.pNameTextView);
             TextView emailTextView = findViewById(R.id.pEmailTextView);
 
 
@@ -85,13 +84,22 @@ private com.google.firebase.auth.FirebaseAuth mFirebaseAuth;
 
 
     // Check if user's email is verified
-    boolean emailVerified = user.isEmailVerified();
+         // boolean emailVerified = user.isEmailVerified();
 
     // The user's ID, unique to the Firebase project. Do NOT use this value to
     // authenticate with your backend server, if you have one. Use
     // FirebaseUser.getIdToken() instead.
-    String uid = user.getUid();
+         //  String uid = user.getUid();
 
-}}}
+     }
+    }
+
+    public void submit(View view) {
+        EditText nameEditText = findViewById(R.id.pNameTextView);
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+
+    }
+}
 
 

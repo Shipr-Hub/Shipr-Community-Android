@@ -69,7 +69,8 @@
         <activity android:name=".Profile" />
         <activity android:name=".Github" />
         <activity android:name=".Welcome_Screen" />
-        <activity android:name=".Resources"></activity>
+        <activity android:name=".Resources" />
+        <activity android:name=".addLibrary"></activity>
     </application>
 
 </manifest>
