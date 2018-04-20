@@ -10,9 +10,9 @@
     <ImageButton
         android:id="@+id/profileImageView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="200dp" />
 
-    <TextView
+    <EditText
         android:id="@+id/pNameTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
@@ -21,4 +21,10 @@
     android:id="@+id/pEmailTextView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="submit"
+        android:text="Submit" />
 </LinearLayout>
