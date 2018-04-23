@@ -3,6 +3,7 @@ package io.github.yhdesai.makertoolbox;
 
 import android.app.Activity;
 import android.content.Context;
+import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,7 @@ public class ToDoAdapter extends ArrayAdapter<DeveloperToDo> {
         }
         TextView titleTextView = convertView.findViewById(R.id.titleTextView);
         TextView descTextView = convertView.findViewById(R.id.descTextView);
+        TextView dateTextView = convertView.findViewById(R.id.dateView);
         TextView featureTextView = convertView.findViewById(R.id.feature);
         TextView bugTextView = convertView.findViewById(R.id.bug);
 
@@ -32,31 +34,9 @@ public class ToDoAdapter extends ArrayAdapter<DeveloperToDo> {
 
         titleTextView.setText(todo.gettName());
         descTextView.setText(todo.gettDesc());
-
-
-        try {
-            Boolean isFeature = todo.getFeature();
-            if (isFeature != null & isFeature) {
-                featureTextView.setVisibility(TextView.INVISIBLE);
-            } else {
-                featureTextView.setVisibility(TextView.VISIBLE);
-            }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-
-
-        try {
-            Boolean isBug = todo.getBug();
-            if (isBug != null & isBug) {
-                bugTextView.setVisibility(TextView.INVISIBLE);
-            } else {
-                bugTextView.setVisibility(TextView.VISIBLE);
-            }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-
+        dateTextView.setText(todo.gettDate());
+        featureTextView.setText(todo.getFeature());
+        bugTextView.setText(todo.getBug());
 
         return convertView;
     }
