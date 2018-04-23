@@ -29,10 +29,25 @@
         android:layout_height="wrap_content"
         android:hint="Enter Description here" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Date" />
+
+    <TextView
+        android:id="@+id/dateTextViewButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:hint=" Enter Date here"
+        android:textSize="18sp" />
+
+
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/descTextView"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal">
 
         <CheckBox
@@ -48,66 +63,18 @@
             android:id="@+id/checkbox_bug"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="6dp"
+            android:layout_marginLeft="16dp"
             android:background="@drawable/bug_label"
             android:onClick="onCheckboxClicked"
             android:text="Bug "
             android:textColor="@color/white" />
     </LinearLayout>
-    <!--
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Date"
-           />
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/dateEditText"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Plaform"/>
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/platform"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Type"/>
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/type"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Priority"/>
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/priority"/> -->
-    <!--
-
-    NAME
-    DESCRIPTION
-    DEADLINE
-    PLATFORM-MADE
-    TODO-TYPE
-    PRIORITY
-
-
-
-    -->
     <Button
         android:id="@+id/sendButton"
-        android:layout_marginTop="26dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="26dp"
         android:text="Add ToDo" />
 
 </LinearLayout>

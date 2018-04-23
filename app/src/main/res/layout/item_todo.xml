@@ -18,7 +18,7 @@
         android:layout_marginLeft="16dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#111111"
-        tools:text="Name" />
+        tools:text="ToDo Name" />
 
     <TextView
         android:id="@+id/descTextView"
@@ -28,18 +28,28 @@
         android:layout_marginLeft="16dp"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="#111111"
-        tools:text="Message" />
+        tools:text="ToDo Description" />
+
+    <TextView
+        android:id="@+id/dateView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/descTextView"
+        android:layout_marginLeft="16dp"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="#111111"
+        tools:text="Date" />
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/descTextView"
+        android:layout_below="@+id/dateView"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="10dp"
         android:orientation="horizontal">
-        <!-- TODO Interchanged the Name of bug and feature to temporarily solve the todo issue-->
+
         <TextView
-            android:id="@+id/bug"
+            android:id="@+id/feature"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="16dp"
@@ -49,7 +59,7 @@
             android:textColor="@color/colorWhite" />
 
         <TextView
-            android:id="@+id/feature"
+            android:id="@+id/bug"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="16dp"

@@ -1,13 +1,20 @@
 package io.github.yhdesai.makertoolbox;
 
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
 import com.google.firebase.auth.FirebaseAuth;
@@ -16,7 +23,10 @@ import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import org.w3c.dom.Text;
+
 import java.util.Arrays;
+import java.util.Calendar;
 
 public class addTodo extends AppCompatActivity {
 
@@ -25,12 +35,17 @@ public class addTodo extends AppCompatActivity {
     private static final String TAG = "addTodo";
     private EditText todoDesc;
     private Button mSendButton;
+    private TextView dateTextViewButton;
 
     private String mUsername;
     private EditText todoName;
 
-    private Boolean isFeature;
-    private Boolean isBug;
+    private String isFeature;
+    private String isBug;
+
+    private int day;
+    private int month;
+    private int year;
 
     // Firebase instance variable
     private FirebaseDatabase mFirebaseDatabase;
@@ -38,7 +53,16 @@ public class addTodo extends AppCompatActivity {
     private ChildEventListener mChildEventListener;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
-
+    private DatePickerDialog.OnDateSetListener datePickerListener = new DatePickerDialog.OnDateSetListener() {
+        public void onDateSet(DatePicker view, int selectedYear,
+                              int selectedMonth, int selectedDay) {
+            day = selectedDay;
+            month = selectedMonth;
+            year = selectedYear;
+            dateTextViewButton.setText(selectedDay + "/" + (selectedMonth + 1) + "/"
+                    + selectedYear);
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +78,7 @@ public class addTodo extends AppCompatActivity {
         todoName = findViewById(R.id.todoName);
         todoDesc = findViewById(R.id.todoDesc);
         mSendButton = findViewById(R.id.sendButton);
+        dateTextViewButton = findViewById(R.id.dateTextViewButton);
 
 
         // Send button sends a message and clears the EditText
@@ -63,18 +88,21 @@ public class addTodo extends AppCompatActivity {
 
                 // Sending the Message
                 String sTodoName = todoName.getText().toString();
-                if (sTodoName.equals("")){
-                    Log.i(TAG, "ToDo Name can't be empty");}
-                else{
+                if (sTodoName.equals("")) {
+                    Toast toast = Toast.makeText(getApplicationContext(), "ToDo Name can't be empty", Toast.LENGTH_SHORT);
+
+                    toast.show();
+                } else {
 
 
-                    DeveloperToDo developerToDo = new DeveloperToDo(todoName.getText().toString(), todoDesc.getText().toString(), isFeature, isBug);
-                        mMessagesDatabaseReference.push().setValue(developerToDo);
+                    DeveloperToDo developerToDo = new DeveloperToDo(todoName.getText().toString(), todoDesc.getText().toString(), dateTextViewButton.getText().toString(), isFeature, isBug);
+                    mMessagesDatabaseReference.push().setValue(developerToDo);
 
-                        // Clear input box
-                        todoName.setText("");
-                        todoDesc.setText("");
-                        finish();
+                    // Clear input box
+                    todoName.setText("");
+                    todoDesc.setText("");
+                    dateTextViewButton.setText("");
+                    finish();
                 }
             }
         });
@@ -96,8 +124,8 @@ public class addTodo extends AppCompatActivity {
                                     .setAvailableProviders(
                                             Arrays.asList(
                                                     //   new AuthUI.IdpConfig.Builder(AuthUI.TWITTER_PROVIDER).build(),
-                                                    new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build(),
-                                                    //    new AuthUI.IdpConfig.Builder(AuthUI.FACEBOOK_PROVIDER).build(),
+                                                    //   new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build(),
+                                                    //   new AuthUI.IdpConfig.Builder(AuthUI.FACEBOOK_PROVIDER).build(),
                                                     new AuthUI.IdpConfig.Builder(AuthUI.EMAIL_PROVIDER).build()
                                             ))
                                     .build(),
@@ -108,6 +136,25 @@ public class addTodo extends AppCompatActivity {
 
             }
         };
+
+
+        dateTextViewButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                InputMethodManager keyboard = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                keyboard.hideSoftInputFromWindow(dateTextViewButton.getWindowToken(), 0);
+
+
+                showDialog(0);
+            }
+        });
+
+    }
+
+    @Override
+    @Deprecated
+    protected Dialog onCreateDialog(int id) {
+        return new DatePickerDialog(this, datePickerListener, year, month, day);
     }
 
 
@@ -148,15 +195,16 @@ public class addTodo extends AppCompatActivity {
             case R.id.checkbox_feature:
                 if (checked) {
 
-                    isFeature = true;
+                    isFeature = "Feature";
                 } else
-                    isFeature = false;
+                    isFeature = "";
+
                 break;
             case R.id.checkbox_bug:
                 if (checked) {
-                    isBug = true;
+                    isBug = "Bug";
                 } else
-                    isBug = false;
+                    isBug = "";
                 break;
 
         }

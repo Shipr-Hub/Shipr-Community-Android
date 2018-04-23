@@ -1,5 +1,7 @@
 package io.github.yhdesai.makertoolbox;
 
+import java.util.Date;
+
 /**
  * Created by yash on 23/3/18.
  */
@@ -7,17 +9,19 @@ package io.github.yhdesai.makertoolbox;
 public class DeveloperToDo {
     private String tName;
     private String tDesc;
-    private Boolean feature;
-    private Boolean bug;
+    private String tDate;
+    private String feature;
+    private String bug;
 
     public DeveloperToDo() {
     }
 
-    public DeveloperToDo(String tName, String tDesc, Boolean feature, Boolean bug) {
+    public DeveloperToDo(String tName, String tDesc, String tDate, String feature, String bug) {
         this.tName = tName;
         this.tDesc = tDesc;
         this.feature = feature;
         this.bug = bug;
+        this.tDate = tDate;
     }
 
 
@@ -37,19 +41,27 @@ public class DeveloperToDo {
         this.tDesc = tDesc;
     }
 
-    public Boolean getBug() {
+    public String gettDate() {
+        return tDate;
+    }
+
+    public void setDate(String tDate) {
+        this.tDate = tDate;
+    }
+
+    public String getBug() {
         return bug;
     }
 
-    public void setBug(Boolean bug) {
+    public void setBug(String bug) {
         this.bug = bug;
     }
 
-    public Boolean getFeature() {
+    public String getFeature() {
         return feature;
     }
 
-    public void setFeature(Boolean feature) {
+    public void setFeature(String feature) {
         this.feature = feature;
     }
 }
