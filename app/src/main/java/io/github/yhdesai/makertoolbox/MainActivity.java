@@ -153,6 +153,10 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.todo) {
             FragmentManager help = getFragmentManager();
             help.beginTransaction().replace(R.id.content_frame, new todo()).addToBackStack("general").commit();
+        } else if (id == R.id.color) {
+            startActivity(new Intent(MainActivity.this, colorPicker.class));
+
+
         } else if (id == R.id.nav_awe_lib) {
             startActivity(new Intent(MainActivity.this, Awesome_Libraries.class));
         } else if (id == R.id.nav_profile) {
@@ -191,4 +195,7 @@ public class MainActivity extends AppCompatActivity
     }
 
 
+    public void color(View view) {
+        startActivity(new Intent(MainActivity.this, colorPicker.class));
+    }
 }
