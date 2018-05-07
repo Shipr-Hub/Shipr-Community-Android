@@ -36,6 +36,10 @@ public class Dev extends AppCompatActivity {
         startActivity(new Intent(Dev.this, Github.class));
     }
 
+    public void color(View v) {
+        startActivity(new Intent(Dev.this, colorPicker.class));
+    }
+
 
 
 }

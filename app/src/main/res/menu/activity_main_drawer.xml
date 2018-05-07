@@ -12,6 +12,10 @@
         <item
             android:id="@+id/todo"
             android:title="Todo (WIP)" />
+
+        <item
+            android:id="@+id/color"
+            android:title="Color Picker" />
     </group>
 
     <item android:title="Work in Progress">

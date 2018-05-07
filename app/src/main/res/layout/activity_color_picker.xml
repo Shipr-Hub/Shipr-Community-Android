@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".colorPicker">
+
+    <View
+        android:id="@+id/colorPickerOutput"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:onClick="colorPickerDialog" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerInParent="true"
+        android:layout_centerVertical="true"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/colorOutput1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:shadowColor="@color/black"
+            android:text="#FFFFFF"
+            android:textColor="@color/white"
+            android:textColorHighlight="@color/black"
+            android:textSize="50sp" />
+
+        <!--<TextView
+            android:id="@+id/colorOutput2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:shadowColor="@color/black"
+            android:text="#FFFFFF"
+            android:textColor="@color/white"
+            android:textSize="50sp" />-->
+    </LinearLayout>
+</RelativeLayout>
