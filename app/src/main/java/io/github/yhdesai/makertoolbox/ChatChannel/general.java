@@ -1,4 +1,4 @@
-package io.github.yhdesai.makertoolbox.Fragments;
+package io.github.yhdesai.makertoolbox.ChatChannel;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -24,13 +24,16 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.TimeZone;
 
 import io.github.yhdesai.makertoolbox.DeveloperMessage;
@@ -38,11 +41,11 @@ import io.github.yhdesai.makertoolbox.MessageAdapter;
 import io.github.yhdesai.makertoolbox.R;
 
 
-public class help extends Fragment   {
+public class general extends Fragment {
     public static final String ANONYMOUS = "anonymous";
     public static final int DEFAULT_MSG_LENGTH_LIMIT = 1000;
     public static final int RC_SIGN_IN = 1;
-    private static final String TAG = "help";
+    private static final String TAG = "general";
     private ListView mMessageListView;
     private MessageAdapter mMessageAdapter;
     private ProgressBar mProgressBar;
@@ -50,10 +53,16 @@ public class help extends Fragment   {
     private Button mSendButton;
 
     private String mUsername;
+    private String mPlatform;
+    private String mChannel = "general";
+    private String mDate;
+    private String mTime;
+    private String mMessage;
 
     // Firebase instance variable
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mMessagesDatabaseReference;
+    private DatabaseReference mNotificationsDatabaseReference;
     private ChildEventListener mChildEventListener;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
@@ -61,14 +70,18 @@ public class help extends Fragment   {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_help, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_general, container, false);
         FirebaseApp.initializeApp(getActivity());
 
+
         mUsername = ANONYMOUS;
+        mPlatform = "Android";
         // Initialize Firebase components
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mFirebaseAuth = FirebaseAuth.getInstance();
-        mMessagesDatabaseReference = mFirebaseDatabase.getReference().child("help");
+
+        mMessagesDatabaseReference = mFirebaseDatabase.getReference().child("general");
+
 
         // Initialize references to views
         mProgressBar = rootView.findViewById(R.id.progressBar);
@@ -76,9 +89,8 @@ public class help extends Fragment   {
         mMessageEditText = rootView.findViewById(R.id.messageEditText);
         mSendButton = rootView.findViewById(R.id.sendButton);
 
-         mSendButton.setEnabled(false);
-
         // Initialize message ListView and its adapter
+
         List<DeveloperMessage> friendlyMessages = new ArrayList<>();
         mMessageAdapter = new MessageAdapter(getActivity(), R.layout.item_message, friendlyMessages);
         mMessageListView.setAdapter(mMessageAdapter);
@@ -86,6 +98,9 @@ public class help extends Fragment   {
 
         // Initialize progress bar
         mProgressBar.setVisibility(ProgressBar.INVISIBLE);
+        mSendButton.setEnabled(false);
+
+        FirebaseMessaging.getInstance().subscribeToTopic("general");
 
         // Enable Send button when there's text to send
         mMessageEditText.addTextChangedListener(new TextWatcher() {
@@ -113,29 +128,33 @@ public class help extends Fragment   {
             @Override
             public void onClick(View view) {
 
+
                 // Getting the time
                 SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
                 sdf.setTimeZone(TimeZone.getTimeZone("IST"));
+                String mTime = sdf.format(new Date()).toString();
 
                 // Getting the date
                 final Calendar c = Calendar.getInstance();
                 int year = c.get(Calendar.YEAR);
                 int month = c.get(Calendar.MONTH);
                 int day = c.get(Calendar.DAY_OF_MONTH);
-                String mDate = String.valueOf(day) + "-"+ String.valueOf(month)+"-"+String.valueOf(year);
+                mDate = String.valueOf(day) + "-" + String.valueOf(month) + "-" + String.valueOf(year);
+
+                mMessage = mMessageEditText.getText().toString();
 
 
                 // Sending the Message
-                DeveloperMessage developerMessage = new DeveloperMessage(mMessageEditText.getText().toString(), mUsername, null, sdf.format(new Date()).toString(), mDate, "Android");
+                DeveloperMessage developerMessage = new DeveloperMessage(mMessage, mUsername, null, mTime, mDate, mPlatform);
                 mMessagesDatabaseReference.push().setValue(developerMessage);
+
+                sendNotificationToUser(mChannel, null, mMessageEditText.getText().toString());
 
 
                 // Clear input box
                 mMessageEditText.setText("");
             }
         });
-
-
 
 
         mAuthStateListener = new FirebaseAuth.AuthStateListener() {
@@ -145,15 +164,19 @@ public class help extends Fragment   {
                 if (user != null) {
                     //User is signed in
                     onSignedInInitialize(user.getDisplayName());
-                       } else {
+                } else {
                     // User is signed out
                     onSignedOutCleanup();
                     startActivityForResult(
                             AuthUI.getInstance()
                                     .createSignInIntentBuilder()
                                     .setAvailableProviders(
-                                            Arrays.asList(new AuthUI.IdpConfig.Builder(AuthUI.EMAIL_PROVIDER).build(),
-                                                    new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build()))
+                                            Arrays.asList(
+                                                    //   new AuthUI.IdpConfig.Builder(AuthUI.TWITTER_PROVIDER).build(),
+                                                    new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build(),
+                                                    //    new AuthUI.IdpConfig.Builder(AuthUI.FACEBOOK_PROVIDER).build(),
+                                                    new AuthUI.IdpConfig.Builder(AuthUI.EMAIL_PROVIDER).build()
+                                            ))
                                     .build(),
                             RC_SIGN_IN);
 
@@ -163,6 +186,20 @@ public class help extends Fragment   {
             }
         };
         return rootView;
+
+
+    }
+
+    private void sendNotificationToUser(String channel, String user, final String message) {
+        mNotificationsDatabaseReference = mFirebaseDatabase.getReference().child("notificationRequests");
+
+
+        Map notification = new HashMap<>();
+        notification.put("channel", channel);
+        notification.put("username", user);
+        notification.put("message", message);
+
+        mNotificationsDatabaseReference.push().setValue(notification);
     }
 
     private void onSignedInInitialize(String username) {
@@ -170,8 +207,7 @@ public class help extends Fragment   {
         attachDatabaseReadListener();
     }
 
-
-    private void onSignedOutCleanup(){
+    private void onSignedOutCleanup() {
         mUsername = ANONYMOUS;
         mMessageAdapter.clear();
         detachDatabaseReadListener();
@@ -207,22 +243,13 @@ public class help extends Fragment   {
             mMessagesDatabaseReference.addChildEventListener(mChildEventListener);
         }
     }
-    private void detachDatabaseReadListener(){
-        if(mChildEventListener != null) {
+
+    private void detachDatabaseReadListener() {
+        if (mChildEventListener != null) {
             mMessagesDatabaseReference.removeEventListener(mChildEventListener);
             mChildEventListener = null;
         }
     }
-
-
-
-
-
-
-
-
-
-
 
     @Override
     public void onResume() {
