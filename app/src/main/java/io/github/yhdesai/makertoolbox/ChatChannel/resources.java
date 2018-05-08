@@ -1,4 +1,4 @@
-package io.github.yhdesai.makertoolbox.Fragments;
+package io.github.yhdesai.makertoolbox.ChatChannel;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -24,28 +24,25 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.TimeZone;
 
 import io.github.yhdesai.makertoolbox.DeveloperMessage;
 import io.github.yhdesai.makertoolbox.MessageAdapter;
 import io.github.yhdesai.makertoolbox.R;
 
-
-public class general extends Fragment {
+// Remove this once Awesome Resources has been added
+public class resources extends Fragment {
     public static final String ANONYMOUS = "anonymous";
     public static final int DEFAULT_MSG_LENGTH_LIMIT = 1000;
     public static final int RC_SIGN_IN = 1;
-    private static final String TAG = "general";
+    private static final String TAG = "resources";
     private ListView mMessageListView;
     private MessageAdapter mMessageAdapter;
     private ProgressBar mProgressBar;
@@ -53,16 +50,10 @@ public class general extends Fragment {
     private Button mSendButton;
 
     private String mUsername;
-    private String mPlatform;
-    private String mChannel = "general";
-    private String mDate;
-    private String mTime;
-    private String mMessage;
 
     // Firebase instance variable
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mMessagesDatabaseReference;
-    private DatabaseReference mNotificationsDatabaseReference;
     private ChildEventListener mChildEventListener;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
@@ -70,18 +61,16 @@ public class general extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_general, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_resources, container, false);
+
         FirebaseApp.initializeApp(getActivity());
 
 
         mUsername = ANONYMOUS;
-        mPlatform = "Android";
         // Initialize Firebase components
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mFirebaseAuth = FirebaseAuth.getInstance();
-
-        mMessagesDatabaseReference = mFirebaseDatabase.getReference().child("general");
-
+        mMessagesDatabaseReference = mFirebaseDatabase.getReference().child("resources");
 
         // Initialize references to views
         mProgressBar = rootView.findViewById(R.id.progressBar);
@@ -89,8 +78,8 @@ public class general extends Fragment {
         mMessageEditText = rootView.findViewById(R.id.messageEditText);
         mSendButton = rootView.findViewById(R.id.sendButton);
 
+        mSendButton.setEnabled(false);
         // Initialize message ListView and its adapter
-
         List<DeveloperMessage> friendlyMessages = new ArrayList<>();
         mMessageAdapter = new MessageAdapter(getActivity(), R.layout.item_message, friendlyMessages);
         mMessageListView.setAdapter(mMessageAdapter);
@@ -98,9 +87,6 @@ public class general extends Fragment {
 
         // Initialize progress bar
         mProgressBar.setVisibility(ProgressBar.INVISIBLE);
-        mSendButton.setEnabled(false);
-
-        FirebaseMessaging.getInstance().subscribeToTopic("general");
 
         // Enable Send button when there's text to send
         mMessageEditText.addTextChangedListener(new TextWatcher() {
@@ -128,27 +114,21 @@ public class general extends Fragment {
             @Override
             public void onClick(View view) {
 
-
                 // Getting the time
                 SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
                 sdf.setTimeZone(TimeZone.getTimeZone("IST"));
-                String mTime = sdf.format(new Date()).toString();
 
                 // Getting the date
                 final Calendar c = Calendar.getInstance();
                 int year = c.get(Calendar.YEAR);
                 int month = c.get(Calendar.MONTH);
                 int day = c.get(Calendar.DAY_OF_MONTH);
-                mDate = String.valueOf(day) + "-" + String.valueOf(month) + "-" + String.valueOf(year);
-
-                mMessage = mMessageEditText.getText().toString();
+                String mDate = String.valueOf(day) + "-" + String.valueOf(month) + "-" + String.valueOf(year);
 
 
                 // Sending the Message
-                DeveloperMessage developerMessage = new DeveloperMessage(mMessage, mUsername, null, mTime, mDate, mPlatform);
+                DeveloperMessage developerMessage = new DeveloperMessage(mMessageEditText.getText().toString(), mUsername, null, sdf.format(new Date()).toString(), mDate, "Android");
                 mMessagesDatabaseReference.push().setValue(developerMessage);
-
-                sendNotificationToUser(mChannel, null, mMessageEditText.getText().toString());
 
 
                 // Clear input box
@@ -171,12 +151,8 @@ public class general extends Fragment {
                             AuthUI.getInstance()
                                     .createSignInIntentBuilder()
                                     .setAvailableProviders(
-                                            Arrays.asList(
-                                                    //   new AuthUI.IdpConfig.Builder(AuthUI.TWITTER_PROVIDER).build(),
-                                                    new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build(),
-                                                    //    new AuthUI.IdpConfig.Builder(AuthUI.FACEBOOK_PROVIDER).build(),
-                                                    new AuthUI.IdpConfig.Builder(AuthUI.EMAIL_PROVIDER).build()
-                                            ))
+                                            Arrays.asList(new AuthUI.IdpConfig.Builder(AuthUI.EMAIL_PROVIDER).build(),
+                                                    new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build()))
                                     .build(),
                             RC_SIGN_IN);
 
@@ -186,26 +162,13 @@ public class general extends Fragment {
             }
         };
         return rootView;
-
-
-    }
-
-    private void sendNotificationToUser(String channel, String user, final String message) {
-        mNotificationsDatabaseReference = mFirebaseDatabase.getReference().child("notificationRequests");
-
-
-        Map notification = new HashMap<>();
-        notification.put("channel", channel);
-        notification.put("username", user);
-        notification.put("message", message);
-
-        mNotificationsDatabaseReference.push().setValue(notification);
     }
 
     private void onSignedInInitialize(String username) {
         mUsername = username;
         attachDatabaseReadListener();
     }
+
 
     private void onSignedOutCleanup() {
         mUsername = ANONYMOUS;
@@ -250,6 +213,7 @@ public class general extends Fragment {
             mChildEventListener = null;
         }
     }
+
 
     @Override
     public void onResume() {

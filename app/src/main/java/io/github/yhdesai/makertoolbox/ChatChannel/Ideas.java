@@ -1,4 +1,4 @@
-package io.github.yhdesai.makertoolbox.Fragments;
+package io.github.yhdesai.makertoolbox.ChatChannel;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -38,15 +38,14 @@ import io.github.yhdesai.makertoolbox.MessageAdapter;
 import io.github.yhdesai.makertoolbox.R;
 
 
-public class bug extends Fragment {
+public class Ideas extends Fragment {
     public static final String ANONYMOUS = "anonymous";
     public static final int DEFAULT_MSG_LENGTH_LIMIT = 1000;
     public static final int RC_SIGN_IN = 1;
-    private static final String TAG = "bug";
+    private static final String TAG = "ideas";
     private ListView mMessageListView;
     private MessageAdapter mMessageAdapter;
     private ProgressBar mProgressBar;
-    //  private ImageButton mPhotoPickerButton;
     private EditText mMessageEditText;
     private Button mSendButton;
 
@@ -59,12 +58,10 @@ public class bug extends Fragment {
     private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
 
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_general, container, false);
-
+        View rootView = inflater.inflate(R.layout.fragment_ideas, container, false);
 
         FirebaseApp.initializeApp(getActivity());
 
@@ -73,9 +70,7 @@ public class bug extends Fragment {
         // Initialize Firebase components
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mFirebaseAuth = FirebaseAuth.getInstance();
-
-        mMessagesDatabaseReference = mFirebaseDatabase.getReference().child("bugs");
-
+        mMessagesDatabaseReference = mFirebaseDatabase.getReference().child("ideas");
 
         // Initialize references to views
         mProgressBar = rootView.findViewById(R.id.progressBar);
@@ -83,13 +78,13 @@ public class bug extends Fragment {
         mMessageEditText = rootView.findViewById(R.id.messageEditText);
         mSendButton = rootView.findViewById(R.id.sendButton);
 
-         mSendButton.setEnabled(false);
-
         // Initialize message ListView and its adapter
 
         List<DeveloperMessage> friendlyMessages = new ArrayList<>();
         mMessageAdapter = new MessageAdapter(getActivity(), R.layout.item_message, friendlyMessages);
         mMessageListView.setAdapter(mMessageAdapter);
+
+        mSendButton.setEnabled(false);
 
 
         // Initialize progress bar
@@ -130,7 +125,7 @@ public class bug extends Fragment {
                 int year = c.get(Calendar.YEAR);
                 int month = c.get(Calendar.MONTH);
                 int day = c.get(Calendar.DAY_OF_MONTH);
-                String mDate = String.valueOf(day) + "-"+ String.valueOf(month)+"-"+String.valueOf(year);
+                String mDate = String.valueOf(day) + "-" + String.valueOf(month) + "-" + String.valueOf(year);
 
 
                 // Sending the Message
@@ -157,12 +152,8 @@ public class bug extends Fragment {
                             AuthUI.getInstance()
                                     .createSignInIntentBuilder()
                                     .setAvailableProviders(
-                                            Arrays.asList(
-                                                    //   new AuthUI.IdpConfig.Builder(AuthUI.TWITTER_PROVIDER).build(),
-                                                    new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build(),
-                                                    //    new AuthUI.IdpConfig.Builder(AuthUI.FACEBOOK_PROVIDER).build(),
-                                                    new AuthUI.IdpConfig.Builder(AuthUI.EMAIL_PROVIDER).build()
-                                            ))
+                                            Arrays.asList(new AuthUI.IdpConfig.Builder(AuthUI.EMAIL_PROVIDER).build(),
+                                                    new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build()))
                                     .build(),
                             RC_SIGN_IN);
 
@@ -172,14 +163,13 @@ public class bug extends Fragment {
             }
         };
         return rootView;
-
-
     }
 
     private void onSignedInInitialize(String username) {
         mUsername = username;
         attachDatabaseReadListener();
     }
+
 
     private void onSignedOutCleanup() {
         mUsername = ANONYMOUS;
@@ -224,6 +214,7 @@ public class bug extends Fragment {
         }
     }
 
+
     @Override
     public void onResume() {
         super.onResume();
@@ -239,4 +230,6 @@ public class bug extends Fragment {
         detachDatabaseReadListener();
         mMessageAdapter.clear();
     }
+
+
 }

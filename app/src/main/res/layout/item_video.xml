@@ -21,16 +21,16 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:layout_marginLeft="16dp"
-            android:contentDescription="Library Image"
             android:layout_marginRight="16dp"
             android:layout_marginTop="16dp"
-            android:background="@color/blue" />
+            android:background="@color/blue"
+            android:contentDescription="Library Image" />
 
         <TextView
             android:id="@+id/titleTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/subTitleTextView"
+            android:layout_below="@+id/imageView"
             android:layout_marginLeft="24dp"
             android:layout_marginStart="24dp"
             android:textColor="#111111"
@@ -40,7 +40,7 @@
             android:id="@+id/subTitleTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/imageView"
+            android:layout_below="@+id/titleTextView"
             android:layout_marginBottom="8dp"
             android:layout_marginLeft="24dp"
             android:layout_marginStart="24dp"
@@ -49,7 +49,7 @@
     </RelativeLayout>
 
 
-    <LinearLayout
+    <!--<LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -80,14 +80,14 @@
             android:layout_marginStart="16dp"
             android:textColor="#111111"
             tools:text="Github" />
-    </LinearLayout>
+    </LinearLayout>-->
 
-    <TextView
-        android:id="@+id/photoURLTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
-        android:textColor="#111111"
-        tools:text="url" />
+    <!-- <TextView
+         android:id="@+id/photoURLTextView"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_marginLeft="16dp"
+         android:layout_marginStart="16dp"
+         android:textColor="#111111"
+         tools:text="url" />-->
 </LinearLayout>

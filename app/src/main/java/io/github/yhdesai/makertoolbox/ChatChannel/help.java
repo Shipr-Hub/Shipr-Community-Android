@@ -1,4 +1,4 @@
-package io.github.yhdesai.makertoolbox.Fragments;
+package io.github.yhdesai.makertoolbox.ChatChannel;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -37,12 +37,12 @@ import io.github.yhdesai.makertoolbox.DeveloperMessage;
 import io.github.yhdesai.makertoolbox.MessageAdapter;
 import io.github.yhdesai.makertoolbox.R;
 
-// Remove this once Awesome Resources has been added
-public class resources extends Fragment {
+
+public class help extends Fragment {
     public static final String ANONYMOUS = "anonymous";
     public static final int DEFAULT_MSG_LENGTH_LIMIT = 1000;
     public static final int RC_SIGN_IN = 1;
-    private static final String TAG = "resources";
+    private static final String TAG = "help";
     private ListView mMessageListView;
     private MessageAdapter mMessageAdapter;
     private ProgressBar mProgressBar;
@@ -61,16 +61,14 @@ public class resources extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_resources, container, false);
-
+        View rootView = inflater.inflate(R.layout.fragment_help, container, false);
         FirebaseApp.initializeApp(getActivity());
-
 
         mUsername = ANONYMOUS;
         // Initialize Firebase components
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mFirebaseAuth = FirebaseAuth.getInstance();
-        mMessagesDatabaseReference = mFirebaseDatabase.getReference().child("resources");
+        mMessagesDatabaseReference = mFirebaseDatabase.getReference().child("help");
 
         // Initialize references to views
         mProgressBar = rootView.findViewById(R.id.progressBar);
@@ -78,7 +76,8 @@ public class resources extends Fragment {
         mMessageEditText = rootView.findViewById(R.id.messageEditText);
         mSendButton = rootView.findViewById(R.id.sendButton);
 
-         mSendButton.setEnabled(false);
+        mSendButton.setEnabled(false);
+
         // Initialize message ListView and its adapter
         List<DeveloperMessage> friendlyMessages = new ArrayList<>();
         mMessageAdapter = new MessageAdapter(getActivity(), R.layout.item_message, friendlyMessages);
