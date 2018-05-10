@@ -40,4 +40,17 @@
     <color name="dribbledark">#c32361</color>
     <color name="black">#000000</color>
     <color name="dialogcolor">#009688</color>
+
+
+    <item name="purple" type="color">#FFAA66CC</item>
+    <item name="orange" type="color">#FFFFBB33</item>
+    <item name="lightblue" type="color">#FF7AE5FF</item>
+    <item name="darkblue" type="color">#FF0099CC</item>
+    <item name="darkpurple" type="color">#FF9933CC</item>
+    <item name="cybergreen" type="color">#FF66FA45</item>
+    <item name="darkorange" type="color">#FFFF8800</item>
+    <item name="almostblack" type="color">#FF302533</item>
+    <item name="eggshell" type="color">#FFEEEAEE</item>
+
+
 </resources>

@@ -52,6 +52,10 @@ dependencies {
     //notifications
     implementation "com.android.support:support-compat:26.1.0"
 
+    //ssh
+    implementation 'com.jcraft:jsch:0.1.51'
+    implementation 'org.bouncycastle:bcprov-jdk16:1.46'
+
     // play services required for firebase
     implementation 'com.google.android.gms:play-services-plus:15.0.1'
 
