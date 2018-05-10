@@ -24,7 +24,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import io.github.yhdesai.makertoolbox.DeveloperMessage;
-import io.github.yhdesai.makertoolbox.MessageAdapter;
+import io.github.yhdesai.makertoolbox.adapter.MessageAdapter;
 import io.github.yhdesai.makertoolbox.R;
 
 

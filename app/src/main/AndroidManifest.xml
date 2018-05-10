@@ -72,7 +72,9 @@
         <activity android:name=".Resources" />
         <activity android:name=".addLibrary" />
         <activity android:name=".colorPicker" />
-        <activity android:name=".video"></activity>
+        <activity android:name=".video" />
+        <activity android:name=".ssh.SshActivity" />
+        <activity android:name=".ssh.SSH_Connect"></activity>
     </application>
 
 </manifest>

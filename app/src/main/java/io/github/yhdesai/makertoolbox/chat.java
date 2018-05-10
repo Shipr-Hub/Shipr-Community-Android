@@ -14,12 +14,12 @@ import android.view.MenuItem;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-import io.github.yhdesai.makertoolbox.Fragments.Ideas;
-import io.github.yhdesai.makertoolbox.Fragments.resources;
-import io.github.yhdesai.makertoolbox.Fragments.general;
-import io.github.yhdesai.makertoolbox.Fragments.bug;
-import io.github.yhdesai.makertoolbox.Fragments.help;
-import io.github.yhdesai.makertoolbox.Fragments.intro;
+import io.github.yhdesai.makertoolbox.ChatChannel.Ideas;
+import io.github.yhdesai.makertoolbox.ChatChannel.resources;
+import io.github.yhdesai.makertoolbox.ChatChannel.general;
+import io.github.yhdesai.makertoolbox.ChatChannel.bug;
+import io.github.yhdesai.makertoolbox.ChatChannel.help;
+import io.github.yhdesai.makertoolbox.ChatChannel.intro;
 
 
 public class chat extends AppCompatActivity

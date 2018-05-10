@@ -122,5 +122,20 @@
             android:text="Color Picker"
             android:textColor="#FFFFFF"
             android:textSize="30sp" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="32dp"
+            android:background="#03A6FF"
+            android:onClick="ssh"
+            android:shadowColor="#A8A8A8"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="5"
+            android:text="SSH Default"
+            android:textColor="#FFFFFF"
+            android:textSize="30sp" />
+
     </LinearLayout>
 </ScrollView>

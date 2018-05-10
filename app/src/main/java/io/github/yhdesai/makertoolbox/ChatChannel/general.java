@@ -37,7 +37,7 @@ import java.util.Map;
 import java.util.TimeZone;
 
 import io.github.yhdesai.makertoolbox.DeveloperMessage;
-import io.github.yhdesai.makertoolbox.MessageAdapter;
+import io.github.yhdesai.makertoolbox.adapter.MessageAdapter;
 import io.github.yhdesai.makertoolbox.R;
 
 

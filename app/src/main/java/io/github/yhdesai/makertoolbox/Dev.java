@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import io.github.yhdesai.makertoolbox.ssh.SshActivity;
+
 public class Dev extends AppCompatActivity {
 
     @Override
@@ -12,32 +14,41 @@ public class Dev extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dev);
     }
-    public void chat(View v){
+
+    public void chat(View v) {
         startActivity(new Intent(Dev.this, chat.class));
     }
 
-    public void add_todo(View v){
+    public void add_todo(View v) {
         startActivity(new Intent(Dev.this, addTodo.class));
     }
-    public void library(View v){
+
+    public void library(View v) {
         startActivity(new Intent(Dev.this, Awesome_Libraries.class));
     }
-    public void profile(View v){
+
+    public void profile(View v) {
         startActivity(new Intent(Dev.this, Profile.class));
     }
 
-    public void edit_profile(View v){
+    public void edit_profile(View v) {
         startActivity(new Intent(Dev.this, Edit_Profile.class));
     }
-    public void intro(View v){
+
+    public void intro(View v) {
         startActivity(new Intent(Dev.this, Welcome_Screen.class));
     }
-    public void git(View v){
+
+    public void git(View v) {
         startActivity(new Intent(Dev.this, Github.class));
     }
 
     public void color(View v) {
         startActivity(new Intent(Dev.this, colorPicker.class));
+    }
+
+    public void ssh(View v) {
+        startActivity(new Intent(Dev.this, SshActivity.class));
     }
 
 
