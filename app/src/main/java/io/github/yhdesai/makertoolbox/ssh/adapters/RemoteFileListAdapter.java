@@ -56,7 +56,7 @@ public class RemoteFileListAdapter extends BaseAdapter {
 
             convertView = mInflater.inflate(R.layout.listview_item_ssh, null);
             ImageView imageView = convertView.findViewById(R.id.imageview_item);
-            TextView textView = (convertView.findViewById(R.id.textview_item);
+            TextView textView = convertView.findViewById(R.id.textview_item);
             holder.textView = textView;
             holder.imageView = imageView;
             // change text color for directories
