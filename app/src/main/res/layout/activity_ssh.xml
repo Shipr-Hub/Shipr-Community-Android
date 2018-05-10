@@ -1,0 +1,69 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/almostblack"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/connectstatus"
+        style="@style/textviewStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Connect Status: " />
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/sshtext"
+                style="@style/textviewStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <io.github.yhdesai.makertoolbox.ssh.SshEditText
+                android:id="@+id/command"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="@color/almostblack"
+                android:gravity="top|left"
+                android:imeOptions="actionGo"
+                android:inputType="textMultiLine"
+                android:minLines="10"
+                android:singleLine="true"
+                android:textColor="@color/cybergreen"
+                android:textCursorDrawable="@null" />
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/sftpbutton"
+        style="@style/buttonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:text="@string/filetransfer" />
+
+    <Button
+        android:id="@+id/endsessionbutton"
+        style="@style/buttonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:text="End session" />
+
+
+</RelativeLayout>

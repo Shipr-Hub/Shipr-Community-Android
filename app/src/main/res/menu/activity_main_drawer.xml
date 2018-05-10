@@ -16,6 +16,10 @@
         <item
             android:id="@+id/color"
             android:title="Color Picker" />
+
+        <item
+            android:id="@+id/ssh"
+            android:title="SSH Client" />
     </group>
 
     <item android:title="Work in Progress">

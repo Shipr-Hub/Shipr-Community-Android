@@ -34,7 +34,7 @@ import java.util.List;
 import java.util.TimeZone;
 
 import io.github.yhdesai.makertoolbox.DeveloperMessage;
-import io.github.yhdesai.makertoolbox.MessageAdapter;
+import io.github.yhdesai.makertoolbox.adapter.MessageAdapter;
 import io.github.yhdesai.makertoolbox.R;
 
 // Remove this once Awesome Resources has been added

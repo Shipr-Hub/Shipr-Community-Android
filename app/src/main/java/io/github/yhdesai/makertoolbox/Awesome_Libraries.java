@@ -30,6 +30,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import io.github.yhdesai.makertoolbox.R;
+import io.github.yhdesai.makertoolbox.adapter.LibraryAdapter;
 
 
 public class Awesome_Libraries extends AppCompatActivity {

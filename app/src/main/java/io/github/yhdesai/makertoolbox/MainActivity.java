@@ -29,6 +29,8 @@ import java.util.Arrays;
 
 import android.content.res.Resources;
 
+import io.github.yhdesai.makertoolbox.ssh.SshActivity;
+
 
 // This is the MainActivity which opens when the App is opened
 
@@ -155,6 +157,9 @@ public class MainActivity extends AppCompatActivity
             help.beginTransaction().replace(R.id.content_frame, new todo()).addToBackStack("general").commit();
         } else if (id == R.id.color) {
             startActivity(new Intent(MainActivity.this, colorPicker.class));
+
+        } else if (id == R.id.ssh) {
+            startActivity(new Intent(MainActivity.this, SshActivity.class));
 
 
         } else if (id == R.id.nav_awe_lib) {
