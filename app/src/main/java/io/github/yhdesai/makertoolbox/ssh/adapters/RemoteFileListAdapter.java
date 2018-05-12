@@ -9,10 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jcraft.jsch.ChannelSftp;
-
-
 import java.util.Vector;
-
 import io.github.yhdesai.makertoolbox.R;
 
 
