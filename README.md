@@ -1,6 +1,5 @@
 # Maker-ToolBox-Android
 Dev Props is a Go-To Application for developers to enable them to develop their projects from their smartphones. 
-This is being developed keeping in mind that there are many people who want to code, but dont have access to a computer.
 
 Basic features:
 1) Chat
