@@ -20,7 +20,7 @@ public class Dev extends AppCompatActivity {
     }
 
     public void add_todo(View v) {
-        startActivity(new Intent(Dev.this, addTodo.class));
+        startActivity(new Intent(Dev.this, GTodo.class));
     }
 
     public void library(View v) {
