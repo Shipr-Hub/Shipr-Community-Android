@@ -4,6 +4,8 @@
     package="io.github.yhdesai.makertoolbox">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
 
     <application
         android:allowBackup="true"
@@ -74,7 +76,8 @@
         <activity android:name=".colorPicker" />
         <activity android:name=".video" />
         <activity android:name=".ssh.SshActivity" />
-        <activity android:name=".ssh.SSH_Connect"></activity>
+        <activity android:name=".ssh.SSH_Connect" />
+        <activity android:name=".GTodo" />
     </application>
 
 </manifest>
