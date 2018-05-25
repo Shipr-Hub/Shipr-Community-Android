@@ -31,4 +31,11 @@
     <string name="retrieve_remote_files">Retrieving remote file list</string>
     <string name="insertallvalues">Please fill in username, hostname and password values.</string>
     <string name="title_activity_config">ConfigActivity</string>
+    <string name="title_activity_mt_">MT_Activity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -18,11 +18,7 @@
             android:name=".MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".addTodo"
@@ -78,6 +74,15 @@
         <activity android:name=".ssh.SshActivity" />
         <activity android:name=".ssh.SSH_Connect" />
         <activity android:name=".GTodo" />
+        <activity
+            android:name=".MT_Activity"
+            android:label="@string/title_activity_mt_">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
