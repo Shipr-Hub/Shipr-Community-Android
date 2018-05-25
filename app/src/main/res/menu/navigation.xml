@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_chat"
+        android:icon="@drawable/ic_menu_send"
+        android:title="Chat" />
+
+    <item
+        android:id="@+id/navigation_tools"
+        android:icon="@drawable/ic_menu_manage"
+        android:title="Tools" />
+
+    <item
+        android:id="@+id/navigation_profile"
+        android:icon="@drawable/ic_menu_overflow_light"
+        android:title="Profile" />
+
+</menu>

@@ -11,6 +11,7 @@ android {
         versionCode 4
         versionName "0.2.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
         release {
@@ -60,7 +61,6 @@ dependencies {
     //color picker
     implementation 'com.pes.materialcolorpicker:library:1.2.0'
 
-
     //to-do
     implementation 'pub.devrel:easypermissions:0.3.0'
     implementation('com.google.api-client:google-api-client-android:1.23.0') {
@@ -83,6 +83,7 @@ dependencies {
 
     //test
     implementation 'com.android.support:support-v4:26.1.0'
+    implementation 'com.android.support:support-vector-drawable:26.1.0'
     testImplementation 'junit:junit:4.12'
 
 }
