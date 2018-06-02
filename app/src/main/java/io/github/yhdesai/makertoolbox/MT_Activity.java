@@ -31,6 +31,8 @@ public class MT_Activity extends AppCompatActivity {
                     //
                     return true;
                 case R.id.navigation_profile:
+                    FragmentManager frag2 = getFragmentManager();
+                    frag2.beginTransaction().replace(R.id.content_frame, new Profile()).commit();
 
                     return true;
             }

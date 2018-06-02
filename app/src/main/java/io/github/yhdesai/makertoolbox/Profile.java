@@ -1,13 +1,18 @@
 package io.github.yhdesai.makertoolbox;
 
-import android.support.v7.app.AppCompatActivity;
+import android.app.Fragment;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
-public class Profile extends AppCompatActivity {
+public class Profile extends Fragment {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_profile, container, false);
     }
+
+
 }
