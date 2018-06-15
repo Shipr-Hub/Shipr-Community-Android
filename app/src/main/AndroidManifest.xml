@@ -5,7 +5,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <!-- <uses-permission android:name="android.permission.GET_ACCOUNTS" />-->
 
     <application
         android:allowBackup="true"
@@ -40,6 +40,11 @@
             android:name="com.android.support:support-compat:26.1.0"
             android:value="26.1.0"
             tools:replace="android:value" />
+
+        <meta-data
+            android:name="com.android.support:support-v4:26.1.0"
+            android:value="26.1.0"
+            tools:replace="android:value" />
         <!--
      Set custom default icon. This is used when no icon is set for incoming notification messages.
      See README(https://goo.gl/l4GJaQ) for more.
@@ -55,12 +60,12 @@
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorAccent" />
 
-        <service android:name=".MyFirebaseMessagingService">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-            </intent-filter>
-        </service>
-
+        <!-- <service android:name=".MyFirebaseMessagingService">
+             <intent-filter>
+                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
+             </intent-filter>
+         </service>
+ -->
         <activity android:name=".Dev" />
         <activity android:name=".Awesome_Libraries" />
         <activity android:name=".Edit_Profile" />

@@ -11,66 +11,144 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:orientation="vertical"
+        tools:ignore="UselessParent">
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_margin="16dp"
-            android:layout_weight="1"
-            android:orientation="vertical">
+        <!-- <Button
+             android:layout_width="match_parent"
+             android:layout_height="50dp"
+             android:layout_marginTop="32dp"
+             android:background="@drawable/tools_button"
+             android:onClick="chat"
+             android:shadowColor="#A8A8A8"
+             android:shadowDx="0"
+             android:shadowDy="0"
+             android:shadowRadius="5"
+             android:text="Chat"
+             android:textColor="#FFFFFF"
+             android:textSize="30sp" />-->
+
+        <Button
+            android:id="@+id/tools_color_button"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/tools_button"
+            android:shadowColor="#A8A8A8"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="5"
+            android:text="Color Picker"
+            android:textColor="#FFFFFF"
+            android:textSize="30sp" />
 
 
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:layout_marginTop="32dp"
-                android:background="#03A6FF"
-                android:onClick="color"
-                android:shadowColor="#A8A8A8"
-                android:shadowDx="0"
-                android:shadowDy="0"
-                android:shadowRadius="5"
-                android:text="Color Picker"
-                android:textColor="#FFFFFF"
-                android:textSize="30sp" />
-        </LinearLayout>
+        <Button
+            android:id="@+id/tools_todo_button"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/tools_button"
+            android:shadowColor="#A8A8A8"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="5"
+            android:text="ToDo (WIP)"
+            android:textColor="#FFFFFF"
+            android:textSize="30sp" />
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_margin="16dp"
-            android:layout_weight="1"
-            android:orientation="vertical">
+        <Button
+            android:id="@+id/tools_ssh_button"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/tools_button"
+            android:shadowColor="#A8A8A8"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="5"
+            android:text="SSH"
+            android:textColor="#FFFFFF"
+            android:textSize="30sp" />
 
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:background="#03A6FF"
-                android:onClick="todo"
-                android:shadowColor="#A8A8A8"
-                android:shadowDx="0"
-                android:shadowDy="0"
-                android:shadowRadius="5"
-                android:text="ToDo (WIP)"
-                android:textColor="#FFFFFF"
-                android:textSize="30sp" />
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:layout_marginTop="32dp"
-                android:background="#03A6FF"
-                android:onClick="dev"
-                android:shadowColor="#A8A8A8"
-                android:shadowDx="0"
-                android:shadowDy="0"
-                android:shadowRadius="5"
-                android:text="Dev Mode"
-                android:textColor="#FFFFFF"
-                android:textSize="30sp" />
-        </LinearLayout>
+        <!--  <Button
+              android:layout_width="match_parent"
+              android:layout_height="50dp"
+              android:layout_marginTop="32dp" android:background="@drawable/tools_button"
+              android:onClick="dev"
+              android:shadowColor="#A8A8A8"
+              android:shadowDx="0"
+              android:shadowDy="0"
+              android:shadowRadius="5"
+              android:text="Dev Mode"
+              android:textColor="#FFFFFF"
+              android:textSize="30sp" />-->
 
 
     </LinearLayout>
+    <!-- <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:orientation="horizontal">
+
+         <LinearLayout
+             android:layout_width="0dp"
+             android:layout_height="match_parent"
+             android:layout_margin="16dp"
+             android:layout_weight="1"
+             android:orientation="vertical">
+
+
+             <Button
+                 android:layout_width="match_parent"
+                 android:layout_height="150dp"
+                 android:layout_marginTop="32dp"
+                 android:background="#03A6FF"
+                 android:onClick="color"
+                 android:shadowColor="#A8A8A8"
+                 android:shadowDx="0"
+                 android:shadowDy="0"
+                 android:shadowRadius="5"
+                 android:text="Color Picker"
+                 android:textColor="#FFFFFF"
+                 android:textSize="30sp" />
+         </LinearLayout>
+
+         <LinearLayout
+             android:layout_width="0dp"
+             android:layout_height="match_parent"
+             android:layout_margin="16dp"
+             android:layout_weight="1"
+             android:orientation="vertical">
+
+             <Button
+                 android:layout_width="match_parent"
+                 android:layout_height="150dp"
+                 android:background="#03A6FF"
+                 android:onClick="todo"
+                 android:shadowColor="#A8A8A8"
+                 android:shadowDx="0"
+                 android:shadowDy="0"
+                 android:shadowRadius="5"
+                 android:text="ToDo (WIP)"
+                 android:textColor="#FFFFFF"
+                 android:textSize="30sp" />
+
+             <Button
+                 android:layout_width="match_parent"
+                 android:layout_height="150dp"
+                 android:layout_marginTop="32dp"
+                 android:background="#03A6FF"
+                 android:onClick="dev"
+                 android:shadowColor="#A8A8A8"
+                 android:shadowDx="0"
+                 android:shadowDy="0"
+                 android:shadowRadius="5"
+                 android:text="Dev Mode"
+                 android:textColor="#FFFFFF"
+                 android:textSize="30sp" />
+         </LinearLayout>
+
+
+     </LinearLayout>-->
 </FrameLayout>

@@ -48,7 +48,7 @@ public class MT_Activity extends AppCompatActivity {
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         FragmentManager frag1 = getFragmentManager();
-        frag1.beginTransaction().replace(R.id.content_frame, new ToolsList()).commit();
+        frag1.beginTransaction().replace(R.id.content_frame, new general()).commit();
 
 
     }
