@@ -25,7 +25,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -101,7 +100,7 @@ public class general extends Fragment {
         mProgressBar.setVisibility(ProgressBar.INVISIBLE);
         mSendButton.setEnabled(false);
 
-        FirebaseMessaging.getInstance().subscribeToTopic("general");
+        /* FirebaseMessaging.getInstance().subscribeToTopic("general");*/
 
         // Enable Send button when there's text to send
         mMessageEditText.addTextChangedListener(new TextWatcher() {

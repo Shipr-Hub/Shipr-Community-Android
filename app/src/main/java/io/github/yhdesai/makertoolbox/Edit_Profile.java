@@ -17,9 +17,6 @@ import com.firebase.ui.auth.AuthUI;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
 import java.util.Arrays;
 
@@ -108,26 +105,26 @@ private com.google.firebase.auth.FirebaseAuth mFirebaseAuth;
 
     }
 
-    private void putImageInStorage(StorageReference storageReference, Uri uri, final String key) {
+   /* private void putImageInStorage(StorageReference storageReference, Uri uri, final String key) {
         storageReference.putFile(uri).addOnCompleteListener(this,
                 new OnCompleteListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
                         if (task.isSuccessful()) {
-                           /* DeveloperMessage friendlyMessage =
+                           *//* DeveloperMessage friendlyMessage =
                                     new DeveloperMessage(null, mUsername, mPhotoUrl,
                                             task.getResult().getDownloadUrl()
                                                     .toString());
                             mFirebaseDatabaseReference.child(MESSAGES_CHILD).child(key)
-                                    .setValue(friendlyMessage);*/
+                                    .setValue(friendlyMessage);*//*
                         } else {
-                            /*Log.w(TAG, "Image upload task was not successful.",
-                                    task.getException());*/
+                            *//*Log.w(TAG, "Image upload task was not successful.",
+                                    task.getException());*//*
                         }
                     }
                 });
     }
-
+*/
 
 }
 

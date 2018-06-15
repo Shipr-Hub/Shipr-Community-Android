@@ -2,9 +2,8 @@ package io.github.yhdesai.makertoolbox;
 
 import android.util.Log;
 
-import com.firebase.jobdispatcher.JobParameters;
-import com.firebase.jobdispatcher.JobService;
-
+public class MyJobService {
+}
 
 /**
  * Created by yash on 16/3/18.
@@ -12,6 +11,7 @@ import com.firebase.jobdispatcher.JobService;
 
 
 //  Basic Layout, Needs to be edited
+/*
 public class MyJobService extends JobService {
 
     private static final String TAG = "MyJobService";
@@ -28,5 +28,6 @@ public class MyJobService extends JobService {
         return false;
     }
 }
+*/
 
 

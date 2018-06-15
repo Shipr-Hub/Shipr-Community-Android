@@ -18,63 +18,48 @@
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_margin="16dp"
-                android:orientation="vertical"
-                android:layout_weight="1">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/tools_button"
+                android:onClick="color"
+                android:shadowColor="#A8A8A8"
+                android:shadowDx="0"
+                android:shadowDy="0"
+                android:shadowRadius="5"
+                android:text="Color Picker"
+                android:textColor="#FFFFFF"
+                android:textSize="30sp" />
 
 
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="150dp"
-                    android:background="#03A6FF"
-                    android:layout_marginTop="32dp"
-                    android:shadowColor="#A8A8A8"
-                    android:shadowDx="0"
-                    android:shadowDy="0"
-                    android:onClick="color"
-                    android:shadowRadius="5"
-                    android:text="Color Picker"
-                    android:textColor="#FFFFFF"
-                    android:textSize="30sp" />
-            </LinearLayout>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:background="@drawable/tools_button"
+                android:onClick="todo"
+                android:shadowColor="#A8A8A8"
+                android:shadowDx="0"
+                android:shadowDy="0"
+                android:shadowRadius="5"
+                android:text="ToDo (WIP)"
+                android:textColor="#FFFFFF"
+                android:textSize="30sp" />
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_margin="16dp"
-                android:orientation="vertical"
-                android:layout_weight="1">
-
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="150dp"
-                    android:background="#03A6FF"
-                    android:onClick="todo"
-                    android:shadowColor="#A8A8A8"
-                    android:shadowDx="0"
-                    android:shadowDy="0"
-                    android:shadowRadius="5"
-                    android:text="ToDo (WIP)"
-                    android:textColor="#FFFFFF"
-                    android:textSize="30sp" />
-
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="150dp"
-                    android:background="#03A6FF"
-                    android:shadowColor="#A8A8A8"
-                    android:shadowDx="0"
-                    android:shadowDy="0"
-                    android:layout_marginTop="32dp"
-                    android:shadowRadius="5"
-                    android:textColor="#FFFFFF"
-                    android:textSize="30sp"
-                    android:text="Dev Mode"
-                    android:onClick="dev"/>
-            </LinearLayout>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/tools_button"
+                android:onClick="dev"
+                android:shadowColor="#A8A8A8"
+                android:shadowDx="0"
+                android:shadowDy="0"
+                android:shadowRadius="5"
+                android:text="Dev Mode"
+                android:textColor="#FFFFFF"
+                android:textSize="30sp" />
 
 
         </LinearLayout>

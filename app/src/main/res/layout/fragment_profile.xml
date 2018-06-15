@@ -6,26 +6,36 @@
     android:layout_height="match_parent"
     tools:context=".Profile">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+    <!--  <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="128dp"
-            android:layout_height="128dp"
-            android:src="@android:color/holo_blue_bright" />
+          <ImageView
+              android:id="@+id/imageView2"
+              android:layout_width="128dp"
+              android:layout_height="128dp"
+              android:src="@android:color/holo_blue_bright" />
+
+          <TextView
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:text="Nane" />
+
+          <EditText
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:hint="Enter Nane here" />
+
+      </LinearLayout>-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nane" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter Nane here" />
-
-    </LinearLayout>
+            android:layout_centerInParent="true"
+            android:text="Coming Soon" />
+    </RelativeLayout>
 </FrameLayout>
