@@ -25,6 +25,7 @@ public class ToolsList extends Fragment {
         Button color = view.findViewById(R.id.tools_color_button);
         Button todo = view.findViewById(R.id.tools_todo_button);
         Button ssh = view.findViewById(R.id.tools_ssh_button);
+        Button net = view.findViewById(R.id.tools_network_button);
 
         color.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,6 +47,13 @@ public class ToolsList extends Fragment {
             public void onClick(View view) {
                 startActivity(new Intent(getActivity(), SshActivity.class));
 
+            }
+        });
+
+        net.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), NetActivity.class));
             }
         });
         return view;
