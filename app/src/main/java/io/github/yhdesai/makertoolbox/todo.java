@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -90,6 +91,15 @@ public class todo extends Fragment {
 
         // Initialize progress bar
         mProgressBar.setVisibility(ProgressBar.INVISIBLE);
+
+        FloatingActionButton addtodobtn = rootView.findViewById(R.id.addTodo);
+        addtodobtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), addTodo.class));
+            }
+        });
+
         return rootView;
 
 
@@ -160,11 +170,6 @@ public class todo extends Fragment {
         detachDatabaseReadListener();
         ToDoAdapter.clear();
     }
-
-    public void addToDo(View view) {
-        startActivity(new Intent(getActivity(), addTodo.class));
-    }
-
 
 
 }

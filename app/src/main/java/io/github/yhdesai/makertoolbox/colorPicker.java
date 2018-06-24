@@ -1,5 +1,6 @@
 package io.github.yhdesai.makertoolbox;
 
+import android.graphics.Color;
 import android.support.annotation.ColorInt;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ public class colorPicker extends AppCompatActivity {
     int defaultColorG = 0;
     int defaultColorB = 0;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,6 +23,7 @@ public class colorPicker extends AppCompatActivity {
         //getActionBar().hide();
         getSupportActionBar().hide();
         colorPickerDialog(null);
+
     }
 
     public void colorPickerDialog(View v) {
@@ -43,6 +46,10 @@ public class colorPicker extends AppCompatActivity {
                 colorOutput1.setText(String.format("#%06X", (0xFFFFFF & color)));
                 //TextView colorOutput2 = findViewById(R.id.colorOutput2);
                 //colorOutput2.setText(String.format("#%08X", (0xFFFFFFFF & color)));
+                defaultColorR = Color.red(color);
+                defaultColorG = Color.green(color);
+                defaultColorB = Color.blue(color);
+
 
                 // Log the data returned
                /* Log.d("Alpha", Integer.toString(Color.alpha(color)));
