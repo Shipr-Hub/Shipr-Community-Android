@@ -73,6 +73,20 @@
             android:textColor="#FFFFFF"
             android:textSize="30sp" />
 
+        <Button
+            android:id="@+id/tools_network_button"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/tools_button"
+            android:shadowColor="#A8A8A8"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="5"
+            android:text="Network Tools"
+            android:textColor="#FFFFFF"
+            android:textSize="30sp" />
+
         <!--  <Button
               android:layout_width="match_parent"
               android:layout_height="50dp"

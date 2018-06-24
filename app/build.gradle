@@ -3,14 +3,13 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 26
-
     defaultConfig {
         applicationId "io.github.yhdesai.makertoolbox"
         minSdkVersion 16
         multiDexEnabled true
         targetSdkVersion 26
-        versionCode 7
-        versionName "0.3.2"
+        versionCode 8
+        versionName "0.3.3"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
@@ -20,47 +19,38 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    buildToolsVersion '28.0.0'
 }
 
 dependencies {
-
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     //FireBase Auth
     implementation 'com.google.firebase:firebase-auth:16.0.2'
     implementation 'com.firebaseui:firebase-ui-auth:2.1.1'
     implementation 'com.google.android.gms:play-services-auth:15.0.1'
     //implementation 'com.facebook.android:facebook-android-sdk:4.27.0'
     //implementation("com.twitter.sdk.android:twitter-core:3.0.0@aar") { transitive = true }
-
     //FireBase Database
     implementation 'com.google.firebase:firebase-database:16.0.1'
-
-      //FireBase Core
+    //FireBase Core
     implementation 'com.google.firebase:firebase-core:16.0.1'
-
-      //Firebase Storage
+    //Firebase Storage
     implementation 'com.google.firebase:firebase-storage:16.0.1'
-
-//    //FireBase Ads
-//    implementation 'com.google.firebase:firebase-ads:15.0.1'
+    //    //FireBase Ads
+    //    implementation 'com.google.firebase:firebase-ads:15.0.1'
     /*  //FireBase Notifications
-    implementation 'com.google.firebase:firebase-messaging:17.0.0'
-    implementation 'com.firebase:firebase-jobdispatcher:0.8.5'*/
-
+        implementation 'com.google.firebase:firebase-messaging:17.0.0'
+        implementation 'com.firebase:firebase-jobdispatcher:0.8.5'*/
     /* //notifications
-    implementation "com.android.support:support-compat:26.1.0"
-*/
+        implementation "com.android.support:support-compat:26.1.0"
+    */
     //ssh
     implementation 'com.jcraft:jsch:0.1.51'
     implementation 'org.bouncycastle:bcprov-jdk16:1.46'
-
     /* // play services required for firebase
-    implementation 'com.google.android.gms:play-services-plus:15.0.1'*/
-
+        implementation 'com.google.android.gms:play-services-plus:15.0.1'*/
     //color picker
     implementation 'com.pes.materialcolorpicker:library:1.2.0'
-
     //to-do
     implementation 'pub.devrel:easypermissions:0.3.0'
     implementation('com.google.api-client:google-api-client-android:1.23.0') {
@@ -69,18 +59,18 @@ dependencies {
     implementation('com.google.apis:google-api-services-tasks:v1-rev52-1.23.0') {
         exclude group: 'org.apache.httpcomponents'
     }
-
+    //    //network tools
+    //    implementation 'com.github.stealthcopter:AndroidNetworkTools:0.4.0'
     //crashlytics
     implementation 'com.crashlytics.sdk.android:crashlytics:2.9.4'
-
     //version fix
-    implementation "com.android.support:design:26.1.0"
-    implementation "com.android.support:customtabs:26.1.0"
-    implementation "com.android.support:cardview-v7:26.1.0"
-
+    implementation 'com.android.support:design:26.1.0'
+    implementation 'com.android.support:customtabs:26.1.0'
+    implementation 'com.android.support:cardview-v7:26.1.0'
     implementation 'com.android.support:multidex:1.0.3'
-
     implementation 'com.google.firebase:firebase-crash:16.0.1'
+    //    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation files('lib/AndroidNetworkTools.jar')
 }
 
 
