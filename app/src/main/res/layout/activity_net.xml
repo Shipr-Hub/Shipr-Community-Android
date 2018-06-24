@@ -6,8 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="io.github.yhdesai.makertoolbox.NetActivity"
-    tools:showIn="@layout/activity_main">
+    tools:context="io.github.yhdesai.makertoolbox.NetActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -34,7 +33,7 @@
                 android:id="@+id/editIpAddress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="hint_ip_address"
+                android:hint="IP Address or Hostname"
                 android:inputType="textNoSuggestions" />
         </android.support.design.widget.TextInputLayout>
 
@@ -69,11 +68,11 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/subnetDevicesButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="subnet" />
+            <!--  <Button
+                  android:id="@+id/subnetDevicesButton"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="subnet" />-->
 
         </LinearLayout>
 
