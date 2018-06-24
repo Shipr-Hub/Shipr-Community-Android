@@ -57,8 +57,12 @@ import com.stealthcopter.networktools.ping.PingResult;
 import com.stealthcopter.networktools.ping.PingStats;
 import com.stealthcopter.networktools.subnet.Device;
 
+import java.io.DataInputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.net.InetAddress;
+import java.net.Socket;
 import java.util.ArrayList;
 
 public class NetActivity extends AppCompatActivity {
@@ -124,6 +128,34 @@ public class NetActivity extends AppCompatActivity {
                         }
                     }
                 }).start();
+            }
+        });
+
+        findViewById(R.id.whois).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String domquest = "google" + "." + "com";
+                String resultado = "";
+                Socket theSocket;
+                String hostname = "whois.internic.net";
+                int port = 43;
+                try {
+                    theSocket = new Socket(hostname, port, true);
+                    Writer out = new OutputStreamWriter(theSocket.getOutputStream());
+                    out.write("=" + domquest + "\r\n");
+                    out.flush();
+                    DataInputStream theWhoisStream;
+                    theWhoisStream = new DataInputStream(theSocket.getInputStream());
+                    String s;
+                    while ((s = theWhoisStream.readLine()) != null) {
+                        resultado = resultado + s + "\n";
+                        appendResultsText(resultado);
+                    }
+                } catch (IOException e) {
+                }
+
+
             }
         });
 
