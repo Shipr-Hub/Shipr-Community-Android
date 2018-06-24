@@ -9,8 +9,8 @@ android {
         minSdkVersion 16
         multiDexEnabled true
         targetSdkVersion 26
-        versionCode 5
-        versionName "0.3.0"
+        versionCode 7
+        versionName "0.3.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
@@ -27,36 +27,35 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     //FireBase Auth
-    implementation 'com.google.firebase:firebase-auth:16.0.1'
-    implementation 'com.firebaseui:firebase-ui-auth:2.1.1'/*
-    implementation 'com.google.android.gms:play-services-auth:15.0.1'*/
+    implementation 'com.google.firebase:firebase-auth:16.0.2'
+    implementation 'com.firebaseui:firebase-ui-auth:2.1.1'
+    implementation 'com.google.android.gms:play-services-auth:15.0.1'
     //implementation 'com.facebook.android:facebook-android-sdk:4.27.0'
     //implementation("com.twitter.sdk.android:twitter-core:3.0.0@aar") { transitive = true }
 
     //FireBase Database
     implementation 'com.google.firebase:firebase-database:16.0.1'
 
-  /*  //FireBase Core
-    implementation 'com.google.firebase:firebase-core:16.0.0'*/
+      //FireBase Core
+    implementation 'com.google.firebase:firebase-core:16.0.1'
 
-  /*  //Firebase Storage
-    implementation 'com.google.firebase:firebase-storage:16.0.1'*/
+      //Firebase Storage
+    implementation 'com.google.firebase:firebase-storage:16.0.1'
 
-    //FireBase Ads
-    //implementation 'com.google.firebase:firebase-ads:11.8.0'
-
-  /*  //FireBase Notifications
+//    //FireBase Ads
+//    implementation 'com.google.firebase:firebase-ads:15.0.1'
+    /*  //FireBase Notifications
     implementation 'com.google.firebase:firebase-messaging:17.0.0'
     implementation 'com.firebase:firebase-jobdispatcher:0.8.5'*/
 
-   /* //notifications
+    /* //notifications
     implementation "com.android.support:support-compat:26.1.0"
 */
     //ssh
     implementation 'com.jcraft:jsch:0.1.51'
     implementation 'org.bouncycastle:bcprov-jdk16:1.46'
 
-   /* // play services required for firebase
+    /* // play services required for firebase
     implementation 'com.google.android.gms:play-services-plus:15.0.1'*/
 
     //color picker
@@ -72,7 +71,7 @@ dependencies {
     }
 
     //crashlytics
-    //   implementation 'com.crashlytics.sdk.android:crashlytics:2.9.1'
+    implementation 'com.crashlytics.sdk.android:crashlytics:2.9.4'
 
     //version fix
     implementation "com.android.support:design:26.1.0"
@@ -81,6 +80,7 @@ dependencies {
 
     implementation 'com.android.support:multidex:1.0.3'
 
+    implementation 'com.google.firebase:firebase-crash:16.0.1'
 }
 
 
