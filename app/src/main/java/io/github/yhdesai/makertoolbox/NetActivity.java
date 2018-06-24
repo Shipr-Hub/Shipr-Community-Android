@@ -70,8 +70,6 @@ public class NetActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_net);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
         resultText = findViewById(R.id.resultText);
         editIpAddress = findViewById(R.id.editIpAddress);
@@ -129,7 +127,7 @@ public class NetActivity extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.subnetDevicesButton).setOnClickListener(new View.OnClickListener() {
+       /* findViewById(R.id.subnetDevicesButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 new Thread(new Runnable() {
@@ -144,7 +142,7 @@ public class NetActivity extends AppCompatActivity {
                 }).start();
             }
         });
-
+*/
     }
 
     private void appendResultsText(final String text) {
