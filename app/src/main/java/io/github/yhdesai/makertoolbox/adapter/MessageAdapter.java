@@ -6,6 +6,7 @@ package io.github.yhdesai.makertoolbox.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -32,6 +33,7 @@ public class MessageAdapter extends ArrayAdapter<DeveloperMessage> {
         }
         TextView messageTextView = convertView.findViewById(R.id.messageTextView);
         TextView authorTextView = convertView.findViewById(R.id.nameTextView);
+        TextView timeTextView = convertView.findViewById(R.id.timeTextView);
         TextView dateTextView = convertView.findViewById(R.id.dateTextView);
 
         DeveloperMessage message = getItem(position);
@@ -41,16 +43,22 @@ public class MessageAdapter extends ArrayAdapter<DeveloperMessage> {
         authorTextView.setText(message.getName());
 
         String time = message.getTime();
+        Log.d("time", time);
         try {
             SimpleDateFormat mTime = new SimpleDateFormat("HH:mm", Locale.ENGLISH);
             mTime.setTimeZone(TimeZone.getTimeZone("IST"));
             Date date = mTime.parse(time);
+            Log.d("date", date.toString());
+            dateTextView.setText(date.toString());
             mTime.setTimeZone(TimeZone.getDefault());
-            String formattedDate = mTime.format(date);
-            dateTextView.setText(formattedDate);
+            String formattedTime = mTime.format(date);
+            timeTextView.setText(formattedTime);
+
         } catch (java.text.ParseException e) {
             e.printStackTrace();
         }
+
+
         return convertView;
     }
 }
