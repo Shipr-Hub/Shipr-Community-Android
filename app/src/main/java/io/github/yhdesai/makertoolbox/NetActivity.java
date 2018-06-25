@@ -131,7 +131,7 @@ public class NetActivity extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.whois).setOnClickListener(new View.OnClickListener() {
+       /* findViewById(R.id.whois).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -157,7 +157,7 @@ public class NetActivity extends AppCompatActivity {
 
 
             }
-        });
+        });*/
 
        /* findViewById(R.id.subnetDevicesButton).setOnClickListener(new View.OnClickListener() {
             @Override

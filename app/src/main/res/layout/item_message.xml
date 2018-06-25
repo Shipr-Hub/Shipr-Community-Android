@@ -2,7 +2,6 @@
 
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingTop="8dp">
@@ -18,21 +17,22 @@
 
     <TextView
         android:id="@+id/nameTextView"
-        android:layout_marginLeft="8dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="4dp"
         android:text="John Doe"
+        android:textColor="@color/white"
         android:textSize="12sp"
         app:layout_constraintLeft_toRightOf="@+id/photoImageView"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/messageTextView"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="4dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="4dp"
         android:background="@drawable/rounded_rectangle_orange"
         android:maxWidth="240dp"
         android:padding="8dp"
@@ -42,14 +42,24 @@
         app:layout_constraintTop_toBottomOf="@+id/nameTextView" />
 
     <TextView
-        android:id="@+id/dateTextView"
-        android:layout_marginLeft="4dp"
+        android:id="@+id/timeTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
         android:text="11:40"
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="@+id/messageTextView"
         app:layout_constraintLeft_toRightOf="@+id/messageTextView" />
+
+    <TextView
+        android:id="@+id/dateTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="4dp"
+        android:text="date here"
+        app:layout_constraintLeft_toRightOf="@+id/nameTextView"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
 
