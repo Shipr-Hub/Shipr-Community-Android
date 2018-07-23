@@ -10,6 +10,7 @@
         android:id="@+id/photoImageView"
         android:layout_width="32dp"
         android:layout_height="32dp"
+        android:contentDescription="@string/profile_picture_of_message_author"
         android:layout_marginLeft="8dp"
         android:background="@drawable/circle"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -22,7 +23,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginTop="4dp"
         android:text="John Doe"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="12sp"
         app:layout_constraintLeft_toRightOf="@+id/photoImageView"
         app:layout_constraintTop_toTopOf="parent" />
@@ -57,9 +58,10 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="4dp"
         android:layout_marginTop="4dp"
+        android:visibility="invisible"
         android:text="date here"
         app:layout_constraintLeft_toRightOf="@+id/nameTextView"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toBottomOf="@+id/messageTextView" />
 
 </android.support.constraint.ConstraintLayout>
 

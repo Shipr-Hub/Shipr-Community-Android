@@ -72,6 +72,10 @@
             android:orientation="horizontal"
             >
 
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_add_black_24dp"/>
             <EditText
                 android:id="@+id/messageEditText"
                 android:layout_width="0dp"
@@ -81,7 +85,7 @@
                 android:layout_marginRight="16dp"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
-                android:hint="Enter message"
+                android:hint="@string/enter_message"
                 android:maxLines="6"/>
 
             <Button
@@ -92,8 +96,9 @@
                 android:background="?attr/selectableItemBackground"
                 android:clickable="true"
                 android:gravity="center"
-                android:text="SEND"
-                android:textSize="14sp" />
+                android:text="@string/send_button"
+                android:textSize="14sp"
+                android:focusable="true" />
 
         </LinearLayout>
 

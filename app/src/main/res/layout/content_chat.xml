@@ -20,7 +20,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:gravity="center"
-        android:text="This Activity is still under development"
+        android:text="@string/under_dev"
         android:textSize="20dp"/>
 
 </LinearLayout>

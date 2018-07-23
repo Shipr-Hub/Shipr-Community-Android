@@ -1,13 +1,13 @@
 package io.github.yhdesai.makertoolbox.ChatChannel;
 
 import android.app.Fragment;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +20,7 @@ import com.firebase.ui.auth.AuthUI;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserInfo;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -52,12 +53,15 @@ public class general extends Fragment {
     private EditText mMessageEditText;
     private Button mSendButton;
 
-    private String mUsername;
+    private String mName;
     private String mPlatform;
     private String mChannel = "general";
     private String mDate;
     private String mTime;
     private String mMessage;
+    /*private String mDisplayName;*/
+    private String mProfilePic;
+    private String mVersion;
 
     // Firebase instance variable
     private FirebaseDatabase mFirebaseDatabase;
@@ -70,17 +74,18 @@ public class general extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_general, container, false);
-        FirebaseApp.initializeApp(getActivity());
+            View rootView = inflater.inflate(R.layout.fragment_general, container, false);
+            FirebaseApp.initializeApp(getActivity());
 
 
-        mUsername = ANONYMOUS;
+        mName = ANONYMOUS;
         mPlatform = "Android";
         // Initialize Firebase components
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mFirebaseAuth = FirebaseAuth.getInstance();
 
         mMessagesDatabaseReference = mFirebaseDatabase.getReference().child("general");
+
 
 
         // Initialize references to views
@@ -132,7 +137,7 @@ public class general extends Fragment {
                 // Getting the time
                 SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
                 sdf.setTimeZone(TimeZone.getTimeZone("IST"));
-                String mTime = sdf.format(new Date()).toString();
+                mTime = sdf.format(new Date());
 
                 // Getting the date
                 final Calendar c = Calendar.getInstance();
@@ -143,9 +148,36 @@ public class general extends Fragment {
 
                 mMessage = mMessageEditText.getText().toString();
 
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                if (user != null) {
+                    for (UserInfo profile : user.getProviderData()) {
+                        // Id of the provider (ex: google.com)
+                        String providerId = profile.getProviderId();
+
+                        // UID specific to the provider
+                        String uid = profile.getUid();
+
+                        // Name, email address, and profile photo Url
+                      /*  mDisplayName = profile.getDisplayName();*/
+                        Uri uri = profile.getPhotoUrl();
+                        /*mProfilePic = uri.toString();*/
+                    }
+
+                }
+
 
                 // Sending the Message
-                DeveloperMessage developerMessage = new DeveloperMessage(mMessage, mUsername, null, mTime, mDate, mPlatform);
+                DeveloperMessage developerMessage = new DeveloperMessage(
+                        mName,
+                        /*mDisplayName,*/
+                        mProfilePic,
+                        mMessage,
+                        null,
+                        mTime,
+                        mDate,
+                        mPlatform,
+                        mVersion
+                );
                 mMessagesDatabaseReference.push().setValue(developerMessage);
 
                 sendNotificationToUser(mChannel, null, mMessageEditText.getText().toString());
@@ -203,12 +235,12 @@ public class general extends Fragment {
     }
 
     private void onSignedInInitialize(String username) {
-        mUsername = username;
+        mName = username;
         attachDatabaseReadListener();
     }
 
     private void onSignedOutCleanup() {
-        mUsername = ANONYMOUS;
+        mName = ANONYMOUS;
         mMessageAdapter.clear();
         detachDatabaseReadListener();
 
