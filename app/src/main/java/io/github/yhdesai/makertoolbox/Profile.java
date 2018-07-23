@@ -89,8 +89,8 @@ public class Profile extends Fragment {
         pUsername.setText(displayName);
         pEmail.setText(email);
         /*  pDisplayName.setText();*/
-
-        mProfilePic.setOnClickListener(new View.OnClickListener() {
+//TODO profile pic
+       /* mProfilePic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
@@ -101,7 +101,7 @@ public class Profile extends Fragment {
                 Log.d("pong", "Pong");
             }
         });
-
+*/
 
 
         mSubmitButton.setOnClickListener(new View.OnClickListener()
