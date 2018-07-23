@@ -219,7 +219,7 @@ public class NetActivity extends AppCompatActivity {
 
             @Override
             public void onError(Exception e) {
-                // TODO: STUB METHOD
+
             }
         });
 

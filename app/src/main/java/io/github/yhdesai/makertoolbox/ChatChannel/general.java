@@ -131,8 +131,8 @@ public class general extends Fragment {
             }
         });
         mMessageEditText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(DEFAULT_MSG_LENGTH_LIMIT)});
-//TODO fix this
-       /* addPic.setOnClickListener(new View.OnClickListener() {
+
+        addPic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
@@ -140,8 +140,7 @@ public class general extends Fragment {
                 intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
                 startActivityForResult(Intent.createChooser(intent, "Complete action using"), RC_CHAT_PHOTO_PICKER);
             }
-        });*/
-
+        });
 
 
         // Send button sends a message and clears the EditText

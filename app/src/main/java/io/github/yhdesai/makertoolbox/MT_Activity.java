@@ -10,8 +10,12 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserInfo;
@@ -49,7 +53,6 @@ public class MT_Activity extends AppCompatActivity {
     private DatabaseReference mNotificationsDatabaseReference;
 
 
-
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -81,6 +84,7 @@ public class MT_Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mt);
+        Log.d("TAG", "MT_ACTIVITY OPENED");
 /*
         FirebaseApp.initializeApp(this);*/
         FirebaseStorage mFirebaseStorage = FirebaseStorage.getInstance();
@@ -88,8 +92,6 @@ public class MT_Activity extends AppCompatActivity {
         mProfileStroageReference = mFirebaseStorage.getReference().child("profile_pic");
         FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();
         mMessagesDatabaseReference = mFirebaseDatabase.getReference().child("general");
-
-
 
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
@@ -103,8 +105,8 @@ public class MT_Activity extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Log.d("MT_Activity", "onActivityResult detected");
-      if (requestCode == RC_PHOTO_PICKER && resultCode == RESULT_OK) {
+        Log.d("MT_Activity", "onActivityResult executed");
+      /*if (requestCode == RC_PHOTO_PICKER && resultCode == RESULT_OK) {
             Uri selectedImageUri = data.getData();
 
             // Get a reference to store file at chat_photos/<FILENAME>
@@ -119,76 +121,146 @@ public class MT_Activity extends AppCompatActivity {
                             Log.d("url : ", downloadUrl.toString());
 
                             // Set the download URL to the message box, so that the user can send it to the database
- /*                         FriendlyMessage friendlyMessage = new FriendlyMessage(null, mUsername, downloadUrl.toString());
-                            mMessagesDatabaseReference.push().setValue(friendlyMessage);*/
+ *//*                         FriendlyMessage friendlyMessage = new FriendlyMessage(null, mUsername, downloadUrl.toString());
+                            mMessagesDatabaseReference.push().setValue(friendlyMessage);*//*
                         }
                     });
-        }else if(requestCode == RC_CHAT_PHOTO_PICKER && resultCode == RESULT_OK){
+        }else */
 
-          Uri selectedImageUri = data.getData();
+        //TODO fix this
+        if (requestCode == RC_CHAT_PHOTO_PICKER && resultCode == RESULT_OK) {
 
-          // Get a reference to store file at chat_photos/<FILENAME>
-          StorageReference photoRef = mProfileStroageReference.child(selectedImageUri.getLastPathSegment());
+            Uri selectedImageUri = data.getData();
 
-          // Upload file to Firebase Storage
-          photoRef.putFile(selectedImageUri)
-                  .addOnSuccessListener(this, new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                      public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                          // When the image has successfully uploaded, we get its download URL
-                          Uri downloadUrl = taskSnapshot.getUploadSessionUri();
-                          Log.d("url : ", downloadUrl.toString());
-
-                           //Set the download URL to the message box, so that the user can send it to the database
-
-                          // Getting the time
-                          SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-                          sdf.setTimeZone(TimeZone.getTimeZone("IST"));
-                          mTime = sdf.format(new Date());
-
-                          // Getting the date
-                          final Calendar c = Calendar.getInstance();
-                          int year = c.get(Calendar.YEAR);
-                          int month = c.get(Calendar.MONTH);
-                          int day = c.get(Calendar.DAY_OF_MONTH);
-                          mDate = String.valueOf(day) + "-" + String.valueOf(month) + "-" + String.valueOf(year);
+            // Get a reference to store file at chat_photos/<FILENAME>
+            final StorageReference photoRef = mProfileStroageReference.child(selectedImageUri.getLastPathSegment());
 
 
-                          FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                          if (user != null) {
-                              for (UserInfo profile : user.getProviderData()) {
-                                  // Id of the provider (ex: google.com)
-                                  String providerId = profile.getProviderId();
+            photoRef.putFile(selectedImageUri).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                @Override
+                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                    if (!task.isSuccessful()) {
+                        throw task.getException();
+                    }
+                    return photoRef.getDownloadUrl();
+                }
+            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                @Override
+                public void onComplete(@NonNull Task<Uri> task) {
+                    if (task.isSuccessful()) {
+                        Uri downloadUri = task.getResult();
 
-                                  // UID specific to the provider
-                                  String uid = profile.getUid();
-
-                                  // Name, email address, and profile photo Url
-                                  /*  mDisplayName = profile.getDisplayName();*/
-                                  Uri uri = profile.getPhotoUrl();
-                                  /*mProfilePic = uri.toString();*/
-                              }
-
-                          }
+                        //TODO return the url of the image uploaded here
 
 
-                          DeveloperMessage developerMessage = new DeveloperMessage(
-                                  mName,
-                                  /*mDisplayName,*/
-                                  mProfilePic,
-                                  mMessage,
-                                  downloadUrl.toString(),
-                                  mTime,
-                                  mDate,
-                                  mPlatform,
-                                  mVersion
-                          );
-                          mMessagesDatabaseReference.push().setValue(developerMessage);
 
-                         // sendNotificationToUser(mChannel, null, mMessageEditText.getText().toString());
-                      }
-                  });
+                        // Getting the time
+                        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+                        sdf.setTimeZone(TimeZone.getTimeZone("IST"));
+                        mTime = sdf.format(new Date());
 
-      }
+                        // Getting the date
+                        final Calendar c = Calendar.getInstance();
+                        int year = c.get(Calendar.YEAR);
+                        int month = c.get(Calendar.MONTH);
+                        int day = c.get(Calendar.DAY_OF_MONTH);
+                        mDate = String.valueOf(day) + "-" + String.valueOf(month) + "-" + String.valueOf(year);
+
+
+                        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                        if (user != null) {
+                            for (UserInfo profile : user.getProviderData()) {
+                                // Id of the provider (ex: google.com)
+                                String providerId = profile.getProviderId();
+
+                                // UID specific to the provider
+                                String uid = profile.getUid();
+
+                                // Name, email address, and profile photo Url
+                                    mName = profile.getDisplayName();
+                               /* Uri uri = profile.getPhotoUrl();*/
+                                 /*  mProfilePic = uri.toString();*/
+                            }
+
+                        }
+
+                        DeveloperMessage developerMessage = new DeveloperMessage(
+                                mName,
+
+                                mProfilePic,
+                                mMessage,
+                                downloadUri.toString(),
+                                mTime,
+                                mDate,
+                                mPlatform,
+                                mVersion
+                        );
+                        mMessagesDatabaseReference.push().setValue(developerMessage);
+                    } else {
+                        Toast.makeText(MT_Activity.this, "upload failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+
+            // Upload file to Firebase Storage
+         /*   photoRef.putFile(selectedImageUri)
+                    .addOnSuccessListener(this, new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            // When the image has successfully uploaded, we get its download URL
+                            Uri downloadUrl = taskSnapshot.getDownloadURL();
+
+                            //Set the download URL to the message box, so that the user can send it to the database
+                            Log.d("url : ", downloadUrl.toString());
+*//*                            // Getting the time
+                            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+                            sdf.setTimeZone(TimeZone.getTimeZone("IST"));
+                            mTime = sdf.format(new Date());
+
+                            // Getting the date
+                            final Calendar c = Calendar.getInstance();
+                            int year = c.get(Calendar.YEAR);
+                            int month = c.get(Calendar.MONTH);
+                            int day = c.get(Calendar.DAY_OF_MONTH);
+                            mDate = String.valueOf(day) + "-" + String.valueOf(month) + "-" + String.valueOf(year);
+
+
+                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                            if (user != null) {
+                                for (UserInfo profile : user.getProviderData()) {
+                                    // Id of the provider (ex: google.com)
+                                    String providerId = profile.getProviderId();
+
+                                    // UID specific to the provider
+                                    String uid = profile.getUid();
+
+                                    // Name, email address, and profile photo Url
+                                    *//**//*  mDisplayName = profile.getDisplayName();*//**//*
+                                    Uri uri = profile.getPhotoUrl();
+                                    *//**//*mProfilePic = uri.toString();*//**//*
+                                }
+
+                            }
+
+
+                            DeveloperMessage developerMessage = new DeveloperMessage(
+                                    mName,
+                                    *//**//*mDisplayName,*//**//*
+                                    mProfilePic,
+                                    mMessage,
+                                    downloadUrl.toString(),
+                                    mTime,
+                                    mDate,
+                                    mPlatform,
+                                    mVersion
+                            );
+                            mMessagesDatabaseReference.push().setValue(developerMessage);
+
+                            // sendNotificationToUser(mChannel, null, mMessageEditText.getText().toString());
+                        *//*
+                        }
+                    });*/
+
+        }
     }
 }
 
