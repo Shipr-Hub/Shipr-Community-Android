@@ -127,9 +127,9 @@ public class resources extends Fragment {
 
 
                 // Sending the Message
-                DeveloperMessage developerMessage = new DeveloperMessage(mMessageEditText.getText().toString(), mUsername, null, sdf.format(new Date()).toString(), mDate, "Android");
+             /*   DeveloperMessage developerMessage = new DeveloperMessage(mMessageEditText.getText().toString(), mUsername, null, sdf.format(new Date()).toString(), mDate, "Android");
                 mMessagesDatabaseReference.push().setValue(developerMessage);
-
+*/
 
                 // Clear input box
                 mMessageEditText.setText("");

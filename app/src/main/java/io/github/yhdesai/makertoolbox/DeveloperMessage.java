@@ -6,23 +6,70 @@ package io.github.yhdesai.makertoolbox;
 
 public class DeveloperMessage {
 
-    private String text;
+
     private String name;
-    private String photoUrl;
+    /*private String displayName;*/
+    private String profilePic;
+    private String text;
+    private String photoMessage;
     private String time;
     private String date;
     private String platform;
+    private String version;
 
     public DeveloperMessage() {
     }
 
-    public DeveloperMessage(String text, String name, String photoUrl, String time, String date, String platform) {
-        this.text = text;
+    public DeveloperMessage(String name,
+                            /*String displayName,*/
+                            String profilePic,
+                            String text,
+                            String photoMessage,
+                            String time,
+                            String date,
+                            String platform,
+                            String version) {
         this.name = name;
-        this.photoUrl = photoUrl;
+        /*this.displayName = displayName;*/
+        this.profilePic = profilePic;
+        this.text = text;
+        this.photoMessage = photoMessage;
         this.time = time;
         this.date = date;
         this.platform = platform;
+        this.version = version;
+    }
+
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
+    }
+
+   /* public String getDisplayName() {
+        return displayName;
+    }*/
+
+    public String getProfilePic() {
+        return profilePic;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    /*public void setDisplayName(String displayName) {
+        this.displayName = displayName;
+    }*/
+
+    public void setProfilePic(String profilePic) {
+        this.profilePic = profilePic;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getText() {
@@ -33,20 +80,13 @@ public class DeveloperMessage {
         this.text = text;
     }
 
-    public String getName() {
-        return name;
+
+    public String getPhotoMessage() {
+        return photoMessage;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getPhotoUrl() {
-        return photoUrl;
-    }
-
-    public void setPhotoUrl(String photoUrl) {
-        this.photoUrl = photoUrl;
+    public void setPhotoMessage(String photoMessage) {
+        this.photoMessage = photoMessage;
     }
 
     public String getTime() {

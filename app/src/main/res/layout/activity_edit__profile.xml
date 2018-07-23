@@ -10,6 +10,7 @@
     <ImageButton
         android:id="@+id/profileImageView"
         android:layout_width="match_parent"
+        android:contentDescription="@string/profile_image_view"
         android:layout_height="200dp" />
 
     <EditText
@@ -26,5 +27,5 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="submit"
-        android:text="Submit" />
+        android:text="@string/submit" />
 </LinearLayout>
