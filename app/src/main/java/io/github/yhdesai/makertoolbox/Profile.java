@@ -103,7 +103,7 @@ public class Profile extends Fragment {
         });
 */
 
-
+// Todo When mSubmitButton is pressed, Open a ImagePicker to select a image, upload it to Firebase Storage and get the uri where the image is stored in firebase storage
         mSubmitButton.setOnClickListener(new View.OnClickListener()
 
         {
