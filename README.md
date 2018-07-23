@@ -1,5 +1,5 @@
 # Maker-ToolBox-Android
-Dev Props is a Go-To Application for developers to enable them to develop their projects from their smartphones. 
+Maker ToolBox is a Go-To Application for developers to enable them to develop their projects from their smartphones. 
 
 Basic features:
 1) Chat
@@ -13,6 +13,7 @@ Basic features:
 9) Podcasts
 10) Ebook
 11) Community Projects
+12) Network Tools
 
 
 Advanced Features :
