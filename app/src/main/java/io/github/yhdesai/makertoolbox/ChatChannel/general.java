@@ -1,6 +1,7 @@
 package io.github.yhdesai.makertoolbox.ChatChannel;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -62,6 +63,7 @@ public class general extends Fragment {
     /*private String mDisplayName;*/
     private String mProfilePic;
     private String mVersion;
+    private Button addPic;
 
     // Firebase instance variable
     private FirebaseDatabase mFirebaseDatabase;
@@ -71,11 +73,13 @@ public class general extends Fragment {
     private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
 
+    private static final int RC_CHAT_PHOTO_PICKER = 3;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_general, container, false);
-            FirebaseApp.initializeApp(getActivity());
+        View rootView = inflater.inflate(R.layout.fragment_general, container, false);
+        FirebaseApp.initializeApp(getActivity());
 
 
         mName = ANONYMOUS;
@@ -87,12 +91,12 @@ public class general extends Fragment {
         mMessagesDatabaseReference = mFirebaseDatabase.getReference().child("general");
 
 
-
         // Initialize references to views
         mProgressBar = rootView.findViewById(R.id.progressBar);
         mMessageListView = rootView.findViewById(R.id.messageListView);
         mMessageEditText = rootView.findViewById(R.id.messageEditText);
         mSendButton = rootView.findViewById(R.id.sendButton);
+        addPic = rootView.findViewById(R.id.addPic);
 
         // Initialize message ListView and its adapter
 
@@ -128,6 +132,18 @@ public class general extends Fragment {
         });
         mMessageEditText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(DEFAULT_MSG_LENGTH_LIMIT)});
 
+        addPic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                intent.setType("image/jpeg");
+                intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
+                startActivityForResult(Intent.createChooser(intent, "Complete action using"), RC_CHAT_PHOTO_PICKER);
+            }
+        });
+
+
+
         // Send button sends a message and clears the EditText
         mSendButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -158,7 +174,7 @@ public class general extends Fragment {
                         String uid = profile.getUid();
 
                         // Name, email address, and profile photo Url
-                      /*  mDisplayName = profile.getDisplayName();*/
+                        /*  mDisplayName = profile.getDisplayName();*/
                         Uri uri = profile.getPhotoUrl();
                         /*mProfilePic = uri.toString();*/
                     }
