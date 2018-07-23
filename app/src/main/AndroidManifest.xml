@@ -78,6 +78,7 @@
         <activity android:name=".GTodo" />
         <activity
             android:name=".MT_Activity"
+            android:launchMode="singleTop"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
