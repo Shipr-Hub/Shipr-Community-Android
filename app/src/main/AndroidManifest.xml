@@ -15,16 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity
             android:name=".addTodo"
             android:label="Add ToDo" />
-        <activity
-            android:name=".chat"
-            android:label="@string/title_activity_chat"
-            android:theme="@style/AppTheme.NoActionBar" />
 
         <meta-data
             android:name="com.google.android.gms.version"
@@ -66,27 +58,24 @@
         -->
         <activity android:name=".Dev" />
         <activity android:name=".Awesome_Libraries" />
-        <activity android:name=".Edit_Profile" />
-        <activity android:name=".Github" />
         <activity android:name=".Welcome_Screen" />
-        <activity android:name=".Resources" />
         <activity android:name=".addLibrary" />
         <activity android:name=".colorPicker" />
         <activity android:name=".video" />
         <activity android:name=".ssh.SshActivity" />
         <activity android:name=".ssh.SSH_Connect" />
-        <activity android:name=".GTodo" />
         <activity
             android:name=".MT_Activity"
-            android:launchMode="singleTop"
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".NetActivity"></activity>
+        <activity android:name=".NetActivity" />
+        <activity android:name=".CodeEditor"></activity>
     </application>
 
 </manifest>

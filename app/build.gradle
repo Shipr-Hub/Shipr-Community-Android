@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 //apply plugin: 'io.fabric'
+apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion 26
@@ -52,13 +53,13 @@ dependencies {
     //color picker
     implementation 'com.pes.materialcolorpicker:library:1.2.0'
     //to-do
-    implementation 'pub.devrel:easypermissions:0.3.0'
-    implementation('com.google.api-client:google-api-client-android:1.23.0') {
+    //implementation 'pub.devrel:easypermissions:0.3.0'
+   /* implementation('com.google.api-client:google-api-client-android:1.23.0') {
         exclude group: 'org.apache.httpcomponents'
-    }
-    implementation('com.google.apis:google-api-services-tasks:v1-rev52-1.23.0') {
+    }*/
+    /*implementation('com.google.apis:google-api-services-tasks:v1-rev52-1.23.0') {
         exclude group: 'org.apache.httpcomponents'
-    }
+    }*/
     //    //network tools
     //    implementation 'com.github.stealthcopter:AndroidNetworkTools:0.4.0'
     //crashlytics
@@ -71,7 +72,15 @@ dependencies {
     implementation 'com.google.firebase:firebase-crash:16.0.1'
     implementation 'com.android.support.constraint:constraint-layout:1.1.2'
     implementation files('lib/AndroidNetworkTools.jar')
-   // implementation 'com.github.stealthcopter:AndroidNetworkTools:0.4.0'
+    // implementation 'com.github.stealthcopter:AndroidNetworkTools:0.4.0'
+
+
+    //Code View
+   // implementation 'com.github.kbiakov:CodeView-android:1.3.1'
+
+    implementation project(path: ':codeview')
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 }
 
 
