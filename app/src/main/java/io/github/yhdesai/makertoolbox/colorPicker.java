@@ -1,5 +1,6 @@
 package io.github.yhdesai.makertoolbox;
 
+
 import android.graphics.Color;
 import android.support.annotation.ColorInt;
 import android.support.v7.app.AppCompatActivity;
@@ -7,13 +8,17 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+
 import com.pes.androidmaterialcolorpickerdialog.ColorPicker;
 import com.pes.androidmaterialcolorpickerdialog.ColorPickerCallback;
+
 
 public class colorPicker extends AppCompatActivity {
     int defaultColorR = 0;
     int defaultColorG = 0;
     int defaultColorB = 0;
+
+
 
 
     @Override
@@ -24,13 +29,16 @@ public class colorPicker extends AppCompatActivity {
         getSupportActionBar().hide();
         colorPickerDialog(null);
 
+
     }
+
 
     public void colorPickerDialog(View v) {
         final ColorPicker cp = new ColorPicker(colorPicker.this, defaultColorR, defaultColorG, defaultColorB);
         /* Show color picker dialog */
         cp.show();
         // cp.enableAutoClose(); // Enables auto-dismiss for the dialog
+
 
         /* Set a new Listener called when user click "select" */
         cp.setCallback(new ColorPickerCallback() {
@@ -41,14 +49,22 @@ public class colorPicker extends AppCompatActivity {
                 view.setBackgroundColor(color);
 
 
-                //Set the text to the color code
-                TextView colorOutput1 = findViewById(R.id.colorOutput1);
-                colorOutput1.setText(String.format("#%06X", (0xFFFFFF & color)));
+
+
+                //Change text color based on the brightness of the background color
+                if ((defaultColorR+defaultColorG+defaultColorB) > 700):
+                	TextView colorOutput = findViewById(R.id.colorOutput1);
+                	colorOutput1.setText(String.format("#%06X", (0x000000 & color)));
+                	else:
+                		TextView colorOutput = findViewById(R.id.colorOutput1);
+                		colorOutput1.setText(String.format("#%06X", (0xFFFFFF & color)));
                 //TextView colorOutput2 = findViewById(R.id.colorOutput2);
                 //colorOutput2.setText(String.format("#%08X", (0xFFFFFFFF & color)));
                 defaultColorR = Color.red(color);
                 defaultColorG = Color.green(color);
                 defaultColorB = Color.blue(color);
+
+
 
 
                 // Log the data returned
@@ -61,10 +77,12 @@ public class colorPicker extends AppCompatActivity {
                 Log.d("#Hex no alpha", String.format("#%06X", (0xFFFFFF & color)));
                 Log.d("#Hex with alpha", String.format("#%08X", (0xFFFFFFFF & color)));*/
 
+
                 // If the auto-dismiss option is not enable (disabled as default) you have to manually dimiss the dialog
                 cp.dismiss();
             }
         });
+
 
     }
 }
