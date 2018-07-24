@@ -4,14 +4,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content" tools:context=".CodeEditor">
+    android:layout_height="wrap_content"
+    tools:context=".CodeEditor">
    <!-- android:animateLayoutChanges="true"-->
 
 
-    <io.github.kbiakov.codeview.CodeView
-        android:id="@+id/code_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-        <!--app:animateOnStart="true"-->
+
+
 
 </RelativeLayout>
