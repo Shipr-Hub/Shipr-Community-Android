@@ -30,7 +30,7 @@ Play Store : https://play.google.com/store/apps/details?id=io.github.yhdesai.mak
 
 Contributions are welcome!
 
-If you need any help, please contact us on [slack][5]
+If you need any help, please contact us on [slack][5]or [discord][6]
 
 1. Check out our [public issues board][0]. If your issue isn't on the board, [open a new one][1].
 2. Fork the project ([Need help forking a project?][3]). You'll do all of your work on your forked copy.
@@ -43,3 +43,4 @@ If you need any help, please contact us on [slack][5]
 [3]: https://help.github.com/articles/fork-a-repo/
 [4]: https://github.com/Kunena/Kunena-Forum/wiki/Create-a-new-branch-with-git-and-manage-branches
 [5]: https://join.slack.com/t/makertoolbox/shared_invite/enQtMzQ1Mjk1OTQyMDUyLTNmOWM4MTM2MzU0ZTQwOTRhZTg5MzQ4YTMyZjAzZTEwN2I4YmYxMDA4YzJjMjEyNGU0YTc0YWM3N2ZmZjFmNTQ
+[6]: http://discord.gg/x28KKWG
