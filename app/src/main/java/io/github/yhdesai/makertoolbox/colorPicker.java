@@ -41,9 +41,15 @@ public class colorPicker extends AppCompatActivity {
                 view.setBackgroundColor(color);
 
 
-                //Set the text to the color code
-                TextView colorOutput1 = findViewById(R.id.colorOutput1);
-                colorOutput1.setText(String.format("#%06X", (0xFFFFFF & color)));
+                //Set the center text color based on the background color
+				if ((defaultColorR+defaultColorG+defaultColorB) > 700) {
+					TextView colorOutput1 = findViewById(R.id.colorOutput1);
+					colorOutput1.setText(String.format("#%06X", (0x000000 & color)));
+				}
+				else if ((defaultColorR+defaultColorG+defaultColorB) < 700) {
+					TextView colorOutput1 = findViewById(R.id.colorOutput1);
+					colorOutput1.setText(String.format("#%06X", (0xFFFFFF & color)));
+				}
                 //TextView colorOutput2 = findViewById(R.id.colorOutput2);
                 //colorOutput2.setText(String.format("#%08X", (0xFFFFFFFF & color)));
                 defaultColorR = Color.red(color);
