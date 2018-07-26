@@ -1,1 +1,1 @@
-include ':app', ':codeview'
+include ':app'
