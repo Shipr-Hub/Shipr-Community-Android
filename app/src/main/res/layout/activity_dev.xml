@@ -9,6 +9,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         tools:context="io.github.yhdesai.makertoolbox.Dev">
+
         <Button
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -22,34 +23,7 @@
             android:text="Code Editor"
             android:textColor="#FFFFFF"
             android:textSize="30sp" />
-        <Button
 
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="32dp"
-            android:background="#03A6FF"
-            android:onClick="chat"
-            android:shadowColor="#A8A8A8"
-            android:shadowDx="0"
-            android:shadowDy="0"
-            android:shadowRadius="5"
-            android:text="Chat"
-            android:textColor="#FFFFFF"
-            android:textSize="30sp" />
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="32dp"
-            android:background="#03A6FF"
-            android:onClick="add_todo"
-            android:shadowColor="#A8A8A8"
-            android:shadowDx="0"
-            android:shadowDy="0"
-            android:shadowRadius="5"
-            android:text="Add Todo"
-            android:textColor="#FFFFFF"
-            android:textSize="30sp" />
 
         <Button
             android:layout_width="match_parent"
@@ -65,19 +39,6 @@
             android:textColor="#FFFFFF"
             android:textSize="30sp" />
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="32dp"
-            android:background="#03A6FF"
-            android:onClick="edit_profile"
-            android:shadowColor="#A8A8A8"
-            android:shadowDx="0"
-            android:shadowDy="0"
-            android:shadowRadius="5"
-            android:text="Edit Profile"
-            android:textColor="#FFFFFF"
-            android:textSize="30sp" />
 
         <Button
             android:layout_width="match_parent"
@@ -93,19 +54,6 @@
             android:textColor="#FFFFFF"
             android:textSize="30sp" />
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="32dp"
-            android:background="#03A6FF"
-            android:onClick="git"
-            android:shadowColor="#A8A8A8"
-            android:shadowDx="0"
-            android:shadowDy="0"
-            android:shadowRadius="5"
-            android:text="Github Client"
-            android:textColor="#FFFFFF"
-            android:textSize="30sp" />
 
         <Button
             android:layout_width="match_parent"
