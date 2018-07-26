@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-//apply plugin: 'io.fabric'
+apply plugin: 'io.fabric'
 /*apply plugin: 'kotlin-android'*/
 
 android {
@@ -35,6 +35,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-database:16.0.1'
     //FireBase Core
     implementation 'com.google.firebase:firebase-core:16.0.1'
+
     //Firebase Storage
     implementation 'com.google.firebase:firebase-storage:16.0.1'
     //    //FireBase Ads
