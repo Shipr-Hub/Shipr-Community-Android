@@ -17,14 +17,9 @@ public class Dev extends AppCompatActivity {
     }
 
 
-
-
-
     public void library(View v) {
         startActivity(new Intent(Dev.this, Awesome_Libraries.class));
     }
-
-
 
 
     public void intro(View v) {
@@ -41,6 +36,7 @@ public class Dev extends AppCompatActivity {
     }
 
 
-    public void code_editor(View view) {startActivity(new Intent(Dev.this, CodeEditor.class));
+    public void code_editor(View view) {
+        startActivity(new Intent(Dev.this, CodeEditor.class));
     }
 }
