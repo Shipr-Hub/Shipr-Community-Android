@@ -10,10 +10,10 @@ public interface ConnectionStatusListener {
     /**
      * Handles event of Session not connected
      */
-    public void onDisconnected();
+    void onDisconnected();
 
     /**
      * Handles event of Session connected
      */
-    public void onConnected();
+    void onConnected();
 }

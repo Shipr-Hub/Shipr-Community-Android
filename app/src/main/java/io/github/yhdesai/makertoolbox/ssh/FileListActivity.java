@@ -75,8 +75,8 @@ public class FileListActivity extends Activity implements OnItemClickListener, O
         setContentView(R.layout.activity_filelistactivity_ssh);
 
         mUserInfo = getIntent().getExtras().getStringArray("UserInfo");
-        mLocalGridView = (GridView) findViewById(R.id.listview);
-        mRemoteGridView = (GridView) findViewById(R.id.remotelistview);
+        mLocalGridView = findViewById(R.id.listview);
+        mRemoteGridView = (findViewById(R.id.remotelistview);
         // Get external storage
         mRootFile = Environment.getExternalStorageDirectory();
         // list files
@@ -89,12 +89,12 @@ public class FileListActivity extends Activity implements OnItemClickListener, O
         mLocalGridView.setAdapter(mFileListAdapter);
         mLocalGridView.setOnItemClickListener(this);
         //----------------- buttons ---------------//
-        mUpButton = (Button) findViewById(R.id.upbutton);
+        mUpButton = findViewById(R.id.upbutton);
         mUpButton.setOnClickListener(this);
-        mConnectButton = (Button) findViewById(R.id.connectbutton);
+        mConnectButton = findViewById(R.id.connectbutton);
         mConnectButton.setOnClickListener(this);
 
-        mStateView = (TextView) findViewById(R.id.statetextview);
+        mStateView = findViewById(R.id.statetextview);
 
         mSessionController = SessionController.getSessionController();
         mSessionController.connect();

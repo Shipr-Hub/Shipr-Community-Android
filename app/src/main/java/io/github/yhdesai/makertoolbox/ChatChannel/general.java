@@ -44,31 +44,29 @@ import io.github.yhdesai.makertoolbox.R;
 
 
 public class general extends Fragment {
-    public static final String ANONYMOUS = "anonymous";
-    public static final int DEFAULT_MSG_LENGTH_LIMIT = 1000;
-    public static final int RC_SIGN_IN = 1;
-    private static final String TAG = "general";
-    private ListView mMessageListView;
+    private static final String ANONYMOUS = "anonymous";
+    private static final int DEFAULT_MSG_LENGTH_LIMIT = 1000;
+    private static final int RC_SIGN_IN = 1;
+    ListView mMessageListView;
     private MessageAdapter mMessageAdapter;
-    private ProgressBar mProgressBar;
+    ProgressBar mProgressBar;
     private EditText mMessageEditText;
     private Button mSendButton;
 
     private String mName;
     private String mPlatform;
-    private String mChannel = "general";
+    String mChannel = "general";
     private String mDate;
     private String mTime;
     private String mMessage;
-    /*private String mDisplayName;*/
-    private String mProfilePic;
-    private String mVersion;
-    private Button addPic;
+    Button addPic;
+    String mProfilePic;
+    String mVersion;
 
     // Firebase instance variable
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mMessagesDatabaseReference;
-    private DatabaseReference mNotificationsDatabaseReference;
+    DatabaseReference mNotificationsDatabaseReference;
     private ChildEventListener mChildEventListener;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
@@ -87,7 +85,6 @@ public class general extends Fragment {
         // Initialize Firebase components
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mFirebaseAuth = FirebaseAuth.getInstance();
-
         mMessagesDatabaseReference = mFirebaseDatabase.getReference().child("general");
 
 
@@ -99,7 +96,6 @@ public class general extends Fragment {
         addPic = rootView.findViewById(R.id.addPic);
 
         // Initialize message ListView and its adapter
-
         List<DeveloperMessage> friendlyMessages = new ArrayList<>();
         mMessageAdapter = new MessageAdapter(getActivity(), R.layout.item_message, friendlyMessages);
         mMessageListView.setAdapter(mMessageAdapter);
@@ -112,33 +108,12 @@ public class general extends Fragment {
         /* FirebaseMessaging.getInstance().subscribeToTopic("general");*/
 
         // Enable Send button when there's text to send
-        mMessageEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (charSequence.toString().trim().length() > 0) {
-                    mSendButton.setEnabled(true);
-                } else {
-                    mSendButton.setEnabled(false);
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-            }
-        });
-        mMessageEditText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(DEFAULT_MSG_LENGTH_LIMIT)});
+        editTextWatcher();
 
         addPic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                intent.setType("image/jpeg");
-                intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
-                startActivityForResult(Intent.createChooser(intent, "Complete action using"), RC_CHAT_PHOTO_PICKER);
+                openImagePicker();
             }
         });
 
@@ -147,63 +122,16 @@ public class general extends Fragment {
         mSendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
-                // Getting the time
-                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-                sdf.setTimeZone(TimeZone.getTimeZone("IST"));
-                mTime = sdf.format(new Date());
-
-                // Getting the date
-                final Calendar c = Calendar.getInstance();
-                int year = c.get(Calendar.YEAR);
-                int month = c.get(Calendar.MONTH);
-                int day = c.get(Calendar.DAY_OF_MONTH);
-                mDate = String.valueOf(day) + "-" + String.valueOf(month) + "-" + String.valueOf(year);
-
-                mMessage = mMessageEditText.getText().toString();
-
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                if (user != null) {
-                    for (UserInfo profile : user.getProviderData()) {
-                        // Id of the provider (ex: google.com)
-                        String providerId = profile.getProviderId();
-
-                        // UID specific to the provider
-                        String uid = profile.getUid();
-
-                        // Name, email address, and profile photo Url
-                        /*  mDisplayName = profile.getDisplayName();*/
-                        Uri uri = profile.getPhotoUrl();
-                        /*mProfilePic = uri.toString();*/
-                    }
-
-                }
-
-
-                // Sending the Message
-                DeveloperMessage developerMessage = new DeveloperMessage(
-                        mName,
-                        /*mDisplayName,*/
-                        mProfilePic,
-                        mMessage,
-                        null,
-                        mTime,
-                        mDate,
-                        mPlatform,
-                        mVersion
-                );
-                mMessagesDatabaseReference.push().setValue(developerMessage);
-
-                sendNotificationToUser(mChannel, null, mMessageEditText.getText().toString());
-
-
-                // Clear input box
+                sendMessage();
+                sendNotificationToUser(null);
                 mMessageEditText.setText("");
             }
         });
+        authStateCheck();
+        return rootView;
+    }
 
-
+    private void authStateCheck() {
         mAuthStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -232,19 +160,99 @@ public class general extends Fragment {
 
             }
         };
-        return rootView;
+    }
+
+    private void openImagePicker() {
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType("image/jpeg");
+        intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
+        startActivityForResult(Intent.createChooser(intent, "Complete action using"), RC_CHAT_PHOTO_PICKER);
+
+    }
+
+    private void editTextWatcher() {
+        mMessageEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (charSequence.toString().trim().length() > 0) {
+                    mSendButton.setEnabled(true);
+                } else {
+                    mSendButton.setEnabled(false);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
+        mMessageEditText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(DEFAULT_MSG_LENGTH_LIMIT)});
+    }
+
+    private void initVariable() {
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+        sdf.setTimeZone(TimeZone.getTimeZone("IST"));
+        mTime = sdf.format(new Date());
+
+        // Getting the date
+        final Calendar c = Calendar.getInstance();
+        int year = c.get(Calendar.YEAR);
+        int month = c.get(Calendar.MONTH);
+        int day = c.get(Calendar.DAY_OF_MONTH);
+        mDate = String.valueOf(day) + "-" + String.valueOf(month) + "-" + String.valueOf(year);
+
+        mMessage = mMessageEditText.getText().toString();
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            for (UserInfo profile : user.getProviderData()) {
+                // Id of the provider (ex: google.com)
+                String providerId = profile.getProviderId();
+
+                // UID specific to the provider
+                String uid = profile.getUid();
+
+                // Name, email address, and profile photo Url
+                /*  mDisplayName = profile.getDisplayName();*/
+                Uri uri = profile.getPhotoUrl();
+                /*mProfilePic = uri.toString();*/
+            }
+
+        }
 
 
     }
 
-    private void sendNotificationToUser(String channel, String user, final String message) {
+    private void sendMessage() {
+        initVariable();
+        // Sending the Message
+        DeveloperMessage developerMessage = new DeveloperMessage(
+                mName,
+                /*mDisplayName,*/
+                mProfilePic,
+                mMessage,
+                null,
+                mTime,
+                mDate,
+                mPlatform,
+                mVersion
+        );
+        mMessagesDatabaseReference.push().setValue(developerMessage);
+
+
+    }
+
+    private void sendNotificationToUser(String user) {
         mNotificationsDatabaseReference = mFirebaseDatabase.getReference().child("notificationRequests");
 
 
         Map notification = new HashMap<>();
-        notification.put("channel", channel);
+        notification.put("channel", mChannel);
         notification.put("username", user);
-        notification.put("message", message);
+        notification.put("message", mMessage);
 
         mNotificationsDatabaseReference.push().setValue(notification);
     }
@@ -260,7 +268,6 @@ public class general extends Fragment {
         detachDatabaseReadListener();
 
     }
-
 
     private void attachDatabaseReadListener() {
 
@@ -313,6 +320,4 @@ public class general extends Fragment {
         detachDatabaseReadListener();
         mMessageAdapter.clear();
     }
-
-
 }
