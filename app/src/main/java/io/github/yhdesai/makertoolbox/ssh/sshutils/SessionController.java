@@ -92,8 +92,7 @@ public class SessionController {
         Log.v(TAG, "session controller exists... " + exists());
         if (exists()) {
             Log.v(TAG, "disconnecting");
-            if (getSessionController().getSession().isConnected())
-                return true;
+            return getSessionController().getSession().isConnected();
         }
         return false;
     }
@@ -174,7 +173,7 @@ public class SessionController {
      * @throws JSchException
      * @throws SftpException
      */
-    public boolean downloadFile(String srcPath, String out, SftpProgressMonitor spm) throws JSchException, SftpException {
+    public boolean downloadFile(String srcPath, String out, SftpProgressMonitor spm) {
         if (mSftpController == null) {
             mSftpController = new SftpController();
 
@@ -191,7 +190,7 @@ public class SessionController {
      * @throws JSchException
      * @throws SftpException
      */
-    public void listRemoteFiles(TaskCallbackHandler taskCallbackHandler, String path) throws JSchException, SftpException {
+    public void listRemoteFiles(TaskCallbackHandler taskCallbackHandler, String path) {
 
         if (mSession == null || !mSession.isConnected()) {
             return;
@@ -213,7 +212,7 @@ public class SessionController {
      *
      * @throws java.io.IOException
      */
-    public void disconnect() throws IOException {
+    public void disconnect() {
 
         if (mSession != null) {
             if (mSftpController != null) {

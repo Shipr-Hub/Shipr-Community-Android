@@ -43,4 +43,5 @@
     <string name="enter_message">Enter message</string>
     <string name="send_button">SEND</string>
 
+    <string name="generalChatLoc">general</string>
 </resources>

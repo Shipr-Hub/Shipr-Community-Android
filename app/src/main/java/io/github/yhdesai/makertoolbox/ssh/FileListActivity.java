@@ -167,7 +167,7 @@ public class FileListActivity extends Activity implements OnItemClickListener, O
     public void onClick(View v) {
         if (v == mUpButton) {
 
-            boolean hasParent = mRootFile.getParentFile() == null ? false : true;
+            boolean hasParent = mRootFile.getParentFile() != null;
             if (hasParent) {
                 mRootFile = mRootFile.getParentFile();
 
@@ -290,7 +290,7 @@ public class FileListActivity extends Activity implements OnItemClickListener, O
 
 
         @Override
-        public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+        public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) throws SftpException {
             if (mIsProcessing) {
                 return;
             }
@@ -355,8 +355,6 @@ public class FileListActivity extends Activity implements OnItemClickListener, O
                     mSessionController.downloadFile(mRemoteFileListAdapter.getRemoteFiles().get(position).getFilename(), out, progressDialog);
                 } catch (JSchException je) {
                     Log.d(TAG, "JschException " + je.getMessage());
-                } catch (SftpException se) {
-                    Log.d(TAG, "SftpException " + se.getMessage());
                 }
             }
 

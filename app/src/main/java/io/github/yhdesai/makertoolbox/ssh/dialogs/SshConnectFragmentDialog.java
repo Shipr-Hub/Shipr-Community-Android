@@ -69,10 +69,7 @@ public class SshConnectFragmentDialog extends DialogFragment implements View.OnC
      * @return true if empty
      */
     private boolean isEditTextEmpty(EditText editText) {
-        if (editText.getText() == null || editText.getText().toString().equalsIgnoreCase("")) {
-            return true;
-        }
-        return false;
+        return editText.getText() == null || editText.getText().toString().equalsIgnoreCase("");
     }
 
     @Override

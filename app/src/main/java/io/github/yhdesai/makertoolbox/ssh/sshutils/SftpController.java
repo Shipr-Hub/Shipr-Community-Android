@@ -110,7 +110,7 @@ public class SftpController {
      * @throws java.io.IOException
      * @throws SftpException
      */
-    public void uploadFiles(Session session, File[] localFiles, SftpProgressMonitor spm) throws JSchException, IOException, SftpException {
+    public void uploadFiles(Session session, File[] localFiles, SftpProgressMonitor spm) throws JSchException, SftpException {
         if (session == null || !session.isConnected()) {
             session.connect();
         }

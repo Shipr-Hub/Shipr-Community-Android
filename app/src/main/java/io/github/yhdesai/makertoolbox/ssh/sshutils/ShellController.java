@@ -95,7 +95,7 @@ public class ShellController {
      *
      * @throws java.io.IOException
      */
-    public synchronized void disconnect() throws IOException {
+    public synchronized void disconnect() {
         try {
             Log.v(TAG, "close shell channel");
             //disconnect channel
