@@ -138,9 +138,8 @@ public class SshEditText extends android.support.v7.widget.AppCompatEditText {
             return true;
 
         char s = this.getText().toString().toCharArray()[i - 1];
-        if (s == '\n' || s == '\r') return true;
+        return s == '\n' || s == '\r';
 
-        return false;
     }
 
     public synchronized String getPrompt() {
