@@ -23,6 +23,7 @@ android {
     buildToolsVersion '28.0.1'
 }
 
+//noinspection SpellCheckingInspection,SpellCheckingInspection
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     //FireBase Auth

@@ -54,8 +54,8 @@ public class FileListAdapter extends BaseAdapter {
 
             convertView = mInflater.inflate(R.layout.listview_item_ssh, null);
 
-            ImageView imageView = (ImageView) convertView.findViewById(R.id.imageview_item);
-            TextView textView = (TextView) convertView.findViewById(R.id.textview_item);
+            ImageView imageView = convertView.findViewById(R.id.imageview_item);
+            TextView textView = convertView.findViewById(R.id.textview_item);
             holder.textView = textView;
             holder.imageView = imageView;
             // change text color for directories

@@ -1,7 +1,6 @@
 package io.github.yhdesai.makertoolbox;
 
 import android.app.Fragment;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -24,11 +23,6 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.TimeZone;
-
-
 public class Profile extends Fragment {
     private EditText pUsername;
     private EditText pDisplayName;
@@ -44,7 +38,7 @@ public class Profile extends Fragment {
 
     private FirebaseAuth mFirebaseAuth;
     private FirebaseStorage mFirebaseStorage;
-    private StorageReference mProfileStroageReference;
+    private StorageReference mProfileStorageReference;
 
     private static final int RC_PHOTO_PICKER = 2;
 
@@ -56,7 +50,7 @@ public class Profile extends Fragment {
         mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseStorage = FirebaseStorage.getInstance();
 
-        mProfileStroageReference = mFirebaseStorage.getReference().child("profile_pic");
+        mProfileStorageReference = mFirebaseStorage.getReference().child("profile_pic");
 
 
         pUsername = rootView.findViewById(R.id.usernameEditText);

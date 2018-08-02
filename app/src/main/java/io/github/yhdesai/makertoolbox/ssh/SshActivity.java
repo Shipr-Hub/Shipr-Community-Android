@@ -56,10 +56,10 @@ public class SshActivity extends Activity implements OnClickListener {
         // requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         setContentView(R.layout.activity_ssh);
-        mEndSessionBtn = (Button) findViewById(R.id.endsessionbutton);
-        mSftpButton = (Button) findViewById(R.id.sftpbutton);
-        mCommandEdit = (SshEditText) findViewById(R.id.command);
-        mConnectStatus = (TextView) findViewById(R.id.connectstatus);
+        mEndSessionBtn = findViewById(R.id.endsessionbutton);
+        mSftpButton = findViewById(R.id.sftpbutton);
+        mCommandEdit = findViewById(R.id.command);
+        mConnectStatus = findViewById(R.id.connectstatus);
         // set onclicklistener
         // mButton.setOnClickListener(this);
         mEndSessionBtn.setOnClickListener(this);

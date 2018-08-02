@@ -95,7 +95,7 @@ public class MT_Activity extends AppCompatActivity {
         mMessagesDatabaseReference = mFirebaseDatabase.getReference().child("general");
 
 
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         FragmentManager frag1 = getFragmentManager();
         frag1.beginTransaction().replace(R.id.content_frame, new general()).commit();
@@ -286,7 +286,7 @@ public class MT_Activity extends AppCompatActivity {
                 return true;
             }}
         return super.dispatchKeyEvent(event);
-    };
+    }
 }
 
 
