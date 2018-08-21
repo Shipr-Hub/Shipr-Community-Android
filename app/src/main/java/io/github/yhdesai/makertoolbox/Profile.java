@@ -23,6 +23,8 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.util.Objects;
+
 public class Profile extends Fragment {
     private EditText pUsername;
     private EditText pDisplayName;
@@ -110,7 +112,7 @@ public class Profile extends Fragment {
                        /* .setPhotoUri(Uri.parse(profilePic))*/
                         .build();
 
-                user.updateProfile(profileUpdates)
+                Objects.requireNonNull(user).updateProfile(profileUpdates)
                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
