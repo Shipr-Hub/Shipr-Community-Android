@@ -220,11 +220,11 @@ public class SessionController {
                 mSftpController.disconnect();
             }
             if (mShellController != null) {
-                try {
+                /* try {*/
                     mShellController.disconnect();
-                } catch (IOException e) {
+                 /*catch (IOException e) {
                     Log.e(TAG, "Exception closing shell controller. " + e.getMessage());
-                }
+                }*/
             }
             synchronized (mConnectStatusListener) {
                 if (mConnectStatusListener != null) {
