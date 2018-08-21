@@ -210,10 +210,6 @@ public class SftpController {
                 e.printStackTrace();
                 Log.e(TAG, "JSchException " + e.getMessage());
                 success = false;
-            } catch (IOException e) {
-                e.printStackTrace();
-                Log.e(TAG, "IOException " + e.getMessage());
-                success = false;
             } catch (SftpException e) {
                 e.printStackTrace();
                 Log.e(TAG, "SftpException " + e.getMessage());
