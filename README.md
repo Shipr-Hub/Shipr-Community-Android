@@ -1,7 +1,7 @@
 # Maker-ToolBox-Android
 Maker ToolBox is a Go-To Application for developers to enable them to develop their projects from their smartphones. 
 
-<p>Google Play Store Listing:</p>
+# Google Play Store Listing:
 <a href="https://play.google.com/store/apps/details?id=io.github.yhdesai.makertoolbox"><img alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/images/apps/en-play-badge-border.png" width="300" /></a>
 
 Basic features:
