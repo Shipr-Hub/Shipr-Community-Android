@@ -1,4 +1,5 @@
-[![Build Status](https://travis-ci.org/Maker-ToolBox/Maker-ToolBox-Android.svg?branch=master)](https://travis-ci.org/Maker-ToolBox/Maker-ToolBox-Android) [![forthebadge](https://forthebadge.com/images/badges/built-for-android.svg)](https://forthebadge.com)
+[![Build Status](https://travis-ci.org/Maker-ToolBox/Maker-ToolBox-Android.svg?branch=master)](https://travis-ci.org/Maker-ToolBox/Maker-ToolBox-Android) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
+
 # Maker-ToolBox-Android
 
 Maker ToolBox is a Go-To Application for developers to enable them to develop their projects from their smartphones. 
