@@ -84,5 +84,24 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"*/
 }
 
+afterEvaluate {
+    processDebugGoogleServices.dependsOn switchToDebug
+    processReleaseGoogleServices.dependsOn switchToRelease
+}
+
+task switchToDebug(type: Copy) {
+    description = 'Switches to DEBUG google-services.json'
+    from "src/debug"
+    include "google-services.json"
+    into "."
+}
+
+task switchToRelease(type: Copy) {
+    description = 'Switches to RELEASE google-services.json'
+    from "src/release"
+    include "google-services.json"
+    into "."
+}
+
 
 apply plugin: 'com.google.gms.google-services'

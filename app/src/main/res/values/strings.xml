@@ -43,5 +43,7 @@
     <string name="enter_message">Enter message</string>
     <string name="send_button">SEND</string>
 
+    <string name="twitter_consumer_secret"></string>
+
     <string name="generalChatLoc">general</string>
 </resources>
