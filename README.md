@@ -1,4 +1,7 @@
 # Maker-ToolBox-Android
+[![Build Status](https://travis-ci.org/Maker-ToolBox/Maker-ToolBox-Android.svg?branch=master)](https://travis-ci.org/Maker-ToolBox/Maker-ToolBox-Android)
+
+
 Maker ToolBox is a Go-To Application for developers to enable them to develop their projects from their smartphones. 
 
 ## Google Play Store Listing:
