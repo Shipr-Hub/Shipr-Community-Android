@@ -3,6 +3,9 @@ apply plugin: 'com.android.application'
 /*apply plugin: 'kotlin-android'*/
 
 android {
+    lintOptions {
+        abortOnError false
+    }
     compileSdkVersion 26
     defaultConfig {
         applicationId "io.github.yhdesai.makertoolbox"
