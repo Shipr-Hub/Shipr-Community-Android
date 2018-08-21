@@ -4,3 +4,11 @@ android:
     - build-tools-28.0.1
     - android-26
     - extra
+    
+test:
+    pre:
+        # Create mock Play Services JSON
+        - ./team-props/scripts/ci-mock-google-services-setup.sh
+
+    override:
+        - ./gradlew check --no-daemon --console=plain --continue    
