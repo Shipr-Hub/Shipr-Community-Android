@@ -27,9 +27,9 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     //FireBase Auth
-    implementation 'com.google.firebase:firebase-auth:16.0.2'
+    implementation 'com.google.firebase:firebase-auth:16.0.3'
     implementation 'com.firebaseui:firebase-ui-auth:2.1.1'
-    implementation 'com.google.android.gms:play-services-auth:15.0.1'
+    implementation 'com.google.android.gms:play-services-auth:16.0.0'
     //implementation 'com.facebook.android:facebook-android-sdk:4.27.0'
     //implementation("com.twitter.sdk.android:twitter-core:3.0.0@aar") { transitive = true }
     //FireBase Database
@@ -65,7 +65,9 @@ dependencies {
     //    //network tools
     //    implementation 'com.github.stealthcopter:AndroidNetworkTools:0.4.0'
     //crashlytics
-    implementation 'com.crashlytics.sdk.android:crashlytics:2.9.4'
+   // implementation 'com.crashlytics.sdk.android:crashlytics:2.9.4'3
+    //TODO enable crashlytics and add the twitter key
+
     //version fix
     implementation 'com.android.support:design:26.1.0'
     implementation 'com.android.support:customtabs:26.1.0'
