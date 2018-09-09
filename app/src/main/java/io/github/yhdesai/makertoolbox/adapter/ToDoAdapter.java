@@ -28,18 +28,18 @@ public class ToDoAdapter extends ArrayAdapter<DeveloperToDo> {
             convertView = ((Activity) getContext()).getLayoutInflater().inflate(R.layout.item_todo, parent, false);
         }
         TextView titleTextView = convertView.findViewById(R.id.titleTextView);
-        TextView descTextView = convertView.findViewById(R.id.descTextView);
+       /* TextView descTextView = convertView.findViewById(R.id.descTextView);
         TextView dateTextView = convertView.findViewById(R.id.dateView);
         TextView featureTextView = convertView.findViewById(R.id.feature);
-        TextView bugTextView = convertView.findViewById(R.id.bug);
+        TextView bugTextView = convertView.findViewById(R.id.bug);*/
 
         DeveloperToDo todo = getItem(position);
 
         titleTextView.setText(todo.gettName());
-        descTextView.setText(todo.gettDesc());
+       /* descTextView.setText(todo.gettDesc());
         dateTextView.setText(todo.gettDate());
         featureTextView.setText(todo.getFeature());
-        bugTextView.setText(todo.getBug());
+        bugTextView.setText(todo.getBug());*/
 
         return convertView;
     }

@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.Vector;
 
 import com.jcraft.jsch.ChannelSftp;
-import com.jcraft.jsch.JSchException;
-import com.jcraft.jsch.SftpException;
 import com.jcraft.jsch.SftpProgressMonitor;
 
 import android.app.Activity;
