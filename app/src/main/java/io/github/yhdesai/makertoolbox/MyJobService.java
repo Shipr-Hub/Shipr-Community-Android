@@ -1,8 +1,6 @@
 package io.github.yhdesai.makertoolbox;
 
-import android.util.Log;
-
-public class MyJobService {
+class MyJobService {
 }
 
 /**

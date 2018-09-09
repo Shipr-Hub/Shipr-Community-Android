@@ -31,6 +31,7 @@
             android:layout_alignParentRight="true"
             android:clickable="true"
             android:id="@+id/addTodo"
+            android:focusable="true"
             android:src="@android:drawable/ic_input_add" />
 
 

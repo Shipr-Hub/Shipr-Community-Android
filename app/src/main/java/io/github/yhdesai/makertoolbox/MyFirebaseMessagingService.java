@@ -1,16 +1,5 @@
 package io.github.yhdesai.makertoolbox;
 
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Context;
-import android.content.Intent;
-import android.media.RingtoneManager;
-import android.net.Uri;
-import android.os.Build;
-import android.support.v4.app.NotificationCompat;
-import android.util.Log;
-
 /**
  * Created by yash on 16/3/18.
  */
@@ -131,6 +120,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 }
         */
 
-public class MyFirebaseMessagingService {
+class MyFirebaseMessagingService {
 }
 

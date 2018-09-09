@@ -76,6 +76,8 @@
         </activity>
         <activity android:name=".NetActivity" />
         <activity android:name=".CodeEditor"></activity>
+        <activity android:name=".ssh.ConfigActivity" />
+        <activity android:name=".ssh.FileListActivity" />
     </application>
 
 </manifest>

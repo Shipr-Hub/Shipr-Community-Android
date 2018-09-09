@@ -24,6 +24,7 @@
             android:id="@+id/username"
             style="@style/editTextStyle"
             android:layout_width="200dp"
+            android:hint="@string/enter_username_here"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:inputType="text"
@@ -41,6 +42,7 @@
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
+            android:hint="@string/enter_hostname_here"
             android:inputType="text"
             android:textCursorDrawable="@null" />
 
@@ -48,7 +50,7 @@
             style="@style/textviewStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="port" />
+            android:text="@string/port" />
 
         <EditText
             android:id="@+id/portnum"
@@ -57,6 +59,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:inputType="number"
+            android:hint="@string/enter_port_number_here"
             android:text="22"
             android:textCursorDrawable="@null" />
 
@@ -71,6 +74,7 @@
             style="@style/editTextStyle"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
+            android:hint="@string/enter_password_here"
             android:layout_marginBottom="10dp"
             android:inputType="textPassword"
             android:textCursorDrawable="@null" />

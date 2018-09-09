@@ -13,18 +13,20 @@
         <ImageView
             android:id="@+id/profileImage"
             android:layout_width="128dp"
+            android:contentDescription="@string/profile_image"
             android:layout_height="128dp"
             android:src="@android:color/holo_blue_bright" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Username" />
+            android:text="@string/username" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter Username here"
+            android:inputType="text"
+            android:hint="@string/enter_username_here"
             android:id="@+id/usernameEditText"/>
 
         <!--<TextView
@@ -40,7 +42,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Email"/>
+            android:text="@string/email"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -49,7 +51,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="submit"
+            android:text="@string/submit"
             android:id="@+id/submit"
            />
 

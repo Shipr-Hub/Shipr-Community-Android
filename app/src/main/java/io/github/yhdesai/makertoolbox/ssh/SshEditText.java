@@ -5,12 +5,10 @@ import android.text.InputType;
 import android.text.Layout;
 import android.text.Selection;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputConnection;
 import android.view.inputmethod.InputConnectionWrapper;
-import android.widget.EditText;
 
 /**
  * EditText class for simulating an SSH shell terminal.
@@ -57,7 +55,7 @@ public class SshEditText extends android.support.v7.widget.AppCompatEditText {
         setup();
     }
 
-    public void setup() {
+    private void setup() {
         this.setRawInputType(InputType.TYPE_CLASS_TEXT);
         this.setImeOptions(EditorInfo.IME_ACTION_GO);
         this.setTextSize(12f);
@@ -114,7 +112,7 @@ public class SshEditText extends android.support.v7.widget.AppCompatEditText {
      *
      * @return Current line, -1 if none.
      */
-    public int getCurrentCursorLine() {
+    private int getCurrentCursorLine() {
         int selectionStart = Selection.getSelectionStart(this.getText());
         Layout layout = this.getLayout();
 
@@ -131,7 +129,7 @@ public class SshEditText extends android.support.v7.widget.AppCompatEditText {
      *
      * @return True if new line, false otherwise.
      */
-    public boolean isNewLine() {
+    private boolean isNewLine() {
 
         int i = this.getText().toString().toCharArray().length;
         if (i == 0)
@@ -165,7 +163,7 @@ public class SshEditText extends android.support.v7.widget.AppCompatEditText {
     private class SshConnectionWrapper extends InputConnectionWrapper {
 
 
-        public SshConnectionWrapper(InputConnection target, boolean mutable) {
+        SshConnectionWrapper(InputConnection target, boolean mutable) {
             super(target, mutable);
         }
 

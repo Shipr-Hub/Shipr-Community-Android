@@ -83,6 +83,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginLeft="16dp"
+                android:inputType="text"
                 android:layout_marginRight="16dp"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"

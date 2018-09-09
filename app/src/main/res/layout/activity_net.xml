@@ -44,43 +44,46 @@
 
             <Button
                 android:id="@+id/pingButton"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="ping" />
+                android:text="@string/ping" />
 
             <Button
                 android:id="@+id/wolButton"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="wol" />
+                android:text="@string/wol" />
 
             <Button
                 android:id="@+id/portScanButton"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="port_scan" />
+                android:text="@string/port_scan" />
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+        <!--  <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal">
 
-            <!--  <Button
-                  android:id="@+id/subnetDevicesButton"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:text="subnet" />-->
+              &lt;!&ndash;  <Button
+                    android:id="@+id/subnetDevicesButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="subnet" />&ndash;&gt;
 
-            <!--  <Button
-                  android:id="@+id/whois"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:text="whois" />-->
+              &lt;!&ndash;  <Button
+                    android:id="@+id/whois"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="whois" />&ndash;&gt;
 
-        </LinearLayout>
+          </LinearLayout>-->
 
     </LinearLayout>
 

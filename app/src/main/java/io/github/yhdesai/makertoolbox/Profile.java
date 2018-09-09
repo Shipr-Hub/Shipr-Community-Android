@@ -27,20 +27,12 @@ import java.util.Objects;
 
 public class Profile extends Fragment {
     private EditText pUsername;
-    private EditText pDisplayName;
-    private TextView pEmail;
 
     private String username;
     private String displayName;
     private String email;
     private String profilePic;
-    private Button mSubmitButton;
-    private ImageView mProfilePic;
 
-
-    private FirebaseAuth mFirebaseAuth;
-    private FirebaseStorage mFirebaseStorage;
-    private StorageReference mProfileStorageReference;
 
     private static final int RC_PHOTO_PICKER = 2;
 
@@ -49,17 +41,17 @@ public class Profile extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_profile, container, false);
         FirebaseApp.initializeApp(getActivity());
-        mFirebaseAuth = FirebaseAuth.getInstance();
-        mFirebaseStorage = FirebaseStorage.getInstance();
+        FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
+        FirebaseStorage mFirebaseStorage = FirebaseStorage.getInstance();
 
-        mProfileStorageReference = mFirebaseStorage.getReference().child("profile_pic");
+        StorageReference mProfileStorageReference = mFirebaseStorage.getReference().child("profile_pic");
 
 
         pUsername = rootView.findViewById(R.id.usernameEditText);
-        pDisplayName = rootView.findViewById(R.id.nameEditText);
-        pEmail = rootView.findViewById(R.id.emailView);
-        mSubmitButton = rootView.findViewById(R.id.submit);
-        mProfilePic = rootView.findViewById(R.id.profileImage);
+        EditText pDisplayName = rootView.findViewById(R.id.nameEditText);
+        TextView pEmail = rootView.findViewById(R.id.emailView);
+        Button mSubmitButton = rootView.findViewById(R.id.submit);
+        ImageView mProfilePic = rootView.findViewById(R.id.profileImage);
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {

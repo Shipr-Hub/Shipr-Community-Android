@@ -21,14 +21,13 @@ import io.github.yhdesai.makertoolbox.R;
 public class FileListAdapter extends BaseAdapter {
 
     private ArrayList<File> mFiles;
-    private Context mContext;
     private LayoutInflater mInflater;
 
     //
     // Constructor
     //
     public FileListAdapter(Context context, ArrayList<File> files) {
-        mContext = context;
+        Context mContext = context;
         mFiles = files;
         mInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }

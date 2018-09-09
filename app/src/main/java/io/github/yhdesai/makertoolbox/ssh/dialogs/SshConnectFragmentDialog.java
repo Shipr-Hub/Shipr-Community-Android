@@ -23,7 +23,6 @@ public class SshConnectFragmentDialog extends DialogFragment implements View.OnC
     private Button mButton;
 
 
-    private SessionUserInfo mSUI;
     private ConnectionStatusListener mListener;
 
     public static SshConnectFragmentDialog newInstance() {
@@ -80,7 +79,7 @@ public class SshConnectFragmentDialog extends DialogFragment implements View.OnC
                 return;
             }
             int port = Integer.valueOf(mPortNumEdit.getText().toString());
-            mSUI = new SessionUserInfo(mUserEdit.getText().toString().trim(), mHostEdit.getText()
+            SessionUserInfo mSUI = new SessionUserInfo(mUserEdit.getText().toString().trim(), mHostEdit.getText()
                     .toString().trim(),
                     mPasswordEdit.getText().toString().trim(), port);
 

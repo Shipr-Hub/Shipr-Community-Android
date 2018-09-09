@@ -24,9 +24,9 @@ import io.github.yhdesai.makertoolbox.ssh.SshEditText;
  * <p/>
  * Created by Jon Hough on 5/17/14.
  */
-public class ShellController {
+class ShellController {
 
-    public static final String TAG = "ShellController";
+    private static final String TAG = "ShellController";
     /**
      *
      */
@@ -58,7 +58,7 @@ public class ShellController {
      * @param returnedString
      * @return
      */
-    public static String fetchPrompt(String returnedString) {
+    private static String fetchPrompt(String returnedString) {
         return "";
     }
 
