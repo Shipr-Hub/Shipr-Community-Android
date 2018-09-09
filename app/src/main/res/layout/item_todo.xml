@@ -18,9 +18,10 @@
         android:layout_marginLeft="16dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#111111"
-        tools:text="ToDo Name" />
+        tools:text="ToDo Name"
+        android:layout_marginStart="16dp" />
 
-    <TextView
+    <!--<TextView
         android:id="@+id/descTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -28,9 +29,9 @@
         android:layout_marginLeft="16dp"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="#111111"
-        tools:text="ToDo Description" />
+        tools:text="ToDo Description" />-->
 
-    <TextView
+   <!-- <TextView
         android:id="@+id/dateView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -38,9 +39,9 @@
         android:layout_marginLeft="16dp"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="#111111"
-        tools:text="Date" />
+        tools:text="Date" />-->
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+   <!-- <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/dateView"
@@ -68,6 +69,6 @@
             android:textAppearance="?android:attr/textAppearanceSmall"
 
             android:textColor="@color/colorWhite" />
-    </LinearLayout>
+    </LinearLayout>-->
 
 </RelativeLayout>

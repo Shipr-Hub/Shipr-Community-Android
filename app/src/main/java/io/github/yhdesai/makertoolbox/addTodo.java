@@ -33,19 +33,19 @@ public class addTodo extends AppCompatActivity {
     public static final String ANONYMOUS = "anonymous";
     public static final int RC_SIGN_IN = 1;
     private static final String TAG = "addTodo";
-    private EditText todoDesc;
+   /* private EditText todoDesc;*/
     private Button mSendButton;
-    private TextView dateTextViewButton;
+    /*private TextView dateTextViewButton;*/
 
     private String mUsername;
     private EditText todoName;
 
-    private String isFeature;
-    private String isBug;
+    /*private String isFeature;
+    private String isBug;*/
 
-    private int day;
+  /*  private int day;
     private int month;
-    private int year;
+    private int year;*/
 
     // Firebase instance variable
     private FirebaseDatabase mFirebaseDatabase;
@@ -53,16 +53,16 @@ public class addTodo extends AppCompatActivity {
     private ChildEventListener mChildEventListener;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
-    private DatePickerDialog.OnDateSetListener datePickerListener = new DatePickerDialog.OnDateSetListener() {
+    /*private DatePickerDialog.OnDateSetListener datePickerListener = new DatePickerDialog.OnDateSetListener() {
         public void onDateSet(DatePicker view, int selectedYear,
                               int selectedMonth, int selectedDay) {
             day = selectedDay;
             month = selectedMonth;
             year = selectedYear;
-            dateTextViewButton.setText(selectedDay + "/" + (selectedMonth + 1) + "/"
-                    + selectedYear);
+            *//*dateTextViewButton.setText(selectedDay + "/" + (selectedMonth + 1) + "/"
+                    + selectedYear);*//*
         }
-    };
+    };*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,9 +76,9 @@ public class addTodo extends AppCompatActivity {
 
         // Initialize references to views
         todoName = findViewById(R.id.todoName);
-        todoDesc = findViewById(R.id.todoDesc);
+      /*  todoDesc = findViewById(R.id.todoDesc);*/
         mSendButton = findViewById(R.id.sendButton);
-        dateTextViewButton = findViewById(R.id.dateTextViewButton);
+      /*  dateTextViewButton = findViewById(R.id.dateTextViewButton);*/
 
 
         // Send button sends a message and clears the EditText
@@ -95,13 +95,14 @@ public class addTodo extends AppCompatActivity {
                 } else {
 
 
-                    DeveloperToDo developerToDo = new DeveloperToDo(todoName.getText().toString(), todoDesc.getText().toString(), dateTextViewButton.getText().toString(), isFeature, isBug);
+                   // DeveloperToDo developerToDo = new DeveloperToDo(todoName.getText().toString(), todoDesc.getText().toString(), dateTextViewButton.getText().toString(), isFeature, isBug);
+                    DeveloperToDo developerToDo = new DeveloperToDo(todoName.getText().toString(), null, null, null, null);
                     mMessagesDatabaseReference.push().setValue(developerToDo);
 
                     // Clear input box
                     todoName.setText("");
-                    todoDesc.setText("");
-                    dateTextViewButton.setText("");
+                  /*  todoDesc.setText("");
+                    dateTextViewButton.setText("");*/
                     finish();
                 }
             }
@@ -138,7 +139,7 @@ public class addTodo extends AppCompatActivity {
         };
 
 
-        dateTextViewButton.setOnClickListener(new View.OnClickListener() {
+       /* dateTextViewButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 InputMethodManager keyboard = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -147,15 +148,15 @@ public class addTodo extends AppCompatActivity {
 
                 showDialog(0);
             }
-        });
+        });*/
 
     }
 
-    @Override
+  /*  @Override
     @Deprecated
     protected Dialog onCreateDialog(int id) {
         return new DatePickerDialog(this, datePickerListener, year, month, day);
-    }
+    }*/
 
 
     private void onSignedInInitialize(String username) {
@@ -186,7 +187,7 @@ public class addTodo extends AppCompatActivity {
 
     }
 
-    public void onCheckboxClicked(View view) {
+    /*public void onCheckboxClicked(View view) {
         // Is the view now checked?
         boolean checked = ((CheckBox) view).isChecked();
 
@@ -208,7 +209,7 @@ public class addTodo extends AppCompatActivity {
                 break;
 
         }
-    }
+    }*/
 
 
 }
