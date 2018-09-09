@@ -11,12 +11,10 @@ import com.jcraft.jsch.SftpException;
 import com.jcraft.jsch.SftpProgressMonitor;
 
 import java.io.File;
-import java.io.IOException;
 import java.lang.InterruptedException;
 
 
 import java.util.Properties;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Controller for Jsch SSH sessions. All SSH
@@ -79,7 +77,7 @@ public class SessionController {
     /**
      * @return
      */
-    public static boolean exists() {
+    private static boolean exists() {
         return sSessionController != null;
     }
 
@@ -284,7 +282,7 @@ public class SessionController {
      * Runnable for beginning session. Opens JSch session with username, password and host information from
      * <b>mSessionUserInfo</b>.
      */
-    public class SshRunnable implements Runnable {
+    class SshRunnable implements Runnable {
 
         public void run() {
             JSch jsch = new JSch();
@@ -322,7 +320,7 @@ public class SessionController {
                                     mConnectStatusListener.onConnected();
                                 } else mConnectStatusListener.onDisconnected();
                             }
-                        } catch (InterruptedException e) {
+                        } catch (InterruptedException ignored) {
 
                         }
                     }

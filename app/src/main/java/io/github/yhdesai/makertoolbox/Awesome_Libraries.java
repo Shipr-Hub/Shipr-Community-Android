@@ -5,19 +5,11 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 
-import android.text.Editable;
-import android.text.InputFilter;
-import android.text.TextWatcher;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
 import com.firebase.ui.auth.AuthUI;
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -35,17 +27,13 @@ import io.github.yhdesai.makertoolbox.adapter.LibraryAdapter;
 
 public class Awesome_Libraries extends AppCompatActivity {
 
-    public static final String ANONYMOUS = "anonymous";
-    public static final int RC_SIGN_IN = 1;
+    private static final String ANONYMOUS = "anonymous";
+    private static final int RC_SIGN_IN = 1;
     private static final String TAG = "Awesome_Libraries";
-    private ListView mLibraryListView;
     private LibraryAdapter LibraryAdapter;
-    private ProgressBar mProgressBar;
 
     private String mUsername;
 
-    // Firebase instance variable
-    private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mLibrariesDatabaseReference;
     private ChildEventListener mChildEventListener;
     private FirebaseAuth mFirebaseAuth;
@@ -58,15 +46,15 @@ public class Awesome_Libraries extends AppCompatActivity {
 
         mUsername = ANONYMOUS;
         // Initialize Firebase components
-        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();
         mFirebaseAuth = FirebaseAuth.getInstance();
 
         mLibrariesDatabaseReference = mFirebaseDatabase.getReference().child("libraries");
 
 
         // Initialize references to views
-        mProgressBar = findViewById(R.id.progressBar);
-        mLibraryListView = findViewById(R.id.libraryListView);
+        ProgressBar mProgressBar = findViewById(R.id.progressBar);
+        ListView mLibraryListView = findViewById(R.id.libraryListView);
 
 
         // Initialize message ListView and its adapter

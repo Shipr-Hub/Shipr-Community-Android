@@ -11,7 +11,6 @@ import com.jcraft.jsch.SftpException;
 import com.jcraft.jsch.SftpProgressMonitor;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.Vector;
 
 /**
@@ -25,7 +24,7 @@ public class SftpController {
     /**
      * Tag name
      */
-    public static final String TAG = "SftpController";
+    private static final String TAG = "SftpController";
 
     /**
      * Remote directory path. The path to the current remote directory.
@@ -110,7 +109,7 @@ public class SftpController {
      * @throws java.io.IOException
      * @throws SftpException
      */
-    public void uploadFiles(Session session, File[] localFiles, SftpProgressMonitor spm) throws JSchException, SftpException {
+    private void uploadFiles(Session session, File[] localFiles, SftpProgressMonitor spm) throws JSchException, SftpException {
         if (session == null || !session.isConnected()) {
             session.connect();
         }
@@ -151,7 +150,7 @@ public class SftpController {
      * @throws JSchException
      * @throws SftpException
      */
-    public void downloadFile(Session session, String srcPath, String out, SftpProgressMonitor spm) throws JSchException, SftpException {
+    private void downloadFile(Session session, String srcPath, String out, SftpProgressMonitor spm) throws JSchException, SftpException {
         if (session == null || !session.isConnected()) {
             session.connect();
         }
@@ -254,7 +253,7 @@ public class SftpController {
          * @param session currently connected Jsch session.
          * @param tch     callback handler for completion or failure.
          */
-        public LsTask(Session session, TaskCallbackHandler tch) {
+        LsTask(Session session, TaskCallbackHandler tch) {
 
             mSession = session;
             mTaskCallbackHandler = tch;
@@ -281,6 +280,7 @@ public class SftpController {
                     channel.connect();
                     ChannelSftp channelsftp = (ChannelSftp) channel;
                     String path = mCurrentPath == null ? "/" : mCurrentPath;
+
                     mRemoteFiles = channelsftp.ls(path);
                     if (mRemoteFiles == null) {
                         Log.d(TAG, "remote file list is null");

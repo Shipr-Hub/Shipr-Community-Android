@@ -15,7 +15,6 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -110,7 +109,7 @@ public class SshActivity extends Activity implements OnClickListener {
                             ExecTaskCallbackHandler t = new ExecTaskCallbackHandler() {
                                 @Override
                                 public void onFail() {
-                                    makeToast(R.string.taskfail);
+                                    makeToast();
                                 }
 
                                 @Override
@@ -131,11 +130,10 @@ public class SshActivity extends Activity implements OnClickListener {
     /**
      * Displays toast to user.
      *
-     * @param text
      */
 
-    private void makeToast(int text) {
-        Toast.makeText(this, getResources().getString(text), Toast.LENGTH_SHORT).show();
+    private void makeToast() {
+        Toast.makeText(this, getResources().getString(R.string.taskfail), Toast.LENGTH_SHORT).show();
     }
 
     /**
@@ -218,7 +216,7 @@ public class SshActivity extends Activity implements OnClickListener {
 
     }
 
-    void showDialog() {
+    private void showDialog() {
 
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         Fragment prev = getFragmentManager().findFragmentByTag("dialog");

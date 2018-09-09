@@ -17,6 +17,8 @@
         android:layout_height="fill_parent"
         android:layout_gravity="top"
         android:gravity="top"
+        android:inputType="text"
+        android:hint="@string/ssh_view"
         android:scrollbarAlwaysDrawVerticalTrack="true"
         android:text="New Text"
         android:verticalScrollbarPosition="defaultPosition" />

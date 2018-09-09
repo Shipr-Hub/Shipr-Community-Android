@@ -1,11 +1,9 @@
 package io.github.yhdesai.makertoolbox.ssh.sshutils;
 
 
-public class HttpTunnelController {
-
-    private String mUrl;
+class HttpTunnelController {
 
     public HttpTunnelController(String url) {
-        mUrl = url;
+        String mUrl = url;
     }
 }

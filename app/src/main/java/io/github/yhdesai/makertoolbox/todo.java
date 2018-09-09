@@ -31,11 +31,9 @@ import java.util.List;
 
 
 public class todo extends Fragment {
-    public static final int RC_SIGN_IN = 1;
+    private static final int RC_SIGN_IN = 1;
     private static final String TAG = "general";
-    private ListView mTodoListView;
     private ToDoAdapter ToDoAdapter;
-    private ProgressBar mProgressBar;
     private String mUsername;
 
     // Firebase instance variable
@@ -81,8 +79,8 @@ public class todo extends Fragment {
         };
 
         // Initialize references to views
-        mProgressBar = rootView.findViewById(R.id.progressBar);
-        mTodoListView = rootView.findViewById(R.id.todoListView);
+        ProgressBar mProgressBar = rootView.findViewById(R.id.progressBar);
+        ListView mTodoListView = rootView.findViewById(R.id.todoListView);
 
         // Initialize To-Do ListView and its adapter
         List<DeveloperToDo> friendlyTodo = new ArrayList<>();

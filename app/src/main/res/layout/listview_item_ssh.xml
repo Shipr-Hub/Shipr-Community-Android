@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:background="#FF000000"
         android:cacheColorHint="#0000"
+        android:contentDescription="imageview"
         android:paddingBottom="15dp"
         android:paddingTop="15dp" />
 

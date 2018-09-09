@@ -46,4 +46,26 @@
     <string name="twitter_consumer_secret"></string>
 
     <string name="generalChatLoc">general</string>
+    <string name="todo_name">Name</string>
+    <string name="enter_todo_name_here">Enter ToDo Name here</string>
+    <string name="enter_username_here">Enter Username here</string>
+    <string name="profile_image">profile image</string>
+    <string name="email">Email</string>
+    <string name="logo">logo</string>
+    <string name="enter_hostname_here">Enter Hostname Here</string>
+    <string name="port">port</string>
+    <string name="enter_port_number_here">Enter Port Number here</string>
+    <string name="enter_password_here">Enter password here</string>
+    <string name="ssh_view">SSH View</string>
+    <string name="port">port</string>
+    <string name="_22">22</string>
+    <string name="password">Password</string>
+    <string name="connect">Connect</string>
+    <string name="username">Username</string>
+    <string name="username">Username</string>
+    <string name="hostname">Hostname</string>
+    <string name="hostname">Hostname</string>
+    <string name="ping">ping</string>
+    <string name="wol">wol</string>
+    <string name="port_scan">port_scan</string>
 </resources>

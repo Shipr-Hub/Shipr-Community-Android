@@ -20,14 +20,13 @@ import io.github.yhdesai.makertoolbox.R;
 public class RemoteFileListAdapter extends BaseAdapter {
 
     private Vector<ChannelSftp.LsEntry> mFiles;
-    private Context mContext;
     private LayoutInflater mInflater;
 
     //
     // Constructor
     //
     public RemoteFileListAdapter(Context context, Vector<ChannelSftp.LsEntry> files) {
-        mContext = context;
+        Context mContext = context;
         mFiles = files;
         mInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }

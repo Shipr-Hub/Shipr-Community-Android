@@ -10,53 +10,55 @@
     <TextView
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:text="Username" />
+        android:text="@string/username" />
 
     <EditText
         android:id="@+id/sshUsernameEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Username"
+        android:hint="@string/username"
         android:inputType="text" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hostname" />
+        android:text="@string/hostname" />
 
     <EditText
         android:id="@+id/sshHostnameEditText"
         android:layout_width="wrap_content"
-        android:hint="Hostname"
+        android:hint="@string/hostname"
         android:layout_height="wrap_content"
         android:inputType="text" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="port" />
+        android:text="@string/port" />
 
     <EditText
         android:id="@+id/sshPortEditText"
         android:layout_width="wrap_content"
         android:inputType="number"
+        android:hint="@string/enter_port_number_here"
         android:layout_height="wrap_content"
-        android:text="22" />
+        android:text="@string/_22" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Password" />
+        android:text="@string/password" />
 
     <EditText
         android:id="@+id/sshPassEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:hint="@string/enter_password_here"
         android:inputType="textPassword" />
 
     <Button
         android:id="@+id/sshConnectButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Connect" /><!--android:onClick="startSshConnection"-->
+        android:text="@string/connect" /><!--android:onClick="startSshConnection"-->
 </LinearLayout>

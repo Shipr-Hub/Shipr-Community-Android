@@ -51,12 +51,9 @@ public class FileListActivity extends Activity implements OnItemClickListener, O
     private GridView mRemoteGridView;
     private FileListAdapter mFileListAdapter;
     private RemoteFileListAdapter mRemoteFileListAdapter;
-    private String[] mUserInfo;
     private File mRootFile;
-    private Button mUpButton, mConnectButton;
-    private TextView mStateView;
+    private Button mUpButton;
     private SessionController mSessionController;
-    private RemoteClickListener mRemoteClickListener;
     private Vector<ChannelSftp.LsEntry> mRemoteFiles;
     private boolean mIsProcessing = false;
 
@@ -72,7 +69,7 @@ public class FileListActivity extends Activity implements OnItemClickListener, O
 
         setContentView(R.layout.activity_filelistactivity_ssh);
 
-        mUserInfo = getIntent().getExtras().getStringArray("UserInfo");
+        String[] mUserInfo = getIntent().getExtras().getStringArray("UserInfo");
         mLocalGridView = findViewById(R.id.listview);
         mRemoteGridView = (findViewById(R.id.remotelistview));
         // Get external storage
@@ -89,15 +86,15 @@ public class FileListActivity extends Activity implements OnItemClickListener, O
         //----------------- buttons ---------------//
         mUpButton = findViewById(R.id.upbutton);
         mUpButton.setOnClickListener(this);
-        mConnectButton = findViewById(R.id.connectbutton);
+        Button mConnectButton = findViewById(R.id.connectbutton);
         mConnectButton.setOnClickListener(this);
 
-        mStateView = findViewById(R.id.statetextview);
+        TextView mStateView = findViewById(R.id.statetextview);
 
         mSessionController = SessionController.getSessionController();
         mSessionController.connect();
 
-        mRemoteClickListener = new RemoteClickListener();
+        RemoteClickListener mRemoteClickListener = new RemoteClickListener();
         mRemoteGridView.setOnItemClickListener(mRemoteClickListener);
 
 
@@ -241,7 +238,7 @@ public class FileListActivity extends Activity implements OnItemClickListener, O
          * @param theme
          */
 
-        public SftpProgressDialog(Context context, int theme) {
+        SftpProgressDialog(Context context, int theme) {
             super(context, theme);
             // TODO Auto-generated constructor stub
         }

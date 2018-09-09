@@ -41,7 +41,6 @@ package io.github.yhdesai.makertoolbox;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
@@ -57,12 +56,8 @@ import com.stealthcopter.networktools.ping.PingResult;
 import com.stealthcopter.networktools.ping.PingStats;
 import com.stealthcopter.networktools.subnet.Device;
 
-import java.io.DataInputStream;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.Writer;
 import java.net.InetAddress;
-import java.net.Socket;
 import java.util.ArrayList;
 
 public class NetActivity extends AppCompatActivity {

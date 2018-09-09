@@ -59,6 +59,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_marginStart="16dp"
             android:textColor="#111111"
             tools:text="wiki" />
@@ -67,7 +68,6 @@
             android:id="@+id/docsTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
             android:layout_marginStart="16dp"
             android:textColor="#111111"
             tools:text="Docs" />
@@ -75,8 +75,7 @@
         <Button
             android:id="@+id/gitTextView"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
+            android:layout_height="wrap_content" style="?android:attr/buttonBarButtonStyle"
             android:layout_marginStart="16dp"
             android:textColor="#111111"
             tools:text="Github" />
@@ -85,8 +84,8 @@
     <TextView
         android:id="@+id/photoURLTextView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
+        android:layout_height="wrap_content" style="?android:attr/buttonBarButtonStyle"
+
         android:layout_marginStart="16dp"
         android:textColor="#111111"
         tools:text="url" />

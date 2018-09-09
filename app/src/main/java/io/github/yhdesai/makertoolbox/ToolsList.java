@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import io.github.yhdesai.makertoolbox.ChatChannel.general;
 import io.github.yhdesai.makertoolbox.ssh.SshActivity;
 
 public class ToolsList extends Fragment {

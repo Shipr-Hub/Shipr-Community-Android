@@ -11,9 +11,9 @@ import com.pes.androidmaterialcolorpickerdialog.ColorPicker;
 import com.pes.androidmaterialcolorpickerdialog.ColorPickerCallback;
 
 public class colorPicker extends AppCompatActivity {
-    int defaultColorR = 0;
-    int defaultColorG = 0;
-    int defaultColorB = 0;
+    private int defaultColorR = 0;
+    private int defaultColorG = 0;
+    private int defaultColorB = 0;
 
 
     @Override
@@ -26,7 +26,7 @@ public class colorPicker extends AppCompatActivity {
 
     }
 
-    public void colorPickerDialog(View v) {
+    private void colorPickerDialog(View v) {
         final ColorPicker cp = new ColorPicker(colorPicker.this, defaultColorR, defaultColorG, defaultColorB);
         /* Show color picker dialog */
         cp.show();
@@ -48,7 +48,7 @@ public class colorPicker extends AppCompatActivity {
                 //Set the center text color based on the background color
 		    TextView colorOutput1 = findViewById(R.id.colorOutput1);
 				if ((defaultColorR+defaultColorG+defaultColorB) > 700) {
-					colorOutput1.setText(String.format("#%06X", (0x000000 & color)));
+					colorOutput1.setText(String.format("#%06X", (0)));
 				} else if ((defaultColorR+defaultColorG+defaultColorB) < 700) {
 					colorOutput1.setText(String.format("#%06X", (0xFFFFFF & color)));
 				}

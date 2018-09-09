@@ -1,18 +1,9 @@
 package io.github.yhdesai.makertoolbox.ssh;
 
-import android.app.Fragment;
-import android.app.FragmentTransaction;
-import android.content.Intent;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.TextView;
 
 import io.github.yhdesai.makertoolbox.R;
-import io.github.yhdesai.makertoolbox.ssh.dialogs.SshConnectFragmentDialog;
-import io.github.yhdesai.makertoolbox.ssh.sshutils.ConnectionStatusListener;
 
 public class SSH_Connect extends AppCompatActivity {
 

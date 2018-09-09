@@ -47,26 +47,26 @@ public class general extends Fragment {
     private static final String ANONYMOUS = "anonymous";
     private static final int DEFAULT_MSG_LENGTH_LIMIT = 1000;
     private static final int RC_SIGN_IN = 1;
-    ListView mMessageListView;
+    private ListView mMessageListView;
     private MessageAdapter mMessageAdapter;
-    ProgressBar mProgressBar;
+    private ProgressBar mProgressBar;
     private EditText mMessageEditText;
     private Button mSendButton;
 
     private String mName;
     private String mPlatform;
-    String mChannel = "general";
+    private String mChannel = "general";
     private String mDate;
     private String mTime;
     private String mMessage;
-    Button addPic;
-    String mProfilePic;
-    String mVersion;
+    private Button addPic;
+    private String mProfilePic;
+    private String mVersion;
 
     // Firebase instance variable
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mMessagesDatabaseReference;
-    DatabaseReference mNotificationsDatabaseReference;
+    private DatabaseReference mNotificationsDatabaseReference;
     private ChildEventListener mChildEventListener;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
@@ -249,7 +249,7 @@ public class general extends Fragment {
         mNotificationsDatabaseReference = mFirebaseDatabase.getReference().child("notificationRequests");
 
 
-        Map notification = new HashMap<>();
+        Map<String, String> notification = new HashMap<String, String>();
         notification.put("channel", mChannel);
         notification.put("username", user);
         notification.put("message", mMessage);
