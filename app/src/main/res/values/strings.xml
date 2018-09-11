@@ -57,14 +57,10 @@
     <string name="enter_port_number_here">Enter Port Number here</string>
     <string name="enter_password_here">Enter password here</string>
     <string name="ssh_view">SSH View</string>
-    <string name="port">port</string>
+
     <string name="_22">22</string>
-    <string name="password">Password</string>
     <string name="connect">Connect</string>
-    <string name="username">Username</string>
-    <string name="username">Username</string>
-    <string name="hostname">Hostname</string>
-    <string name="hostname">Hostname</string>
+
     <string name="ping">ping</string>
     <string name="wol">wol</string>
     <string name="port_scan">port_scan</string>
