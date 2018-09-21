@@ -18,8 +18,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
-import io.github.yhdesai.makertoolbox.DeveloperMessage;
 import io.github.yhdesai.makertoolbox.R;
+import io.github.yhdesai.makertoolbox.model.DeveloperMessage;
 
 public class MessageAdapter extends ArrayAdapter<DeveloperMessage> {
     public MessageAdapter(Context context, int resource, List<DeveloperMessage> objects) {
@@ -61,4 +61,5 @@ public class MessageAdapter extends ArrayAdapter<DeveloperMessage> {
 
         return convertView;
     }
+
 }

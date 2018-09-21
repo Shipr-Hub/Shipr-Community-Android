@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import io.github.yhdesai.makertoolbox.ssh.SshActivity;
+import io.github.yhdesai.makertoolbox.tools.CodeEditor;
 import io.github.yhdesai.makertoolbox.tools.Libraries;
 import io.github.yhdesai.makertoolbox.tools.colorPicker;
 
@@ -38,6 +39,6 @@ public class Dev extends AppCompatActivity {
 
 
     public void code_editor(View view) {
-        startActivity(new Intent(Dev.this, io.github.yhdesai.makertoolbox.CodeEditor.class));
+        startActivity(new Intent(Dev.this, CodeEditor.class));
     }
 }

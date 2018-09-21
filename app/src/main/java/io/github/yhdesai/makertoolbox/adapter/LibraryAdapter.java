@@ -9,8 +9,8 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import io.github.yhdesai.makertoolbox.DeveloperAwesomeLibraries;
 import io.github.yhdesai.makertoolbox.R;
+import io.github.yhdesai.makertoolbox.model.DeveloperAwesomeLibraries;
 
 public class LibraryAdapter extends ArrayAdapter<DeveloperAwesomeLibraries> {
     public LibraryAdapter(Context context, int resource, List<DeveloperAwesomeLibraries> objects) {

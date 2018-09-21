@@ -10,8 +10,8 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import io.github.yhdesai.makertoolbox.DeveloperToDo;
 import io.github.yhdesai.makertoolbox.R;
+import io.github.yhdesai.makertoolbox.model.DeveloperToDo;
 
 public class ToDoAdapter extends ArrayAdapter<DeveloperToDo> {
     public ToDoAdapter(Context context, int resource, List<DeveloperToDo> objects) {

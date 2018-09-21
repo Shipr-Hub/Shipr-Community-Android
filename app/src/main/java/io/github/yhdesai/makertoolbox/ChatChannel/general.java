@@ -38,9 +38,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
 
-import io.github.yhdesai.makertoolbox.DeveloperMessage;
 import io.github.yhdesai.makertoolbox.adapter.MessageAdapter;
 import io.github.yhdesai.makertoolbox.R;
+import io.github.yhdesai.makertoolbox.model.DeveloperMessage;
 
 
 public class general extends Fragment {
