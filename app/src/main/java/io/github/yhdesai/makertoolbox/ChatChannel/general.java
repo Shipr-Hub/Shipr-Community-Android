@@ -85,7 +85,7 @@ public class general extends Fragment {
         // Initialize Firebase components
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mFirebaseAuth = FirebaseAuth.getInstance();
-        mMessagesDatabaseReference = mFirebaseDatabase.getReference().child(getString(R.string.generalChatLoc));
+        mMessagesDatabaseReference = mFirebaseDatabase.getReference().child("chat/general");
 
 
         // Initialize references to views
