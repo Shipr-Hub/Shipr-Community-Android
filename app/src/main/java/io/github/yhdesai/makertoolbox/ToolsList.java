@@ -11,6 +11,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import io.github.yhdesai.makertoolbox.ssh.SshActivity;
+import io.github.yhdesai.makertoolbox.tools.NetActivity;
+import io.github.yhdesai.makertoolbox.tools.colorPicker;
+import io.github.yhdesai.makertoolbox.tools.todo;
 
 public class ToolsList extends Fragment {
 
