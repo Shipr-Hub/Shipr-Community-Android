@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/Maker-ToolBox/Maker-ToolBox-Android.svg?branch=master)](https://travis-ci.org/Maker-ToolBox/Maker-ToolBox-Android) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
+[![Build Status](https://travis-ci.org/Maker-Hub/Maker-ToolBox-Android.svg?branch=master)](https://travis-ci.org/Maker-Hub/Maker-ToolBox-Android) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
 # Maker-ToolBox-Android
 
