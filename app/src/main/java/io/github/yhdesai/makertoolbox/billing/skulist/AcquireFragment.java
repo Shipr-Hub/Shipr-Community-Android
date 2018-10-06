@@ -62,11 +62,11 @@ public class AcquireFragment extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.billing_acquire_fragment, container, false);
-        mErrorTextView = (TextView) root.findViewById(R.id.error_textview);
-        mRecyclerView = (RecyclerView) root.findViewById(R.id.list);
+        mErrorTextView = root.findViewById(R.id.error_textview);
+        mRecyclerView = root.findViewById(R.id.list);
         mLoadingView = root.findViewById(R.id.screen_wait);
         // Setup a toolbar for this fragment
-        Toolbar toolbar = (Toolbar) root.findViewById(R.id.toolbar);
+        Toolbar toolbar = root.findViewById(R.id.toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_arrow_up);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,12 +127,6 @@ public class AcquireFragment extends DialogFragment {
                     @Override
                     public void onSkuDetailsResponse(int responseCode,
                                                      List<SkuDetails> skuDetailsList) {
-//                        if (responseCode == BillingClient.BillingResponse.OK
-//                                && skuDetailsList != null) {
-//                            for (SkuDetails details : skuDetailsList) {
-//                                Log.w(TAG, "Got a SKU: " + details);
-//                            }
-//                        }
                         if (responseCode == BillingClient.BillingResponse.OK && skuDetailsList != null) {
                             List<SkuRowData> inList = new ArrayList<>();
                             for (SkuDetails details : skuDetailsList) {

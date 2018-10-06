@@ -3,10 +3,6 @@ package io.github.yhdesai.makertoolbox;
 class MyJobService {
 }
 
-/**
- * Created by yash on 16/3/18.
- */
-
 
 //  Basic Layout, Needs to be edited
 /*

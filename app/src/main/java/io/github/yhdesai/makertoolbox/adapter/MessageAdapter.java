@@ -1,9 +1,5 @@
 package io.github.yhdesai.makertoolbox.adapter;
 
-/**
- * Created by yash on 26/2/18.
- */
-
 import android.app.Activity;
 import android.content.Context;
 import android.util.Log;

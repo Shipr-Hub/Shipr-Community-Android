@@ -16,6 +16,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 import io.github.yhdesai.makertoolbox.R;
 import io.github.yhdesai.makertoolbox.model.DeveloperToDo;
@@ -113,7 +114,7 @@ public class addTodo extends AppCompatActivity {
                             AuthUI.getInstance()
                                     .createSignInIntentBuilder()
                                     .setAvailableProviders(
-                                            Arrays.asList(
+                                            Collections.singletonList(
                                                     //   new AuthUI.IdpConfig.Builder(AuthUI.TWITTER_PROVIDER).build(),
                                                     //   new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build(),
                                                     //   new AuthUI.IdpConfig.Builder(AuthUI.FACEBOOK_PROVIDER).build(),

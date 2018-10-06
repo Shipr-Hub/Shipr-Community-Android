@@ -83,8 +83,7 @@ public class SshActivity extends Activity implements OnClickListener {
             @Override
             public void afterTextChanged(Editable editable) {
                 String[] sr = editable.toString().split("\r\n");
-                String s = sr[sr.length - 1];
-                mLastLine = s;
+                mLastLine = sr[sr.length - 1];
 
             }
         });

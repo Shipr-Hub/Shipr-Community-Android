@@ -32,6 +32,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -47,26 +48,21 @@ public class general extends Fragment {
     private static final String ANONYMOUS = "anonymous";
     private static final int DEFAULT_MSG_LENGTH_LIMIT = 1000;
     private static final int RC_SIGN_IN = 1;
-    private ListView mMessageListView;
     private MessageAdapter mMessageAdapter;
-    private ProgressBar mProgressBar;
     private EditText mMessageEditText;
     private Button mSendButton;
 
     private String mName;
     private String mPlatform;
-    private String mChannel = "general";
     private String mDate;
     private String mTime;
     private String mMessage;
-    private Button addPic;
     private String mProfilePic;
     private String mVersion;
 
     // Firebase instance variable
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mMessagesDatabaseReference;
-    private DatabaseReference mNotificationsDatabaseReference;
     private ChildEventListener mChildEventListener;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
@@ -89,11 +85,11 @@ public class general extends Fragment {
 
 
         // Initialize references to views
-        mProgressBar = rootView.findViewById(R.id.progressBar);
-        mMessageListView = rootView.findViewById(R.id.messageListView);
+        ProgressBar mProgressBar = rootView.findViewById(R.id.progressBar);
+        ListView mMessageListView = rootView.findViewById(R.id.messageListView);
         mMessageEditText = rootView.findViewById(R.id.messageEditText);
         mSendButton = rootView.findViewById(R.id.sendButton);
-        addPic = rootView.findViewById(R.id.addPic);
+        Button addPic = rootView.findViewById(R.id.addPic);
 
         // Initialize message ListView and its adapter
         List<DeveloperMessage> friendlyMessages = new ArrayList<>();
@@ -146,7 +142,7 @@ public class general extends Fragment {
                             AuthUI.getInstance()
                                     .createSignInIntentBuilder()
                                     .setAvailableProviders(
-                                            Arrays.asList(
+                                            Collections.singletonList(
                                                     //   new AuthUI.IdpConfig.Builder(AuthUI.TWITTER_PROVIDER).build(),
                                                     //   new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build(),
                                                     //   new AuthUI.IdpConfig.Builder(AuthUI.FACEBOOK_PROVIDER).build(),
@@ -246,10 +242,11 @@ public class general extends Fragment {
     }
 
     private void sendNotificationToUser(String user) {
-        mNotificationsDatabaseReference = mFirebaseDatabase.getReference().child("notificationRequests");
+        DatabaseReference mNotificationsDatabaseReference = mFirebaseDatabase.getReference().child("notificationRequests");
 
 
         Map<String, String> notification = new HashMap<String, String>();
+        String mChannel = "general";
         notification.put("channel", mChannel);
         notification.put("username", user);
         notification.put("message", mMessage);

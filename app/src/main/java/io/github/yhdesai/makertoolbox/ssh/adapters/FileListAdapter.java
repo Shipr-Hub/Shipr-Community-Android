@@ -27,9 +27,8 @@ public class FileListAdapter extends BaseAdapter {
     // Constructor
     //
     public FileListAdapter(Context context, ArrayList<File> files) {
-        Context mContext = context;
         mFiles = files;
-        mInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     public int getCount() {
@@ -54,8 +53,7 @@ public class FileListAdapter extends BaseAdapter {
             convertView = mInflater.inflate(R.layout.listview_item_ssh, null);
 
             ImageView imageView = convertView.findViewById(R.id.imageview_item);
-            TextView textView = convertView.findViewById(R.id.textview_item);
-            holder.textView = textView;
+            holder.textView = convertView.findViewById(R.id.textview_item);
             holder.imageView = imageView;
             // change text color for directories
             convertView.setTag(holder);
