@@ -43,9 +43,6 @@
     <string name="enter_message">Enter message</string>
     <string name="send_button">SEND</string>
 
-    <string name="twitter_consumer_secret"></string>
-
-
     <string name="todo_name">Name</string>
     <string name="enter_todo_name_here">Enter ToDo Name here</string>
     <string name="enter_username_here">Enter Username here</string>

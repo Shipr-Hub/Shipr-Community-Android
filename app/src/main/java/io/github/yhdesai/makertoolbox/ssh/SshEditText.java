@@ -87,7 +87,7 @@ public class SshEditText extends android.support.v7.widget.AppCompatEditText {
      */
     public String peekLastInput() {
         synchronized (this) {
-            return new String(mlastInput);
+            return mlastInput;
         }
     }
 

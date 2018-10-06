@@ -74,7 +74,7 @@ public class GamePlayActivity extends FragmentActivity implements BillingProvide
 
         mScreenWait = findViewById(R.id.screen_wait);
         mScreenMain = findViewById(R.id.screen_main);
-        mGasImageView = ((ImageView) findViewById(R.id.gas_gauge));
+        mGasImageView = findViewById(R.id.gas_gauge);
 
         // Specify purchase and drive buttons listeners
         // Note: This couldn't be done inside *.xml for Android TV since TV layout is inflated
