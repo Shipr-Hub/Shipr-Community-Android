@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".tools.xml_designer.ButtonDesigner">
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+    <!--
+    There will be different sections here to change the properties of the button, like
+    1. text
+    height
+    weight
+    id
+    background
+    onClick
+    etc
+
+
+    -->
+
+
+
+</LinearLayout>
