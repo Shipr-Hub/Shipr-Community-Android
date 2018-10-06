@@ -5,7 +5,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="com.android.vending.BILLING"/>
+    <uses-permission android:name="com.android.vending.BILLING" />
 
     <!-- <uses-permission android:name="android.permission.GET_ACCOUNTS" /> -->
     <application
@@ -15,7 +15,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version"
@@ -69,7 +68,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".ssh.ConfigActivity" />
         <activity android:name=".ssh.FileListActivity" />
         <activity android:name=".tools.add.addLibrary" />
@@ -78,6 +76,8 @@
         <activity android:name=".tools.Libraries" />
         <activity android:name=".tools.NetActivity" />
         <activity android:name=".billing.GamePlayActivity" />
+
+        <activity android:name=".tools.xml_designer.ButtonDesigner"></activity>
     </application>
 
 </manifest>
