@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import io.github.yhdesai.makertoolbox.billing.GamePlayActivity;
 import io.github.yhdesai.makertoolbox.ssh.SshActivity;
 import io.github.yhdesai.makertoolbox.tools.CodeEditor;
 import io.github.yhdesai.makertoolbox.tools.Libraries;
@@ -41,4 +42,6 @@ public class Dev extends AppCompatActivity {
     public void code_editor(View view) {
         startActivity(new Intent(Dev.this, CodeEditor.class));
     }
+
+    public void billing(View view) {startActivity(new Intent(Dev.this, GamePlayActivity.class));}
 }

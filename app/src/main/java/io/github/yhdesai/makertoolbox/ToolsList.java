@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import io.github.yhdesai.makertoolbox.billing.GamePlayActivity;
 import io.github.yhdesai.makertoolbox.ssh.SshActivity;
 import io.github.yhdesai.makertoolbox.tools.NetActivity;
 import io.github.yhdesai.makertoolbox.tools.colorPicker;
@@ -28,6 +29,7 @@ public class ToolsList extends Fragment {
         Button todo = view.findViewById(R.id.tools_todo_button);
         Button ssh = view.findViewById(R.id.tools_ssh_button);
         Button net = view.findViewById(R.id.tools_network_button);
+        Button dev = view.findViewById(R.id.tools_dev);
 
         color.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,6 +60,14 @@ public class ToolsList extends Fragment {
                 startActivity(new Intent(getActivity(), NetActivity.class));
             }
         });
+
+        dev.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), Dev.class));
+            }
+        });
+
         return view;
     }
 
