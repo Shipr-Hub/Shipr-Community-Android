@@ -6,14 +6,14 @@ android {
     lintOptions {
         abortOnError false
     }
-    compileSdkVersion 26
+    compileSdkVersion 28
     defaultConfig {
         applicationId "io.github.yhdesai.makertoolbox"
         minSdkVersion 19
         multiDexEnabled true
-        targetSdkVersion 26
-        versionCode 18
-        versionName "0.4.1"
+        targetSdkVersion 28
+        versionCode 19
+        versionName "0.4.3"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
@@ -23,25 +23,25 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    buildToolsVersion '28.0.2'
+    buildToolsVersion '28.0.3'
 }
 
 //noinspection SpellCheckingInspection,SpellCheckingInspection
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     //FireBase Auth
-    implementation 'com.google.firebase:firebase-auth:16.0.3'
+    implementation 'com.google.firebase:firebase-auth:16.0.4'
     implementation 'com.firebaseui:firebase-ui-auth:2.1.1'
-    implementation 'com.google.android.gms:play-services-auth:16.0.0'
+    implementation 'com.google.android.gms:play-services-auth:16.0.1'
     //implementation 'com.facebook.android:facebook-android-sdk:4.27.0'
     //implementation("com.twitter.sdk.android:twitter-core:3.0.0@aar") { transitive = true }
     //FireBase Database
-    implementation 'com.google.firebase:firebase-database:16.0.2'
+    implementation 'com.google.firebase:firebase-database:16.0.3'
     //FireBase Core
-    implementation 'com.google.firebase:firebase-core:16.0.3'
+    implementation 'com.google.firebase:firebase-core:16.0.4'
 
     //Firebase Storage
-    implementation 'com.google.firebase:firebase-storage:16.0.2'
+    implementation 'com.google.firebase:firebase-storage:16.0.3'
     //    //FireBase Ads
     //    implementation 'com.google.firebase:firebase-ads:15.0.1'
     /*  //FireBase Notifications
@@ -72,14 +72,18 @@ dependencies {
     //TODO enable crashlytics and add the twitter key
 
     //version fix
-    implementation 'com.android.support:design:26.1.0'
-    implementation 'com.android.support:customtabs:26.1.0'
-    implementation 'com.android.support:cardview-v7:26.1.0'
+    implementation 'com.android.support:design:28.0.0'
+    implementation 'com.android.support:support-media-compat:28.0.0'
+    implementation 'com.android.support:customtabs:28.0.0'
+    implementation 'com.android.support:cardview-v7:28.0.0'
     implementation 'com.android.support:multidex:1.0.3'
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     implementation files('lib/AndroidNetworkTools.jar')
     // implementation 'com.github.stealthcopter:AndroidNetworkTools:0.4.0'
 
+
+    //Billing
+    implementation 'com.android.billingclient:billing:1.1'
 
     //Code View
    // implementation 'com.github.kbiakov:CodeView-android:1.3.1'

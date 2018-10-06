@@ -11,4 +11,16 @@
     <dimen name="padding">3dp</dimen>
     <dimen name="layout_margin">5dp</dimen>
 
+    <dimen name="single_padding">8dp</dimen>
+    <dimen name="card_margin">8dp</dimen>
+    <dimen name="double_padding">16dp</dimen>
+    <dimen name="max_padding">24dp</dimen>
+    <dimen name="header_gap">8dp</dimen>
+    <dimen name="row_gap">1px</dimen>
+    <dimen name="button_width">150dp</dimen>
+    <dimen name="button_height">50dp</dimen>
+    <dimen name="sku_details_row_height">216dp</dimen>
+    <dimen name="sku_details_price_width">60dp</dimen>
+    <dimen name="sku_details_header_row_height">61dp</dimen>
+
 </resources>

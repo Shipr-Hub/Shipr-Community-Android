@@ -5,6 +5,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="com.android.vending.BILLING"/>
 
     <!-- <uses-permission android:name="android.permission.GET_ACCOUNTS" /> -->
     <application
@@ -14,9 +15,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".addTodo"
-            android:label="Add ToDo" />
 
         <meta-data
             android:name="com.google.android.gms.version"
@@ -57,10 +55,7 @@
          </service>
         -->
         <activity android:name=".Dev" />
-        <activity android:name=".Awesome_Libraries" />
         <activity android:name=".Welcome_Screen" />
-        <activity android:name=".addLibrary" />
-        <activity android:name=".colorPicker" />
         <activity android:name=".video" />
         <activity android:name=".ssh.SshActivity" />
         <activity android:name=".ssh.SSH_Connect" />
@@ -74,10 +69,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".NetActivity" />
-        <activity android:name=".CodeEditor"></activity>
+
         <activity android:name=".ssh.ConfigActivity" />
         <activity android:name=".ssh.FileListActivity" />
+        <activity android:name=".tools.add.addLibrary" />
+        <activity android:name=".tools.CodeEditor" />
+        <activity android:name=".tools.colorPicker" />
+        <activity android:name=".tools.Libraries" />
+        <activity android:name=".tools.NetActivity" />
+        <activity android:name=".billing.GamePlayActivity" />
     </application>
 
 </manifest>

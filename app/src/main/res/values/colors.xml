@@ -51,6 +51,19 @@
     <item name="darkorange" type="color">#FFFF8800</item>
     <item name="almostblack" type="color">#FF302533</item>
     <item name="eggshell" type="color">#FFEEEAEE</item>
+<!-- Billing starts-->
+    <color name="primary_color">#37474F</color>
+    <color name="primary_color_dark">#263238</color>
+    <color name="ascent_color">#4285F4</color>
+
+    <color name="list_bg_color">#eeeeee</color>
+    <color name="row_header_bg_color">#ffffff</color>
+    <color name="row_bg_color">#ffffff</color>
+
+    <color name="disabled_color">#90b1b0</color>
+    <color name="gold">#ffbf00</color>
+
+
 
 
 </resources>
