@@ -1,17 +1,21 @@
 package io.github.yhdesai.makertoolbox.tools;
 
 import android.app.AlertDialog;
+import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.util.SparseIntArray;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -22,9 +26,14 @@ import io.github.yhdesai.makertoolbox.R;
 public class ASCIIViewer extends AppCompatActivity {
 
     private Button analyse, stats, clear, paste;
-    private EditText intro;
+    private EditText intro, num;
     private ListView list;
     private Context c;
+    private TextView preview;
+    private CheckBox combine;
+
+    private int number;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -38,6 +47,9 @@ public class ASCIIViewer extends AppCompatActivity {
         paste = findViewById(R.id.ascii_paste);
         list = findViewById(R.id.ascii_list);
         intro = findViewById(R.id.trad_intro);
+        preview = findViewById(R.id.ascii_preview);
+        num = findViewById(R.id.ascii_number);
+        combine = findViewById(R.id.ascii_combine);
 
         listen();
     }
@@ -112,5 +124,45 @@ public class ASCIIViewer extends AppCompatActivity {
                         .show();
             }
         });
+    }
+
+    public void click(View v) {
+        switch (v.getId()) {
+            case R.id.ascii_preview:
+                ClipboardManager m = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+                m.setPrimaryClip(ClipData.newPlainText("", preview.getText()));
+                Log.d("ASCIIViewer", "Character: [" + preview.getText().toString() + "]");
+                Toast.makeText(c, "Copied to clipboard!", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.ascii_go:
+                try {
+                    number = Integer.parseInt(num.getText().toString());
+                    updatePreview();
+                } catch (NumberFormatException e) {
+                    Toast.makeText(c, "Only numbers admited (ASCII/Unicode ids)", Toast.LENGTH_LONG).show();
+                }
+                break;
+            case R.id.ascii_up:
+                number++;
+                updatePreview();
+                break;
+            case R.id.ascii_down:
+                if (number > 0) number--;
+                updatePreview();
+                break;
+        }
+    }
+
+    private void updatePreview() {
+        num.setText(number + "");
+
+        if (combine.isChecked()) {
+            StringBuilder builder = new StringBuilder();
+            builder.append('a').appendCodePoint(number);
+            preview.setText(builder.toString());
+        } else {
+            preview.setText(Character.toString((char) number));
+        }
+
     }
 }
