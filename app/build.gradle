@@ -69,7 +69,7 @@ dependencies {
     //    implementation 'com.github.stealthcopter:AndroidNetworkTools:0.4.0'
     //crashlytics
     // implementation 'com.crashlytics.sdk.android:crashlytics:2.9.4'3
-    //TODO enable crashlytics and add the twitter key
+    //TODO enable crashlytics
 
     //version fix
     implementation 'com.android.support:design:28.0.0'
@@ -93,21 +93,4 @@ dependencies {
 }
 apply plugin: 'com.google.gms.google-services'
 
-afterEvaluate {
-//    processDebugGoogleServices.dependsOn switchToDebug
-//    processReleaseGoogleServices.dependsOn switchToRelease
-}
 
-/*task switchToDebug(type: Copy) {
-    description = 'Switches to DEBUG google-services.json'
-    from "src/debug"
-    include "google-services.json"
-    into "."
-}*/
-
-/*task switchToRelease(type: Copy) {
-    description = 'Switches to RELEASE google-services.json'
-    from "src/release"
-    include "google-services.json"
-    into "."
-}*/
