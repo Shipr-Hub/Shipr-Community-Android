@@ -76,8 +76,8 @@
         <activity android:name=".tools.Libraries" />
         <activity android:name=".tools.NetActivity" />
         <activity android:name=".billing.GamePlayActivity" />
-
-        <activity android:name=".tools.xml_designer.ButtonDesigner"></activity>
+        <activity android:name=".tools.xml_designer.ButtonDesigner" />
+        <activity android:name=".tools.ASCIIViewer"></activity>
     </application>
 
 </manifest>

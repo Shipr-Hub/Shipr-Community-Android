@@ -1,17 +1,17 @@
 package io.github.yhdesai.makertoolbox;
 
 
+import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import io.github.yhdesai.makertoolbox.billing.GamePlayActivity;
 import io.github.yhdesai.makertoolbox.ssh.SshActivity;
+import io.github.yhdesai.makertoolbox.tools.ASCIIViewer;
 import io.github.yhdesai.makertoolbox.tools.NetActivity;
 import io.github.yhdesai.makertoolbox.tools.colorPicker;
 import io.github.yhdesai.makertoolbox.tools.todo;
@@ -30,6 +30,7 @@ public class ToolsList extends Fragment {
         Button ssh = view.findViewById(R.id.tools_ssh_button);
         Button net = view.findViewById(R.id.tools_network_button);
         Button dev = view.findViewById(R.id.tools_dev);
+        Button ascii = view.findViewById(R.id.tools_ascii);
 
         color.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,6 +66,13 @@ public class ToolsList extends Fragment {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getActivity(), Dev.class));
+            }
+        });
+
+        ascii.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), ASCIIViewer.class));
             }
         });
 
