@@ -7,22 +7,16 @@ Maker ToolBox is a Go-To Application for developers to enable them to develop th
 ## Google Play Store Listing:
 <a href="https://play.google.com/store/apps/details?id=io.github.yhdesai.makertoolbox"><img alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" width="300" /></a>
 
-Basic features:
-1) Chat
-2) Docs
-3) Learning Resources
-4) Awesome Libraries
-5) Awesome Projects
-6) Awesome UI
-7) Animations
-8) Tech Wallpaper
-9) Podcasts
-10) Ebook
-11) Community Projects
-12) Network Tools
 
 
-Advanced Features :
+Current Features : 
+1) Color Picker
+2) SSH Client
+3) Network Tools
+4) ASCII Analyser tool
+
+
+Upcoming Features :
 1) IDE
 2) Compiler
 3) FTP Client
