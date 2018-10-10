@@ -11,7 +11,7 @@ Maker ToolBox is a Go-To Application for developers to enable them to develop th
 ## Trello Board : 
 https://trello.com/b/kuoT8UaL/maker-toolbox
 
-## Features
+## Features :
 
 Current Features : 
 1) Color Picker
@@ -29,7 +29,7 @@ Upcoming Features :
 and more Dev Tools....
 
 
-## Contributing
+## Contributing :
 
 Contributions are welcome!
 
