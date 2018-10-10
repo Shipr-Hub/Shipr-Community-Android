@@ -27,7 +27,7 @@ and more Dev Tools....
 
 Check out other ideas and upcoming features on the [Trello Board][7]
 
-# Screenshots
+## Screenshots
 
 <img src="https://user-images.githubusercontent.com/22801227/46724734-f4352480-cc7a-11e8-93c6-9295bb9deda9.png" width="200"> <img src="https://user-images.githubusercontent.com/22801227/46724749-fd25f600-cc7a-11e8-9cb4-3a44655b9da3.png" width="200"> <img src="https://user-images.githubusercontent.com/22801227/46724766-04e59a80-cc7b-11e8-99fa-f26778360c83.png" width="200"> <img src="https://user-images.githubusercontent.com/22801227/46724788-0f079900-cc7b-11e8-8405-259e2038d89f.png" width="200">
 
