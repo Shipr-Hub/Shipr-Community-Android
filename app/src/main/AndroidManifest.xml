@@ -71,6 +71,7 @@
         <activity android:name=".ssh.ConfigActivity" />
         <activity android:name=".ssh.FileListActivity" />
         <activity android:name=".tools.add.addLibrary" />
+        <activity android:name=".tools.add.addTodo" />
         <activity android:name=".tools.CodeEditor" />
         <activity android:name=".tools.colorPicker" />
         <activity android:name=".tools.Libraries" />
