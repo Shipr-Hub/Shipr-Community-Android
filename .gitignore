@@ -8,4 +8,5 @@
 /app/build
 /app/release
 /captures
-.externalNativeBuildapp/google-services.json
+.externalNativeBuild
+app/google-services.json
