@@ -1,6 +1,9 @@
 package io.github.yhdesai.makertoolbox.ChatChannel;
 
+import android.app.Activity;
 import android.app.Fragment;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -42,6 +45,7 @@ import java.util.TimeZone;
 import io.github.yhdesai.makertoolbox.adapter.MessageAdapter;
 import io.github.yhdesai.makertoolbox.R;
 import io.github.yhdesai.makertoolbox.model.DeveloperMessage;
+import io.github.yhdesai.makertoolbox.notifications.NotificationService;
 
 
 public class general extends Fragment {
@@ -83,6 +87,10 @@ public class general extends Fragment {
         mFirebaseAuth = FirebaseAuth.getInstance();
         mMessagesDatabaseReference = mFirebaseDatabase.getReference().child("chat/general");
 
+        //Clear Notification
+        NotificationManager notificationManager = (NotificationManager) ((Activity) getActivity()).getSystemService(Context.NOTIFICATION_SERVICE);
+        int channel_id = NotificationService.getIntId("general");
+        if(channel_id != -1) notificationManager.cancel(channel_id);
 
         // Initialize references to views
         ProgressBar mProgressBar = rootView.findViewById(R.id.progressBar);

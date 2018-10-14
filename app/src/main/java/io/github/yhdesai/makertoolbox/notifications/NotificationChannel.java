@@ -51,13 +51,15 @@ public class NotificationChannel {
         notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
     }
 
+    public String getChannel_Id() {
+        return channel_Id;
+    }
+
     public void startListner(){
         reference.addValueEventListener(eventListener);
-        Log.e("Debug tag", "event listner added");
     }
 
     public void stopListner(){
-        Log.e("Debug tag", "channel deleted");
         messages.clear();
         reference.removeEventListener(eventListener);
     }
@@ -70,6 +72,10 @@ public class NotificationChannel {
                 DeveloperMessage developerMessage = message.getValue(DeveloperMessage.class);
                 local_count ++;
                 if (local_count > count) {
+                    count = local_count;
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putInt("count", count);
+                    editor.apply();
                     messages.add(developerMessage);
                 }
             }
@@ -89,11 +95,6 @@ public class NotificationChannel {
 
         NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
         inboxStyle.setBigContentTitle(channel_Id + " channel");
-
-        count += messages.size();
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putInt("count", count);
-        editor.apply();
 
         for (int i = (messages.size() > 5 ? messages.size() - 5 : 0); i < messages.size(); i++){
             DeveloperMessage message = messages.get(i);
@@ -117,6 +118,5 @@ public class NotificationChannel {
         }
 
         notificationManager.notify(id, builder.build());
-        messages.clear();
     }
 }

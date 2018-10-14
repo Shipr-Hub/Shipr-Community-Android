@@ -11,7 +11,6 @@ public class NotificationStartReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         String action = intent.getAction();
         Intent service = new Intent(context, NotificationService.class);
-        Log.e("Debug tag", action);
         if(Intent.ACTION_BOOT_COMPLETED.equals(action)){
             if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) context.startForegroundService(service);
             else context.startService(service);

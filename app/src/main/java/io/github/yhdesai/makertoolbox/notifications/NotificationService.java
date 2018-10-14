@@ -33,8 +33,18 @@ public class NotificationService extends Service {
 
     private DatabaseReference databaseReference;
     private int channels = 0;
-    private ArrayList<NotificationChannel> notificationChannels;
+    private static ArrayList<NotificationChannel> notificationChannels = new ArrayList<>();
     private Thread runner;
+
+    public static int getIntId(String channelId){
+        for(int i = 0; i < notificationChannels.size(); i++){
+            NotificationChannel channel = notificationChannels.get(i);
+            if(channel.getChannel_Id().equals(channelId)){
+                return i;
+            }
+        }
+        return -1;
+    }
 
     @Nullable
     @Override
@@ -45,11 +55,9 @@ public class NotificationService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        Log.e("Debug tag", "service oncreate");
         databaseReference = FirebaseDatabase.getInstance().getReference().child("chat");
         state = true;
         channels = 0;
-        notificationChannels = new ArrayList<>();
     }
 
     @Override
@@ -59,7 +67,6 @@ public class NotificationService extends Service {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot channel : dataSnapshot.getChildren()){
                     String channel_Id = channel.getKey();
-                    Log.e("Debug tag", "channel create");
                     NotificationChannel notificationChannel = new NotificationChannel(NotificationService.this, databaseReference, channel_Id, channels++);
                     notificationChannel.startListner();
                     notificationChannels.add(notificationChannel);
@@ -90,11 +97,8 @@ public class NotificationService extends Service {
         }
         notificationChannels.clear();
         channels = 0;
-        Log.e("Debug tag", "service stopped");
         super.onDestroy();
-        Log.e("Debug tag", "service after stopped");
         if(state) {
-            Log.e("Debug tag", "service restart attempt");
             Intent intent = new Intent();
             intent.setAction(service_broadcast);
             getBaseContext().sendBroadcast(intent);
