@@ -5,6 +5,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -15,6 +16,7 @@ import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -30,6 +32,9 @@ public class NotificationChannel {
     private String channel_Id;
     private ArrayList<DeveloperMessage> messages;
     private Context context;
+    private SharedPreferences sharedPreferences;
+    private String channel_Key;
+    private int count;
 
     private NotificationCompat.Builder builder;
     private NotificationManager notificationManager;
@@ -38,43 +43,37 @@ public class NotificationChannel {
         this.context = context;
         this.channel_Id = channel_Id;
         this.reference = reference.child(channel_Id);
+        channel_Key = context.getString(R.string.shared_preference_key) + channel_Id;
+        sharedPreferences = context.getSharedPreferences(channel_Key, Context.MODE_PRIVATE);
+        count = sharedPreferences.getInt("count", 0);
         id = channel_no;
         messages = new ArrayList<>();
         notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
     }
 
     public void startListner(){
-        reference.addChildEventListener(childEventListener);
+        reference.addValueEventListener(eventListener);
         Log.e("Debug tag", "event listner added");
     }
 
     public void stopListner(){
         Log.e("Debug tag", "channel deleted");
         messages.clear();
-        reference.removeEventListener(childEventListener);
+        reference.removeEventListener(eventListener);
     }
 
-    private ChildEventListener childEventListener = new ChildEventListener() {
+    private ValueEventListener eventListener = new ValueEventListener() {
         @Override
-        public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-            DeveloperMessage developerMessage = dataSnapshot.getValue(DeveloperMessage.class);
-            messages.add(developerMessage);
-            if(messages.size() > 0) Notify();
-        }
-
-        @Override
-        public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-        }
-
-        @Override
-        public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
-        }
-
-        @Override
-        public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
+        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            int local_count = 0;
+            for(DataSnapshot message : dataSnapshot.getChildren()) {
+                DeveloperMessage developerMessage = message.getValue(DeveloperMessage.class);
+                local_count ++;
+                if (local_count > count) {
+                    messages.add(developerMessage);
+                }
+            }
+            if (messages.size() > 0) Notify();
         }
 
         @Override
@@ -90,6 +89,11 @@ public class NotificationChannel {
 
         NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
         inboxStyle.setBigContentTitle(channel_Id + " channel");
+
+        count += messages.size();
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("count", count);
+        editor.apply();
 
         for (int i = (messages.size() > 5 ? messages.size() - 5 : 0); i < messages.size(); i++){
             DeveloperMessage message = messages.get(i);
@@ -113,5 +117,6 @@ public class NotificationChannel {
         }
 
         notificationManager.notify(id, builder.build());
+        messages.clear();
     }
 }
