@@ -79,6 +79,23 @@
         <activity android:name=".billing.GamePlayActivity" />
         <activity android:name=".tools.xml_designer.ButtonDesigner" />
         <activity android:name=".tools.ASCIIViewer"></activity>
+
+        <service android:name=".notification.NotificationService"
+            android:enabled="true"/>
+
+        <receiver
+            android:name=".notification.NotificationStartReceiver"
+            android:label="RestartService"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="android.permission.RECEIVE_BOOT_COMPLETE">
+            <intent-filter>
+                <action android:name="makertoolbox.intent.action.RestartService"/>
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED"/>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
+
     </application>
 
 </manifest>
