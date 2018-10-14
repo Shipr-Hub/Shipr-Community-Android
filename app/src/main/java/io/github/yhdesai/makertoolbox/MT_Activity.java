@@ -1,7 +1,9 @@
 package io.github.yhdesai.makertoolbox;
 
 
+import android.app.ActivityManager;
 import android.app.FragmentManager;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -32,6 +34,7 @@ import java.util.TimeZone;
 
 import io.github.yhdesai.makertoolbox.ChatChannel.general;
 import io.github.yhdesai.makertoolbox.model.DeveloperMessage;
+import io.github.yhdesai.makertoolbox.notification.NotificationService;
 
 public class MT_Activity extends AppCompatActivity {
 
@@ -53,6 +56,7 @@ public class MT_Activity extends AppCompatActivity {
     private DatabaseReference mMessagesDatabaseReference;
     private DatabaseReference mNotificationsDatabaseReference;
 
+    private Intent service;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -286,6 +290,36 @@ public class MT_Activity extends AppCompatActivity {
                 return true;
             }}
         return super.dispatchKeyEvent(event);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if(service == null) service = new Intent(getBaseContext(), NotificationService.class);
+        if(isServiceRunning(NotificationService.class)) {
+            NotificationService.state = false;
+            stopService(service);
+        }
+
+        Intent i = new Intent(NotificationService.service_broadcast);
+        this.sendBroadcast(i, NotificationService.service_broadcast);
+    }
+
+    private boolean isServiceRunning(Class<?> serviceClass){
+        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo serviceInfo : manager.getRunningServices(Integer.MAX_VALUE)){
+            if(serviceClass.getName().equals(serviceInfo.service.getClassName())){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    protected void onPause() {
+        if(!isServiceRunning(NotificationService.class)) startService(service);
+        super.onPause();
     }
 }
 
