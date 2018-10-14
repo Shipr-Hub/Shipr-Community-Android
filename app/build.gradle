@@ -93,4 +93,9 @@ dependencies {
 }
 apply plugin: 'com.google.gms.google-services'
 
-
+/*task switchToDebug(type: Copy) {
+    description = 'Switches to DEBUG google-services.json'
+    from "src/debug"
+    include "google-services.json"
+    into "."
+}*/

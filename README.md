@@ -10,7 +10,7 @@ Maker ToolBox is an Open Source Application for developers to develop their proj
 
 ## Features :
 
-Current Features : 
+Current Features :
 1) Color Picker
 2) SSH Client
 3) Network Tools
