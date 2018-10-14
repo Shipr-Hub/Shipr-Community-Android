@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/ascii_preview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:background="#b9f6ca"
+            android:textAlignment="center" />
+
+        <Button
+            android:id="@+id/ascii_up"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:onClick="click"
+            android:text="+" />
+
+        <Button
+            android:id="@+id/ascii_down"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:onClick="click"
+            android:text="-" />
+
+        <CheckBox
+            android:id="@+id/ascii_combine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:text="Combine" />
+
+        <EditText
+            android:id="@+id/ascii_number"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAlignment="center" />
+
+        <Button
+            android:id="@+id/ascii_go"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:onClick="click"
+            android:text="Go" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginVertical="8dp"
+        android:background="@color/colorPrimaryDark" />
+
+    <EditText
+        android:id="@+id/trad_intro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Introduce text/emojis/symbols to analyse" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/ascii_analyse"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Analyse" />
+
+        <Button
+            android:id="@+id/ascii_stats"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:maxLines="1"
+            android:text="Stats" />
+
+        <Button
+            android:id="@+id/ascii_clear"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Clear" />
+
+        <Button
+            android:id="@+id/ascii_paste"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Paste" />
+    </LinearLayout>
+
+
+    <ListView
+        android:id="@+id/ascii_list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+</LinearLayout>
