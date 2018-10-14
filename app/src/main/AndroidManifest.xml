@@ -72,17 +72,19 @@
         <activity android:name=".ssh.ConfigActivity" />
         <activity android:name=".ssh.FileListActivity" />
         <activity android:name=".tools.add.addLibrary" />
+        <activity android:name=".tools.add.addTodo" />
         <activity android:name=".tools.CodeEditor" />
         <activity android:name=".tools.colorPicker" />
         <activity android:name=".tools.Libraries" />
         <activity android:name=".tools.NetActivity" />
         <activity android:name=".billing.GamePlayActivity" />
-
         <activity android:name=".tools.xml_designer.ButtonDesigner"></activity>
+        <activity android:name=".tools.xml_designer.ButtonDesigner" />
+        <activity android:name=".tools.ASCIIViewer"></activity>
 
         <service android:name=".notifications.NotificationService"
             android:enabled="true"/>
-        
+
         <receiver
             android:name=".notifications.NotificationStartReceiver"
             android:label="RestartService"
