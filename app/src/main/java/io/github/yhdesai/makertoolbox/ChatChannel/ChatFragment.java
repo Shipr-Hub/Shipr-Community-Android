@@ -48,7 +48,7 @@ import io.github.yhdesai.makertoolbox.model.DeveloperMessage;
 import io.github.yhdesai.makertoolbox.notification.NotificationService;
 
 
-public class general extends Fragment {
+public class ChatFragment extends Fragment {
     private static final String ANONYMOUS = "anonymous";
     private static final int DEFAULT_MSG_LENGTH_LIMIT = 1000;
     private static final int RC_SIGN_IN = 1;
@@ -70,8 +70,22 @@ public class general extends Fragment {
     private ChildEventListener mChildEventListener;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
+    public String currentChannel = "general";
 
     private static final int RC_CHAT_PHOTO_PICKER = 3;
+
+    @Override public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+    public void updateChatRoom(String channel) {
+        currentChannel = channel;
+        mMessagesDatabaseReference = mFirebaseDatabase.getReference().child("chat/" + currentChannel);
+        mMessageAdapter.clear();
+        detachDatabaseReadListener();
+        attachDatabaseReadListener();
+    }
 
     @Nullable
     @Override
@@ -79,13 +93,12 @@ public class general extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_general, container, false);
         FirebaseApp.initializeApp(getActivity());
 
-
         mName = ANONYMOUS;
         mPlatform = "Android";
         // Initialize Firebase components
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mFirebaseAuth = FirebaseAuth.getInstance();
-        mMessagesDatabaseReference = mFirebaseDatabase.getReference().child("chat/general");
+        mMessagesDatabaseReference = mFirebaseDatabase.getReference().child("chat/" + currentChannel);
 
         //Clear Notification
         NotificationManager notificationManager = (NotificationManager) ((Activity) getActivity()).getSystemService(Context.NOTIFICATION_SERVICE);
@@ -245,20 +258,14 @@ public class general extends Fragment {
                 mVersion
         );
         mMessagesDatabaseReference.push().setValue(developerMessage);
-
-
     }
 
     private void sendNotificationToUser(String user) {
         DatabaseReference mNotificationsDatabaseReference = mFirebaseDatabase.getReference().child("notificationRequests");
-
-
         Map<String, String> notification = new HashMap<String, String>();
-        String mChannel = "general";
-        notification.put("channel", mChannel);
+        notification.put("channel", currentChannel);
         notification.put("username", user);
         notification.put("message", mMessage);
-
         mNotificationsDatabaseReference.push().setValue(notification);
     }
 
@@ -275,30 +282,22 @@ public class general extends Fragment {
     }
 
     private void attachDatabaseReadListener() {
-
         if (mChildEventListener == null) {
-
-
             mChildEventListener = new ChildEventListener() {
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                     DeveloperMessage developerMessage = dataSnapshot.getValue(DeveloperMessage.class);
                     mMessageAdapter.add(developerMessage);
                 }
-
                 public void onChildChanged(DataSnapshot dataSnapshot, String s) {
                 }
-
                 public void onChildRemoved(DataSnapshot dataSnapshot) {
                 }
-
                 public void onChildMoved(DataSnapshot dataSnapshot, String s) {
                 }
-
                 public void onCancelled(DatabaseError databaseError) {
                 }
             };
-
             mMessagesDatabaseReference.addChildEventListener(mChildEventListener);
         }
     }

@@ -9,8 +9,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -27,12 +31,12 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import io.github.yhdesai.makertoolbox.ChatChannel.ChatFragment;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
-import io.github.yhdesai.makertoolbox.ChatChannel.general;
 import io.github.yhdesai.makertoolbox.model.DeveloperMessage;
 import io.github.yhdesai.makertoolbox.notification.NotificationService;
 
@@ -55,6 +59,14 @@ public class MT_Activity extends AppCompatActivity {
 
     private DatabaseReference mMessagesDatabaseReference;
     private DatabaseReference mNotificationsDatabaseReference;
+    private FirebaseStorage mFirebaseStorage;
+    private FirebaseDatabase mFirebaseDatabase;
+
+    private NavigationView navigationView;
+    private BottomNavigationView bottomNavigationView;
+    private ChatFragment chatFragment;
+    private ActionBarDrawerToggle toggle;
+    private DrawerLayout drawerLayout;
 
     private Intent service;
 
@@ -66,51 +78,99 @@ public class MT_Activity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.navigation_chat:
                     FragmentManager frag = getFragmentManager();
-                    frag.beginTransaction().replace(R.id.content_frame, new general()).commit();
-
+                    frag.beginTransaction().replace(R.id.content_frame, new ChatFragment()).commit();
                     return true;
                 case R.id.navigation_tools:
                     FragmentManager frag1 = getFragmentManager();
                     frag1.beginTransaction().replace(R.id.content_frame, new ToolsList()).commit();
-
-                    //
                     return true;
                 case R.id.navigation_profile:
                     FragmentManager frag2 = getFragmentManager();
                     frag2.beginTransaction().replace(R.id.content_frame, new Profile()).commit();
-
                     return true;
             }
             return false;
         }
     };
 
+    private void showChannelDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this)
+            .setTitle("Channel Alert Dialog");
+        builder.create().show();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mt);
-        Log.d("TAG", "MT_ACTIVITY OPENED");
-/*
-        FirebaseApp.initializeApp(this);*/
-        FirebaseStorage mFirebaseStorage = FirebaseStorage.getInstance();
-
-        mProfileStroageReference = mFirebaseStorage.getReference().child("profile_pic");
-        FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();
-        mMessagesDatabaseReference = mFirebaseDatabase.getReference().child("general");
-
-
-        BottomNavigationView navigation = findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        initViews();
+        initFirebase();
         FragmentManager frag1 = getFragmentManager();
-        frag1.beginTransaction().replace(R.id.content_frame, new general()).commit();
+        chatFragment = new ChatFragment();
+        frag1.beginTransaction().replace(R.id.content_frame, chatFragment).commit();
+    }
 
+    private void initViews() {
+        navigationView = findViewById(R.id.navigation_view);
+        bottomNavigationView = findViewById(R.id.navigation);
+        drawerLayout = findViewById(R.id.drawer_layout);
+        toggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                switch (menuItem.getItemId()) {
+                    case R.id.channel_menu_general : {
+                        mChannel = "general";
+                        updateChannel();
+                        break;
+                    }
+                    case R.id.channel_menu_help : {
+                        mChannel = "help";
+                        updateChannel();
+                        break;
+                    }
+                    case R.id.channel_menu_introductions : {
+                        mChannel = "introductions";
+                        updateChannel();
+                        break;
+                    }
+                    case R.id.channel_menu_mt_gen : {
+                        mChannel = "mt-general";
+                        updateChannel();
+                        break;
+                    }
+                }
+                return true;
+            }
+        });
+    }
 
+    @Override public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            drawerLayout.openDrawer(Gravity.START);
+        }
+        return true;
+    }
+
+    private void updateChannel() {
+        mMessagesDatabaseReference = mFirebaseDatabase.getReference().child(mChannel);
+        chatFragment.updateChatRoom(mChannel);
+        drawerLayout.closeDrawers();
+    }
+
+    private void initFirebase() {
+        mFirebaseStorage = FirebaseStorage.getInstance();
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        mProfileStroageReference = mFirebaseStorage.getReference().child("profile_pic");
+        mMessagesDatabaseReference = mFirebaseDatabase.getReference().child(mChannel);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Log.d("MT_Activity", "onActivityResult executed");
       /*if (requestCode == RC_PHOTO_PICKER && resultCode == RESULT_OK) {
             Uri selectedImageUri = data.getData();
 
@@ -139,8 +199,6 @@ public class MT_Activity extends AppCompatActivity {
 
             // Get a reference to store file at chat_photos/<FILENAME>
             final StorageReference photoRef = mProfileStroageReference.child(selectedImageUri.getLastPathSegment());
-
-
             photoRef.putFile(selectedImageUri).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                 @Override
                 public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
@@ -157,8 +215,6 @@ public class MT_Activity extends AppCompatActivity {
 
                         //TODO return the url of the image uploaded here
 
-
-
                         // Getting the time
                         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
                         sdf.setTimeZone(TimeZone.getTimeZone("IST"));
@@ -170,7 +226,6 @@ public class MT_Activity extends AppCompatActivity {
                         int month = c.get(Calendar.MONTH);
                         int day = c.get(Calendar.DAY_OF_MONTH);
                         mDate = String.valueOf(day) + "-" + String.valueOf(month) + "-" + String.valueOf(year);
-
 
                         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                         if (user != null) {

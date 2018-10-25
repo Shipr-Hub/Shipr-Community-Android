@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+  <item android:id="@+id/channel_menu_general"
+      android:title="@string/general"
+      app:showAsAction="never"/>
+  <item android:id="@+id/channel_menu_introductions"
+      android:title="@string/introductions"
+      app:showAsAction="never"/>
+  <item android:id="@+id/channel_menu_help"
+      android:title="@string/help"
+      app:showAsAction="never"/>
+  <item android:id="@+id/channel_menu_mt_gen"
+      android:title="@string/mt_general"
+      app:showAsAction="never"/>
+</menu>
