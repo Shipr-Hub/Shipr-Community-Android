@@ -1,5 +1,6 @@
 package io.github.yhdesai.makertoolbox;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -28,7 +29,6 @@ import java.util.Objects;
 public class Profile extends Fragment {
     private EditText pUsername;
 
-    private String username;
     private String displayName;
     private String email;
     private String profilePic;
@@ -41,6 +41,8 @@ public class Profile extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_profile, container, false);
         FirebaseApp.initializeApp(getActivity());
+
+
         FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
         FirebaseStorage mFirebaseStorage = FirebaseStorage.getInstance();
 
@@ -48,12 +50,11 @@ public class Profile extends Fragment {
 
 
         pUsername = rootView.findViewById(R.id.usernameEditText);
-        EditText pDisplayName = rootView.findViewById(R.id.nameEditText);
         TextView pEmail = rootView.findViewById(R.id.emailView);
         Button mSubmitButton = rootView.findViewById(R.id.submit);
         ImageView mProfilePic = rootView.findViewById(R.id.profileImage);
 
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseUser user = mFirebaseAuth.getCurrentUser();
         if (user != null) {
             for (UserInfo profile : user.getProviderData()) {
                 // Id of the provider (ex: google.com)
@@ -76,9 +77,9 @@ public class Profile extends Fragment {
         }
         pUsername.setText(displayName);
         pEmail.setText(email);
-        /*  pDisplayName.setText();*/
-//TODO profile pic
-       /* mProfilePic.setOnClickListener(new View.OnClickListener() {
+
+        //TODO profile pic
+        mProfilePic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
@@ -89,9 +90,8 @@ public class Profile extends Fragment {
                 Log.d("pong", "Pong");
             }
         });
-*/
 
-// Todo When mSubmitButton is pressed, Open a ImagePicker to select a image, upload it to Firebase Storage and get the uri where the image is stored in firebase storage
+
         mSubmitButton.setOnClickListener(new View.OnClickListener()
 
         {
@@ -101,7 +101,7 @@ public class Profile extends Fragment {
 
                 UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                         .setDisplayName(pUsername.getText().toString())
-                       /* .setPhotoUri(Uri.parse(profilePic))*/
+                        /* .setPhotoUri(Uri.parse(profilePic))*/
                         .build();
 
                 Objects.requireNonNull(user).updateProfile(profileUpdates)
@@ -117,9 +117,6 @@ public class Profile extends Fragment {
         });
         return rootView;
     }
-
-
-
 
 
 }
