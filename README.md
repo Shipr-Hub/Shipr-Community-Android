@@ -2,6 +2,8 @@
 
 # Please Refer to https://github.com/Shipr-Hub/Shipr-ToolBox-Android or https://github.com/Shipr-Hub/Shipr-Social-Android 
 
+# You can also message me on Telegram at t.me/ShiprHubDev
+
 # Maker-ToolBox-Android
 
 Maker ToolBox is an Open Source Application for developers to develop their projects on their smartphone. This is designed for those who don't have access to a computer/want to code from a mobile device on the go.
