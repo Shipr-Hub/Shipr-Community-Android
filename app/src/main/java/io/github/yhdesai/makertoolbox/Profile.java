@@ -42,7 +42,6 @@ public class Profile extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_profile, container, false);
         FirebaseApp.initializeApp(getActivity());
 
-
         FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
         FirebaseStorage mFirebaseStorage = FirebaseStorage.getInstance();
 

@@ -67,6 +67,9 @@ dependencies {
     //Billing
     implementation 'com.android.billingclient:billing:1.1'
 
+    //Profile View
+    // implementation 'com.github.jrvansuita:MaterialAbout:0.0.1'
+
 
 
     //Deprecated
