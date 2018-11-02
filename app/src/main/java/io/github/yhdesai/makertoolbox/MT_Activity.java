@@ -1,7 +1,6 @@
 package io.github.yhdesai.makertoolbox;
 
 import android.app.ActivityManager;
-import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -9,10 +8,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentHostCallback;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -66,18 +63,18 @@ public class MT_Activity extends FragmentActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_chat:
-                    FragmentManager frag = getFragmentManager();
+                    FragmentManager frag = getSupportFragmentManager();
                     frag.beginTransaction().replace(R.id.content_frame, new general()).commit();
 
                     return true;
                 case R.id.navigation_tools:
-                    FragmentManager frag1 = getFragmentManager();
+                    FragmentManager frag1 = getSupportFragmentManager();
                     frag1.beginTransaction().replace(R.id.content_frame, new ToolsList()).commit();
 
                     //
                     return true;
                 case R.id.navigation_profile:
-                    FragmentManager frag2 = getFragmentManager();
+                    FragmentManager frag2 = getSupportFragmentManager();
                     frag2.beginTransaction().replace(R.id.content_frame, new Profile()).commit();
 
                     return true;
@@ -102,7 +99,7 @@ public class MT_Activity extends FragmentActivity {
 
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        FragmentManager frag1 = getFragmentManager();
+        FragmentManager frag1 = getSupportFragmentManager();
         frag1.beginTransaction().replace(R.id.content_frame, new general()).commit();
 
 

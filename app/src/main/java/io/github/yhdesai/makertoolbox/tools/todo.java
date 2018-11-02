@@ -1,11 +1,11 @@
 package io.github.yhdesai.makertoolbox.tools;
 
-import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +28,6 @@ import io.github.yhdesai.makertoolbox.model.DeveloperToDo;
 import io.github.yhdesai.makertoolbox.tools.add.addTodo;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
