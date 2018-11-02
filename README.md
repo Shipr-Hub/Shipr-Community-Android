@@ -1,5 +1,7 @@
 [![Build Status](https://travis-ci.org/Maker-Hub/Maker-ToolBox-Android.svg?branch=master)](https://travis-ci.org/Maker-Hub/Maker-ToolBox-Android) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
+# Please Refer to https://github.com/Shipr-Hub/Shipr-ToolBox-Android or https://github.com/Shipr-Hub/Shipr-Social-Android 
+
 # Maker-ToolBox-Android
 
 Maker ToolBox is an Open Source Application for developers to develop their projects on their smartphone. This is designed for those who don't have access to a computer/want to code from a mobile device on the go.
