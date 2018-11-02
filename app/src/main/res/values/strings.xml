@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Maker ToolBox</string>
+    <string name="app_name">Shipr ToolBox Dev</string>
     <string name="shared_preference_key">io.github.yhdesai.makertoolbox.channel.</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -7,8 +7,8 @@
 
     <string name="title_activity_chat">chat</string>
 
-    <string name="user_name">Maker</string>
-    <string name="user_email">MakerToolbox@yashdesai.me</string>
+    <string name="user_name">Shipr</string>
+    <string name="user_email">user@shipr.tech</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 

@@ -1,6 +1,5 @@
 package io.github.yhdesai.makertoolbox;
 
-
 import android.app.ActivityManager;
 import android.app.FragmentManager;
 import android.content.Context;
@@ -9,6 +8,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentHostCallback;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -36,7 +37,7 @@ import io.github.yhdesai.makertoolbox.ChatChannel.general;
 import io.github.yhdesai.makertoolbox.model.DeveloperMessage;
 import io.github.yhdesai.makertoolbox.notification.NotificationService;
 
-public class MT_Activity extends AppCompatActivity {
+public class MT_Activity extends FragmentActivity {
 
     private static final int RC_PHOTO_PICKER = 2;
     private static final int RC_CHAT_PHOTO_PICKER = 3;
@@ -266,30 +267,6 @@ public class MT_Activity extends AppCompatActivity {
                     });*/
 
         }
-    }
-    @Override
-    public boolean dispatchKeyEvent(KeyEvent event) {
-        if (event.getKeyCode() == KeyEvent.KEYCODE_VOLUME_UP) {
-            if (event.getAction() == KeyEvent.ACTION_DOWN){
-
-
-                super.dispatchKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN,KeyEvent.KEYCODE_DPAD_UP));
-                super.dispatchKeyEvent(new KeyEvent(KeyEvent.ACTION_UP,KeyEvent.KEYCODE_DPAD_UP));
-
-                return true;
-            }}
-
-        if (event.getKeyCode() == KeyEvent.KEYCODE_VOLUME_DOWN) {
-            if (event.getAction() == KeyEvent.ACTION_DOWN){
-
-                super.dispatchKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN,KeyEvent.KEYCODE_DPAD_DOWN));
-                super.dispatchKeyEvent(new KeyEvent(KeyEvent.ACTION_UP,KeyEvent.KEYCODE_DPAD_DOWN));
-                Intent list = new Intent(MT_Activity.this, Dev.class);
-                startActivity(list);
-
-                return true;
-            }}
-        return super.dispatchKeyEvent(event);
     }
 
     @Override
