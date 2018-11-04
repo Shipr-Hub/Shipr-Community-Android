@@ -6,7 +6,7 @@ android {
     }
     compileSdkVersion 28
     defaultConfig {
-        applicationId "io.github.yhdesai.makertoolbox"
+        applicationId "tech.shipr.socialdev"
         minSdkVersion 19
         multiDexEnabled true
         targetSdkVersion 28
