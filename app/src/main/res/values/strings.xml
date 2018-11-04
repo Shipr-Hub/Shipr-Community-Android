@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">Shipr ToolBox Dev</string>
-    <string name="shared_preference_key">io.github.yhdesai.makertoolbox.channel.</string>
+    <string name="app_name">Shipr Social Dev</string>
+    <string name="shared_preference_key">tech.shipr.socialdev.channel.</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -88,9 +88,6 @@
     <string name="toast_full_tank">Your tank is full, please use some gas before buying
         more.</string>
 
-    <string name="content_description_app_loading_image">App loading image</string>
-    <string name="content_description_title_image">80\'s Video Game Style Car Logo</string>
-    <string name="content_desc_gas_gauge_indicator">Gas gauge indicator</string>
-    <string name="content_desc_free_vs_premium_indicator">Free or Premium Image Indicator</string>
+
 
 </resources>
