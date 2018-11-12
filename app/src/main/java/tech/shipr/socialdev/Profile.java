@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,7 +31,6 @@ public class Profile extends Fragment {
     private TextView pUsername;
 
     private String displayName;
-    private String email;
     private String profilePic;
 
 
@@ -48,8 +48,7 @@ public class Profile extends Fragment {
         StorageReference mProfileStorageReference = mFirebaseStorage.getReference().child("profile_pic");
 
 
-        pUsername = rootView.findViewById(R.id.usernameEditText);
-        TextView pEmail = rootView.findViewById(R.id.emailView);
+        pUsername = rootView.findViewById(R.id.usernameTextView);
         ImageView mProfilePic = rootView.findViewById(R.id.profileImage);
 
         FirebaseUser user = mFirebaseAuth.getCurrentUser();
@@ -68,13 +67,13 @@ public class Profile extends Fragment {
                 displayName = profile.getDisplayName();
                 Uri uri = profile.getPhotoUrl();
                 /*  profilePic = uri.toString();*/
-                email = profile.getEmail();
+
 
             }
 
         }
         pUsername.setText(displayName);
-        pEmail.setText(email);
+
 
         //TODO profile pic
         mProfilePic.setOnClickListener(new View.OnClickListener() {
