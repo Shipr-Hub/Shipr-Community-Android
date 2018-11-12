@@ -27,7 +27,7 @@ import com.google.firebase.storage.StorageReference;
 import java.util.Objects;
 
 public class Profile extends Fragment {
-    private EditText pUsername;
+    private TextView pUsername;
 
     private String displayName;
     private String email;
@@ -50,7 +50,6 @@ public class Profile extends Fragment {
 
         pUsername = rootView.findViewById(R.id.usernameEditText);
         TextView pEmail = rootView.findViewById(R.id.emailView);
-        Button mSubmitButton = rootView.findViewById(R.id.submit);
         ImageView mProfilePic = rootView.findViewById(R.id.profileImage);
 
         FirebaseUser user = mFirebaseAuth.getCurrentUser();
@@ -91,7 +90,7 @@ public class Profile extends Fragment {
         });
 
 
-        mSubmitButton.setOnClickListener(new View.OnClickListener()
+    /*    mSubmitButton.setOnClickListener(new View.OnClickListener()
 
         {
             @Override
@@ -100,7 +99,7 @@ public class Profile extends Fragment {
 
                 UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                         .setDisplayName(pUsername.getText().toString())
-                        /* .setPhotoUri(Uri.parse(profilePic))*/
+                        *//* .setPhotoUri(Uri.parse(profilePic))*//*
                         .build();
 
                 Objects.requireNonNull(user).updateProfile(profileUpdates)
@@ -113,7 +112,7 @@ public class Profile extends Fragment {
                             }
                         });
             }
-        });
+        });*/
         return rootView;
     }
 

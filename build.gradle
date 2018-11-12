@@ -8,12 +8,14 @@ buildscript {
         maven { url "https://maven.google.com" }
         maven { url "https://jitpack.io" }
 
+
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.2.1'
         classpath 'com.google.gms:google-services:4.0.1'
         classpath 'com.github.dcendents:android-maven-gradle-plugin:2.0'
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
+
 
     }
 }
@@ -25,6 +27,8 @@ allprojects {
         maven {
             url 'https://maven.google.com/'
         }
+
+
     }
 }
 
