@@ -40,7 +40,6 @@
     <string name="profile_picture_of_message_author">Profile Picture of message author</string>
     <string name="profile_image_view">Profile Image View</string>
     <string name="submit">Submit</string>
-    <string name="under_dev">This Activity is still under development</string>
     <string name="enter_message">Enter message</string>
     <string name="send_button">SEND</string>
 
@@ -50,43 +49,6 @@
     <string name="profile_image">profile image</string>
     <string name="email">Email</string>
     <string name="logo">logo</string>
-    <string name="enter_hostname_here">Enter Hostname Here</string>
-    <string name="port">port</string>
-    <string name="enter_port_number_here">Enter Port Number here</string>
-    <string name="enter_password_here">Enter password here</string>
-    <string name="ssh_view">SSH View</string>
-
-    <string name="_22">22</string>
-    <string name="connect">Connect</string>
-
-    <string name="ping">ping</string>
-    <string name="wol">wol</string>
-    <string name="port_scan">port_scan</string>
-
-
-    <string name="title_activity_main">Trivial Drive v2</string>
-
-    <string name="alert_no_gas">Oh, no! You are out of gas! Try buying some!</string>
-    <string name="alert_drove">Vroooom, you drove a few miles.</string>
-    <string name="alert_fill_gas">You filled &#188; tank. Your tank is now %1$d/4 full!</string>
-    <string name="alert_error_consuming">Error while consuming: %1$s</string>
-    <string name="alert_already_purchased">Item is already purchased</string>
-
-    <string name="error_no_skus">We didn\'t find any SKUs to display&#8230; Check your internet
-        connection and make sure your Google Developer Console was setup correctly.</string>
-    <string name="error_billing_unavailable">Billing unavailable. Make sure your Google Play app
-        is setup correctly</string>
-    <string name="error_billing_default">Billing unavailable. Please check your device.</string>
-    <string name="error_codelab_not_finished">TODO: Here you will need to perform the
-        integration with Play Store to study the New way of integration with Play Billing.
-    </string>
-
-    <string name="button_drive">Drive</string>
-    <string name="button_purchase">Purchase</string>
-    <string name="button_buy">Buy</string>
-    <string name="button_full_tank">Full tank</string>
-    <string name="toast_full_tank">Your tank is full, please use some gas before buying
-        more.</string>
 
 
 
