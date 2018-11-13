@@ -227,7 +227,7 @@ public class general extends Fragment {
         );
         mMessagesDatabaseReference.push().setValue(developerMessage);
 
-        FirebaseInstanceId.getInstance().getInstanceId()
+     /*   FirebaseInstanceId.getInstance().getInstanceId()
                 .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
                     @Override
                     public void onComplete(@NonNull Task<InstanceIdResult> task) {
@@ -243,7 +243,7 @@ public class general extends Fragment {
                         tokenRef.push().setValue(new DeveloperMessage(token, null, null,null,null,null,null,null    ));
 
                     }
-                });
+                });*/
 
     }
 
