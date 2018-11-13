@@ -33,7 +33,6 @@ import java.util.TimeZone;
 
 import tech.shipr.socialdev.ChatChannel.general;
 import tech.shipr.socialdev.model.DeveloperMessage;
-import tech.shipr.socialdev.notification.NotificationService;
 
 
 public class MT_Activity extends FragmentActivity {
@@ -54,9 +53,7 @@ public class MT_Activity extends FragmentActivity {
     private String mVersion;
 
     private DatabaseReference mMessagesDatabaseReference;
-    private DatabaseReference mNotificationsDatabaseReference;
 
-    private Intent service;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -153,7 +150,6 @@ public class MT_Activity extends FragmentActivity {
                         //TODO return the url of the image uploaded here
 
 
-
                         // Getting the time
                         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
                         sdf.setTimeZone(TimeZone.getTimeZone("IST"));
@@ -177,9 +173,9 @@ public class MT_Activity extends FragmentActivity {
                                 String uid = profile.getUid();
 
                                 // Name, email address, and profile photo Url
-                                    mName = profile.getDisplayName();
-                               /* Uri uri = profile.getPhotoUrl();*/
-                                 /*  mProfilePic = uri.toString();*/
+                                mName = profile.getDisplayName();
+                                /* Uri uri = profile.getPhotoUrl();*/
+                                /*  mProfilePic = uri.toString();*/
                             }
 
                         }
@@ -201,96 +197,7 @@ public class MT_Activity extends FragmentActivity {
                     }
                 }
             });
-
-            // Upload file to Firebase Storage
-         /*   photoRef.putFile(selectedImageUri)
-                    .addOnSuccessListener(this, new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            // When the image has successfully uploaded, we get its download URL
-                            Uri downloadUrl = taskSnapshot.getDownloadURL();
-
-                            //Set the download URL to the message box, so that the user can send it to the database
-                            Log.d("url : ", downloadUrl.toString());
-*//*                            // Getting the time
-                            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-                            sdf.setTimeZone(TimeZone.getTimeZone("IST"));
-                            mTime = sdf.format(new Date());
-
-                            // Getting the date
-                            final Calendar c = Calendar.getInstance();
-                            int year = c.get(Calendar.YEAR);
-                            int month = c.get(Calendar.MONTH);
-                            int day = c.get(Calendar.DAY_OF_MONTH);
-                            mDate = String.valueOf(day) + "-" + String.valueOf(month) + "-" + String.valueOf(year);
-
-
-                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                            if (user != null) {
-                                for (UserInfo profile : user.getProviderData()) {
-                                    // Id of the provider (ex: google.com)
-                                    String providerId = profile.getProviderId();
-
-                                    // UID specific to the provider
-                                    String uid = profile.getUid();
-
-                                    // Name, email address, and profile photo Url
-                                    *//**//*  mDisplayName = profile.getDisplayName();*//**//*
-                                    Uri uri = profile.getPhotoUrl();
-                                    *//**//*mProfilePic = uri.toString();*//**//*
-                                }
-
-                            }
-
-
-                            DeveloperMessage developerMessage = new DeveloperMessage(
-                                    mName,
-                                    *//**//*mDisplayName,*//**//*
-                                    mProfilePic,
-                                    mMessage,
-                                    downloadUrl.toString(),
-                                    mTime,
-                                    mDate,
-                                    mPlatform,
-                                    mVersion
-                            );
-                            mMessagesDatabaseReference.push().setValue(developerMessage);
-
-                            // sendNotificationToUser(mChannel, null, mMessageEditText.getText().toString());
-                        *//*
-                        }
-                    });*/
-
         }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        if(service == null) service = new Intent(getBaseContext(), NotificationService.class);
-        if(isServiceRunning(NotificationService.class)) {
-            NotificationService.state = false;
-            stopService(service);
-        }
-
-        Intent i = new Intent(NotificationService.service_broadcast);
-        this.sendBroadcast(i, NotificationService.service_broadcast);
-    }
-
-    private boolean isServiceRunning(Class<?> serviceClass){
-        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
-        for (ActivityManager.RunningServiceInfo serviceInfo : manager.getRunningServices(Integer.MAX_VALUE)){
-            if(serviceClass.getName().equals(serviceInfo.service.getClassName())){
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    protected void onPause() {
-        if(!isServiceRunning(NotificationService.class)) startService(service);
-        super.onPause();
     }
 }
 

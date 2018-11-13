@@ -12,6 +12,7 @@ import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,8 +20,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -30,6 +34,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.text.SimpleDateFormat;
@@ -46,7 +52,6 @@ import java.util.TimeZone;
 import tech.shipr.socialdev.R;
 import tech.shipr.socialdev.adapter.MessageAdapter;
 import tech.shipr.socialdev.model.DeveloperMessage;
-import tech.shipr.socialdev.notification.NotificationService;
 
 
 public class general extends Fragment {
@@ -88,10 +93,6 @@ public class general extends Fragment {
         mFirebaseAuth = FirebaseAuth.getInstance();
         mMessagesDatabaseReference = mFirebaseDatabase.getReference().child("chat/general");
 
-        //Clear Notification
-        NotificationManager notificationManager = (NotificationManager) ((Activity) getActivity()).getSystemService(Context.NOTIFICATION_SERVICE);
-        int channel_id = NotificationService.getIntId("general");
-        if(channel_id != -1) notificationManager.cancel(channel_id);
 
         // Initialize references to views
         ProgressBar mProgressBar = rootView.findViewById(R.id.progressBar);
@@ -152,9 +153,6 @@ public class general extends Fragment {
                                     .createSignInIntentBuilder()
                                     .setAvailableProviders(
                                             Collections.singletonList(
-                                                    //   new AuthUI.IdpConfig.Builder(AuthUI.TWITTER_PROVIDER).build(),
-                                                    //   new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build(),
-                                                    //   new AuthUI.IdpConfig.Builder(AuthUI.FACEBOOK_PROVIDER).build(),
                                                     new AuthUI.IdpConfig.Builder(AuthUI.EMAIL_PROVIDER).build()
                                             ))
                                     .build(),
@@ -212,23 +210,6 @@ public class general extends Fragment {
         mMessage = mMessageEditText.getText().toString();
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null) {
-            for (UserInfo profile : user.getProviderData()) {
-                // Id of the provider (ex: google.com)
-                String providerId = profile.getProviderId();
-
-                // UID specific to the provider
-                String uid = profile.getUid();
-
-                // Name, email address, and profile photo Url
-                /*  mDisplayName = profile.getDisplayName();*/
-                Uri uri = profile.getPhotoUrl();
-                /*mProfilePic = uri.toString();*/
-            }
-
-        }
-
-
     }
 
     private void sendMessage() {
@@ -236,7 +217,6 @@ public class general extends Fragment {
         // Sending the Message
         DeveloperMessage developerMessage = new DeveloperMessage(
                 mName,
-                /*mDisplayName,*/
                 mProfilePic,
                 mMessage,
                 null,
@@ -247,6 +227,23 @@ public class general extends Fragment {
         );
         mMessagesDatabaseReference.push().setValue(developerMessage);
 
+        FirebaseInstanceId.getInstance().getInstanceId()
+                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        if (!task.isSuccessful()) {
+                            Log.w("tag", "getInstanceId failed", task.getException());
+                            return;
+                        }
+
+                        // Get new Instance ID token
+                        String token = task.getResult().getToken();
+
+                        DatabaseReference tokenRef = mFirebaseDatabase.getReference().child("token");
+                        tokenRef.push().setValue(new DeveloperMessage(token, null, null,null,null,null,null,null    ));
+
+                    }
+                });
 
     }
 
