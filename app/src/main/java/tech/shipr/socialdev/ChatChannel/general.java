@@ -227,23 +227,6 @@ public class general extends Fragment {
         );
         mMessagesDatabaseReference.push().setValue(developerMessage);
 
-     /*   FirebaseInstanceId.getInstance().getInstanceId()
-                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
-                        if (!task.isSuccessful()) {
-                            Log.w("tag", "getInstanceId failed", task.getException());
-                            return;
-                        }
-
-                        // Get new Instance ID token
-                        String token = task.getResult().getToken();
-
-                        DatabaseReference tokenRef = mFirebaseDatabase.getReference().child("token");
-                        tokenRef.push().setValue(new DeveloperMessage(token, null, null,null,null,null,null,null    ));
-
-                    }
-                });*/
 
     }
 
