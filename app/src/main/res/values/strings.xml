@@ -50,6 +50,13 @@
     <string name="email">Email</string>
     <string name="logo">logo</string>
 
+    <string-array name="chat_channels">
+        <item>general</item>
+        <item>help</item>
+        <item>ideas</item>
+        <item>bug</item>
+        <item>android</item>
+    </string-array>
 
 
 </resources>

@@ -20,7 +20,12 @@
             android:stackFromBottom="true"
             android:transcriptMode="alwaysScroll"
             tools:listitem="@layout/item_message"/>
-
+<Spinner
+    android:layout_width="wrap_content"
+    android:id="@+id/chatChannelSpinner"
+    android:layout_height="wrap_content"
+    android:layout_alignParentRight="true"
+    android:layout_alignParentTop="true"></Spinner>
         <!--
 
                 <LinearLayout
