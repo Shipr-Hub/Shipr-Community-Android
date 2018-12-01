@@ -49,6 +49,9 @@
     <string name="profile_image">profile image</string>
     <string name="email">Email</string>
     <string name="logo">logo</string>
+    <string name="following">Following</string>
+    <string name="followers">Followers</string>
+    <string name="follow_me">Follow Me</string>
 
     <string-array name="chat_channels">
         <item>general</item>

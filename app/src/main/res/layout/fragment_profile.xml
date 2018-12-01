@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     android:background="#fafafa"
     android:orientation="vertical"
-    tools:context=".Profile">
+    tools:context=".view.Profile">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -24,6 +24,7 @@
                 android:id="@+id/profileImage"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
+                android:contentDescription="@string/profile_image"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="45dp"
                 tools:src="@drawable/ic_access_time_black_18dp" />
@@ -44,7 +45,7 @@
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:layout_centerHorizontal="true"
-            android:layout_marginLeft="50dp"
+            android:layout_marginStart="50dp"
             android:layout_marginTop="205dp"
             app:cardBackgroundColor="@color/fui_transparent">
 
@@ -53,7 +54,9 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/corners"
                 android:orientation="horizontal"
-                android:weightSum="3">
+                android:weightSum="2"
+                android:baselineAligned="false">
+
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -65,14 +68,14 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Photos"
+                        android:text="@string/followers"
                         android:textSize="20sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingTop="10dp"
-                        android:text="125"
+                        android:text="xx"
                         android:textColor="@color/startblue"
                         android:textSize="20sp"
                         android:textStyle="bold" />
@@ -89,38 +92,14 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Followers"
+                        android:text="@string/following"
                         android:textSize="20sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingTop="10dp"
-                        android:text="1205"
-                        android:textColor="@color/startblue"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Following"
-                        android:textSize="20sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingTop="10dp"
-                        android:text="360"
+                        android:text="xx"
                         android:textColor="@color/startblue"
                         android:textSize="20sp"
                         android:textStyle="bold" />
@@ -232,7 +211,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="35dp"
         android:background="@drawable/buttonstyleithgradient"
-        android:text="Follow Me"
+        android:text="@string/follow_me"
         android:textColor="#fff" />
 
 
