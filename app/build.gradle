@@ -29,18 +29,18 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
 
     //FireBase Auth
-    implementation 'com.google.firebase:firebase-auth:16.0.5'
+    implementation 'com.google.firebase:firebase-auth:16.1.0'
     implementation 'com.firebaseui:firebase-ui-auth:2.1.1'
     implementation 'com.google.android.gms:play-services-auth:16.0.1'
 
     //FireBase Database
-    implementation 'com.google.firebase:firebase-database:16.0.4'
+    implementation 'com.google.firebase:firebase-database:16.0.5'
 
     //FireBase Core
-    implementation 'com.google.firebase:firebase-core:16.0.5'
+    implementation 'com.google.firebase:firebase-core:16.0.6'
 
     //Firebase Storage
-    implementation 'com.google.firebase:firebase-storage:16.0.4'
+    implementation 'com.google.firebase:firebase-storage:16.0.5'
 
     //FCM
     implementation 'com.google.firebase:firebase-messaging:17.3.4'
