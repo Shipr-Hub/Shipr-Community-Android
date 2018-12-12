@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -34,7 +35,8 @@
             android:hint="@string/enter_your_email_here"
             android:inputType="text"
             android:textColor="@color/black"
-            android:autofillHints="email" />
+            android:autofillHints="email"
+            tools:ignore="TextFields" />
 
         <TextView
             android:layout_width="match_parent"
@@ -45,7 +47,7 @@
             android:id="@+id/usernameEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter your username here"
+            android:hint="@string/enter_your_username_here"
             android:inputType="text"
             android:textColor="@color/black"
             android:autofillHints="text" />
@@ -73,7 +75,7 @@
             android:id="@+id/langEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter programming languages which you know"
+            android:hint="@string/enter_programming_languages_which_you_know"
             android:textColor="@color/black"
             android:inputType="text" />
 
@@ -99,7 +101,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/enter_your_linkedin_username"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            android:autofillHints="" />
 
         <TextView
             android:layout_width="match_parent"
@@ -118,7 +121,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
-            android:text="@string/submit" />
+            android:text="SUBMIT" />
 
 
     </LinearLayout>
