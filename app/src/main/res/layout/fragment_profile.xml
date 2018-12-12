@@ -1,117 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-<LinearLayout     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="16dp"
-    android:orientation="vertical">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Full Name" />
+        android:layout_margin="16dp"
+        android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/nameEdit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter your name here"
-        android:inputType="text"
-        android:textColor="@color/black" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Display Name" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Username" />
+        <EditText
+            android:id="@+id/nameEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter your name here"
+            android:inputType="text"
+            android:textColor="@color/black" />
 
-    <EditText
-        android:id="@+id/emailEdit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter your email here"
-        android:inputType="text"
-        android:textColor="@color/black" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Username" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Username" />
+        <EditText
+            android:id="@+id/emailEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter your email here"
+            android:inputType="text"
+            android:textColor="@color/black" />
 
-    <EditText
-        android:id="@+id/usernameEdit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter your username here"
-        android:inputType="text"
-        android:textColor="@color/black" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Username" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Age" />
+        <EditText
+            android:id="@+id/usernameEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter your username here"
+            android:inputType="text"
+            android:textColor="@color/black" />
 
-    <EditText
-        android:id="@+id/ageEditemailEdit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Age" />
 
-        android:hint="Enter your age here"
-        android:inputType="textEmailAddress"
-        android:textColor="@color/black" />
+        <EditText
+            android:id="@+id/ageEditemailEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Programming Languages" />
+            android:hint="Enter your age here"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/black" />
 
-    <EditText
-        android:id="@+id/langEdit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter programming languages"
-        android:textColor="@color/black" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Programming Languages" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Github (Optional)" />
+        <EditText
+            android:id="@+id/langEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter programming languages which you know"
+            android:textColor="@color/black" />
 
-    <EditText
-        android:id="@+id/gitEdit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter your Github Username"
-        android:textColor="@color/black" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Github (Optional)" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Twitter (Optional)" />
+        <EditText
+            android:id="@+id/gitEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter your Github Username"
+            android:textColor="@color/black" />
 
-    <EditText
-        android:id="@+id/twitEdit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter your Linkedin Username"
-        android:textColor="@color/black" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Twitter (Optional)" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Linkedin (Optional)" />
+        <EditText
+            android:id="@+id/twitEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter your Linkedin Username"
+            android:textColor="@color/black" />
 
-    <EditText
-        android:id="@+id/linkEdit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter your Twitter Username"
-        android:textColor="@color/black" />
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Linkedin (Optional)" />
 
-        android:layout_marginTop="16dp"
-        android:text="SUBMIT" />
-</LinearLayout>
-    </ScrollView>
+        <EditText
+            android:id="@+id/linkEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter your Twitter Username"
+            android:textColor="@color/black" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:text="SUBMIT" />
+
+
+    </LinearLayout>
+
+</ScrollView>

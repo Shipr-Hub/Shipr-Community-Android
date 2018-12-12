@@ -16,7 +16,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import tech.shipr.socialdev.R;
 import tech.shipr.socialdev.model.DeveloperMessage;
 
-public class Profile extends Fragment {
+public class ProfileActivity extends Fragment {
     private TextView pUsername;
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mprofileDatabaseReference;

@@ -32,7 +32,7 @@ import tech.shipr.socialdev.R;
 import tech.shipr.socialdev.model.DeveloperMessage;
 
 
-public class MT_Activity extends FragmentActivity {
+public class MTActivity extends FragmentActivity {
 
     private static final int RC_PHOTO_PICKER = 2;
     private static final int RC_CHAT_PHOTO_PICKER = 3;
@@ -65,7 +65,7 @@ public class MT_Activity extends FragmentActivity {
 
                 case R.id.navigation_profile:
                     FragmentManager frag2 = getSupportFragmentManager();
-                    frag2.beginTransaction().replace(R.id.content_frame, new Profile()).commit();
+                    frag2.beginTransaction().replace(R.id.content_frame, new ProfileActivity()).commit();
 
                     return true;
             }
@@ -189,7 +189,7 @@ public class MT_Activity extends FragmentActivity {
                         );
                         mMessagesDatabaseReference.push().setValue(developerMessage);
                     } else {
-                        Toast.makeText(MT_Activity.this, "upload failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MTActivity.this, "upload failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }
             });
