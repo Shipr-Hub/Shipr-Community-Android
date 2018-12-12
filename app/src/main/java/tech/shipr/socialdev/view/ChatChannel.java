@@ -57,16 +57,16 @@ import tech.shipr.socialdev.adapter.MessageAdapter;
 import tech.shipr.socialdev.model.DeveloperMessage;
 
 
-public class ChatChannel extends Fragment   implements AdapterView.OnItemSelectedListener {
+public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedListener {
     private static final String ANONYMOUS = "anonymous";
     private static final int DEFAULT_MSG_LENGTH_LIMIT = 1000;
     private static final int RC_SIGN_IN = 1;
+    private static final int RC_CHAT_PHOTO_PICKER = 3;
     private MessageAdapter mMessageAdapter;
     private EditText mMessageEditText;
     private Button mSendButton;
-
     private String mName;
-    private String mPlatform;
+    final String  mPlatform = "Android";;
     private String mDate;
     private String mTime;
     private String mMessage;
@@ -80,21 +80,17 @@ public class ChatChannel extends Fragment   implements AdapterView.OnItemSelecte
     private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
 
-    private static final int RC_CHAT_PHOTO_PICKER = 3;
+    private String mChannel;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_general, container, false);
-        FirebaseApp.initializeApp(getActivity());
-
 
         mName = ANONYMOUS;
-        mPlatform = "Android";
-        // Initialize Firebase components
-        mFirebaseDatabase = FirebaseDatabase.getInstance();
-        mFirebaseAuth = FirebaseAuth.getInstance();
-        mMessagesDatabaseReference = mFirebaseDatabase.getReference().child("chat/general");
+
+        mChannel = "general";
+        initFirebase();
 
 
         // Initialize references to views
@@ -102,18 +98,22 @@ public class ChatChannel extends Fragment   implements AdapterView.OnItemSelecte
         ListView mMessageListView = rootView.findViewById(R.id.messageListView);
         mMessageEditText = rootView.findViewById(R.id.messageEditText);
         mSendButton = rootView.findViewById(R.id.sendButton);
-//        Button addPic = rootView.findViewById(R.id.addPic);
+
 
         //Initialize spinner'
         Spinner spinner = (Spinner) rootView.findViewById(R.id.chatChannelSpinner);
-// Create an ArrayAdapter using the string array and a default spinner layout
+
+        // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.chat_channels, android.R.layout.simple_spinner_item);
-// Specify the layout to use when the list of choices appears
+
+         // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-// Apply the adapter to the spinner
+
+        // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
+
 
         // Initialize message ListView and its adapter
         List<DeveloperMessage> friendlyMessages = new ArrayList<>();
@@ -125,7 +125,7 @@ public class ChatChannel extends Fragment   implements AdapterView.OnItemSelecte
         mProgressBar.setVisibility(ProgressBar.INVISIBLE);
         mSendButton.setEnabled(false);
 
-       FirebaseMessaging.getInstance().subscribeToTopic("general");
+        FirebaseMessaging.getInstance().subscribeToTopic(mChannel);
 
         // Enable Send button when there's text to send
         editTextWatcher();
@@ -150,6 +150,14 @@ public class ChatChannel extends Fragment   implements AdapterView.OnItemSelecte
         authStateCheck();
         return rootView;
     }
+
+    private void initFirebase() {
+        FirebaseApp.initializeApp(getActivity());
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        mMessagesDatabaseReference = mFirebaseDatabase.getReference().child(mChannel);
+    }
+
 
     private void authStateCheck() {
         mAuthStateListener = new FirebaseAuth.AuthStateListener() {
@@ -325,10 +333,11 @@ public class ChatChannel extends Fragment   implements AdapterView.OnItemSelecte
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         String items = parent.getSelectedItem().toString();
         Log.i("Selected item : ", items);
+        mChannel = items;
         updateChannel(items);
     }
 
-    private void updateChannel(String channelName) {
+    public void updateChannel(String channelName) {
         mMessageAdapter.clear();
         detachDatabaseReadListener();
         mMessagesDatabaseReference = mFirebaseDatabase.getReference().child("chat/" + channelName);

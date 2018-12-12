@@ -61,5 +61,15 @@
         <item>android</item>
     </string-array>
 
+    <string name="chat_channel">Chat Channel</string>
+    <string name="mt_general">MT-General</string>
+    <string name="help">Help</string>
+    <string name="introductions">Introductions</string>
+    <string name="general">General</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+    <string name="ideas">ideas</string>
+    <string name="android">android</string>
+
 
 </resources>
