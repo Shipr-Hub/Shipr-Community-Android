@@ -11,7 +11,7 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="wrap_content"   android:textColor="@color/black"
             android:layout_marginBottom="16dp"
             android:text="Edit Profile"
             android:textAlignment="center"
@@ -19,7 +19,7 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="wrap_content"   android:textColor="@color/black"
             android:text="@string/display_name" />
 
         <EditText
@@ -27,11 +27,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/enter_your_name_here"
+            android:layout_marginTop="8dp"
             android:inputType="text"
             android:textColor="@color/black" />
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="match_parent"   android:textColor="@color/black"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/profile_element_spacing"
             android:text="@string/email" />
@@ -40,13 +41,14 @@
             android:id="@+id/emailEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:autofillHints="email"
             android:hint="@string/enter_your_email_here"
             android:inputType="text"
             android:textColor="@color/black" />
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="match_parent"   android:textColor="@color/black"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/profile_element_spacing"
             android:text="@string/username" />
@@ -55,14 +57,15 @@
             android:id="@+id/usernameEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:autofillHints="text"
-            android:hint="Enter your username here"
+            android:hint="@string/enter_your_username_here"
             android:inputType="text"
             android:textColor="@color/black" />
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="wrap_content"   android:textColor="@color/black"
             android:layout_marginTop="@dimen/profile_element_spacing"
             android:text="@string/age" />
 
@@ -71,13 +74,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
+            android:layout_marginTop="8dp"
             android:hint="@string/enter_your_age_here"
             android:inputType="textEmailAddress"
             android:textColor="@color/black" />
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="wrap_content"   android:textColor="@color/black"
             android:layout_marginTop="@dimen/profile_element_spacing"
             android:text="@string/programming_languages" />
 
@@ -85,26 +89,28 @@
             android:id="@+id/langEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter programming languages which you know"
+            android:layout_marginTop="8dp"
+            android:hint="@string/enter_programming_languages_which_you_know"
             android:inputType="text"
             android:textColor="@color/black" />
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="wrap_content"   android:textColor="@color/black"
             android:layout_marginTop="@dimen/profile_element_spacing"
             android:text="@string/github_optional" />
 
         <EditText
             android:id="@+id/gitEdit"
             android:layout_width="match_parent"
+            android:layout_marginTop="8dp"
             android:layout_height="wrap_content"
             android:hint="@string/enter_your_github_username"
             android:textColor="@color/black" />
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="wrap_content"   android:textColor="@color/black"
             android:layout_marginTop="@dimen/profile_element_spacing"
             android:text="@string/twitter_optional" />
 
@@ -113,10 +119,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/enter_your_linkedin_username"
+            android:layout_marginTop="8dp"
             android:textColor="@color/black" />
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="match_parent"   android:textColor="@color/black"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/profile_element_spacing"
             android:text="@string/linkedin_optional" />
@@ -125,12 +132,13 @@
             android:id="@+id/linkEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:hint="@string/enter_your_twitter_username"
             android:textColor="@color/black" />
 
         <Button
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="wrap_content"   android:textColor="@color/black"
             android:layout_marginTop="@dimen/profile_element_spacing"
             android:layout_marginBottom="16dp"
             android:text="@string/submit" />

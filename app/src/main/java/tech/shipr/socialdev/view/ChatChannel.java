@@ -66,7 +66,7 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
     private EditText mMessageEditText;
     private Button mSendButton;
     private String mName;
-    final String  mPlatform = "Android";;
+    final String  mPlatform = "Android";
     private String mDate;
     private String mTime;
     private String mMessage;
@@ -89,7 +89,7 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
 
         mName = ANONYMOUS;
 
-        mChannel = "general";
+        mChannel = "help";
         initFirebase();
 
 
@@ -101,7 +101,7 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
 
 
         //Initialize spinner'
-        Spinner spinner = (Spinner) rootView.findViewById(R.id.chatChannelSpinner);
+        Spinner spinner = rootView.findViewById(R.id.chatChannelSpinner);
 
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
