@@ -84,5 +84,6 @@
     <string name="enter_your_twitter_username">Enter your Twitter Username</string>
     <string name="enter_programming_languages_which_you_know">Enter programming languages which you know</string>
     <string name="enter_your_username_here">Enter your username here</string>
+    <string name="edit_profile">Edit Profile</string>
 
 </resources>
