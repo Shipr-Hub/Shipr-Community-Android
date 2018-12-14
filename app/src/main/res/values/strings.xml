@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Shipr Social Dev</string>
+    <string name="app_name">Shipr Dev</string>
     <string name="shared_preference_key">tech.shipr.socialdev.channel.</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -83,7 +83,7 @@
     <string name="enter_programming_languages_which_you_know">Enter programming languages which you know</string>
     <string name="enter_your_linkedin_username">Enter your Linkedin Username</string>
     <string name="linkedin_optional">Linkedin (Optional)</string>
-    <string name="enter_your_twitter_username">Enter your Twitter Username</string>
+    <string name="enter_your_twitter_username">Enter your Twitter Username</string><d></d>
 
 
 </resources>
