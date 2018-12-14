@@ -22,5 +22,6 @@
     <dimen name="sku_details_row_height">216dp</dimen>
     <dimen name="sku_details_price_width">60dp</dimen>
     <dimen name="sku_details_header_row_height">61dp</dimen>
+    <dimen name="profile_element_spacing">20dp</dimen>
 
 </resources>

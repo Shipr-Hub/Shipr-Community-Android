@@ -43,7 +43,7 @@ public class ProfileActivity extends Fragment {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         assert user != null;
         String id = user.getUid();
-        mprofileDatabaseReference = mFirebaseDatabase.getReference().child("user" + "/" + id + "/" + "profile");
+        mprofileDatabaseReference = mFirebaseDatabase.getReference().child("users" + "/" + id + "/" + "profile");
 
 
 
