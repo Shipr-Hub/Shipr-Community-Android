@@ -21,6 +21,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
     buildToolsVersion '28.0.3'
 }
 
@@ -31,7 +35,7 @@ dependencies {
 
     //FireBase Auth
     implementation 'com.google.firebase:firebase-auth:16.1.0'
-    implementation 'com.firebaseui:firebase-ui-auth:2.1.1'
+    implementation 'com.firebaseui:firebase-ui-auth:4.3.0'
     implementation 'com.google.android.gms:play-services-auth:16.0.1'
 
     //FireBase Database
@@ -47,6 +51,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-messaging:17.3.4'
     implementation 'com.firebase:firebase-jobdispatcher:0.8.5'
 
+
     //version fix
     implementation 'com.android.support:design:28.0.0'
     implementation 'com.android.support:support-v4:28.0.0'
@@ -55,6 +60,10 @@ dependencies {
     implementation 'com.android.support:cardview-v7:28.0.0'
     implementation 'com.android.support:multidex:1.0.3'
     implementation 'org.jetbrains:annotations-java5:15.0'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    androidTestImplementation 'com.android.support.test:rules:1.0.2'
 
 
 }

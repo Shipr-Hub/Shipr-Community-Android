@@ -175,7 +175,7 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
                                     .createSignInIntentBuilder()
                                     .setAvailableProviders(
                                             Collections.singletonList(
-                                                    new AuthUI.IdpConfig.Builder(AuthUI.EMAIL_PROVIDER).build()
+                                                    new AuthUI.IdpConfig.EmailBuilder().build()
                                             ))
                                     .build(),
                             RC_SIGN_IN);

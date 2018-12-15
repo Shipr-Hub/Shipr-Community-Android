@@ -28,7 +28,7 @@
             android:id="@+id/nameEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/profileEditTextTopMargin"
             android:hint="@string/enter_your_name_here"
             android:inputType="text"
             android:textColor="@color/black" />
@@ -44,10 +44,10 @@
             android:id="@+id/emailEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+           android:layout_marginTop="@dimen/profileEditTextTopMargin"
             android:autofillHints="email"
             android:hint="@string/enter_your_email_here"
-            android:inputType="text"
+            android:inputType="textEmailAddress"
             android:textColor="@color/black" />
 
         <TextView
@@ -61,7 +61,7 @@
             android:id="@+id/usernameEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+           android:layout_marginTop="@dimen/profileEditTextTopMargin"
             android:autofillHints="text"
             android:hint="@string/enter_your_username_here"
             android:inputType="text"
@@ -78,8 +78,7 @@
             android:id="@+id/ageEditemailEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
-            android:layout_marginTop="8dp"
+           android:layout_marginTop="@dimen/profileEditTextTopMargin"
             android:hint="@string/enter_your_age_here"
             android:inputType="textEmailAddress"
             android:textColor="@color/black" />
@@ -95,7 +94,7 @@
             android:id="@+id/langEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+           android:layout_marginTop="@dimen/profileEditTextTopMargin"
             android:hint="@string/enter_programming_languages_which_you_know"
             android:inputType="text"
             android:textColor="@color/black" />
@@ -111,7 +110,7 @@
             android:id="@+id/gitEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+           android:layout_marginTop="@dimen/profileEditTextTopMargin"
             android:hint="@string/enter_your_github_username"
             android:textColor="@color/black" />
 
@@ -126,7 +125,7 @@
             android:id="@+id/twitEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+           android:layout_marginTop="@dimen/profileEditTextTopMargin"
             android:hint="@string/enter_your_linkedin_username"
             android:textColor="@color/black" />
 
@@ -141,7 +140,7 @@
             android:id="@+id/linkEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+           android:layout_marginTop="@dimen/profileEditTextTopMargin"
             android:hint="@string/enter_your_twitter_username"
             android:textColor="@color/black" />
 
@@ -149,6 +148,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/profile_element_spacing"
+            android:id="@+id/submitButton"
             android:layout_marginBottom="16dp"
             android:text="@string/submit"
             android:textColor="@color/black" />

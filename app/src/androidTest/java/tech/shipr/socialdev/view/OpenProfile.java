@@ -1,5 +1,6 @@
 package tech.shipr.socialdev.view;
 
+//This file is used to open the profile view directly while working on it
 
 import android.support.test.espresso.ViewInteraction;
 import android.support.test.filters.LargeTest;
@@ -9,21 +10,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 
+import static android.support.test.espresso.Espresso.onData;
+import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.action.ViewActions.*;
+import static android.support.test.espresso.matcher.ViewMatchers.*;
+
+import tech.shipr.socialdev.R;
+
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
+import org.hamcrest.core.IsInstanceOf;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import tech.shipr.socialdev.R;
-
-import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.action.ViewActions.click;
-import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static android.support.test.espresso.matcher.ViewMatchers.withContentDescription;
-import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.anything;
+import static org.hamcrest.Matchers.is;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
@@ -38,6 +42,7 @@ public class OpenProfile {
         // The recommended way to handle such scenarios is to use Espresso idling resources:
         // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
 
+
         ViewInteraction bottomNavigationItemView = onView(
                 allOf(withId(R.id.navigation_profile), withContentDescription("Profile"),
                         childAtPosition(
@@ -47,6 +52,12 @@ public class OpenProfile {
                                 1),
                         isDisplayed()));
         bottomNavigationItemView.perform(click());
+
+        try {
+            Thread.sleep(999999);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     private static Matcher<View> childAtPosition(
