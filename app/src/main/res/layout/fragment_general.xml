@@ -52,7 +52,7 @@
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
                 android:hint="@string/enter_message"
-                android:inputType="text"
+                android:inputType="textShortMessage"
                 android:maxLines="6" />
 
             <Button
