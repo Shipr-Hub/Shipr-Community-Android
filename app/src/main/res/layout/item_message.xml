@@ -55,6 +55,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
             android:paddingEnd="8dp"
+            android:paddingStart="8dp"
             android:paddingBottom="4dp"
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="@+id/messageTextView"
