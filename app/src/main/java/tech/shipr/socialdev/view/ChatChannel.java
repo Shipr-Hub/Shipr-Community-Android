@@ -51,6 +51,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.TimeZone;
 
 import tech.shipr.socialdev.R;
@@ -85,7 +86,7 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_general, container, false);
 
         mName = ANONYMOUS;
@@ -105,7 +106,7 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
         Spinner spinner = rootView.findViewById(R.id.chatChannelSpinner);
 
         // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(Objects.requireNonNull(getActivity()),
                 R.array.chat_channels, android.R.layout.simple_spinner_item);
 
          // Specify the layout to use when the list of choices appears
@@ -140,13 +141,10 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
 */
 
         // Send button sends a message and clears the EditText
-        mSendButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                sendMessage();
-                sendNotificationToUser(null);
-                mMessageEditText.setText("");
-            }
+        mSendButton.setOnClickListener(view -> {
+            sendMessage();
+            sendNotificationToUser(null);
+            mMessageEditText.setText("");
         });
         authStateCheck();
         return rootView;
@@ -161,30 +159,27 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
 
 
     private void authStateCheck() {
-        mAuthStateListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user != null) {
-                    //User is signed in
-                    onSignedInInitialize(user.getDisplayName());
-                } else {
-                    // User is signed out
-                    onSignedOutCleanup();
-                    startActivityForResult(
-                            AuthUI.getInstance()
-                                    .createSignInIntentBuilder()
-                                    .setAvailableProviders(
-                                            Collections.singletonList(
-                                                    new AuthUI.IdpConfig.EmailBuilder().build()
-                                            ))
-                                    .build(),
-                            RC_SIGN_IN);
+        mAuthStateListener = firebaseAuth -> {
+            FirebaseUser user = firebaseAuth.getCurrentUser();
+            if (user != null) {
+                //User is signed in
+                onSignedInInitialize(user.getDisplayName());
+            } else {
+                // User is signed out
+                onSignedOutCleanup();
+                startActivityForResult(
+                        AuthUI.getInstance()
+                                .createSignInIntentBuilder()
+                                .setAvailableProviders(
+                                        Collections.singletonList(
+                                                new AuthUI.IdpConfig.EmailBuilder().build()
+                                        ))
+                                .build(),
+                        RC_SIGN_IN);
 
-
-                }
 
             }
+
         };
     }
 
@@ -257,7 +252,7 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
         DatabaseReference mNotificationsDatabaseReference = mFirebaseDatabase.getReference().child("notificationRequests");
 
 
-        Map<String, String> notification = new HashMap<String, String>();
+        Map<String, String> notification = new HashMap<>();
         String mChannel = "general";
         notification.put("channel", mChannel);
         notification.put("username", user);
@@ -285,21 +280,21 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
 
             mChildEventListener = new ChildEventListener() {
                 @Override
-                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String s) {
                     DeveloperMessage developerMessage = dataSnapshot.getValue(DeveloperMessage.class);
                     mMessageAdapter.add(developerMessage);
                 }
 
-                public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                public void onChildChanged(@NonNull DataSnapshot dataSnapshot, String s) {
                 }
 
-                public void onChildRemoved(DataSnapshot dataSnapshot) {
+                public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
                 }
 
-                public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+                public void onChildMoved(@NonNull DataSnapshot dataSnapshot, String s) {
                 }
 
-                public void onCancelled(DatabaseError databaseError) {
+                public void onCancelled(@NonNull DatabaseError databaseError) {
                 }
             };
 
