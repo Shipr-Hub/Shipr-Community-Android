@@ -20,6 +20,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
@@ -64,7 +65,7 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
     private static final int RC_CHAT_PHOTO_PICKER = 3;
     private MessageAdapter mMessageAdapter;
     private EditText mMessageEditText;
-    private Button mSendButton;
+    private ImageButton mSendButton;
     private String mName;
     final String  mPlatform = "Android";
     private String mDate;
