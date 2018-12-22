@@ -31,7 +31,7 @@
             android:id="@+id/nameTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-          android:padding="4dp"
+            android:padding="4dp"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
             android:textColor="@color/orange"
@@ -42,26 +42,26 @@
             android:id="@+id/messageTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:maxWidth="240dp"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
-            android:maxWidth="240dp"
             android:textColor="#000"
             tools:text="Hi, How are you?" />
 
         <TextView
-        android:id="@+id/timeTextView"
-        android:layout_width="match_parent"
-            android:textAlignment="viewEnd"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-            android:paddingEnd="8dp"
+            android:id="@+id/timeTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
             android:paddingStart="8dp"
-            android:paddingBottom="4dp"
-        android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="@+id/messageTextView"
-        app:layout_constraintLeft_toRightOf="@+id/mainMessageView"
-        tools:ignore="SmallSp"
-        tools:text="11:40" />
+            android:paddingEnd="12dp"
+            android:paddingBottom="1dp"
+            android:textAlignment="viewEnd"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="@+id/messageTextView"
+            app:layout_constraintLeft_toRightOf="@+id/mainMessageView"
+            tools:ignore="SmallSp"
+            tools:text="11:40" />
 
     </LinearLayout>
 

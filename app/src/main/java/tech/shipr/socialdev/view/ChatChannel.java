@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
@@ -68,7 +70,7 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
     private EditText mMessageEditText;
     private ImageButton mSendButton;
     private String mName;
-    final String  mPlatform = "Android";
+    final String mPlatform = "Android";
     private String mDate;
     private String mTime;
     private String mMessage;
@@ -81,8 +83,9 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
     private ChildEventListener mChildEventListener;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
-
+    private ListView mMessageListView;
     private String mChannel;
+    private ProgressBar mProgressBar;
 
     @Nullable
     @Override
@@ -96,8 +99,8 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
 
 
         // Initialize references to views
-        ProgressBar mProgressBar = rootView.findViewById(R.id.progressBar);
-        ListView mMessageListView = rootView.findViewById(R.id.messageListView);
+        mProgressBar = rootView.findViewById(R.id.progressBar);
+        mMessageListView = rootView.findViewById(R.id.messageListView);
         mMessageEditText = rootView.findViewById(R.id.messageEditText);
         mSendButton = rootView.findViewById(R.id.sendButton);
 
@@ -109,7 +112,7 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(Objects.requireNonNull(getActivity()),
                 R.array.chat_channels, android.R.layout.simple_spinner_item);
 
-         // Specify the layout to use when the list of choices appears
+        // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         // Apply the adapter to the spinner
