@@ -76,6 +76,7 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
     private String mMessage;
     private String mProfilePic;
     private String mVersion;
+    private Boolean mProgressBarPresent = true;
 
     // Firebase instance variable
     private FirebaseDatabase mFirebaseDatabase;
@@ -127,7 +128,7 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
 
 
         // Initialize progress bar
-        mProgressBar.setVisibility(ProgressBar.INVISIBLE);
+
         mSendButton.setEnabled(false);
 
         FirebaseMessaging.getInstance().subscribeToTopic(mChannel);
@@ -275,6 +276,13 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
         detachDatabaseReadListener();
 
     }
+    private void mProgressBarCheck(){
+        if(mProgressBarPresent){
+            mProgressBar.setVisibility(View.GONE);
+            mProgressBarPresent=false;
+
+        }
+    }
 
     private void attachDatabaseReadListener() {
 
@@ -286,6 +294,7 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
                 public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String s) {
                     DeveloperMessage developerMessage = dataSnapshot.getValue(DeveloperMessage.class);
                     mMessageAdapter.add(developerMessage);
+                    mProgressBarCheck();
                 }
 
                 public void onChildChanged(@NonNull DataSnapshot dataSnapshot, String s) {
