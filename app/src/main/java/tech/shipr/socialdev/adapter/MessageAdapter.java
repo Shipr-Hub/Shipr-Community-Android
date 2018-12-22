@@ -30,7 +30,7 @@ public class MessageAdapter extends ArrayAdapter<DeveloperMessage> {
         TextView messageTextView = convertView.findViewById(R.id.messageTextView);
         TextView authorTextView = convertView.findViewById(R.id.nameTextView);
         TextView timeTextView = convertView.findViewById(R.id.timeTextView);
-        TextView dateTextView = convertView.findViewById(R.id.dateTextView);
+   //     TextView dateTextView = convertView.findViewById(R.id.dateTextView);
 
         DeveloperMessage message = getItem(position);
 
@@ -45,7 +45,7 @@ public class MessageAdapter extends ArrayAdapter<DeveloperMessage> {
             mTime.setTimeZone(TimeZone.getTimeZone("IST"));
             Date date = mTime.parse(time);
             Log.d("date", date.toString());
-            dateTextView.setText(date.toString());
+     //       dateTextView.setText(date.toString());
             mTime.setTimeZone(TimeZone.getDefault());
             String formattedTime = mTime.format(date);
             timeTextView.setText(formattedTime);
