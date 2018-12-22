@@ -52,25 +52,21 @@ public class MTActivity extends FragmentActivity {
 
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+            = item -> {
+        switch (item.getItemId()) {
+            case R.id.navigation_chat:
+                FragmentManager frag = getSupportFragmentManager();
+                frag.beginTransaction().replace(R.id.content_frame, new ChatChannel()).commit();
 
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.navigation_chat:
-                    FragmentManager frag = getSupportFragmentManager();
-                    frag.beginTransaction().replace(R.id.content_frame, new ChatChannel()).commit();
+                return true;
 
-                    return true;
+            case R.id.navigation_profile:
+                FragmentManager frag2 = getSupportFragmentManager();
+                frag2.beginTransaction().replace(R.id.content_frame, new ProfileActivity()).commit();
 
-                case R.id.navigation_profile:
-                    FragmentManager frag2 = getSupportFragmentManager();
-                    frag2.beginTransaction().replace(R.id.content_frame, new ProfileActivity()).commit();
-
-                    return true;
-            }
-            return false;
+                return true;
         }
+        return false;
     };
 
     @Override
@@ -78,8 +74,7 @@ public class MTActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mt);
         Log.d("TAG", "MT_ACTIVITY OPENED");
-/*
-        FirebaseApp.initializeApp(this);*/
+        //FirebaseApp.initializeApp(this);
         FirebaseStorage mFirebaseStorage = FirebaseStorage.getInstance();
 
         mProfileStroageReference = mFirebaseStorage.getReference().child("profile_pic");
