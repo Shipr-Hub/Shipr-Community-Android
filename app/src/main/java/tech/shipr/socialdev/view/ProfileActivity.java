@@ -1,6 +1,7 @@
 package tech.shipr.socialdev.view;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -134,7 +135,7 @@ public class ProfileActivity extends Fragment {
         });*/
 
 
-        Button button = (Button) rootView.findViewById(R.id.submitButton);
+        FloatingActionButton button =  rootView.findViewById(R.id.submitButton);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
