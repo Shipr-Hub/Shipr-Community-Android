@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.firebase.FirebaseApp;
@@ -27,11 +28,18 @@ import tech.shipr.socialdev.R;
 public class ProfileActivity extends Fragment {
 
 
+    EditText usernameEdit;
+    EditText emailEdit;
+    EditText nameEdits;
+    EditText ageEditemailEdit;
+    EditText langEdit;
+    EditText gitEdit;
+    EditText twitEdit;
+    EditText linkEdit;
     private TextView pUsername;
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mprofileDatabaseReference;
     private FirebaseAuth mFirebaseAuth;
-
     private String fullName;
     private String username;
     private String email;
@@ -41,14 +49,9 @@ public class ProfileActivity extends Fragment {
     private String twitter;
     private String linkedin;
     private Profile mProfile;
-    EditText usernameEdit;
-    EditText emailEdit;
-    EditText nameEdits;
-    EditText ageEditemailEdit;
-    EditText langEdit;
-    EditText gitEdit;
-    EditText twitEdit;
-    EditText linkEdit;
+    //    private Boolean mProgressBarPresent;
+//    private ProgressBar mProgressBar;
+    private ValueEventListener postListener;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -64,6 +67,7 @@ public class ProfileActivity extends Fragment {
         gitEdit = rootView.findViewById(R.id.gitEdit);
         twitEdit = rootView.findViewById(R.id.twitEdit);
         linkEdit = rootView.findViewById(R.id.linkEdit);
+        //    mProgressBar = rootView.findViewById(R.id.pProgressBar);
 
         FirebaseApp.initializeApp(getActivity());
 
@@ -73,8 +77,9 @@ public class ProfileActivity extends Fragment {
         assert user != null;
         String id = user.getUid();
         mprofileDatabaseReference = mFirebaseDatabase.getReference().child("users" + "/" + id + "/" + "profile");
+//mProgressBarPresent = true;
 
-        ValueEventListener postListener = new ValueEventListener() {
+        postListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // Get Post object and use the values to update the UI
@@ -99,6 +104,8 @@ public class ProfileActivity extends Fragment {
                     setEditIfNotEmpty(twitter, twitEdit);
                     setEditIfNotEmpty(linkedin, linkEdit);
                 }
+
+                // mProgressBarCheck();
 
             }
 
@@ -135,7 +142,7 @@ public class ProfileActivity extends Fragment {
         });*/
 
 
-        FloatingActionButton button =  rootView.findViewById(R.id.submitButton);
+        FloatingActionButton button = rootView.findViewById(R.id.submitButton);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -160,16 +167,21 @@ public class ProfileActivity extends Fragment {
     private void getVariablesFromEditText() {
         fullName = nameEdits.getText().toString();
         email = emailEdit.getText().toString();
-username = usernameEdit.getText().toString();
-age=ageEditemailEdit.getText().toString();
-languages= langEdit.getText().toString();
-
-    github=gitEdit.getText().toString();
-    twitter=twitEdit.getText().toString();
-    linkedin=linkEdit.getText().toString();
+        username = usernameEdit.getText().toString();
+        age = ageEditemailEdit.getText().toString();
+        languages = langEdit.getText().toString();
+        github = gitEdit.getText().toString();
+        twitter = twitEdit.getText().toString();
+        linkedin = linkEdit.getText().toString();
 
 
     }
+ /*   private void mProgressBarCheck(){
+        if(mProgressBarPresent){
+            mProgressBar.setVisibility(View.GONE);
+            mProgressBarPresent=false;
 
+        }
+    }*/
 
 }

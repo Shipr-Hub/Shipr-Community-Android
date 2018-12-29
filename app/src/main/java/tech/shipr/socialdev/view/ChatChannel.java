@@ -276,10 +276,11 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
         detachDatabaseReadListener();
 
     }
-    private void mProgressBarCheck(){
-        if(mProgressBarPresent){
+
+    private void mProgressBarCheck() {
+        if (mProgressBarPresent) {
             mProgressBar.setVisibility(View.GONE);
-            mProgressBarPresent=false;
+            mProgressBarPresent = false;
 
         }
     }

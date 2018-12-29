@@ -146,6 +146,14 @@
             android:hint="@string/enter_your_twitter_username"
             android:textColor="@color/black" />
 
+        <!-- <ProgressBar
+             android:id="@+id/pProgressBar"
+             style="?android:attr/progressBarStyleLarge"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_centerHorizontal="true"
+             android:layout_centerVertical="true" />-->
+
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/submitButton"
             android:layout_width="wrap_content"
