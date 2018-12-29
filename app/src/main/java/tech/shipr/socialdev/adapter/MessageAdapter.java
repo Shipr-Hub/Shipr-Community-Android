@@ -41,12 +41,26 @@ public class MessageAdapter extends ArrayAdapter<DeveloperMessage> {
         messageTextView.setVisibility(View.VISIBLE);
         messageTextView.setText(message.getText());
         authorTextView.setText(message.getName());
+
+
         String pic = message.getProfilePic();
-        Log.d("profile pic", pic + ".");
 
-        Picasso.get().load(pic).into(profileImageView);
+        if (pic == null) {
 
-        messageTextView.setText(message.getText() + "  " + pic);
+            Picasso.get()
+                    .load(R.drawable.ic_account_circle_black_36dp)
+                    //   .placeholder(R.drawable.circle)
+                    .into(profileImageView);
+//            viewHolder.messengerImageView.setImageDrawable(ContextCompat.getDrawable(MainActivity.this,
+//                    R.drawable.ic_account_circle_black_36dp));
+        } else {
+            Picasso.get().load(pic).into(profileImageView);
+
+//            Glide.with(MainActivity.this)
+//                    .load(friendlyMessage.getPhotoUrl())
+//                    .into(viewHolder.messengerImageView);
+        }
+
 
 
         String time = message.getTime();
