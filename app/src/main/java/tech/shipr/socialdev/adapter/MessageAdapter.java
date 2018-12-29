@@ -6,7 +6,10 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -31,12 +34,20 @@ public class MessageAdapter extends ArrayAdapter<DeveloperMessage> {
         TextView authorTextView = convertView.findViewById(R.id.nameTextView);
         TextView timeTextView = convertView.findViewById(R.id.timeTextView);
    //     TextView dateTextView = convertView.findViewById(R.id.dateTextView);
+        ImageView profileImageView = convertView.findViewById(R.id.photoImageView);
 
         DeveloperMessage message = getItem(position);
 
         messageTextView.setVisibility(View.VISIBLE);
         messageTextView.setText(message.getText());
         authorTextView.setText(message.getName());
+        String pic = message.getProfilePic();
+        Log.d("profile pic", pic + ".");
+
+        Picasso.get().load(pic).into(profileImageView);
+
+        messageTextView.setText(message.getText() + "  " + pic);
+
 
         String time = message.getTime();
         Log.d("time", time);

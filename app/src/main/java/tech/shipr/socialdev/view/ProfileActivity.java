@@ -1,5 +1,7 @@
 package tech.shipr.socialdev.view;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -53,6 +55,8 @@ public class ProfileActivity extends Fragment {
 //    private ProgressBar mProgressBar;
     private ValueEventListener postListener;
 
+    private static final int RC_PROFILE_PHOTO_PICKER = 4;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -79,6 +83,39 @@ public class ProfileActivity extends Fragment {
         mprofileDatabaseReference = mFirebaseDatabase.getReference().child("users" + "/" + id + "/" + "profile");
 //mProgressBarPresent = true;
 
+
+
+
+
+
+             if (user != null) {
+            // Name, email address, and profile photo Url
+            String name = user.getDisplayName();
+            String email = user.getEmail();
+            Uri photoUrl = user.getPhotoUrl();
+
+            // Check if user's email is verified
+            boolean emailVerified = user.isEmailVerified();
+
+            // The user's ID, unique to the Firebase project. Do NOT use this value to
+            // authenticate with your backend server, if you have one. Use
+            // FirebaseUser.getIdToken() instead.
+            String uid = user.getUid();
+            EditText text = rootView.findViewById(R.id.profileImageEdit);
+                 assert photoUrl != null;
+    //             text.setText(photoUrl.toString());
+        }
+
+
+
+
+
+
+
+
+
+
+
         postListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -94,6 +131,7 @@ public class ProfileActivity extends Fragment {
                     github = mProfile.getGithub();
                     twitter = mProfile.getTwitter();
                     linkedin = mProfile.getLinkedin();
+
 
                     setEditIfNotEmpty(fullName, nameEdits);
                     setEditIfNotEmpty(email, emailEdit);
@@ -175,7 +213,14 @@ public class ProfileActivity extends Fragment {
         linkedin = linkEdit.getText().toString();
 
 
+    }   public  void openImagePicker() {
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType("image/jpeg");
+        intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
+        startActivityForResult(Intent.createChooser(intent, "Complete action using"), RC_PROFILE_PHOTO_PICKER);
+
     }
+
  /*   private void mProgressBarCheck(){
         if(mProgressBarPresent){
             mProgressBar.setVisibility(View.GONE);
