@@ -232,7 +232,12 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
         mMessage = mMessageEditText.getText().toString();
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-mProfilePic = user.getPhotoUrl().toString();
+
+
+
+        if (Objects.requireNonNull(user).getPhotoUrl() != null) {
+            mProfilePic = Objects.requireNonNull(user.getPhotoUrl()).toString();
+        }
     }
 
     private void sendMessage() {

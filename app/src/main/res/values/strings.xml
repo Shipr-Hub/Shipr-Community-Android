@@ -60,6 +60,7 @@
         <item>android</item>
     </string-array>
 
+
     <string name="chat_channel">Chat Channel</string>
     <string name="mt_general">MT-General</string>
     <string name="help">Help</string>
@@ -86,5 +87,7 @@
     <string name="enter_your_username_here">Enter your username here</string>
     <string name="edit_profile">Edit Profile</string>
     <string name="msg_send_button">Send Button</string>
+    <string name="logout">logout</string>
+    <string name="sign_out">Sign Out</string>
 
 </resources>

@@ -11,10 +11,12 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -34,6 +36,7 @@ import com.google.firebase.storage.UploadTask;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.TimeZone;
 
@@ -43,6 +46,7 @@ import tech.shipr.socialdev.model.DeveloperMessage;
 
 public class MTActivity extends FragmentActivity {
 
+    private static final int RC_SIGN_IN = 1;
     private static final int RC_PHOTO_PICKER = 2;
     private static final int RC_CHAT_PHOTO_PICKER = 3;
 
@@ -111,7 +115,6 @@ public class MTActivity extends FragmentActivity {
 
 
     }
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -253,7 +256,26 @@ public class MTActivity extends FragmentActivity {
                 });
 
     }*/
+public   void signout(View view){
 
+    AuthUI.getInstance()
+            .signOut(this)
+            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                public void onComplete(@NonNull Task<Void> task) {
+                    Toast.makeText(MTActivity.this, "You have been signed out", Toast.LENGTH_SHORT).show();
+
+                    startActivityForResult(
+                            AuthUI.getInstance()
+                                    .createSignInIntentBuilder()
+                                    .setAvailableProviders(
+                                            Collections.singletonList(
+                                                    new AuthUI.IdpConfig.EmailBuilder().build()
+                                            ))
+                                    .build(),
+                            RC_SIGN_IN);
+                }
+            });
+}
     private void uploadImageToStorage(StorageReference photoRef, Uri selectedImageUri) {
 
         uploadTask = photoRef.putFile(selectedImageUri);
