@@ -86,7 +86,11 @@ public class MTActivity extends FragmentActivity {
 
         Log.d("TAG", "MT_ACTIVITY OPENED");
         //FirebaseApp.initializeApp(this);
-        initFirebase();
+        if (savedInstanceState == null) {
+            initFirebase(true);
+        } else {
+            initFirebase(false);
+        }
 
 
         BottomNavigationView navigation = findViewById(R.id.navigation);
@@ -97,9 +101,11 @@ public class MTActivity extends FragmentActivity {
 
     }
 
-    private void initFirebase() {
+    private void initFirebase(Boolean bundleEmpty) {
         FirebaseApp.initializeApp(this);
-        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+        if (bundleEmpty) {
+            FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+        }
         mFirebaseAuth = FirebaseAuth.getInstance();
         FirebaseStorage mFirebaseStorage = FirebaseStorage.getInstance();
 
@@ -109,6 +115,7 @@ public class MTActivity extends FragmentActivity {
 
 
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -235,42 +242,43 @@ public class MTActivity extends FragmentActivity {
     }
 
 
-  /*  private void uploadImageToStorage(StorageReference photoRef, Uri selectedImageUri) {
-        Log.d("debug uploadimage", "started");
-        Log.d("debug had got ref", photoRef.toString());
-        Log.d("debug had got uri", selectedImageUri.toString());
-        String test;
-        photoRef.putFile(selectedImageUri)
-                .addOnSuccessListener(this, new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        // When the image has successfully uploaded, we get its download URL
+    /*  private void uploadImageToStorage(StorageReference photoRef, Uri selectedImageUri) {
+          Log.d("debug uploadimage", "started");
+          Log.d("debug had got ref", photoRef.toString());
+          Log.d("debug had got uri", selectedImageUri.toString());
+          String test;
+          photoRef.putFile(selectedImageUri)
+                  .addOnSuccessListener(this, new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                      public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                          // When the image has successfully uploaded, we get its download URL
 
-                        updateProfilePic(taskSnapshot.      );
-                        Toast.makeText(MTActivity.this, "Your Profile Image has been updated", Toast.LENGTH_SHORT).show();
+                          updateProfilePic(taskSnapshot.      );
+                          Toast.makeText(MTActivity.this, "Your Profile Image has been updated", Toast.LENGTH_SHORT).show();
+                      }
+                  });
+
+      }*/
+    public void signout(View view) {
+
+        AuthUI.getInstance()
+                .signOut(this)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    public void onComplete(@NonNull Task<Void> task) {
+                        Toast.makeText(MTActivity.this, "You have been signed out", Toast.LENGTH_SHORT).show();
+
+                        startActivityForResult(
+                                AuthUI.getInstance()
+                                        .createSignInIntentBuilder()
+                                        .setAvailableProviders(
+                                                Collections.singletonList(
+                                                        new AuthUI.IdpConfig.EmailBuilder().build()
+                                                ))
+                                        .build(),
+                                RC_SIGN_IN);
                     }
                 });
+    }
 
-    }*/
-public   void signout(View view){
-
-    AuthUI.getInstance()
-            .signOut(this)
-            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                public void onComplete(@NonNull Task<Void> task) {
-                    Toast.makeText(MTActivity.this, "You have been signed out", Toast.LENGTH_SHORT).show();
-
-                    startActivityForResult(
-                            AuthUI.getInstance()
-                                    .createSignInIntentBuilder()
-                                    .setAvailableProviders(
-                                            Collections.singletonList(
-                                                    new AuthUI.IdpConfig.EmailBuilder().build()
-                                            ))
-                                    .build(),
-                            RC_SIGN_IN);
-                }
-            });
-}
     private void uploadImageToStorage(StorageReference photoRef, Uri selectedImageUri) {
 
         uploadTask = photoRef.putFile(selectedImageUri);
