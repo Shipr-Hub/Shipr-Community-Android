@@ -55,8 +55,6 @@
     <string-array name="chat_channels">
         <item>general</item>
         <item>help</item>
-        <item>ideas</item>
-        <item>bug</item>
         <item>android</item>
     </string-array>
 
