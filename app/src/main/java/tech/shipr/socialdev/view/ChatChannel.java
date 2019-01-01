@@ -1,16 +1,10 @@
 package tech.shipr.socialdev.view;
 
-import android.app.Activity;
-import android.app.NotificationManager;
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
@@ -20,33 +14,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserInfo;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.iid.InstanceIdResult;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
@@ -75,7 +61,7 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
     private String mTime;
     private String mMessage;
     private String mProfilePic;
-    private String mVersion;
+    private String mVersion = "1";
     private Boolean mProgressBarPresent = true;
 
     // Firebase instance variable
@@ -87,7 +73,7 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
     private ListView mMessageListView;
     private String mChannel;
     private ProgressBar mProgressBar;
-
+    private String uid;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -157,6 +143,7 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
     private void initFirebase() {
         FirebaseApp.initializeApp(getActivity());
         mFirebaseAuth = FirebaseAuth.getInstance();
+
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mMessagesDatabaseReference = mFirebaseDatabase.getReference().child(mChannel);
     }
@@ -233,6 +220,7 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
+        uid = user.getUid();
 
 
         if (Objects.requireNonNull(user).getPhotoUrl() != null) {
@@ -251,8 +239,8 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
                 mTime,
                 mDate,
                 mPlatform,
-                mVersion
-        );
+                mVersion,
+                uid);
         mMessagesDatabaseReference.push().setValue(developerMessage);
 
 
