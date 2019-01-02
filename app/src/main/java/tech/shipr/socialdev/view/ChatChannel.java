@@ -33,8 +33,8 @@ import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -74,6 +74,7 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
     private String mChannel;
     private ProgressBar mProgressBar;
     private String uid;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -162,9 +163,13 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
                 startActivityForResult(
                         AuthUI.getInstance()
                                 .createSignInIntentBuilder()
+                                .setLogo(R.mipmap.ic_launcher)
+                                .setTheme(R.style.AppTheme)
                                 .setAvailableProviders(
-                                        Collections.singletonList(
-                                                new AuthUI.IdpConfig.EmailBuilder().build()
+                                        Arrays.asList(
+                                                new AuthUI.IdpConfig.EmailBuilder().build(),
+                                                new AuthUI.IdpConfig.GoogleBuilder().build(),
+                                                new AuthUI.IdpConfig.GitHubBuilder().build()
                                         ))
                                 .build(),
                         RC_SIGN_IN);
@@ -352,4 +357,6 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
+
+
 }

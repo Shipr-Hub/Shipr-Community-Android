@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
+import com.firebase.ui.auth.IdpResponse;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -121,7 +122,22 @@ public class MTActivity extends FragmentActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         Log.d("MT_Activity", "onActivityResult executed");
-        if (requestCode == 4 && resultCode == RESULT_OK) {
+        if (requestCode == RC_SIGN_IN) {
+            IdpResponse response = IdpResponse.fromResultIntent(data);
+
+            if (resultCode == RESULT_OK) {
+                // Successfully signed in
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                // ...
+            } else {
+                // Sign in failed. If response is null the user canceled the
+                // sign-in flow using the back button. Otherwise check
+                // response.getError().getErrorCode() and handle the error.
+                // ...
+                Log.d("Error Code", String.valueOf(response.getError().getErrorCode()));
+                Log.d("Error Message", response.getError().getMessage());
+            }
+        } else if (requestCode == 4 && resultCode == RESULT_OK) {
             Uri selectedImageUri = data.getData();
 
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
