@@ -168,8 +168,8 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
                                 .setAvailableProviders(
                                         Arrays.asList(
                                                 new AuthUI.IdpConfig.EmailBuilder().build(),
-                                                new AuthUI.IdpConfig.GoogleBuilder().build(),
-                                                new AuthUI.IdpConfig.GitHubBuilder().build()
+                                                new AuthUI.IdpConfig.GoogleBuilder().build()
+                                                //                                new AuthUI.IdpConfig.GitHubBuilder().build()
                                         ))
                                 .build(),
                         RC_SIGN_IN);
