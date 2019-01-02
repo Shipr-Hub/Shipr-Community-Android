@@ -79,6 +79,7 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_general, container, false);
 
+
         mName = ANONYMOUS;
 
         mChannel = "help";

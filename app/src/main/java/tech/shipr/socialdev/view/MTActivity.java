@@ -56,6 +56,7 @@ public class MTActivity extends FragmentActivity {
     private Uri downloadUri;
     private String uid;
     private DatabaseReference mMessagesDatabaseReference;
+    private static DatabaseReference rootRef;
     // Firebase instance variable
 
     private FirebaseAuth mFirebaseAuth;
@@ -86,11 +87,7 @@ public class MTActivity extends FragmentActivity {
 
         Log.d("TAG", "MT_ACTIVITY OPENED");
         //FirebaseApp.initializeApp(this);
-        if (savedInstanceState == null) {
-            initFirebase(true);
-        } else {
-            initFirebase(false);
-        }
+        initFirebase();
 
 
         BottomNavigationView navigation = findViewById(R.id.navigation);
@@ -101,17 +98,21 @@ public class MTActivity extends FragmentActivity {
 
     }
 
-    private void initFirebase(Boolean bundleEmpty) {
+    private void initFirebase() {
         FirebaseApp.initializeApp(this);
-        if (bundleEmpty) {
-            FirebaseDatabase.getInstance().setPersistenceEnabled(true);
-        }
-        mFirebaseAuth = FirebaseAuth.getInstance();
-        FirebaseStorage mFirebaseStorage = FirebaseStorage.getInstance();
 
+        if (rootRef == null) {
+            FirebaseDatabase database = FirebaseDatabase.getInstance();
+            database.setPersistenceEnabled(true);
+            rootRef = database.getReference();
+        }
+
+        mMessagesDatabaseReference = rootRef.child("chat/general");
+
+        mFirebaseAuth = FirebaseAuth.getInstance();
+
+        FirebaseStorage mFirebaseStorage = FirebaseStorage.getInstance();
         mProfileStroageReference = mFirebaseStorage.getReference().child("profile_pic");
-        FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();
-        mMessagesDatabaseReference = mFirebaseDatabase.getReference().child("chat/general");
 
 
     }
