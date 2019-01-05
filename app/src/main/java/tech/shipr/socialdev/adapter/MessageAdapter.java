@@ -6,7 +6,11 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -16,6 +20,7 @@ import java.util.TimeZone;
 
 import tech.shipr.socialdev.R;
 import tech.shipr.socialdev.model.DeveloperMessage;
+
 
 public class MessageAdapter extends ArrayAdapter<DeveloperMessage> {
     public MessageAdapter(Context context, int resource, List<DeveloperMessage> objects) {
@@ -30,13 +35,27 @@ public class MessageAdapter extends ArrayAdapter<DeveloperMessage> {
         TextView messageTextView = convertView.findViewById(R.id.messageTextView);
         TextView authorTextView = convertView.findViewById(R.id.nameTextView);
         TextView timeTextView = convertView.findViewById(R.id.timeTextView);
-        TextView dateTextView = convertView.findViewById(R.id.dateTextView);
+        //     TextView dateTextView = convertView.findViewById(R.id.dateTextView);
+        ImageView profileImageView = convertView.findViewById(R.id.photoImageView);
 
         DeveloperMessage message = getItem(position);
 
         messageTextView.setVisibility(View.VISIBLE);
         messageTextView.setText(message.getText());
         authorTextView.setText(message.getName());
+
+
+        String pic = message.getProfilePic();
+
+        if (pic == null) {
+
+            Picasso.get()
+                    .load(R.drawable.ic_account_circle_black_36dp)
+                    .into(profileImageView);
+        } else {
+            Picasso.get().load(pic).fit().into(profileImageView);
+        }
+
 
         String time = message.getTime();
         Log.d("time", time);
@@ -45,7 +64,7 @@ public class MessageAdapter extends ArrayAdapter<DeveloperMessage> {
             mTime.setTimeZone(TimeZone.getTimeZone("IST"));
             Date date = mTime.parse(time);
             Log.d("date", date.toString());
-            dateTextView.setText(date.toString());
+            //       dateTextView.setText(date.toString());
             mTime.setTimeZone(TimeZone.getDefault());
             String formattedTime = mTime.format(date);
             timeTextView.setText(formattedTime);

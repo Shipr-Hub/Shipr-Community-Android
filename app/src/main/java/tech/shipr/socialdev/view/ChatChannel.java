@@ -1,10 +1,6 @@
 package tech.shipr.socialdev.view;
 
-import android.app.Activity;
-import android.app.NotificationManager;
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -18,39 +14,35 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
+
 import android.widget.ImageView;
+import android.widget.ImageButton;
+
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserInfo;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.iid.InstanceIdResult;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.TimeZone;
 
 import hani.momanii.supernova_emoji_library.Actions.EmojIconActions;
@@ -66,15 +58,20 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
     private static final int RC_SIGN_IN = 1;
     private static final int RC_CHAT_PHOTO_PICKER = 3;
     private MessageAdapter mMessageAdapter;
+
     //private EditText mMessageEditText;
     private Button mSendButton;
+    private EditText mMessageEditText;
+    private ImageButton mSendButton;
+  
     private String mName;
-    final String  mPlatform = "Android";
+    final String mPlatform = "Android";
     private String mDate;
     private String mTime;
     private String mMessage;
     private String mProfilePic;
-    private String mVersion;
+    private String mVersion = "1";
+    private Boolean mProgressBarPresent = true;
 
     // Firebase instance variable
     private FirebaseDatabase mFirebaseDatabase;
@@ -83,16 +80,22 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
     private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
 
+
     private EmojiconEditText mEmojiconEditText;
     private EmojIconActions mEmojiconActions;
     private ImageView mEmojiImageView;
 
+    private ListView mMessageListView;
+
     private String mChannel;
+    private ProgressBar mProgressBar;
+    private String uid;
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_general, container, false);
+
 
         mName = ANONYMOUS;
 
@@ -108,6 +111,10 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
         mEmojiconEditText = rootView.findViewById(R.id.emojicon_edit_text);
         mEmojiconActions = new EmojIconActions(getContext().getApplicationContext(), rootView, mEmojiconEditText, mEmojiImageView);
         mEmojiconActions.ShowEmojIcon();
+
+        mProgressBar = rootView.findViewById(R.id.progressBar);
+        mMessageListView = rootView.findViewById(R.id.messageListView);
+        mMessageEditText = rootView.findViewById(R.id.messageEditText);
 
         mSendButton = rootView.findViewById(R.id.sendButton);
 
@@ -132,10 +139,10 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
         Spinner spinner = rootView.findViewById(R.id.chatChannelSpinner);
 
         // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(Objects.requireNonNull(getActivity()),
                 R.array.chat_channels, android.R.layout.simple_spinner_item);
 
-         // Specify the layout to use when the list of choices appears
+        // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         // Apply the adapter to the spinner
@@ -150,7 +157,7 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
 
 
         // Initialize progress bar
-        mProgressBar.setVisibility(ProgressBar.INVISIBLE);
+
         mSendButton.setEnabled(false);
 
         FirebaseMessaging.getInstance().subscribeToTopic(mChannel);
@@ -174,6 +181,10 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
                 sendNotificationToUser(null);
                 mEmojiconEditText.setText("");
             }
+        mSendButton.setOnClickListener(view -> {
+            sendMessage();
+            sendNotificationToUser(null);
+            mMessageEditText.setText("");
         });
         authStateCheck();
         return rootView;
@@ -182,36 +193,38 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
     private void initFirebase() {
         FirebaseApp.initializeApp(getActivity());
         mFirebaseAuth = FirebaseAuth.getInstance();
+
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mMessagesDatabaseReference = mFirebaseDatabase.getReference().child(mChannel);
     }
 
 
     private void authStateCheck() {
-        mAuthStateListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user != null) {
-                    //User is signed in
-                    onSignedInInitialize(user.getDisplayName());
-                } else {
-                    // User is signed out
-                    onSignedOutCleanup();
-                    startActivityForResult(
-                            AuthUI.getInstance()
-                                    .createSignInIntentBuilder()
-                                    .setAvailableProviders(
-                                            Collections.singletonList(
-                                                    new AuthUI.IdpConfig.EmailBuilder().build()
-                                            ))
-                                    .build(),
-                            RC_SIGN_IN);
+        mAuthStateListener = firebaseAuth -> {
+            FirebaseUser user = firebaseAuth.getCurrentUser();
+            if (user != null) {
+                //User is signed in
+                onSignedInInitialize(user.getDisplayName());
+            } else {
+                // User is signed out
+                onSignedOutCleanup();
+                startActivityForResult(
+                        AuthUI.getInstance()
+                                .createSignInIntentBuilder()
+                                .setLogo(R.mipmap.ic_launcher)
+                                .setTheme(R.style.AppTheme)
+                                .setAvailableProviders(
+                                        Arrays.asList(
+                                                new AuthUI.IdpConfig.EmailBuilder().build(),
+                                                new AuthUI.IdpConfig.GoogleBuilder().build()
+                                                //                                new AuthUI.IdpConfig.GitHubBuilder().build()
+                                        ))
+                                .build(),
+                        RC_SIGN_IN);
 
-
-                }
 
             }
+
         };
     }
 
@@ -260,6 +273,13 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
         mMessage = mEmojiconEditText.getText().toString();
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        uid = user.getUid();
+
+
+        if (Objects.requireNonNull(user).getPhotoUrl() != null) {
+            mProfilePic = Objects.requireNonNull(user.getPhotoUrl()).toString();
+        }
     }
 
     private void sendMessage() {
@@ -273,8 +293,8 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
                 mTime,
                 mDate,
                 mPlatform,
-                mVersion
-        );
+                mVersion,
+                uid);
         mMessagesDatabaseReference.push().setValue(developerMessage);
 
 
@@ -284,7 +304,7 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
         DatabaseReference mNotificationsDatabaseReference = mFirebaseDatabase.getReference().child("notificationRequests");
 
 
-        Map<String, String> notification = new HashMap<String, String>();
+        Map<String, String> notification = new HashMap<>();
         String mChannel = "general";
         notification.put("channel", mChannel);
         notification.put("username", user);
@@ -305,6 +325,14 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
 
     }
 
+    private void mProgressBarCheck() {
+        if (mProgressBarPresent) {
+            mProgressBar.setVisibility(View.GONE);
+            mProgressBarPresent = false;
+
+        }
+    }
+
     private void attachDatabaseReadListener() {
 
         if (mChildEventListener == null) {
@@ -312,21 +340,22 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
 
             mChildEventListener = new ChildEventListener() {
                 @Override
-                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String s) {
                     DeveloperMessage developerMessage = dataSnapshot.getValue(DeveloperMessage.class);
                     mMessageAdapter.add(developerMessage);
+                    mProgressBarCheck();
                 }
 
-                public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                public void onChildChanged(@NonNull DataSnapshot dataSnapshot, String s) {
                 }
 
-                public void onChildRemoved(DataSnapshot dataSnapshot) {
+                public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
                 }
 
-                public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+                public void onChildMoved(@NonNull DataSnapshot dataSnapshot, String s) {
                 }
 
-                public void onCancelled(DatabaseError databaseError) {
+                public void onCancelled(@NonNull DatabaseError databaseError) {
                 }
             };
 
@@ -376,4 +405,6 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
+
+
 }

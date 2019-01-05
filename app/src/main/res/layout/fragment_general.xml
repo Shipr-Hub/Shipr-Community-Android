@@ -23,9 +23,9 @@
         <Spinner
             android:id="@+id/chatChannelSpinner"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"/>
+            android:layout_alignParentEnd="true" />
 
         <LinearLayout
             android:id="@+id/linearLayout"
@@ -36,11 +36,11 @@
             android:minHeight="48dp"
             android:orientation="horizontal">
 
-       <!--     <Button
-                android:id="@+id/addPic"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_add_black_24dp" />-->
+            <!--     <Button
+                     android:id="@+id/addPic"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:src="@drawable/ic_add_black_24dp" />-->
 
             <!--<EditText
                 android:id="@+id/messageEditText"
@@ -79,19 +79,19 @@
                 android:maxLines="6"
                 emojicon:emojiconSize="28sp" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/sendButton"
                 android:layout_width="64dp"
                 android:layout_height="48dp"
                 android:layout_gravity="bottom"
+                android:background="?attr/selectableItemBackground"
                 android:clickable="true"
+                android:contentDescription="@string/msg_send_button"
                 android:focusable="true"
                 android:gravity="center"
+                android:src="@android:drawable/ic_menu_send"
                 android:text="@string/send_button"
                 android:textSize="14sp" />
-            <!--  android:background="?attr/selectableItemBackground"-->
-
-
         </LinearLayout>
 
         <ProgressBar
@@ -102,5 +102,4 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true" />
     </RelativeLayout>
-
 </FrameLayout>

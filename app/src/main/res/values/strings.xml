@@ -55,10 +55,9 @@
     <string-array name="chat_channels">
         <item>general</item>
         <item>help</item>
-        <item>ideas</item>
-        <item>bug</item>
         <item>android</item>
     </string-array>
+
 
     <string name="chat_channel">Chat Channel</string>
     <string name="mt_general">MT-General</string>
@@ -85,5 +84,8 @@
     <string name="enter_programming_languages_which_you_know">Enter programming languages which you know</string>
     <string name="enter_your_username_here">Enter your username here</string>
     <string name="edit_profile">Edit Profile</string>
+    <string name="msg_send_button">Send Button</string>
+    <string name="logout">logout</string>
+    <string name="sign_out">Sign Out</string>
 
 </resources>

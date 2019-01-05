@@ -1,6 +1,9 @@
 package tech.shipr.socialdev.view;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,11 +11,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,11 +31,18 @@ import tech.shipr.socialdev.R;
 public class ProfileActivity extends Fragment {
 
 
+    TextView usernameEdit;
+    TextView emailEdit;
+    EditText nameEdits;
+    EditText ageEditemailEdit;
+    EditText langEdit;
+    EditText gitEdit;
+    EditText twitEdit;
+    EditText linkEdit;
     private TextView pUsername;
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mprofileDatabaseReference;
     private FirebaseAuth mFirebaseAuth;
-
     private String fullName;
     private String username;
     private String email;
@@ -40,14 +52,11 @@ public class ProfileActivity extends Fragment {
     private String twitter;
     private String linkedin;
     private Profile mProfile;
-    EditText usernameEdit;
-    EditText emailEdit;
-    EditText nameEdits;
-    EditText ageEditemailEdit;
-    EditText langEdit;
-    EditText gitEdit;
-    EditText twitEdit;
-    EditText linkEdit;
+    //    private Boolean mProgressBarPresent;
+//    private ProgressBar mProgressBar;
+    private ValueEventListener postListener;
+
+    private static final int RC_PROFILE_PHOTO_PICKER = 4;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -63,6 +72,7 @@ public class ProfileActivity extends Fragment {
         gitEdit = rootView.findViewById(R.id.gitEdit);
         twitEdit = rootView.findViewById(R.id.twitEdit);
         linkEdit = rootView.findViewById(R.id.linkEdit);
+        //    mProgressBar = rootView.findViewById(R.id.pProgressBar);
 
         FirebaseApp.initializeApp(getActivity());
 
@@ -72,8 +82,27 @@ public class ProfileActivity extends Fragment {
         assert user != null;
         String id = user.getUid();
         mprofileDatabaseReference = mFirebaseDatabase.getReference().child("users" + "/" + id + "/" + "profile");
+       //mProgressBarPresent = true;
 
-        ValueEventListener postListener = new ValueEventListener() {
+
+        if (user != null) {
+            // Name, email address, and profile photo Url
+
+            String username = user.getDisplayName();
+            String email = user.getEmail();
+            // Uri photoUrl = user.getPhotoUrl();
+
+            // Check if user's email is verified
+            boolean emailVerified = user.isEmailVerified();
+            //TODO Add a listener and if false, add verift email button
+
+
+            emailEdit.setText(email);
+            usernameEdit.setText(username);
+        }
+
+
+        postListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // Get Post object and use the values to update the UI
@@ -89,9 +118,10 @@ public class ProfileActivity extends Fragment {
                     twitter = mProfile.getTwitter();
                     linkedin = mProfile.getLinkedin();
 
+
                     setEditIfNotEmpty(fullName, nameEdits);
-                    setEditIfNotEmpty(email, emailEdit);
-                    setEditIfNotEmpty(username, usernameEdit);
+                    setTextIfNotEmpty(email, emailEdit);
+                    setTextIfNotEmpty(username, usernameEdit);
                     setEditIfNotEmpty(age, ageEditemailEdit);
                     setEditIfNotEmpty(languages, langEdit);
                     setEditIfNotEmpty(github, gitEdit);
@@ -99,11 +129,19 @@ public class ProfileActivity extends Fragment {
                     setEditIfNotEmpty(linkedin, linkEdit);
                 }
 
+                // mProgressBarCheck();
+
             }
 
             private void setEditIfNotEmpty(String sstring, EditText editText) {
                 if (sstring != null && !sstring.isEmpty()) {
                     editText.setText(sstring);
+                }
+            }
+
+            private void setTextIfNotEmpty(String ssstring, TextView seditText) {
+                if (ssstring != null && !ssstring.isEmpty()) {
+                    seditText.setText(ssstring);
                 }
             }
 
@@ -116,25 +154,7 @@ public class ProfileActivity extends Fragment {
         };
         mprofileDatabaseReference.addListenerForSingleValueEvent(postListener);
 
-
-
-
-
- /*       //TODO profile pic
-        mProfilePic.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                intent.setType("image/jpeg");
-                intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
-                Log.d("ping", "Ping");
-                startActivityForResult(Intent.createChooser(intent, "Complete action using"), RC_PHOTO_PICKER);
-                Log.d("pong", "Pong");
-            }
-        });*/
-
-
-        Button button = (Button) rootView.findViewById(R.id.submitButton);
+        FloatingActionButton button = rootView.findViewById(R.id.submitButton);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -159,16 +179,38 @@ public class ProfileActivity extends Fragment {
     private void getVariablesFromEditText() {
         fullName = nameEdits.getText().toString();
         email = emailEdit.getText().toString();
-username = usernameEdit.getText().toString();
-age=ageEditemailEdit.getText().toString();
-languages= langEdit.getText().toString();
-
-    github=gitEdit.getText().toString();
-    twitter=twitEdit.getText().toString();
-    linkedin=linkEdit.getText().toString();
+        username = usernameEdit.getText().toString();
+        age = ageEditemailEdit.getText().toString();
+        languages = langEdit.getText().toString();
+        github = gitEdit.getText().toString();
+        twitter = twitEdit.getText().toString();
+        linkedin = linkEdit.getText().toString();
 
 
     }
 
+    private void clearPic(View view){
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                .setPhotoUri(null)
+                .build();
+
+    }
+    public void openImagePicker() {
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType("image/jpeg");
+        intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
+        startActivityForResult(Intent.createChooser(intent, "Complete action using"), RC_PROFILE_PHOTO_PICKER);
+
+    }
+
+ /*   private void mProgressBarCheck(){
+        if(mProgressBarPresent){
+            mProgressBar.setVisibility(View.GONE);
+            mProgressBarPresent=false;
+
+        }
+    }*/
 
 }

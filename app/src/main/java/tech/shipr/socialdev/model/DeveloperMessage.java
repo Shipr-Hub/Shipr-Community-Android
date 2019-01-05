@@ -16,19 +16,20 @@ public class DeveloperMessage {
     private String date;
     private String platform;
     private String version;
+    private String uid;
 
     public DeveloperMessage() {
     }
 
     public DeveloperMessage(String name,
-                            /*String displayName,*/
+            /*String displayName,*/
                             String profilePic,
                             String text,
                             String photoMessage,
                             String time,
                             String date,
                             String platform,
-                            String version) {
+                            String version, String uid) {
         this.name = name;
         /*this.displayName = displayName;*/
         this.profilePic = profilePic;
@@ -38,6 +39,7 @@ public class DeveloperMessage {
         this.date = date;
         this.platform = platform;
         this.version = version;
+        this.uid = uid;
     }
 
     public String getVersion() {
@@ -114,4 +116,11 @@ public class DeveloperMessage {
     }
 
 
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
 }

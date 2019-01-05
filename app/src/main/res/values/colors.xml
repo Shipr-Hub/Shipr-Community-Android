@@ -4,7 +4,7 @@
     <color name="colorPrimaryDark">#0E00FF</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorWhite">#ffffff</color>
-    <color name="chatBG">#fff</color>
+    <color name="chatBG">#ade4fd</color>
     <color name="msgTxtColor">#111111</color>
     <color name="secondary_tex">#111111</color>
     <color name="amber">#FFC107</color>
