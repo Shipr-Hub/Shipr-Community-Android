@@ -20,6 +20,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
@@ -52,6 +53,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
 
+import hani.momanii.supernova_emoji_library.Actions.EmojIconActions;
+import hani.momanii.supernova_emoji_library.Helper.EmojiconEditText;
 import tech.shipr.socialdev.R;
 import tech.shipr.socialdev.adapter.MessageAdapter;
 import tech.shipr.socialdev.model.DeveloperMessage;
@@ -63,7 +66,7 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
     private static final int RC_SIGN_IN = 1;
     private static final int RC_CHAT_PHOTO_PICKER = 3;
     private MessageAdapter mMessageAdapter;
-    private EditText mMessageEditText;
+    //private EditText mMessageEditText;
     private Button mSendButton;
     private String mName;
     final String  mPlatform = "Android";
@@ -79,6 +82,10 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
     private ChildEventListener mChildEventListener;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
+
+    private EmojiconEditText mEmojiconEditText;
+    private EmojIconActions mEmojiconActions;
+    private ImageView mEmojiImageView;
 
     private String mChannel;
 
@@ -96,8 +103,29 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
         // Initialize references to views
         ProgressBar mProgressBar = rootView.findViewById(R.id.progressBar);
         ListView mMessageListView = rootView.findViewById(R.id.messageListView);
-        mMessageEditText = rootView.findViewById(R.id.messageEditText);
+        //mMessageEditText = rootView.findViewById(R.id.messageEditText);
+        mEmojiImageView = rootView.findViewById(R.id.emojiButton);
+        mEmojiconEditText = rootView.findViewById(R.id.emojicon_edit_text);
+        mEmojiconActions = new EmojIconActions(getContext().getApplicationContext(), rootView, mEmojiconEditText, mEmojiImageView);
+        mEmojiconActions.ShowEmojIcon();
+
         mSendButton = rootView.findViewById(R.id.sendButton);
+
+        mEmojiconActions.setKeyboardListener(new EmojIconActions.KeyboardListener() {
+            @Override
+            public void onKeyboardOpen() {
+
+                mEmojiconActions.setUseSystemEmoji(true);
+
+            }
+
+            @Override
+            public void onKeyboardClose() {
+
+            }
+        });
+
+        mEmojiconActions.addEmojiconEditTextList(mEmojiconEditText);
 
 
         //Initialize spinner'
@@ -144,7 +172,7 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
             public void onClick(View view) {
                 sendMessage();
                 sendNotificationToUser(null);
-                mMessageEditText.setText("");
+                mEmojiconEditText.setText("");
             }
         });
         authStateCheck();
@@ -196,7 +224,7 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
     }
 
     private void editTextWatcher() {
-        mMessageEditText.addTextChangedListener(new TextWatcher() {
+        mEmojiconEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
             }
@@ -214,7 +242,7 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
             public void afterTextChanged(Editable editable) {
             }
         });
-        mMessageEditText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(DEFAULT_MSG_LENGTH_LIMIT)});
+        mEmojiconEditText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(DEFAULT_MSG_LENGTH_LIMIT)});
     }
 
     private void initVariable() {
@@ -229,7 +257,7 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
         int day = c.get(Calendar.DAY_OF_MONTH);
         mDate = String.valueOf(day) + "-" + String.valueOf(month) + "-" + String.valueOf(year);
 
-        mMessage = mMessageEditText.getText().toString();
+        mMessage = mEmojiconEditText.getText().toString();
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     }
