@@ -1,6 +1,5 @@
 package tech.shipr.socialdev.view;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -56,7 +55,6 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
     private static final String ANONYMOUS = "anonymous";
     private static final int DEFAULT_MSG_LENGTH_LIMIT = 1000;
     private static final int RC_SIGN_IN = 1;
-    private static final int RC_CHAT_PHOTO_PICKER = 3;
     private MessageAdapter mMessageAdapter;
 
     //private EditText mMessageEditText;
@@ -65,12 +63,12 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
     private ImageButton mSendButton;
   
     private String mName;
-    final String mPlatform = "Android";
+    private final String mPlatform = "Android";
     private String mDate;
     private String mTime;
     private String mMessage;
     private String mProfilePic;
-    private String mVersion = "1";
+    private final String mVersion = "1";
     private Boolean mProgressBarPresent = true;
 
     // Firebase instance variable
@@ -98,8 +96,8 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
 
 
         mName = ANONYMOUS;
-
         mChannel = "help";
+
         initFirebase();
 
 
@@ -156,22 +154,15 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
         mMessageListView.setAdapter(mMessageAdapter);
 
 
-        // Initialize progress bar
-
+        //disable send button (will be enabled when text is present)
         mSendButton.setEnabled(false);
-
-        FirebaseMessaging.getInstance().subscribeToTopic(mChannel);
 
         // Enable Send button when there's text to send
         editTextWatcher();
 
-       /* addPic.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openImagePicker();
-            }
-        });
-*/
+        FirebaseMessaging.getInstance().subscribeToTopic(mChannel);
+
+
 
         // Send button sends a message and clears the EditText
         mSendButton.setOnClickListener(new View.OnClickListener() {
@@ -186,6 +177,7 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
             sendNotificationToUser(null);
             mMessageEditText.setText(""); 
         }); */
+
         authStateCheck();
         return rootView;
     }
@@ -228,14 +220,6 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
         };
     }
 
-    private void openImagePicker() {
-        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        intent.setType("image/jpeg");
-        intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
-        startActivityForResult(Intent.createChooser(intent, "Complete action using"), RC_CHAT_PHOTO_PICKER);
-
-    }
-
     private void editTextWatcher() {
         mEmojiconEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -274,7 +258,7 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-        uid = user.getUid();
+        uid = Objects.requireNonNull(user).getUid();
 
 
         if (Objects.requireNonNull(user).getPhotoUrl() != null) {
@@ -300,14 +284,14 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
 
     }
 
-    private void sendNotificationToUser(String user) {
+    private void sendNotificationToUser() {
         DatabaseReference mNotificationsDatabaseReference = mFirebaseDatabase.getReference().child("notificationRequests");
 
 
         Map<String, String> notification = new HashMap<>();
         String mChannel = "general";
         notification.put("channel", mChannel);
-        notification.put("username", user);
+        notification.put("username", null);
         notification.put("message", mMessage);
 
         mNotificationsDatabaseReference.push().setValue(notification);

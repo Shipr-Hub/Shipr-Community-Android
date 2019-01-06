@@ -31,13 +31,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
-import tech.shipr.socialdev.model.DeveloperMessage;
-
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     private static final String TAG = "MyFirebaseMsgService";
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mtokenDatabaseReference;
+
     /**
      * Called when message is received.
      *
@@ -60,8 +59,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         // Check if message contains a notification payload.
         if (remoteMessage.getNotification() != null) {
             Log.d(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
+            sendNotification("General", remoteMessage.getNotification().getBody());
         }
-        sendNotification("General",  remoteMessage.getNotification().getBody());
     }
 
     @Override

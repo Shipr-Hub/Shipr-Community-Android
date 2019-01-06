@@ -54,6 +54,7 @@
                 android:hint="@string/enter_message"
                 android:inputType="textShortMessage"
                 android:maxLines="6" />-->
+          
             <ImageView
                 android:id="@+id/emojiButton"
                 android:layout_width="64dp"
@@ -78,6 +79,7 @@
                 android:hint="@string/enter_message"
                 android:maxLines="6"
                 emojicon:emojiconSize="28sp" />
+
 
             <ImageButton
                 android:id="@+id/sendButton"

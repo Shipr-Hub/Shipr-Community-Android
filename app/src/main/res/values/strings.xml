@@ -1,56 +1,12 @@
 <resources>
     <string name="app_name">Shipr Dev</string>
-    <string name="shared_preference_key">tech.shipr.socialdev.channel.</string>
-
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-
-    <string name="title_activity_chat">chat</string>
-
-    <string name="user_name">Shipr</string>
-    <string name="user_email">user@shipr.tech</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
-
-    <string name="menu_settings">Settings</string>
-    <string name="input_information">Input Information</string>
-    <string name="hostname">Hostname</string>
-    <string name="password">Password</string>
-    <string name="connect_btn">Connect</string>
-    <string name="status">Status</string>
-    <string name="disconnect_btn">Disconnect</string>
-    <string name="status_connected">Connected</string>
-    <string name="status_disconnected">Disconnected</string>
-    <string name="command">Enter command</string>
-    <string name="runcommand">Run</string>
-    <string name="taskfail">Unable to complete command.</string>
-    <string name="progress_runningcommand">Running command</string>
-    <string name="progress_pleasewait">Please wait</string>
-    <string name="filetransfer">File transfer</string>
-    <string name="up">Up</string>
-    <string name="retrieve_remote_files">Retrieving remote file list</string>
-    <string name="insertallvalues">Please fill in username, hostname and password values.</string>
-    <string name="title_activity_config">ConfigActivity</string>
-    <string name="title_activity_mt_">MT_Activity</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
 
     <string name="profile_picture_of_message_author">Profile Picture of message author</string>
-    <string name="profile_image_view">Profile Image View</string>
-    <string name="submit">Submit</string>
     <string name="enter_message">Enter message</string>
     <string name="send_button">SEND</string>
 
-    <string name="todo_name">Name</string>
-    <string name="enter_todo_name_here">Enter ToDo Name here</string>
-    <string name="enter_username_here">Enter Username here</string>
     <string name="profile_image">profile image</string>
     <string name="email">Email</string>
-    <string name="logo">logo</string>
-    <string name="following">Following</string>
-    <string name="followers">Followers</string>
-    <string name="follow_me">Follow Me</string>
 
     <string-array name="chat_channels">
         <item>general</item>
@@ -59,18 +15,11 @@
     </string-array>
 
 
-    <string name="chat_channel">Chat Channel</string>
-    <string name="mt_general">MT-General</string>
     <string name="help">Help</string>
-    <string name="introductions">Introductions</string>
     <string name="general">General</string>
-    <string name="open">Open</string>
-    <string name="close">Close</string>
-    <string name="ideas">ideas</string>
     <string name="android">android</string>
     <string name="display_name">Display Name</string>
     <string name="enter_your_name_here">Enter your name here</string>
-    <string name="enter_your_email_here">Enter your email here</string>
     <string name="username">Username</string>
     <string name="age">Age</string>
     <string name="enter_your_age_here">Enter your age here</string>
@@ -82,10 +31,10 @@
     <string name="linkedin_optional">Linkedin (Optional)</string>
     <string name="enter_your_twitter_username">Enter your Twitter Username</string>
     <string name="enter_programming_languages_which_you_know">Enter programming languages which you know</string>
-    <string name="enter_your_username_here">Enter your username here</string>
     <string name="edit_profile">Edit Profile</string>
     <string name="msg_send_button">Send Button</string>
-    <string name="logout">logout</string>
     <string name="sign_out">Sign Out</string>
+    <string name="chat">Chat</string>
+    <string name="profile">Profile</string>
 
 </resources>

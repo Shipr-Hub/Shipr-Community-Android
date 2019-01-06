@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -96,7 +97,9 @@
             android:layout_marginTop="@dimen/profileEditTextTopMargin"
             android:hint="@string/enter_your_age_here"
             android:inputType="textEmailAddress"
-            android:textColor="@color/black" />
+            android:importantForAutofill="no"
+            android:textColor="@color/black"
+            tools:targetApi="o" />
 
         <TextView
             android:layout_width="match_parent"
@@ -127,6 +130,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/profileEditTextTopMargin"
             android:hint="@string/enter_your_github_username"
+            android:inputType="text"
             android:textColor="@color/black" />
 
         <TextView
@@ -142,6 +146,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/profileEditTextTopMargin"
             android:hint="@string/enter_your_linkedin_username"
+            android:inputType="textShortMessage"
             android:textColor="@color/black" />
 
         <TextView
@@ -157,6 +162,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/profileEditTextTopMargin"
             android:hint="@string/enter_your_twitter_username"
+            android:inputType="textShortMessage"
             android:textColor="@color/black" />
 
         <android.support.design.widget.FloatingActionButton
