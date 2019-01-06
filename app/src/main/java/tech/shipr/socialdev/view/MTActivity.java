@@ -1,5 +1,6 @@
 package tech.shipr.socialdev.view;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -7,6 +8,9 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.view.View;
 import android.widget.Toast;
 
@@ -83,18 +87,13 @@ public class MTActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mt);
-
-        Log.d("TAG", "MT_ACTIVITY OPENED");
-        //FirebaseApp.initializeApp(this);
+        
         initFirebase();
-
-
+        
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         FragmentManager frag1 = getSupportFragmentManager();
         frag1.beginTransaction().replace(R.id.content_frame, new ChatChannel()).commit();
-
-
     }
 
     private void initFirebase() {

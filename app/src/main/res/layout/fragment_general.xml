@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:emojicon="http://schemas.android.com/apk/res-auto"
     android:background="@color/chatBG">
 
     <RelativeLayout
@@ -41,7 +42,7 @@
                      android:layout_height="wrap_content"
                      android:src="@drawable/ic_add_black_24dp" />-->
 
-            <EditText
+            <!--<EditText
                 android:id="@+id/messageEditText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -51,9 +52,34 @@
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
                 android:hint="@string/enter_message"
-                android:inputType="text"
-                android:importantForAutofill="no"
-                android:maxLines="6" />
+                android:inputType="textShortMessage"
+                android:maxLines="6" />-->
+          
+            <ImageView
+                android:id="@+id/emojiButton"
+                android:layout_width="64dp"
+                android:layout_height="48dp"
+                android:layout_gravity="bottom"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:src="@color/colorPrimary"/>
+
+            <hani.momanii.supernova_emoji_library.Helper.EmojiconEditText
+                android:id="@+id/emojicon_edit_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_toLeftOf="@id/sendButton"
+                android:layout_gravity="center"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:hint="@string/enter_message"
+                android:maxLines="6"
+                emojicon:emojiconSize="28sp" />
+
 
             <ImageButton
                 android:id="@+id/sendButton"
