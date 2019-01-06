@@ -89,22 +89,13 @@ public class MTActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mt);
-
-        Log.d("TAG", "MT_ACTIVITY OPENED");
-/*
-        FirebaseApp.initializeApp(this);*/
-        FirebaseStorage mFirebaseStorage = FirebaseStorage.getInstance()
-
-        Log.d("TAG", "MT_ACTIVITY OPENED");
-        //FirebaseApp.initializeApp(this);
+        
         initFirebase();
-
-
+        
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         FragmentManager frag1 = getSupportFragmentManager();
         frag1.beginTransaction().replace(R.id.content_frame, new ChatChannel()).commit();
-
     }
 
     private void initFirebase() {
