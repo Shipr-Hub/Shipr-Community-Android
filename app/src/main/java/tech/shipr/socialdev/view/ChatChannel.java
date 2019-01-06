@@ -1,5 +1,6 @@
 package tech.shipr.socialdev.view;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -11,9 +12,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 
 import android.widget.ImageView;
 import android.widget.ImageButton;
@@ -56,12 +57,8 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
     private static final int DEFAULT_MSG_LENGTH_LIMIT = 1000;
     private static final int RC_SIGN_IN = 1;
     private MessageAdapter mMessageAdapter;
-
-    //private EditText mMessageEditText;
-    private Button mSendButton;
-    private EditText mMessageEditText;
     private ImageButton mSendButton;
-  
+
     private String mName;
     private final String mPlatform = "Android";
     private String mDate;
@@ -80,8 +77,8 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
 
 
     private EmojiconEditText mEmojiconEditText;
-    private EmojIconActions mEmojiconActions;
-    private ImageView mEmojiImageView;
+    private EmojIconActions mEmojicon;
+    private ImageView mEmojiButton;
 
     private ListView mMessageListView;
 
@@ -96,41 +93,23 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
 
 
         mName = ANONYMOUS;
-        mChannel = "help";
+        mChannel = "general";
 
         initFirebase();
 
 
         // Initialize references to views
-        ProgressBar mProgressBar = rootView.findViewById(R.id.progressBar);
-        ListView mMessageListView = rootView.findViewById(R.id.messageListView);
-        //mMessageEditText = rootView.findViewById(R.id.messageEditText);
-        mEmojiImageView = rootView.findViewById(R.id.emojiButton);
-        mEmojiconEditText = rootView.findViewById(R.id.emojicon_edit_text);
-        mEmojiconActions = new EmojIconActions(getContext().getApplicationContext(), rootView, mEmojiconEditText, mEmojiImageView);
-        mEmojiconActions.ShowEmojIcon();
 
         mProgressBar = rootView.findViewById(R.id.progressBar);
+        ListView mMessageListView = rootView.findViewById(R.id.messageListView);
+
+
         mMessageListView = rootView.findViewById(R.id.messageListView);
-        mMessageEditText = rootView.findViewById(R.id.messageEditText);
 
         mSendButton = rootView.findViewById(R.id.sendButton);
 
-        mEmojiconActions.setKeyboardListener(new EmojIconActions.KeyboardListener() {
-            @Override
-            public void onKeyboardOpen() {
-
-                mEmojiconActions.setUseSystemEmoji(true);
-
-            }
-
-            @Override
-            public void onKeyboardClose() {
-
-            }
-        });
-
-        mEmojiconActions.addEmojiconEditTextList(mEmojiconEditText);
+        mEmojiButton = rootView.findViewById(R.id.emojiButton);
+        mEmojiconEditText = rootView.findViewById(R.id.emojicon_edit_text);
 
 
         //Initialize spinner'
@@ -146,6 +125,25 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
         // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
+
+        //Emoji
+        mEmojicon = new EmojIconActions(getContext().getApplicationContext(), rootView, mEmojiconEditText, mEmojiButton);
+        mEmojicon.ShowEmojIcon();
+        mEmojicon.setUseSystemEmoji(true);
+
+        mEmojicon.setKeyboardListener(new EmojIconActions.KeyboardListener() {
+            @Override
+            public void onKeyboardOpen() {
+                Log.e("Keyboard", "open");
+            }
+
+            @Override
+            public void onKeyboardClose() {
+                Log.e("Keyboard", "close");
+            }
+        });
+
+        mEmojicon.addEmojiconEditTextList(mEmojiconEditText);
 
 
         // Initialize message ListView and its adapter
@@ -163,23 +161,23 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
         FirebaseMessaging.getInstance().subscribeToTopic(mChannel);
 
 
-
         // Send button sends a message and clears the EditText
         mSendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 sendMessage();
-                sendNotificationToUser(null);
+                sendNotificationToUser();
                 mEmojiconEditText.setText("");
             }
         });
-    /*    mSendButton.setOnClickListener(view -> {
-            sendMessage();
-            sendNotificationToUser(null);
-            mMessageEditText.setText(""); 
-        }); */
 
         authStateCheck();
+
+
+        //Keep the keyboard closed on start
+        ((Activity) getContext()).getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
         return rootView;
     }
 
@@ -210,7 +208,7 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
                                         Arrays.asList(
                                                 new AuthUI.IdpConfig.EmailBuilder().build(),
                                                 new AuthUI.IdpConfig.GoogleBuilder().build()
-                                                //                                new AuthUI.IdpConfig.GitHubBuilder().build()
+                                                //new AuthUI.IdpConfig.GitHubBuilder().build()
                                         ))
                                 .build(),
                         RC_SIGN_IN);
@@ -288,11 +286,10 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
     private void sendNotificationToUser() {
         DatabaseReference mNotificationsDatabaseReference = mFirebaseDatabase.getReference().child("notificationRequests");
 
-
         Map<String, String> notification = new HashMap<>();
-        String mChannel = "general";
+
         notification.put("channel", mChannel);
-        notification.put("username", null);
+        //    notification.put("username", null);
         notification.put("message", mMessage);
 
         mNotificationsDatabaseReference.push().setValue(notification);
