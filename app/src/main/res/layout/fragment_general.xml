@@ -63,7 +63,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:gravity="center"
-                android:src="@drawable/circle"/>
+                android:src="@color/colorPrimary"/>
 
             <hani.momanii.supernova_emoji_library.Helper.EmojiconEditText
                 android:id="@+id/emojicon_edit_text"
