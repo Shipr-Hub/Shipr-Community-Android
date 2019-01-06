@@ -34,6 +34,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.messaging.FirebaseMessaging;
 
+import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -47,6 +48,7 @@ import java.util.TimeZone;
 
 import hani.momanii.supernova_emoji_library.Actions.EmojIconActions;
 import hani.momanii.supernova_emoji_library.Helper.EmojiconEditText;
+import hani.momanii.supernova_emoji_library.Helper.EmojiconsPopup;
 import tech.shipr.socialdev.R;
 import tech.shipr.socialdev.adapter.MessageAdapter;
 import tech.shipr.socialdev.model.DeveloperMessage;
@@ -144,6 +146,7 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
         });
 
         mEmojicon.addEmojiconEditTextList(mEmojiconEditText);
+        disableAutoOpenEmoji(mEmojicon);
 
 
         // Initialize message ListView and its adapter
@@ -175,10 +178,23 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
 
 
         //Keep the keyboard closed on start
-        ((Activity) getContext()).getWindow().setSoftInputMode(
-                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        //      ((Activity) getContext()).getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
 
         return rootView;
+    }
+
+    private void disableAutoOpenEmoji(EmojIconActions emojActions) {
+        try {
+            Field field = emojActions.getClass().getDeclaredField("popup");
+            field.setAccessible(true);
+            EmojiconsPopup emojiconsPopup = (EmojiconsPopup) field.get(emojActions);
+            field = emojiconsPopup.getClass().getDeclaredField("pendingOpen");
+            field.setAccessible(true);
+            field.set(emojiconsPopup, false);
+        } catch (Exception ignored) {
+
+        }
     }
 
     private void initFirebase() {
