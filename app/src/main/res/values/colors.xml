@@ -3,67 +3,10 @@
     <color name="colorPrimary">#0E00FF</color>
     <color name="colorPrimaryDark">#0E00FF</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="colorWhite">#ffffff</color>
     <color name="chatBG">#ade4fd</color>
-    <color name="msgTxtColor">#111111</color>
-    <color name="secondary_tex">#111111</color>
-    <color name="amber">#FFC107</color>
-    <color name="red_primary">#D32F2F</color>
-    <color name="red_secondary">#F44336</color>
-    <color name="divider_color">#B6B6B6</color>
-    <color name="light_primary_color">#FFCDD2</color>
-
-    <color name="primary">#3F51B5</color>
-    <color name="primary_dark">#303F9F</color>
-    <color name="primary_light">#C5CAE9</color>
-    <color name="accent">#03A9F4</color>
-    <!--<color name="accent">#FF9100</color>-->
-    <color name="primary_text">#212121</color>
-    <color name="secondary_text">#727272</color>
-    <color name="icons">#FFFFFF</color>
-    <color name="divider">#B6B6B6</color>
-
-    <color name="grey600">#757575</color>
-    <color name="grey300">#E0E0E0</color>
-
-    <color name="primary_ligher">#E1E4F4</color>
-    <color name="primary_lightest">#F0F1F9</color>
-
-    <color name="todoBG">#A7C1EE</color>
-    <color name="white">#ffffff</color>
-    <color name="red">#f44336</color>
-    <color name="green">#4caf50</color>
-    <color name="blue">#2196f3</color>
     <color name="grey">#b3b3b3</color>
-    <color name="lightgrey">#d9d9d9</color>
-    <color name="dribble">#ea4c89</color>
-    <color name="dribbledark">#c32361</color>
     <color name="black">#000000</color>
-    <color name="dialogcolor">#009688</color>
-
-
-    <item name="purple" type="color">#FFAA66CC</item>
-    <item name="orange" type="color">#FFFFBB33</item>
-    <item name="lightblue" type="color">#FF7AE5FF</item>
-    <item name="darkblue" type="color">#FF0099CC</item>
-    <item name="darkpurple" type="color">#FF9933CC</item>
-    <item name="cybergreen" type="color">#FF66FA45</item>
-    <item name="darkorange" type="color">#FFFF8800</item>
-    <item name="almostblack" type="color">#FF302533</item>
-    <item name="eggshell" type="color">#FFEEEAEE</item>
-<!-- Billing starts-->
-    <color name="primary_color">#37474F</color>
-    <color name="primary_color_dark">#263238</color>
-    <color name="ascent_color">#4285F4</color>
-
-    <color name="list_bg_color">#eeeeee</color>
-    <color name="row_header_bg_color">#ffffff</color>
-    <color name="row_bg_color">#ffffff</color>
-
-    <color name="disabled_color">#90b1b0</color>
-    <color name="gold">#ffbf00</color>
-    <color name="startblue">#09c6df</color>
-    <color name="endblue">#0bcce6</color>
-
+    <color name="orange">#FFFFBB33</color>
+    <color name="ic_launcher_background">#FFFFFF</color>
 
 </resources>

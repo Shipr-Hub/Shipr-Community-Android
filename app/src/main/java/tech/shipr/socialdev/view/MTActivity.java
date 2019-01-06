@@ -3,7 +3,6 @@ package tech.shipr.socialdev.view;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -13,8 +12,6 @@ import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
-import com.google.android.gms.tasks.Continuation;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
@@ -31,6 +28,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
+import java.util.Objects;
 import java.util.TimeZone;
 
 import tech.shipr.socialdev.R;
@@ -63,7 +61,7 @@ public class MTActivity extends FragmentActivity {
     private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
 
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+    private final BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = item -> {
         switch (item.getItemId()) {
             case R.id.navigation_chat:
@@ -134,7 +132,7 @@ public class MTActivity extends FragmentActivity {
                 // sign-in flow using the back button. Otherwise check
                 // response.getError().getErrorCode() and handle the error.
                 // ...
-                Log.d("Error Code", String.valueOf(response.getError().getErrorCode()));
+                Log.d("Error Code", String.valueOf(Objects.requireNonNull(response).getError().getErrorCode()));
                 Log.d("Error Message", response.getError().getMessage());
             }
         } else if (requestCode == 4 && resultCode == RESULT_OK) {
@@ -159,71 +157,65 @@ public class MTActivity extends FragmentActivity {
                 final StorageReference photoRef = mProfileStroageReference.child(selectedImageUri.getLastPathSegment());
 
 
-                photoRef.putFile(selectedImageUri).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-                    @Override
-                    public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                        if (!task.isSuccessful()) {
-                            throw task.getException();
-                        }
-                        return photoRef.getDownloadUrl();
+                photoRef.putFile(selectedImageUri).continueWithTask(task -> {
+                    if (!task.isSuccessful()) {
+                        throw task.getException();
                     }
-                }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Uri> task) {
-                        if (task.isSuccessful()) {
-                            Uri downloadUri = task.getResult();
+                    return photoRef.getDownloadUrl();
+                }).addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Uri downloadUri = task.getResult();
 
-                            //TODO return the url of the image uploaded here
-
-
-                            // Getting the time
-                            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-                            sdf.setTimeZone(TimeZone.getTimeZone("IST"));
-                            mTime = sdf.format(new Date());
-
-                            // Getting the date
-                            final Calendar c = Calendar.getInstance();
-                            int year = c.get(Calendar.YEAR);
-                            int month = c.get(Calendar.MONTH);
-                            int day = c.get(Calendar.DAY_OF_MONTH);
-                            mDate = String.valueOf(day) + "-" + String.valueOf(month) + "-" + String.valueOf(year);
+                        //TODO return the url of the image uploaded here
 
 
-                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                            if (user != null) {
-                                for (UserInfo profile : user.getProviderData()) {
-                                    // Id of the provider (ex: google.com)
-                                    String providerId = profile.getProviderId();
+                        // Getting the time
+                        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+                        sdf.setTimeZone(TimeZone.getTimeZone("IST"));
+                        mTime = sdf.format(new Date());
 
-                                    // UID specific to the provider
+                        // Getting the date
+                        final Calendar c = Calendar.getInstance();
+                        int year = c.get(Calendar.YEAR);
+                        int month = c.get(Calendar.MONTH);
+                        int day = c.get(Calendar.DAY_OF_MONTH);
+                        mDate = String.valueOf(day) + "-" + String.valueOf(month) + "-" + String.valueOf(year);
 
-                                    uid = profile.getUid();
 
-                                    // Name, email address, and profile photo Url
-                                    mName = profile.getDisplayName();
-                                    Uri uri = profile.getPhotoUrl();
-                                    if (uri != null) {
-                                        mProfilePic = uri.toString();
-                                    }
+                        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                        if (user != null) {
+                            for (UserInfo profile : user.getProviderData()) {
+                                // Id of the provider (ex: google.com)
+                                String providerId = profile.getProviderId();
+
+                                // UID specific to the provider
+
+                                uid = profile.getUid();
+
+                                // Name, email address, and profile photo Url
+                                mName = profile.getDisplayName();
+                                Uri uri = profile.getPhotoUrl();
+                                if (uri != null) {
+                                    mProfilePic = uri.toString();
                                 }
-
                             }
 
-                            DeveloperMessage developerMessage = new DeveloperMessage(
-                                    mName,
-
-                                    mProfilePic,
-                                    mMessage,
-                                    downloadUri.toString(),
-                                    mTime,
-                                    mDate,
-                                    mPlatform,
-                                    mVersion,
-                                    uid);
-                            mMessagesDatabaseReference.push().setValue(developerMessage);
-                        } else {
-                            Toast.makeText(MTActivity.this, "upload failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         }
+
+                        DeveloperMessage developerMessage = new DeveloperMessage(
+                                mName,
+
+                                mProfilePic,
+                                mMessage,
+                                downloadUri.toString(),
+                                mTime,
+                                mDate,
+                                mPlatform,
+                                mVersion,
+                                uid);
+                        mMessagesDatabaseReference.push().setValue(developerMessage);
+                    } else {
+                        Toast.makeText(MTActivity.this, "upload failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -246,13 +238,10 @@ public class MTActivity extends FragmentActivity {
 
         assert user != null;
         user.updateProfile(profileUpdates)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            Log.d("profile Pic", "User profile updated.");
-                            Toast.makeText(MTActivity.this, "Profile pic set", Toast.LENGTH_SHORT).show();
-                        }
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Log.d("profile Pic", "User profile updated.");
+                        Toast.makeText(MTActivity.this, "Profile pic set", Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -279,20 +268,18 @@ public class MTActivity extends FragmentActivity {
 
         AuthUI.getInstance()
                 .signOut(this)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    public void onComplete(@NonNull Task<Void> task) {
-                        Toast.makeText(MTActivity.this, "You have been signed out", Toast.LENGTH_SHORT).show();
+                .addOnCompleteListener(task -> {
+                    Toast.makeText(MTActivity.this, "You have been signed out", Toast.LENGTH_SHORT).show();
 
-                        startActivityForResult(
-                                AuthUI.getInstance()
-                                        .createSignInIntentBuilder()
-                                        .setAvailableProviders(
-                                                Collections.singletonList(
-                                                        new AuthUI.IdpConfig.EmailBuilder().build()
-                                                ))
-                                        .build(),
-                                RC_SIGN_IN);
-                    }
+                    startActivityForResult(
+                            AuthUI.getInstance()
+                                    .createSignInIntentBuilder()
+                                    .setAvailableProviders(
+                                            Collections.singletonList(
+                                                    new AuthUI.IdpConfig.EmailBuilder().build()
+                                            ))
+                                    .build(),
+                            RC_SIGN_IN);
                 });
     }
 
@@ -300,27 +287,21 @@ public class MTActivity extends FragmentActivity {
 
         uploadTask = photoRef.putFile(selectedImageUri);
 
-        Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-            @Override
-            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                if (!task.isSuccessful()) {
-                    throw task.getException();
-                }
-
-                // Continue with the task to get the download URL
-                return photoRef.getDownloadUrl();
+        Task<Uri> urlTask = uploadTask.continueWithTask(task -> {
+            if (!task.isSuccessful()) {
+                throw task.getException();
             }
-        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-            @Override
-            public void onComplete(@NonNull Task<Uri> task) {
-                if (task.isSuccessful()) {
 
-                    downloadUri = task.getResult();
-                    updateProfilePic(downloadUri);
-                } else {
-                    // Handle failures
-                    // ...
-                }
+            // Continue with the task to get the download URL
+            return photoRef.getDownloadUrl();
+        }).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+
+                downloadUri = task.getResult();
+                updateProfilePic(downloadUri);
+            } else {
+                // Handle failures
+                // ...
             }
         });
 

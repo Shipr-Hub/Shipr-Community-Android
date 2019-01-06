@@ -1,17 +1,15 @@
 package tech.shipr.socialdev.view;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.firebase.FirebaseApp;
@@ -24,21 +22,20 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import tech.shipr.socialdev.model.Profile;
-
 import tech.shipr.socialdev.R;
+import tech.shipr.socialdev.model.Profile;
 
 public class ProfileActivity extends Fragment {
 
 
-    TextView usernameEdit;
-    TextView emailEdit;
-    EditText nameEdits;
-    EditText ageEditemailEdit;
-    EditText langEdit;
-    EditText gitEdit;
-    EditText twitEdit;
-    EditText linkEdit;
+    private TextView usernameEdit;
+    private TextView emailEdit;
+    private EditText nameEdits;
+    private EditText ageEditemailEdit;
+    private EditText langEdit;
+    private EditText gitEdit;
+    private EditText twitEdit;
+    private EditText linkEdit;
     private TextView pUsername;
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mprofileDatabaseReference;
@@ -59,7 +56,7 @@ public class ProfileActivity extends Fragment {
     private static final int RC_PROFILE_PHOTO_PICKER = 4;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_profile, container, false);
 
@@ -155,22 +152,19 @@ public class ProfileActivity extends Fragment {
         mprofileDatabaseReference.addListenerForSingleValueEvent(postListener);
 
         FloatingActionButton button = rootView.findViewById(R.id.submitButton);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getVariablesFromEditText();
-                mProfile = new Profile(
-                        fullName,
-                        username,
-                        email,
-                        age,
-                        languages,
-                        github,
-                        twitter,
-                        linkedin
-                );
-                mprofileDatabaseReference.setValue(mProfile);
-            }
+        button.setOnClickListener(v -> {
+            getVariablesFromEditText();
+            mProfile = new Profile(
+                    fullName,
+                    username,
+                    email,
+                    age,
+                    languages,
+                    github,
+                    twitter,
+                    linkedin
+            );
+            mprofileDatabaseReference.setValue(mProfile);
         });
 
         return rootView;

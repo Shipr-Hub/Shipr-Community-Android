@@ -3,16 +3,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:id="@+id/channel_menu_general"
+    <item
         android:title="@string/general"
         app:showAsAction="never"/>
 
-    <item android:id="@+id/channel_menu_help"
+    <item
         android:title="@string/help"
         app:showAsAction="never"/>
 
 
-    <item android:id="@+id/channel_menu_android"
+    <item
         android:title="@string/android"
         app:showAsAction="never"/>
 

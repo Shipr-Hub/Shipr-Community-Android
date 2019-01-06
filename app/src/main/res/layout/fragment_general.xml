@@ -52,6 +52,7 @@
                 android:background="@android:color/transparent"
                 android:hint="@string/enter_message"
                 android:inputType="text"
+                android:importantForAutofill="no"
                 android:maxLines="6" />
 
             <ImageButton
