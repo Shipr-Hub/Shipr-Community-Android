@@ -181,11 +181,11 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
                 sendNotificationToUser(null);
                 mEmojiconEditText.setText("");
             }
-        mSendButton.setOnClickListener(view -> {
+    /*    mSendButton.setOnClickListener(view -> {
             sendMessage();
             sendNotificationToUser(null);
-            mMessageEditText.setText("");
-        });
+            mMessageEditText.setText(""); 
+        }); */
         authStateCheck();
         return rootView;
     }
