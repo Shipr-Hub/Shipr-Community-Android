@@ -36,5 +36,6 @@
     <string name="sign_out">Sign Out</string>
     <string name="chat">Chat</string>
     <string name="profile">Profile</string>
+    <string name="emoji_button">Emoji Button</string>
 
 </resources>

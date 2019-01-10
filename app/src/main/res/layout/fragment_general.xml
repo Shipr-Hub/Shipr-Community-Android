@@ -36,25 +36,6 @@
             android:minHeight="48dp"
             android:orientation="horizontal">
 
-            <!--     <Button
-                     android:id="@+id/addPic"
-                     android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:src="@drawable/ic_add_black_24dp" />-->
-
-            <!--<EditText
-                android:id="@+id/messageEditText"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:hint="@string/enter_message"
-                android:inputType="textShortMessage"
-                android:maxLines="6" />-->
-          
             <ImageView
                 android:id="@+id/emojiButton"
                 android:layout_width="64dp"
@@ -63,14 +44,13 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:gravity="center"
-                android:src="@color/colorPrimary"/>
+                android:contentDescription="@string/emoji_button"
+                android:src="@drawable/smiley" />
 
             <hani.momanii.supernova_emoji_library.Helper.EmojiconEditText
                 android:id="@+id/emojicon_edit_text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_toLeftOf="@id/sendButton"
                 android:layout_gravity="center"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"

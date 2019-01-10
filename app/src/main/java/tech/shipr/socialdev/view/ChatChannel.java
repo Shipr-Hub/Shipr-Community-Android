@@ -1,6 +1,5 @@
 package tech.shipr.socialdev.view;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,18 +11,17 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-
-import android.widget.ImageView;
 import android.widget.ImageButton;
-
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 
 import com.firebase.ui.auth.AuthUI;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -40,9 +38,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import java.util.TimeZone;
 
@@ -104,17 +100,10 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
 
         mProgressBar = rootView.findViewById(R.id.progressBar);
         ListView mMessageListView = rootView.findViewById(R.id.messageListView);
-
-
         mMessageListView = rootView.findViewById(R.id.messageListView);
-
         mSendButton = rootView.findViewById(R.id.sendButton);
-
         mEmojiButton = rootView.findViewById(R.id.emojiButton);
         mEmojiconEditText = rootView.findViewById(R.id.emojicon_edit_text);
-
-
-        //Initialize spinner'
         Spinner spinner = rootView.findViewById(R.id.chatChannelSpinner);
 
         // Create an ArrayAdapter using the string array and a default spinner layout
@@ -163,23 +152,19 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
 
         FirebaseMessaging.getInstance().subscribeToTopic(mChannel);
 
-
         // Send button sends a message and clears the EditText
         mSendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 sendMessage();
-                sendNotificationToUser();
                 mEmojiconEditText.setText("");
             }
         });
 
         authStateCheck();
 
-
         //Keep the keyboard closed on start
         //      ((Activity) getContext()).getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-
 
         return rootView;
     }
@@ -299,21 +284,9 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
 
     }
 
-    private void sendNotificationToUser() {
-        DatabaseReference mNotificationsDatabaseReference = mFirebaseDatabase.getReference().child("notificationRequests");
-
-        Map<String, String> notification = new HashMap<>();
-
-        notification.put("channel", mChannel);
-        //    notification.put("username", null);
-        notification.put("message", mMessage);
-
-        mNotificationsDatabaseReference.push().setValue(notification);
-    }
-
     private void onSignedInInitialize(String username) {
         mName = username;
-        attachDatabaseReadListener();
+        updateChannel(mChannel);
     }
 
     private void onSignedOutCleanup() {
@@ -395,6 +368,7 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
     public void updateChannel(String channelName) {
         mMessageAdapter.clear();
         detachDatabaseReadListener();
+        subToChannel(channelName);
         mMessagesDatabaseReference = mFirebaseDatabase.getReference().child("chat/" + channelName);
         attachDatabaseReadListener();
     }
@@ -404,5 +378,19 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
 
     }
 
+    private void subToChannel(String channel) {
+        FirebaseMessaging.getInstance().subscribeToTopic("weather")
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        String msg = "success";
+                        if (!task.isSuccessful()) {
+                            msg = "failed";
+                        }
+                        Log.d("msg", msg);
+                        //    Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
 
 }
