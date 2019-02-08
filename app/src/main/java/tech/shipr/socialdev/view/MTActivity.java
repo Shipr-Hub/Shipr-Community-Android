@@ -65,8 +65,11 @@ public class MTActivity extends FragmentActivity {
     private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
 
+    public BottomNavigationView navigation;
+
     private final BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = item -> {
+        Log.e("Arshad", item.getItemId() + " ");
         switch (item.getItemId()) {
             case R.id.navigation_chat:
                 FragmentManager frag = getSupportFragmentManager();
@@ -90,7 +93,7 @@ public class MTActivity extends FragmentActivity {
         
         initFirebase();
         
-        BottomNavigationView navigation = findViewById(R.id.navigation);
+        navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         FragmentManager frag1 = getSupportFragmentManager();
         frag1.beginTransaction().replace(R.id.content_frame, new ChatChannel()).commit();
