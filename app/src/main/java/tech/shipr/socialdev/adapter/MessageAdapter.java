@@ -2,7 +2,10 @@ package tech.shipr.socialdev.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,11 +23,17 @@ import java.util.TimeZone;
 
 import tech.shipr.socialdev.R;
 import tech.shipr.socialdev.model.DeveloperMessage;
+import tech.shipr.socialdev.view.MTActivity;
+import tech.shipr.socialdev.view.ProfileActivity;
 
 
-public class MessageAdapter extends ArrayAdapter<DeveloperMessage> {
+public class MessageAdapter extends ArrayAdapter<DeveloperMessage> implements View.OnClickListener {
+
+    Context mContext;
+
     public MessageAdapter(Context context, int resource, List<DeveloperMessage> objects) {
         super(context, resource, objects);
+        mContext = context;
     }
 
     @NonNull
@@ -44,6 +53,9 @@ public class MessageAdapter extends ArrayAdapter<DeveloperMessage> {
         messageTextView.setVisibility(View.VISIBLE);
         messageTextView.setText(message.getText());
         authorTextView.setText(message.getName());
+
+        // Click listeners
+        profileImageView.setOnClickListener(MessageAdapter.this);
 
 
         String pic = message.getProfilePic();
@@ -78,4 +90,15 @@ public class MessageAdapter extends ArrayAdapter<DeveloperMessage> {
         return convertView;
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.photoImageView:
+                FragmentManager frag2 = ((FragmentActivity)mContext).getSupportFragmentManager();
+                frag2.beginTransaction().replace(R.id.content_frame, new ProfileActivity()).commit();
+                ((MTActivity)mContext).navigation.setSelectedItemId(R.id.navigation_profile);
+
+                break;
+        }
+    }
 }
