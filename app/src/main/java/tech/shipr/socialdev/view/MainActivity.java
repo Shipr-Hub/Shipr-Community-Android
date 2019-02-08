@@ -1,5 +1,6 @@
 package tech.shipr.socialdev.view;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -41,7 +42,6 @@ public class MainActivity extends FragmentActivity {
     private static final int RC_PHOTO_PICKER = 2;
     private static final int RC_CHAT_PHOTO_PICKER = 3;
 
-    private FirebaseStorage mFirebaseStorage;
     private StorageReference mProfileStroageReference;
 
     private String mName;
@@ -51,18 +51,14 @@ public class MainActivity extends FragmentActivity {
     private String mTime;
     private String mMessage;
     private String mProfilePic;
-    private String mVersion = "1";
-    private UploadTask uploadTask;
+    private final String mVersion = "1";
     private Uri downloadUri;
     private String uid;
     private DatabaseReference mMessagesDatabaseReference;
     private static DatabaseReference rootRef;
     // Firebase instance variable
 
-    private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
-
-    public BottomNavigationView navigation;
 
     private final BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = item -> {
@@ -89,7 +85,7 @@ public class MainActivity extends FragmentActivity {
 
         initFirebase();
 
-        navigation = findViewById(R.id.navigation);
+        BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         FragmentManager frag1 = getSupportFragmentManager();
         frag1.beginTransaction().replace(R.id.content_frame, new ChatChannel()).commit();
@@ -106,10 +102,10 @@ public class MainActivity extends FragmentActivity {
 
         mMessagesDatabaseReference = rootRef.child("chat/general");
 
-        mFirebaseAuth = FirebaseAuth.getInstance();
+        FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
 
 
-        mFirebaseStorage = FirebaseStorage.getInstance();
+        FirebaseStorage mFirebaseStorage = FirebaseStorage.getInstance();
         mProfileStroageReference = mFirebaseStorage.getReference().child("profile_pic");
 
 
@@ -131,8 +127,8 @@ public class MainActivity extends FragmentActivity {
                 // sign-in flow using the back button. Otherwise check
                 // response.getError().getErrorCode() and handle the error.
                 // ...
-                Log.d("Error Code", String.valueOf(Objects.requireNonNull(response).getError().getErrorCode()));
-                Log.d("Error Message", response.getError().getMessage());
+                Log.d("Error Code", String.valueOf(Objects.requireNonNull(Objects.requireNonNull(response).getError()).getErrorCode()));
+                Log.d("Error Message", Objects.requireNonNull(response.getError()).getMessage());
             }
         } else if (requestCode == 4 && resultCode == RESULT_OK) {
             Uri selectedImageUri = data.getData();
@@ -153,12 +149,12 @@ public class MainActivity extends FragmentActivity {
                 Uri selectedImageUri = data.getData();
 
                 // Get a reference to store file at chat_photos/<FILENAME>
-                final StorageReference photoRef = mProfileStroageReference.child(selectedImageUri.getLastPathSegment());
+                final StorageReference photoRef = mProfileStroageReference.child(Objects.requireNonNull(Objects.requireNonNull(selectedImageUri).getLastPathSegment()));
 
 
                 photoRef.putFile(selectedImageUri).continueWithTask(task -> {
                     if (!task.isSuccessful()) {
-                        throw task.getException();
+                        throw Objects.requireNonNull(task.getException());
                     }
                     return photoRef.getDownloadUrl();
                 }).addOnCompleteListener(task -> {
@@ -169,7 +165,7 @@ public class MainActivity extends FragmentActivity {
 
 
                         // Getting the time
-                        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+                        @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
                         sdf.setTimeZone(TimeZone.getTimeZone("IST"));
                         mTime = sdf.format(new Date());
 
@@ -206,7 +202,7 @@ public class MainActivity extends FragmentActivity {
 
                                 mProfilePic,
                                 mMessage,
-                                downloadUri.toString(),
+                                Objects.requireNonNull(downloadUri).toString(),
                                 mTime,
                                 mDate,
                                 mPlatform,
@@ -214,7 +210,7 @@ public class MainActivity extends FragmentActivity {
                                 uid);
                         mMessagesDatabaseReference.push().setValue(developerMessage);
                     } else {
-                        Toast.makeText(MainActivity.this, "upload failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "upload failed: " + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -284,11 +280,11 @@ public class MainActivity extends FragmentActivity {
 
     private void uploadImageToStorage(StorageReference photoRef, Uri selectedImageUri) {
 
-        uploadTask = photoRef.putFile(selectedImageUri);
+        UploadTask uploadTask = photoRef.putFile(selectedImageUri);
 
         Task<Uri> urlTask = uploadTask.continueWithTask(task -> {
             if (!task.isSuccessful()) {
-                throw task.getException();
+                throw Objects.requireNonNull(task.getException());
             }
 
             // Continue with the task to get the download URL
@@ -298,10 +294,9 @@ public class MainActivity extends FragmentActivity {
 
                 downloadUri = task.getResult();
                 updateProfilePic(downloadUri);
-            } else {
-                // Handle failures
-                // ...
-            }
+            }  // Handle failures
+            // ...
+
         });
 
     }

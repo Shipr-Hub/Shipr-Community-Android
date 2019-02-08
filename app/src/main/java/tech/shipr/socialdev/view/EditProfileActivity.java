@@ -22,6 +22,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.jetbrains.annotations.NotNull;
+
 import tech.shipr.socialdev.R;
 import tech.shipr.socialdev.model.Profile;
 
@@ -36,10 +38,7 @@ public class EditProfileActivity extends Fragment {
     private EditText gitEdit;
     private EditText twitEdit;
     private EditText linkEdit;
-    private TextView pUsername;
-    private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mprofileDatabaseReference;
-    private FirebaseAuth mFirebaseAuth;
     private String fullName;
     private String username;
     private String email;
@@ -49,9 +48,6 @@ public class EditProfileActivity extends Fragment {
     private String twitter;
     private String linkedin;
     private Profile mProfile;
-    //    private Boolean mProgressBarPresent;
-//    private ProgressBar mProgressBar;
-    private ValueEventListener postListener;
 
     private static final int RC_PROFILE_PHOTO_PICKER = 4;
 
@@ -73,8 +69,8 @@ public class EditProfileActivity extends Fragment {
 
         FirebaseApp.initializeApp(getActivity());
 
-        mFirebaseDatabase = FirebaseDatabase.getInstance();
-        mFirebaseAuth = FirebaseAuth.getInstance();
+        FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();
+        FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         assert user != null;
         String id = user.getUid();
@@ -82,7 +78,7 @@ public class EditProfileActivity extends Fragment {
        //mProgressBarPresent = true;
 
 
-        if (user != null) {
+        {
             // Name, email address, and profile photo Url
 
             String username = user.getDisplayName();
@@ -99,9 +95,11 @@ public class EditProfileActivity extends Fragment {
         }
 
 
-        postListener = new ValueEventListener() {
+        //    private Boolean mProgressBarPresent;
+        //    private ProgressBar mProgressBar;
+        ValueEventListener postListener = new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(@NotNull DataSnapshot dataSnapshot) {
                 // Get Post object and use the values to update the UI
 
                 mProfile = dataSnapshot.getValue(Profile.class);
@@ -143,7 +141,7 @@ public class EditProfileActivity extends Fragment {
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
+            public void onCancelled(@NotNull DatabaseError databaseError) {
                 // Getting Post failed, log a message
                 Log.w("ProfileActivity", "loadPost:onCancelled", databaseError.toException());
                 // ...
@@ -184,7 +182,7 @@ public class EditProfileActivity extends Fragment {
 
     }
 
-    private void clearPic(View view){
+    private void clearPic() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()

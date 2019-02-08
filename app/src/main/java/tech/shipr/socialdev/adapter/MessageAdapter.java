@@ -28,7 +28,7 @@ import tech.shipr.socialdev.view.ViewProfileActivity;
 
 public class MessageAdapter extends ArrayAdapter<DeveloperMessage> implements View.OnClickListener {
 
-    private Context mContext;
+    private final Context mContext;
     private DeveloperMessage message;
 
     public MessageAdapter(Context context, int resource, List<DeveloperMessage> objects) {

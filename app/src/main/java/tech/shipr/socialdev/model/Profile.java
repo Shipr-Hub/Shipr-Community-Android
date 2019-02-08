@@ -24,64 +24,32 @@ public class Profile {
         return fullName;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
     public String getUsername() {
         return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getAge() {
         return age;
-    }
-
-    public void setAge(String age) {
-        this.age = age;
     }
 
     public String getLanguages() {
         return languages;
     }
 
-    public void setLanguages(String languages) {
-        this.languages = languages;
-    }
-
     public String getGithub() {
         return github;
-    }
-
-    public void setGithub(String github) {
-        this.github = github;
     }
 
     public String getTwitter() {
         return twitter;
     }
 
-    public void setTwitter(String twitter) {
-        this.twitter = twitter;
-    }
-
     public String getLinkedin() {
         return linkedin;
-    }
-
-    public void setLinkedin(String linkedin) {
-        this.linkedin = linkedin;
     }
 
     public Profile(String fullName,

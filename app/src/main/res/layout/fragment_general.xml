@@ -3,12 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:emojicon="http://schemas.android.com/apk/res-auto"
-    android:background="@color/chatBG">
+    xmlns:emojicon="http://schemas.android.com/apk/res-auto">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/chatBG"
+        tools:ignore="UselessParent">
 
         <ListView
             android:id="@+id/messageListView"

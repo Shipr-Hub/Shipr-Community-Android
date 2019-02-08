@@ -9,7 +9,7 @@
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:layout_marginTop="30dp"
         android:orientation="vertical">
@@ -80,7 +80,9 @@
             android:layout_marginTop="@dimen/profileEditTextTopMargin"
             android:hint="@string/enter_your_name_here"
             android:inputType="text"
-            android:textColor="@color/black" />
+            android:importantForAutofill="no"
+            android:textColor="@color/black"
+            tools:targetApi="o" />
 
 
         <TextView
@@ -115,7 +117,9 @@
             android:layout_marginTop="@dimen/profileEditTextTopMargin"
             android:hint="@string/enter_programming_languages_which_you_know"
             android:inputType="text"
-            android:textColor="@color/black" />
+            android:importantForAutofill="no"
+            android:textColor="@color/black"
+            tools:targetApi="o" />
 
         <TextView
             android:layout_width="match_parent"
@@ -131,7 +135,9 @@
             android:layout_marginTop="@dimen/profileEditTextTopMargin"
             android:hint="@string/enter_your_github_username"
             android:inputType="text"
-            android:textColor="@color/black" />
+            android:importantForAutofill="no"
+            android:textColor="@color/black"
+            tools:targetApi="o" />
 
         <TextView
             android:layout_width="match_parent"
@@ -147,7 +153,9 @@
             android:layout_marginTop="@dimen/profileEditTextTopMargin"
             android:hint="@string/enter_your_linkedin_username"
             android:inputType="textShortMessage"
-            android:textColor="@color/black" />
+            android:importantForAutofill="no"
+            android:textColor="@color/black"
+            tools:targetApi="o" />
 
         <TextView
             android:layout_width="match_parent"
@@ -163,7 +171,9 @@
             android:layout_marginTop="@dimen/profileEditTextTopMargin"
             android:hint="@string/enter_your_twitter_username"
             android:inputType="textShortMessage"
-            android:textColor="@color/black" />
+            android:importantForAutofill="no"
+            android:textColor="@color/black"
+            tools:targetApi="o" />
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/submitButton"
