@@ -41,6 +41,7 @@ public class MainActivity extends FragmentActivity {
     private static final int RC_PHOTO_PICKER = 2;
     private static final int RC_CHAT_PHOTO_PICKER = 3;
 
+    private FirebaseStorage mFirebaseStorage;
     private StorageReference mProfileStroageReference;
 
     private String mName;
@@ -65,7 +66,6 @@ public class MainActivity extends FragmentActivity {
 
     private final BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = item -> {
-        Log.e("Arshad", item.getItemId() + " ");
         switch (item.getItemId()) {
             case R.id.navigation_chat:
                 FragmentManager frag = getSupportFragmentManager();
@@ -86,9 +86,9 @@ public class MainActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mt);
-        
+
         initFirebase();
-        
+
         navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         FragmentManager frag1 = getSupportFragmentManager();
@@ -108,7 +108,8 @@ public class MainActivity extends FragmentActivity {
 
         mFirebaseAuth = FirebaseAuth.getInstance();
 
-        FirebaseStorage mFirebaseStorage = FirebaseStorage.getInstance();
+
+        mFirebaseStorage = FirebaseStorage.getInstance();
         mProfileStroageReference = mFirebaseStorage.getReference().child("profile_pic");
 
 

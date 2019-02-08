@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="16dp"
+        android:layout_marginTop="30dp"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="@string/edit_profile"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="22sp" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="profileImageEdit"
+            android:text="@string/profile_image" />
+
+        <!--<Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="clearPic"
+            android:text="remove pic" />-->
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/profile_element_spacing"
+            android:text="@string/username"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/usernameEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/profileEditTextTopMargin"
+            android:textColor="@color/black" />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/profile_element_spacing"
+            android:text="@string/email"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/emailEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/profileEditTextTopMargin"
+            android:textColor="@color/black" />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/profile_element_spacing"
+            android:text="@string/display_name"
+            android:textColor="@color/black" />
+
+        <EditText
+            android:id="@+id/nameEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/profileEditTextTopMargin"
+            android:hint="@string/enter_your_name_here"
+            android:inputType="text"
+            android:textColor="@color/black" />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/profile_element_spacing"
+            android:text="@string/age"
+            android:textColor="@color/black" />
+
+        <EditText
+            android:id="@+id/ageEditemailEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/profileEditTextTopMargin"
+            android:hint="@string/enter_your_age_here"
+            android:inputType="textEmailAddress"
+            android:importantForAutofill="no"
+            android:textColor="@color/black"
+            tools:targetApi="o" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/profile_element_spacing"
+            android:text="@string/programming_languages"
+            android:textColor="@color/black" />
+
+        <EditText
+            android:id="@+id/langEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/profileEditTextTopMargin"
+            android:hint="@string/enter_programming_languages_which_you_know"
+            android:inputType="text"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/profile_element_spacing"
+            android:text="@string/github_optional"
+            android:textColor="@color/black" />
+
+        <EditText
+            android:id="@+id/gitEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/profileEditTextTopMargin"
+            android:hint="@string/enter_your_github_username"
+            android:inputType="text"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/profile_element_spacing"
+            android:text="@string/twitter_optional"
+            android:textColor="@color/black" />
+
+        <EditText
+            android:id="@+id/twitEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/profileEditTextTopMargin"
+            android:hint="@string/enter_your_linkedin_username"
+            android:inputType="textShortMessage"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/profile_element_spacing"
+            android:text="@string/linkedin_optional"
+            android:textColor="@color/black" />
+
+        <EditText
+            android:id="@+id/linkEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/profileEditTextTopMargin"
+            android:hint="@string/enter_your_twitter_username"
+            android:inputType="textShortMessage"
+            android:textColor="@color/black" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/submitButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/fab_margin"
+            app:srcCompat="@android:drawable/ic_menu_send" />
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|start"
+            android:layout_marginBottom="40dp"
+            android:onClick="signout"
+            android:text="@string/sign_out" />
+
+    </LinearLayout>
+</ScrollView>

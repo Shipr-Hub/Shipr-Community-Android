@@ -1,5 +1,6 @@
 package tech.shipr.socialdev.view;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -12,7 +13,9 @@ public class ViewProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_profile);
 
-        //TODO Get the data from the intent
+        // Get the data from the intent
+        Intent intent = getIntent();
+        String uid = intent.getStringExtra("uid");
 
         //TODO Based on the user id, load the persons data
     }

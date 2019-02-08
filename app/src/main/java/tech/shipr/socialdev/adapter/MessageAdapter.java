@@ -23,13 +23,14 @@ import java.util.TimeZone;
 
 import tech.shipr.socialdev.R;
 import tech.shipr.socialdev.model.DeveloperMessage;
-import tech.shipr.socialdev.view.MTActivity;
-import tech.shipr.socialdev.view.ProfileActivity;
+import tech.shipr.socialdev.view.MainActivity;
+import tech.shipr.socialdev.view.ViewProfileActivity;
 
 
 public class MessageAdapter extends ArrayAdapter<DeveloperMessage> implements View.OnClickListener {
 
     Context mContext;
+    DeveloperMessage message;
 
     public MessageAdapter(Context context, int resource, List<DeveloperMessage> objects) {
         super(context, resource, objects);
@@ -48,7 +49,8 @@ public class MessageAdapter extends ArrayAdapter<DeveloperMessage> implements Vi
         //     TextView dateTextView = convertView.findViewById(R.id.dateTextView);
         ImageView profileImageView = convertView.findViewById(R.id.photoImageView);
 
-        DeveloperMessage message = getItem(position);
+
+        message = getItem(position);
 
         messageTextView.setVisibility(View.VISIBLE);
         messageTextView.setText(message.getText());
@@ -85,8 +87,6 @@ public class MessageAdapter extends ArrayAdapter<DeveloperMessage> implements Vi
         } catch (java.text.ParseException e) {
             e.printStackTrace();
         }
-
-
         return convertView;
     }
 
@@ -94,10 +94,9 @@ public class MessageAdapter extends ArrayAdapter<DeveloperMessage> implements Vi
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.photoImageView:
-                FragmentManager frag2 = ((FragmentActivity)mContext).getSupportFragmentManager();
-                frag2.beginTransaction().replace(R.id.content_frame, new ProfileActivity()).commit();
-                ((MTActivity)mContext).navigation.setSelectedItemId(R.id.navigation_profile);
-
+                Intent intentName = new Intent(mContext, ViewProfileActivity.class);
+                intentName.putExtra("uid", message.getUid());
+                mContext.startActivity(intentName);
                 break;
         }
     }
