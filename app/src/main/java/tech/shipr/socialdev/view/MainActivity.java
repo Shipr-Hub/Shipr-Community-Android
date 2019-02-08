@@ -1,6 +1,5 @@
 package tech.shipr.socialdev.view;
 
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -8,9 +7,6 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.view.View;
 import android.widget.Toast;
 
@@ -39,7 +35,7 @@ import tech.shipr.socialdev.R;
 import tech.shipr.socialdev.model.DeveloperMessage;
 
 
-public class MTActivity extends FragmentActivity {
+public class MainActivity extends FragmentActivity {
 
     private static final int RC_SIGN_IN = 1;
     private static final int RC_PHOTO_PICKER = 2;
@@ -76,7 +72,7 @@ public class MTActivity extends FragmentActivity {
 
             case R.id.navigation_profile:
                 FragmentManager frag2 = getSupportFragmentManager();
-                frag2.beginTransaction().replace(R.id.content_frame, new ProfileActivity()).commit();
+                frag2.beginTransaction().replace(R.id.content_frame, new EditProfileActivity()).commit();
 
                 return true;
         }
@@ -214,7 +210,7 @@ public class MTActivity extends FragmentActivity {
                                 uid);
                         mMessagesDatabaseReference.push().setValue(developerMessage);
                     } else {
-                        Toast.makeText(MTActivity.this, "upload failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "upload failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -240,7 +236,7 @@ public class MTActivity extends FragmentActivity {
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         Log.d("profile Pic", "User profile updated.");
-                        Toast.makeText(MTActivity.this, "Profile pic set", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "Profile pic set", Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -268,7 +264,7 @@ public class MTActivity extends FragmentActivity {
         AuthUI.getInstance()
                 .signOut(this)
                 .addOnCompleteListener(task -> {
-                    Toast.makeText(MTActivity.this, "You have been signed out", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "You have been signed out", Toast.LENGTH_SHORT).show();
 
                     startActivityForResult(
                             AuthUI.getInstance()

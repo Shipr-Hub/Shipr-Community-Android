@@ -25,7 +25,7 @@ import com.google.firebase.database.ValueEventListener;
 import tech.shipr.socialdev.R;
 import tech.shipr.socialdev.model.Profile;
 
-public class ProfileActivity extends Fragment {
+public class EditProfileActivity extends Fragment {
 
 
     private TextView usernameEdit;
