@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +13,8 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -23,14 +23,13 @@ import java.util.TimeZone;
 
 import tech.shipr.socialdev.R;
 import tech.shipr.socialdev.model.DeveloperMessage;
-import tech.shipr.socialdev.view.MainActivity;
 import tech.shipr.socialdev.view.ViewProfileActivity;
 
 
 public class MessageAdapter extends ArrayAdapter<DeveloperMessage> implements View.OnClickListener {
 
-    Context mContext;
-    DeveloperMessage message;
+    private Context mContext;
+    private DeveloperMessage message;
 
     public MessageAdapter(Context context, int resource, List<DeveloperMessage> objects) {
         super(context, resource, objects);
@@ -39,7 +38,7 @@ public class MessageAdapter extends ArrayAdapter<DeveloperMessage> implements Vi
 
     @NonNull
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView, @NotNull ViewGroup parent) {
         if (convertView == null) {
             convertView = ((Activity) getContext()).getLayoutInflater().inflate(R.layout.item_message, parent, false);
         }
@@ -58,6 +57,7 @@ public class MessageAdapter extends ArrayAdapter<DeveloperMessage> implements Vi
 
         // Click listeners
         profileImageView.setOnClickListener(MessageAdapter.this);
+
 
 
         String pic = message.getProfilePic();
@@ -95,7 +95,9 @@ public class MessageAdapter extends ArrayAdapter<DeveloperMessage> implements Vi
         switch (v.getId()) {
             case R.id.photoImageView:
                 Intent intentName = new Intent(mContext, ViewProfileActivity.class);
+                // TODO: 2/9/19 Edit this so that it does return the user uid
                 intentName.putExtra("uid", message.getUid());
+                Log.d("uid sent", "onClick: " + message.getUid());
                 mContext.startActivity(intentName);
                 break;
         }

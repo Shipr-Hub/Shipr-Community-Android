@@ -157,7 +157,8 @@ public class EditProfileActivity extends Fragment {
             mProfile = new Profile(
                     fullName,
                     username,
-                    email,
+                  //email,
+                  null,
                     age,
                     languages,
                     github,
