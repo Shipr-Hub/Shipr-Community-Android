@@ -2,6 +2,7 @@ package tech.shipr.socialdev.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
@@ -12,6 +13,8 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -20,16 +23,22 @@ import java.util.TimeZone;
 
 import tech.shipr.socialdev.R;
 import tech.shipr.socialdev.model.DeveloperMessage;
+import tech.shipr.socialdev.view.ViewProfileActivity;
 
 
-public class MessageAdapter extends ArrayAdapter<DeveloperMessage> {
+public class MessageAdapter extends ArrayAdapter<DeveloperMessage> implements View.OnClickListener {
+
+    private Context mContext;
+    private DeveloperMessage message;
+
     public MessageAdapter(Context context, int resource, List<DeveloperMessage> objects) {
         super(context, resource, objects);
+        mContext = context;
     }
 
     @NonNull
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView, @NotNull ViewGroup parent) {
         if (convertView == null) {
             convertView = ((Activity) getContext()).getLayoutInflater().inflate(R.layout.item_message, parent, false);
         }
@@ -39,11 +48,16 @@ public class MessageAdapter extends ArrayAdapter<DeveloperMessage> {
         //     TextView dateTextView = convertView.findViewById(R.id.dateTextView);
         ImageView profileImageView = convertView.findViewById(R.id.photoImageView);
 
-        DeveloperMessage message = getItem(position);
+
+        message = getItem(position);
 
         messageTextView.setVisibility(View.VISIBLE);
         messageTextView.setText(message.getText());
         authorTextView.setText(message.getName());
+
+        // Click listeners
+        profileImageView.setOnClickListener(MessageAdapter.this);
+
 
 
         String pic = message.getProfilePic();
@@ -73,9 +87,19 @@ public class MessageAdapter extends ArrayAdapter<DeveloperMessage> {
         } catch (java.text.ParseException e) {
             e.printStackTrace();
         }
-
-
         return convertView;
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.photoImageView:
+                Intent intentName = new Intent(mContext, ViewProfileActivity.class);
+                // TODO: 2/9/19 Edit this so that it does return the user uid
+                intentName.putExtra("uid", message.getUid());
+                Log.d("uid sent", "onClick: " + message.getUid());
+                mContext.startActivity(intentName);
+                break;
+        }
+    }
 }

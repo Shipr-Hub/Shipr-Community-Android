@@ -99,7 +99,6 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
         // Initialize references to views
 
         mProgressBar = rootView.findViewById(R.id.progressBar);
-        ListView mMessageListView = rootView.findViewById(R.id.messageListView);
         mMessageListView = rootView.findViewById(R.id.messageListView);
         mSendButton = rootView.findViewById(R.id.sendButton);
         mEmojiButton = rootView.findViewById(R.id.emojiButton);
