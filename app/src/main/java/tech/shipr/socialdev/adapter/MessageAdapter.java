@@ -26,7 +26,7 @@ import tech.shipr.socialdev.model.DeveloperMessage;
 import tech.shipr.socialdev.view.ViewProfileActivity;
 
 
-public class MessageAdapter extends ArrayAdapter<DeveloperMessage> implements View.OnClickListener {
+public class MessageAdapter extends ArrayAdapter<DeveloperMessage> {
 
     private final Context mContext;
     private DeveloperMessage message;
@@ -56,7 +56,7 @@ public class MessageAdapter extends ArrayAdapter<DeveloperMessage> implements Vi
         authorTextView.setText(message.getName());
 
         // Click listeners
-        profileImageView.setOnClickListener(MessageAdapter.this);
+        profileImageView.setOnClickListener(new ClickHandler(mContext, message));
 
 
 
@@ -90,16 +90,27 @@ public class MessageAdapter extends ArrayAdapter<DeveloperMessage> implements Vi
         return convertView;
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.photoImageView:
-                Intent intentName = new Intent(mContext, ViewProfileActivity.class);
-                // TODO: 2/9/19 Edit this so that it does return the user uid
-                intentName.putExtra("uid", message.getUid());
-                Log.d("uid sent", "onClick: " + message.getUid());
-                mContext.startActivity(intentName);
-                break;
+    public class ClickHandler implements View.OnClickListener {
+
+        private Context mContext;
+        private DeveloperMessage message;
+
+        public ClickHandler(Context mContext, DeveloperMessage message) {
+            this.mContext = mContext;
+            this.message = message;
+        }
+
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()) {
+                case R.id.photoImageView:
+                    Intent intentName = new Intent(mContext, ViewProfileActivity.class);
+                    intentName.putExtra("uid", message.getUid());
+                    Log.d("uid sent", "onClick: " + message.getUid());
+                    mContext.startActivity(intentName);
+                    break;
+            }
         }
     }
+
 }
