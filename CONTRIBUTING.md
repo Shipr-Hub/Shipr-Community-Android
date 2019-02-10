@@ -1,15 +1,40 @@
-## Contributing
+# Contributing :
 
-**Working on your first Pull Request?** You can learn how from this *free* series [How to Contribute to an Open Source Project on GitHub](https://egghead.io/series/how-to-contribute-to-an-open-source-project-on-github)
+First of all, thanks for thinking of contributing to this project! 👏
+
+Following these guidelines helps to communicate that you respect the time of the maintainer and developing this open
+source project. In return, they should reciprocate that respect in addressing your issue, assessing changes, and helping
+you finalize your pull requests.
+
+This project has a [Contributor Covenant Code of Conduct](./CODE_OF_CONDUCT.md). By participating in this project you
+agree to abide by its terms.
+
+## Ways to Contribute
+
+- Blog or tweet about the project
+- Improve documentation
+- Fix a bug
+- Implement a new feature
+- Discuss potential ways to improve project
+- Improve existing implementation, performance, etc.
+
+## Questions & Feature Requests
+
+Feel free to [open a ticket](https://github.com/Shipr-Hub/Shipr-Social-Android/issues/new) with your question. Feature requests are
+also welcome. Describe the feature, why you need it, and how it should work. Please provide as much detail and context
+as possible.
+
+## File a Bug
+
+In case you've encountered a bug, please make sure:
 
 1. Check out our [public issues board][0]. If your issue isn't on the board, [open a new one][1].
-2. Pick an issue that nobody has claimed and start working on it. 
-3. Fork the project ([Need help forking a project?][3]). You'll do all of your work on your forked copy.
-4. Create a branch specific to the issue or feature you are working on. Push your work on that branch ([Need help with branching?][4]).
-5. Name the branch something like `fixes-xxx-issue` or `add-xxx-feature` where `xxx` is a short description of the changes or feature you are adding.
-6. Once your code is ready, submit a pull request from your branch to Maker ToolBox's `master` branch. We'll do a quick review and give you feedback.
+- In your issue description, please include:
+  - What you expected to see, and what happened instead.
+  - Interesting logs.
+  - All steps to reproduce the issue.
+2. Fork the project ([Need help forking a project?][3]). You'll do all of your work on your forked copy.
+3. Create a branch specific to the issue or feature you are working on. Push your work on that branch ([Need help with branching?][4]).
+4. Name the branch something like `fixes-xxx-issue` or `add-xxx-feature` where `xxx` is a short description of the changes or feature you are adding.
+5. Once your code is ready, submit a pull request from your branch to Shipr's `master` branch. We'll do a quick review and give you feedback.
 
-[0]: https://github.com/yhdesai/Maker-ToolBox-Android/issues
-[1]: https://github.com/yhdesai/Maker-ToolBox-Android/issues/new
-[3]: https://help.github.com/articles/fork-a-repo/
-[4]: https://github.com/Kunena/Kunena-Forum/wiki/Create-a-new-branch-with-git-and-manage-branches
