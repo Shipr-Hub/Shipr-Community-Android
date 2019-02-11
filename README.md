@@ -47,7 +47,7 @@ agree to abide by its terms.
 
 ### Questions & Feature Requests
 
-Feel free to [open a ticket](https://github.com/Shipr-Hub/Shipr-Social-Android/issues/new) with your question. Feature requests are
+Feel free to [open a ticket][2] with your question. Feature requests are
 also welcome. Describe the feature, why you need it, and how it should work. Please provide as much detail and context
 as possible.
 
