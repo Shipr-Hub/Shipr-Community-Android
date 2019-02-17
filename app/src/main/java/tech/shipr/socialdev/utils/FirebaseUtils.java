@@ -7,6 +7,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+@SuppressWarnings({"WeakerAccess", "ParameterCanBeLocal", "UnusedAssignment", "EmptyMethod"})
 public class FirebaseUtils {
 
     public void initFirebaseApp(Context mContext) {

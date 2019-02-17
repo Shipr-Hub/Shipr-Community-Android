@@ -51,7 +51,6 @@ public class EditProfileActivity extends Fragment {
     private String twitter;
     private String linkedin;
     private Profile mProfile;
-    private ImageView profileImageView;
 
     private static final int RC_PROFILE_PHOTO_PICKER = 4;
 
@@ -69,7 +68,7 @@ public class EditProfileActivity extends Fragment {
         gitEdit = rootView.findViewById(R.id.gitEdit);
         twitEdit = rootView.findViewById(R.id.twitEdit);
         linkEdit = rootView.findViewById(R.id.linkEdit);
-        profileImageView = rootView.findViewById(R.id.profileImage);
+        ImageView profileImageView = rootView.findViewById(R.id.profileImage);
 
         //    mProgressBar = rootView.findViewById(R.id.pProgressBar);
 

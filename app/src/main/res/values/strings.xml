@@ -6,7 +6,6 @@
     <string name="send_button">SEND</string>
 
     <string name="profile_image">profile image</string>
-    <string name="email">Email</string>
 
     <string-array name="chat_channels">
         <item>general</item>
@@ -20,7 +19,6 @@
     <string name="android">android</string>
     <string name="display_name">Display Name</string>
     <string name="enter_your_name_here">Enter your name here</string>
-    <string name="username">Username</string>
     <string name="age">Age</string>
     <string name="enter_your_age_here">Enter your age here</string>
     <string name="programming_languages">Programming Languages</string>

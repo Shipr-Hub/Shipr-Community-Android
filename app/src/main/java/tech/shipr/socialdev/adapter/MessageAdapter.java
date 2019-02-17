@@ -31,8 +31,6 @@ import tech.shipr.socialdev.view.ViewProfileActivity;
 public class MessageAdapter extends ArrayAdapter<DeveloperMessage> {
 
     private final Context mContext;
-    private DeveloperMessage message;
-    private FirebaseAuth firebaseAuth;
 
     public MessageAdapter(Context context, int resource, List<DeveloperMessage> objects) {
         super(context, resource, objects);
@@ -45,7 +43,7 @@ public class MessageAdapter extends ArrayAdapter<DeveloperMessage> {
 
         initFirebase();
 
-        message = getItem(position);
+        DeveloperMessage message = getItem(position);
         assert message != null;
 
 
@@ -114,13 +112,13 @@ public class MessageAdapter extends ArrayAdapter<DeveloperMessage> {
 
     private void initFirebase() {
         FirebaseApp.initializeApp(getContext());
-        firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     }
 
-    public class ClickHandler implements View.OnClickListener {
+    class ClickHandler implements View.OnClickListener {
 
-        private Context mContext;
-        private DeveloperMessage message;
+        private final Context mContext;
+        private final DeveloperMessage message;
 
         ClickHandler(Context mContext, DeveloperMessage message) {
             this.mContext = mContext;
