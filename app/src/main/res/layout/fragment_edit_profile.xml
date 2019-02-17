@@ -24,46 +24,36 @@
             android:textColor="@color/black"
             android:textSize="22sp" />
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="profileImageEdit"
-            android:text="@string/profile_image" />
 
-        <!--<Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="clearPic"
-            android:text="remove pic" />-->
+        <ImageView
+            android:id="@+id/profileImage"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:background="@color/black"
+            android:contentDescription="@string/profile_image"
+            android:onClick="profileImageEdit" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/profile_element_spacing"
-            android:text="@string/username"
-            android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/usernameEdit"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+
+            android:layout_gravity="center"
             android:layout_marginTop="@dimen/profileEditTextTopMargin"
-            android:textColor="@color/black" />
-
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/profile_element_spacing"
-            android:text="@string/email"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            tools:text="Username" />
 
         <TextView
             android:id="@+id/emailEdit"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+
+            android:layout_gravity="center"
             android:layout_marginTop="@dimen/profileEditTextTopMargin"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            tools:text="user@email.com" />
 
 
         <TextView
@@ -79,8 +69,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/profileEditTextTopMargin"
             android:hint="@string/enter_your_name_here"
-            android:inputType="text"
             android:importantForAutofill="no"
+            android:inputType="text"
             android:textColor="@color/black"
             tools:targetApi="o" />
 
@@ -98,8 +88,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/profileEditTextTopMargin"
             android:hint="@string/enter_your_age_here"
-            android:inputType="textEmailAddress"
             android:importantForAutofill="no"
+            android:inputType="textEmailAddress"
             android:textColor="@color/black"
             tools:targetApi="o" />
 
@@ -116,8 +106,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/profileEditTextTopMargin"
             android:hint="@string/enter_programming_languages_which_you_know"
-            android:inputType="text"
             android:importantForAutofill="no"
+            android:inputType="text"
             android:textColor="@color/black"
             tools:targetApi="o" />
 
@@ -134,8 +124,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/profileEditTextTopMargin"
             android:hint="@string/enter_your_github_username"
-            android:inputType="text"
             android:importantForAutofill="no"
+            android:inputType="text"
             android:textColor="@color/black"
             tools:targetApi="o" />
 
@@ -152,8 +142,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/profileEditTextTopMargin"
             android:hint="@string/enter_your_linkedin_username"
-            android:inputType="textShortMessage"
             android:importantForAutofill="no"
+            android:inputType="textShortMessage"
             android:textColor="@color/black"
             tools:targetApi="o" />
 
@@ -170,8 +160,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/profileEditTextTopMargin"
             android:hint="@string/enter_your_twitter_username"
-            android:inputType="textShortMessage"
             android:importantForAutofill="no"
+            android:inputType="textShortMessage"
             android:textColor="@color/black"
             tools:targetApi="o" />
 
