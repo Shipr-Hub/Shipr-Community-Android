@@ -1,6 +1,7 @@
 package tech.shipr.socialdev.view;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -10,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.firebase.FirebaseApp;
@@ -21,6 +23,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -48,6 +51,7 @@ public class EditProfileActivity extends Fragment {
     private String twitter;
     private String linkedin;
     private Profile mProfile;
+    private ImageView profileImageView;
 
     private static final int RC_PROFILE_PHOTO_PICKER = 4;
 
@@ -65,6 +69,8 @@ public class EditProfileActivity extends Fragment {
         gitEdit = rootView.findViewById(R.id.gitEdit);
         twitEdit = rootView.findViewById(R.id.twitEdit);
         linkEdit = rootView.findViewById(R.id.linkEdit);
+        profileImageView = rootView.findViewById(R.id.profileImage);
+
         //    mProgressBar = rootView.findViewById(R.id.pProgressBar);
 
         FirebaseApp.initializeApp(getActivity());
@@ -75,7 +81,7 @@ public class EditProfileActivity extends Fragment {
         assert user != null;
         String id = user.getUid();
         mprofileDatabaseReference = mFirebaseDatabase.getReference().child("users" + "/" + id + "/" + "profile");
-       //mProgressBarPresent = true;
+        //mProgressBarPresent = true;
 
 
         {
@@ -83,7 +89,8 @@ public class EditProfileActivity extends Fragment {
 
             String username = user.getDisplayName();
             String email = user.getEmail();
-            // Uri photoUrl = user.getPhotoUrl();
+            Uri photoUri = user.getPhotoUrl();
+
 
             // Check if user's email is verified
             boolean emailVerified = user.isEmailVerified();
@@ -92,6 +99,11 @@ public class EditProfileActivity extends Fragment {
 
             emailEdit.setText(email);
             usernameEdit.setText(username);
+            if (photoUri != null && !photoUri.equals(Uri.EMPTY)) {
+                Picasso.get().load(photoUri).fit().into(profileImageView);
+            }
+
+
         }
 
 
@@ -155,8 +167,8 @@ public class EditProfileActivity extends Fragment {
             mProfile = new Profile(
                     fullName,
                     username,
-                  //email,
-                  null,
+                    //email,
+                    null,
                     age,
                     languages,
                     github,
@@ -190,6 +202,7 @@ public class EditProfileActivity extends Fragment {
                 .build();
 
     }
+
     public void openImagePicker() {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("image/jpeg");
