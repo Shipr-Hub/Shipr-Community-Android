@@ -11,6 +11,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.picasso.Picasso;
 
 import org.jetbrains.annotations.NotNull;
@@ -30,6 +32,7 @@ public class MessageAdapter extends ArrayAdapter<DeveloperMessage> {
 
     private final Context mContext;
     private DeveloperMessage message;
+    private FirebaseAuth firebaseAuth;
 
     public MessageAdapter(Context context, int resource, List<DeveloperMessage> objects) {
         super(context, resource, objects);
@@ -39,9 +42,31 @@ public class MessageAdapter extends ArrayAdapter<DeveloperMessage> {
     @NonNull
     @Override
     public View getView(int position, View convertView, @NotNull ViewGroup parent) {
+
+        initFirebase();
+
+        message = getItem(position);
+        assert message != null;
+
+
+        //TODO: refer issue #94
+       /* if (convertView == null) {
+            FirebaseUser user = firebaseAuth.getCurrentUser();
+            assert user != null;
+            String uid = user.getUid();
+            if (message.getUid().equals(uid)) {
+                convertView = ((Activity) getContext()).getLayoutInflater().inflate(R.layout.item_message_right, parent, false);
+            } else {
+                convertView = ((Activity) getContext()).getLayoutInflater().inflate(R.layout.item_message, parent, false);
+
+            }
+        }*/
+
         if (convertView == null) {
             convertView = ((Activity) getContext()).getLayoutInflater().inflate(R.layout.item_message, parent, false);
         }
+
+
         TextView messageTextView = convertView.findViewById(R.id.messageTextView);
         TextView authorTextView = convertView.findViewById(R.id.nameTextView);
         TextView timeTextView = convertView.findViewById(R.id.timeTextView);
@@ -49,15 +74,12 @@ public class MessageAdapter extends ArrayAdapter<DeveloperMessage> {
         ImageView profileImageView = convertView.findViewById(R.id.photoImageView);
 
 
-        message = getItem(position);
-
         messageTextView.setVisibility(View.VISIBLE);
         messageTextView.setText(message.getText());
         authorTextView.setText(message.getName());
 
         // Click listeners
         profileImageView.setOnClickListener(new ClickHandler(mContext, message));
-
 
 
         String pic = message.getProfilePic();
@@ -90,12 +112,17 @@ public class MessageAdapter extends ArrayAdapter<DeveloperMessage> {
         return convertView;
     }
 
+    private void initFirebase() {
+        FirebaseApp.initializeApp(getContext());
+        firebaseAuth = FirebaseAuth.getInstance();
+    }
+
     public class ClickHandler implements View.OnClickListener {
 
         private Context mContext;
         private DeveloperMessage message;
 
-        public ClickHandler(Context mContext, DeveloperMessage message) {
+        ClickHandler(Context mContext, DeveloperMessage message) {
             this.mContext = mContext;
             this.message = message;
         }
@@ -112,5 +139,6 @@ public class MessageAdapter extends ArrayAdapter<DeveloperMessage> {
             }
         }
     }
+
 
 }
