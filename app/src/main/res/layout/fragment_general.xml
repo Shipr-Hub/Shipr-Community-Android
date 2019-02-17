@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:emojicon="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:emojicon="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -40,20 +40,21 @@
             <ImageView
                 android:id="@+id/emojiButton"
                 android:layout_width="64dp"
-                android:layout_height="48dp"
-                android:layout_gravity="bottom"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
                 android:clickable="true"
+                android:contentDescription="@string/emoji_button"
                 android:focusable="true"
                 android:gravity="center"
-                android:contentDescription="@string/emoji_button"
-                android:src="@drawable/smiley" />
+                android:src="@drawable/smiley"
+                android:text="@string/send_button"
+                android:textSize="14sp" />
 
             <hani.momanii.supernova_emoji_library.Helper.EmojiconEditText
                 android:id="@+id/emojicon_edit_text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
