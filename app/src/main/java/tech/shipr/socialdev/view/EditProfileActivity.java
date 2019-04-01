@@ -210,6 +210,7 @@ public class EditProfileActivity extends Fragment {
 
     }
 
+
  /*   private void mProgressBarCheck(){
         if(mProgressBarPresent){
             mProgressBar.setVisibility(View.GONE);

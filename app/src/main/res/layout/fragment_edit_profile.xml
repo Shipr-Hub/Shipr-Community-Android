@@ -182,5 +182,11 @@
             android:onClick="signout"
             android:text="@string/sign_out" />
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="openPrivacyPolicy"
+            android:text="@string/privacyPolicy" />
+
     </LinearLayout>
 </ScrollView>
