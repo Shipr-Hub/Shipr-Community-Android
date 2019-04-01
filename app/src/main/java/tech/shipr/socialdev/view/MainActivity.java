@@ -1,6 +1,8 @@
 package tech.shipr.socialdev.view;
 
 import android.annotation.SuppressLint;
+import android.app.ActivityManager;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -35,6 +37,7 @@ import java.util.TimeZone;
 import tech.shipr.socialdev.PrivacyPolicy;
 import tech.shipr.socialdev.R;
 import tech.shipr.socialdev.model.DeveloperMessage;
+import tech.shipr.socialdev.notification.NotificationService;
 
 
 public class MainActivity extends FragmentActivity {
@@ -57,6 +60,7 @@ public class MainActivity extends FragmentActivity {
     private String uid;
     private DatabaseReference mMessagesDatabaseReference;
     private static DatabaseReference rootRef;
+    private Intent service;
     // Firebase instance variable
 
     private FirebaseAuth.AuthStateListener mAuthStateListener;
@@ -304,6 +308,36 @@ public class MainActivity extends FragmentActivity {
 
     public void openPrivacyPolicy(View view) {
         startActivity(new Intent(MainActivity.this, PrivacyPolicy.class));
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (service == null) service = new Intent(getBaseContext(), NotificationService.class);
+        if (isServiceRunning(NotificationService.class)) {
+            NotificationService.state = false;
+            stopService(service);
+        }
+
+        Intent i = new Intent(NotificationService.service_broadcast);
+        this.sendBroadcast(i, NotificationService.service_broadcast);
+    }
+
+    private boolean isServiceRunning(Class<?> serviceClass) {
+        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo serviceInfo : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.getName().equals(serviceInfo.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    protected void onPause() {
+        if (!isServiceRunning(NotificationService.class)) startService(service);
+        super.onPause();
     }
 
 }

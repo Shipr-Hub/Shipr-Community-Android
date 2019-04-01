@@ -1,6 +1,8 @@
 package tech.shipr.socialdev.view;
 
 import android.annotation.SuppressLint;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -47,6 +49,7 @@ import hani.momanii.supernova_emoji_library.Helper.EmojiconsPopup;
 import tech.shipr.socialdev.R;
 import tech.shipr.socialdev.adapter.MessageAdapter;
 import tech.shipr.socialdev.model.DeveloperMessage;
+import tech.shipr.socialdev.notification.NotificationService;
 
 
 public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedListener {
@@ -97,6 +100,11 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
         ImageView mEmojiButton = rootView.findViewById(R.id.emojiButton);
         mEmojiconEditText = rootView.findViewById(R.id.emojicon_edit_text);
         Spinner spinner = rootView.findViewById(R.id.chatChannelSpinner);
+
+        //Clear Notification
+        NotificationManager notificationManager = (NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
+        int channel_id = NotificationService.getIntId("general");
+        if (channel_id != -1) notificationManager.cancel(channel_id);
 
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(Objects.requireNonNull(getActivity()),
