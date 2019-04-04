@@ -177,14 +177,19 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|start"
-            android:layout_marginBottom="40dp"
             android:onClick="signout"
             android:text="@string/sign_out" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="purchaseHelp"
+            android:text="purchase Featured Help" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="40dp"
             android:onClick="openPrivacyPolicy"
             android:text="@string/privacyPolicy" />
 

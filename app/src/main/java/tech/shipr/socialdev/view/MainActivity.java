@@ -34,6 +34,7 @@ import java.util.Date;
 import java.util.Objects;
 import java.util.TimeZone;
 
+import tech.shipr.socialdev.BillingActivity;
 import tech.shipr.socialdev.PrivacyPolicy;
 import tech.shipr.socialdev.R;
 import tech.shipr.socialdev.model.DeveloperMessage;
@@ -304,6 +305,10 @@ public class MainActivity extends FragmentActivity {
 
         });
 
+    }
+
+    public void purchaseHelp(View view) {
+        startActivity(new Intent(MainActivity.this, BillingActivity.class));
     }
 
     public void openPrivacyPolicy(View view) {
