@@ -98,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
 
         BottomNavigationView navigation = findViewById(R.id.navigation);
         toolbar = findViewById(R.id.toolbar);
+        toolbar.setOverflowIcon(getResources().getDrawable(R.drawable.filter));
         setSupportActionBar(toolbar);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         FragmentManager frag1 = getSupportFragmentManager();
