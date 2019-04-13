@@ -5,15 +5,18 @@
 
     <item
         android:title="@string/general"
+        android:id="@+id/general"
         app:showAsAction="never"/>
 
     <item
         android:title="@string/help"
+        android:id="@+id/help"
         app:showAsAction="never"/>
 
 
     <item
         android:title="@string/android"
+        android:id="@+id/android"
         app:showAsAction="never"/>
 
 
