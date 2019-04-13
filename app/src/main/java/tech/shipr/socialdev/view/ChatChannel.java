@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
@@ -84,7 +85,7 @@ public class ChatChannel extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_general, container, false);
-
+        ((AppCompatActivity) getActivity()).getSupportActionBar().show();
 
         mName = ANONYMOUS;
         mChannel = "general";
@@ -344,7 +345,7 @@ public class ChatChannel extends Fragment {
         mMessageAdapter.clear();
     }
 
-    private void updateChannel(String channelName) {
+    public void updateChannel(String channelName) {
         mMessageAdapter.clear();
         detachDatabaseReadListener();
         subToChannel();
