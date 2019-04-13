@@ -9,7 +9,11 @@ import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Toast;
 
@@ -41,7 +45,7 @@ import tech.shipr.socialdev.model.DeveloperMessage;
 import tech.shipr.socialdev.notification.NotificationService;
 
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends AppCompatActivity {
 
     private static final int RC_SIGN_IN = 1;
     private static final int RC_PHOTO_PICKER = 2;
@@ -62,6 +66,7 @@ public class MainActivity extends FragmentActivity {
     private DatabaseReference mMessagesDatabaseReference;
     private static DatabaseReference rootRef;
     private Intent service;
+    private Toolbar toolbar;
     // Firebase instance variable
 
     private FirebaseAuth.AuthStateListener mAuthStateListener;
@@ -92,9 +97,18 @@ public class MainActivity extends FragmentActivity {
         initFirebase();
 
         BottomNavigationView navigation = findViewById(R.id.navigation);
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         FragmentManager frag1 = getSupportFragmentManager();
         frag1.beginTransaction().replace(R.id.content_frame, new ChatChannel()).commit();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.chat_channel_menu, menu);
+        return true;
     }
 
     private void initFirebase() {
