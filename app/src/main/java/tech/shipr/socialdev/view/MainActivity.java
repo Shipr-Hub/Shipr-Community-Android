@@ -14,7 +14,9 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
@@ -67,6 +69,8 @@ public class MainActivity extends AppCompatActivity {
     private static DatabaseReference rootRef;
     private Intent service;
     private Toolbar toolbar;
+    private ChatChannel chatChannel;
+    private TextView categoryTextView;
     // Firebase instance variable
 
     private FirebaseAuth.AuthStateListener mAuthStateListener;
@@ -76,7 +80,9 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.navigation_chat:
                 FragmentManager frag = getSupportFragmentManager();
-                frag.beginTransaction().replace(R.id.content_frame, new ChatChannel()).commit();
+                chatChannel = new ChatChannel();
+                setCategoryLabel(getResources().getString(R.string.general));
+                frag.beginTransaction().replace(R.id.content_frame, chatChannel).commit();
 
                 return true;
 
@@ -96,13 +102,16 @@ public class MainActivity extends AppCompatActivity {
 
         initFirebase();
 
+        chatChannel = new ChatChannel();
+
         BottomNavigationView navigation = findViewById(R.id.navigation);
+        categoryTextView = findViewById(R.id.categoryTextView);
         toolbar = findViewById(R.id.toolbar);
         toolbar.setOverflowIcon(getResources().getDrawable(R.drawable.filter));
         setSupportActionBar(toolbar);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         FragmentManager frag1 = getSupportFragmentManager();
-        frag1.beginTransaction().replace(R.id.content_frame, new ChatChannel()).commit();
+        frag1.beginTransaction().replace(R.id.content_frame, chatChannel).commit();
     }
 
     @Override
@@ -110,6 +119,30 @@ public class MainActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.chat_channel_menu, menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.general:
+                chatChannel.updateChannel(getResources().getStringArray(R.array.chat_channels)[0]);
+                setCategoryLabel(getResources().getString(R.string.general));
+                return true;
+            case R.id.help:
+                chatChannel.updateChannel(getResources().getStringArray(R.array.chat_channels)[1]);
+                setCategoryLabel(getResources().getString(R.string.help));
+                return true;
+            case R.id.android:
+                chatChannel.updateChannel(getResources().getStringArray(R.array.chat_channels)[2]);
+                setCategoryLabel(getResources().getString(R.string.android));
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void setCategoryLabel(String categoryLabel) {
+        categoryTextView.setText(categoryLabel);
     }
 
     private void initFirebase() {
