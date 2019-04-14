@@ -66,6 +66,7 @@ public class MessageAdapter extends ArrayAdapter<DeveloperMessage> {
 
 
         TextView messageTextView = convertView.findViewById(R.id.messageTextView);
+        messageTextView.setMaxWidth(mContext.getResources().getDisplayMetrics().widthPixels - 160);
         TextView authorTextView = convertView.findViewById(R.id.nameTextView);
         TextView timeTextView = convertView.findViewById(R.id.timeTextView);
         //     TextView dateTextView = convertView.findViewById(R.id.dateTextView);

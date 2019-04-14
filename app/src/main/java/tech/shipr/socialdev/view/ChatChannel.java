@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
@@ -52,7 +53,7 @@ import tech.shipr.socialdev.model.DeveloperMessage;
 import tech.shipr.socialdev.notification.NotificationService;
 
 
-public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedListener {
+public class ChatChannel extends Fragment {
     private static final String ANONYMOUS = "anonymous";
     private static final int DEFAULT_MSG_LENGTH_LIMIT = 1000;
     private static final int RC_SIGN_IN = 1;
@@ -84,7 +85,7 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_general, container, false);
-
+        ((AppCompatActivity) getActivity()).getSupportActionBar().show();
 
         mName = ANONYMOUS;
         mChannel = "general";
@@ -99,23 +100,11 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
         mSendButton = rootView.findViewById(R.id.sendButton);
         ImageView mEmojiButton = rootView.findViewById(R.id.emojiButton);
         mEmojiconEditText = rootView.findViewById(R.id.emojicon_edit_text);
-        Spinner spinner = rootView.findViewById(R.id.chatChannelSpinner);
 
         //Clear Notification
         NotificationManager notificationManager = (NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
         int channel_id = NotificationService.getIntId("general");
         if (channel_id != -1) notificationManager.cancel(channel_id);
-
-        // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(Objects.requireNonNull(getActivity()),
-                R.array.chat_channels, android.R.layout.simple_spinner_item);
-
-        // Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        // Apply the adapter to the spinner
-        spinner.setAdapter(adapter);
-        spinner.setOnItemSelectedListener(this);
 
         //Emoji
         EmojIconActions mEmojicon = new EmojIconActions(Objects.requireNonNull(getContext()).getApplicationContext(), rootView, mEmojiconEditText, mEmojiButton);
@@ -356,25 +345,12 @@ public class ChatChannel extends Fragment implements AdapterView.OnItemSelectedL
         mMessageAdapter.clear();
     }
 
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        String items = parent.getSelectedItem().toString();
-        Log.i("Selected item : ", items);
-        mChannel = items;
-        updateChannel(items);
-    }
-
-    private void updateChannel(String channelName) {
+    public void updateChannel(String channelName) {
         mMessageAdapter.clear();
         detachDatabaseReadListener();
         subToChannel();
         mMessagesDatabaseReference = mFirebaseDatabase.getReference().child("chat/" + channelName);
         attachDatabaseReadListener();
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
     }
 
     private void subToChannel() {
