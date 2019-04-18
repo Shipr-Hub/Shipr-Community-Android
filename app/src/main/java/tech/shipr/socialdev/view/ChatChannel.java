@@ -8,6 +8,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
@@ -15,32 +17,26 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.Spinner;
 
 import com.firebase.ui.auth.AuthUI;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 import java.util.Objects;
 import java.util.TimeZone;
 
@@ -58,6 +54,7 @@ public class ChatChannel extends Fragment {
     private static final int DEFAULT_MSG_LENGTH_LIMIT = 1000;
     private static final int RC_SIGN_IN = 1;
     private MessageAdapter mMessageAdapter;
+    private LinearLayoutManager mLinearLayoutManager;
     private ImageButton mSendButton;
 
     private String mName;
@@ -70,16 +67,18 @@ public class ChatChannel extends Fragment {
     // Firebase instance variable
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mMessagesDatabaseReference;
-    private ChildEventListener mChildEventListener;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
-
 
     private EmojiconEditText mEmojiconEditText;
 
     private String mChannel;
     private ProgressBar mProgressBar;
     private String uid;
+    private RecyclerView mMessageRecycler;
+    private EmojIconActions mEmojicon;
+
+
 
     @Nullable
     @Override
@@ -96,10 +95,24 @@ public class ChatChannel extends Fragment {
         // Initialize references to views
 
         mProgressBar = rootView.findViewById(R.id.progressBar);
-        ListView mMessageListView = rootView.findViewById(R.id.messageListView);
+        mMessageRecycler = rootView.findViewById(R.id.messageRecyclerView);
         mSendButton = rootView.findViewById(R.id.sendButton);
         ImageView mEmojiButton = rootView.findViewById(R.id.emojiButton);
         mEmojiconEditText = rootView.findViewById(R.id.emojicon_edit_text);
+        mEmojicon = new EmojIconActions(Objects.requireNonNull(getContext()).getApplicationContext(), rootView, mEmojiconEditText, mEmojiButton);
+
+        return rootView;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        //Init RecyclerView
+        mLinearLayoutManager = new LinearLayoutManager(getActivity());
+        mLinearLayoutManager.setStackFromEnd(true);
+        mMessageRecycler.setLayoutManager(mLinearLayoutManager);
+        mMessageRecycler.setHasFixedSize(true);
 
         //Clear Notification
         NotificationManager notificationManager = (NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
@@ -107,7 +120,6 @@ public class ChatChannel extends Fragment {
         if (channel_id != -1) notificationManager.cancel(channel_id);
 
         //Emoji
-        EmojIconActions mEmojicon = new EmojIconActions(Objects.requireNonNull(getContext()).getApplicationContext(), rootView, mEmojiconEditText, mEmojiButton);
         mEmojicon.ShowEmojIcon();
         mEmojicon.setUseSystemEmoji(true);
 
@@ -126,12 +138,31 @@ public class ChatChannel extends Fragment {
         mEmojicon.addEmojiconEditTextList(mEmojiconEditText);
         disableAutoOpenEmoji(mEmojicon);
 
+        FirebaseRecyclerOptions<DeveloperMessage> options =
+                new FirebaseRecyclerOptions.Builder<DeveloperMessage>()
+                        .setQuery(mMessagesDatabaseReference,DeveloperMessage.class)
+                        .setLifecycleOwner(this)
+                        .build();
 
-        // Initialize message ListView and its adapter
-        List<DeveloperMessage> friendlyMessages = new ArrayList<>();
-        mMessageAdapter = new MessageAdapter(getActivity(), R.layout.item_message, friendlyMessages);
-        mMessageListView.setAdapter(mMessageAdapter);
+        mMessageAdapter = new MessageAdapter(getContext(), options) {
+            @Override
+            public void onLoaded() {
+                mProgressBarCheck();
+            }
+        };
 
+        //TODO: Have to fix this, not scrolling
+        //Auto scroll when new Messages are arrived
+        mMessageAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+
+            @Override
+            public void onItemRangeInserted(int positionStart, int itemCount) {
+                super.onItemRangeInserted(positionStart, itemCount);
+                mMessageRecycler.scrollToPosition(positionStart);
+            }
+        });
+
+        mMessageRecycler.setAdapter(mMessageAdapter);
 
         //disable send button (will be enabled when text is present)
         mSendButton.setEnabled(false);
@@ -147,12 +178,13 @@ public class ChatChannel extends Fragment {
             mEmojiconEditText.setText("");
         });
 
+
         authStateCheck();
 
         //Keep the keyboard closed on start
         //      ((Activity) getContext()).getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
-        return rootView;
+
     }
 
     private void disableAutoOpenEmoji(EmojIconActions emojActions) {
@@ -238,7 +270,7 @@ public class ChatChannel extends Fragment {
         int year = c.get(Calendar.YEAR);
         int month = c.get(Calendar.MONTH);
         int day = c.get(Calendar.DAY_OF_MONTH);
-        mDate = String.valueOf(day) + "-" + String.valueOf(month) + "-" + String.valueOf(year);
+        mDate = day + "-" + month + "-" + year;
 
         mMessage = mEmojiconEditText.getText().toString();
 
@@ -267,9 +299,8 @@ public class ChatChannel extends Fragment {
                 mPlatform,
                 mVersion,
                 uid);
-        mMessagesDatabaseReference.push().setValue(developerMessage);
 
-
+        mMessagesDatabaseReference.push().setValue(developerMessage).addOnSuccessListener(aVoid -> mMessageRecycler.smoothScrollToPosition(mMessageAdapter.getItemCount()));
     }
 
     private void onSignedInInitialize(String username) {
@@ -279,9 +310,7 @@ public class ChatChannel extends Fragment {
 
     private void onSignedOutCleanup() {
         mName = ANONYMOUS;
-        mMessageAdapter.clear();
         detachDatabaseReadListener();
-
     }
 
     private void mProgressBarCheck() {
@@ -292,41 +321,8 @@ public class ChatChannel extends Fragment {
         }
     }
 
-    private void attachDatabaseReadListener() {
-
-        if (mChildEventListener == null) {
-
-
-            mChildEventListener = new ChildEventListener() {
-                @Override
-                public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String s) {
-                    DeveloperMessage developerMessage = dataSnapshot.getValue(DeveloperMessage.class);
-                    mMessageAdapter.add(developerMessage);
-                    mProgressBarCheck();
-                }
-
-                public void onChildChanged(@NonNull DataSnapshot dataSnapshot, String s) {
-                }
-
-                public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-                }
-
-                public void onChildMoved(@NonNull DataSnapshot dataSnapshot, String s) {
-                }
-
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-                }
-            };
-
-            mMessagesDatabaseReference.addChildEventListener(mChildEventListener);
-        }
-    }
-
     private void detachDatabaseReadListener() {
-        if (mChildEventListener != null) {
-            mMessagesDatabaseReference.removeEventListener(mChildEventListener);
-            mChildEventListener = null;
-        }
+        mMessageAdapter.stopListening();
     }
 
     @Override
@@ -342,23 +338,38 @@ public class ChatChannel extends Fragment {
             mFirebaseAuth.removeAuthStateListener(mAuthStateListener);
         }
         detachDatabaseReadListener();
-        mMessageAdapter.clear();
     }
 
     public void updateChannel(String channelName) {
-        mMessageAdapter.clear();
         detachDatabaseReadListener();
-        subToChannel();
+
         mMessagesDatabaseReference = mFirebaseDatabase.getReference().child("chat/" + channelName);
-        attachDatabaseReadListener();
+
+        FirebaseRecyclerOptions<DeveloperMessage> options =
+                new FirebaseRecyclerOptions.Builder<DeveloperMessage>()
+                        .setQuery(mMessagesDatabaseReference,DeveloperMessage.class)
+                        .setLifecycleOwner(this)
+                        .build();
+
+        mMessageAdapter = new MessageAdapter(getContext(), options) {
+            @Override
+            public void onLoaded() {
+                mProgressBarCheck();
+            }
+        };
+        mMessageRecycler.setAdapter(mMessageAdapter);
+
+        subToChannel(channelName);
+
     }
 
-    private void subToChannel() {
-        FirebaseMessaging.getInstance().subscribeToTopic("weather")
+    private void subToChannel(String channelName) {
+        FirebaseMessaging.getInstance().subscribeToTopic(channelName)
                 .addOnCompleteListener(task -> {
                     String msg = "success";
                     if (!task.isSuccessful()) {
                         msg = "failed";
+
                     }
                     Log.d("msg", msg);
                     //    Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
