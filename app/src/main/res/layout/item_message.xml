@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:paddingTop="8dp">
 
-    <ImageView
+    <tech.shipr.socialdev.custom.CircleImageView
         android:id="@+id/photoImageView"
         android:layout_width="32dp"
         android:layout_height="32dp"
@@ -20,10 +20,12 @@
         android:id="@+id/mainMessageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:background="@drawable/rounded_rectangle_orange"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/message_left"
         android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@+id/timeTextView"
         app:layout_constraintLeft_toRightOf="@+id/photoImageView"
+        app:layout_constraintStart_toEndOf="@+id/photoImageView"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
@@ -44,26 +46,24 @@
             android:autoLink="web"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
+            android:paddingBottom="8dp"
             android:textColor="#000"
             tools:text="Hi, How are you?" />
 
-        <TextView
-            android:id="@+id/timeTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:paddingStart="8dp"
-            android:paddingEnd="12dp"
-            android:paddingBottom="1dp"
-            android:textAlignment="viewEnd"
-            android:textSize="10sp"
-            app:layout_constraintBottom_toBottomOf="@+id/messageTextView"
-            app:layout_constraintLeft_toRightOf="@+id/mainMessageView"
-            tools:ignore="SmallSp"
-            tools:text="11:40" />
 
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/timeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:paddingEnd="8dp"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/mainMessageView"
+        tools:ignore="SmallSp"
+        tools:text="11:40" />
 
     <!--<TextView-->
     <!--android:id="@+id/dateTextView"-->
