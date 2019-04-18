@@ -67,7 +67,6 @@ public class ChatChannel extends Fragment {
     // Firebase instance variable
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mMessagesDatabaseReference;
-    private ChildEventListener mChildEventListener;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
 
@@ -323,9 +322,7 @@ public class ChatChannel extends Fragment {
     }
 
     private void detachDatabaseReadListener() {
-        if (mChildEventListener != null) {
-            mMessageAdapter.stopListening();
-        }
+        mMessageAdapter.stopListening();
     }
 
     @Override
@@ -344,8 +341,9 @@ public class ChatChannel extends Fragment {
     }
 
     public void updateChannel(String channelName) {
-        mMessagesDatabaseReference = mFirebaseDatabase.getReference().child("chat/" + channelName);
         detachDatabaseReadListener();
+
+        mMessagesDatabaseReference = mFirebaseDatabase.getReference().child("chat/" + channelName);
 
         FirebaseRecyclerOptions<DeveloperMessage> options =
                 new FirebaseRecyclerOptions.Builder<DeveloperMessage>()
@@ -361,16 +359,17 @@ public class ChatChannel extends Fragment {
         };
         mMessageRecycler.setAdapter(mMessageAdapter);
 
-        subToChannel();
+        subToChannel(channelName);
 
     }
 
-    private void subToChannel() {
-        FirebaseMessaging.getInstance().subscribeToTopic("weather")
+    private void subToChannel(String channelName) {
+        FirebaseMessaging.getInstance().subscribeToTopic(channelName)
                 .addOnCompleteListener(task -> {
                     String msg = "success";
                     if (!task.isSuccessful()) {
                         msg = "failed";
+
                     }
                     Log.d("msg", msg);
                     //    Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
