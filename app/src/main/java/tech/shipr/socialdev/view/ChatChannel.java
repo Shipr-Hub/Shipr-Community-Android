@@ -20,14 +20,11 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.messaging.FirebaseMessaging;
@@ -67,7 +64,6 @@ public class ChatChannel extends Fragment {
     // Firebase instance variable
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mMessagesDatabaseReference;
-    private ChildEventListener mChildEventListener;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
 
@@ -139,31 +135,7 @@ public class ChatChannel extends Fragment {
         mEmojicon.addEmojiconEditTextList(mEmojiconEditText);
         disableAutoOpenEmoji(mEmojicon);
 
-        FirebaseRecyclerOptions<DeveloperMessage> options =
-                new FirebaseRecyclerOptions.Builder<DeveloperMessage>()
-                        .setQuery(mMessagesDatabaseReference,DeveloperMessage.class)
-                        .setLifecycleOwner(this)
-                        .build();
-
-        mMessageAdapter = new MessageAdapter(getContext(), options) {
-            @Override
-            public void onLoaded() {
-                mProgressBarCheck();
-            }
-        };
-
-        //TODO: Have to fix this, not scrolling
-        //Auto scroll when new Messages are arrived
-        mMessageAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
-
-            @Override
-            public void onItemRangeInserted(int positionStart, int itemCount) {
-                super.onItemRangeInserted(positionStart, itemCount);
-                mMessageRecycler.scrollToPosition(positionStart);
-            }
-        });
-
-        mMessageRecycler.setAdapter(mMessageAdapter);
+        setUpAdapter();
 
         //disable send button (will be enabled when text is present)
         mSendButton.setEnabled(false);
@@ -173,7 +145,7 @@ public class ChatChannel extends Fragment {
 
         FirebaseMessaging.getInstance().subscribeToTopic(mChannel);
 
-        // Send button sends a message and clears the EditText
+        // Send button sends a item_message and clears the EditText
         mSendButton.setOnClickListener(view -> {
             sendMessage();
             mEmojiconEditText.setText("");
@@ -184,8 +156,33 @@ public class ChatChannel extends Fragment {
 
         //Keep the keyboard closed on start
         //      ((Activity) getContext()).getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+    }
 
+    private void setUpAdapter() {
+        // Init Firebase Recycler options
+        FirebaseRecyclerOptions<DeveloperMessage> options =
+                new FirebaseRecyclerOptions.Builder<DeveloperMessage>()
+                        .setQuery(mMessagesDatabaseReference, DeveloperMessage.class)
+                        .setLifecycleOwner(this)
+                        .build();
+        // Init adapter
+        mMessageAdapter = new MessageAdapter(getContext(), options) {
+            @Override
+            public void onLoaded() {
+                mProgressBarCheck();
+            }
+        };
 
+        // Scroll to bottom on new messages
+        mMessageAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onItemRangeInserted(int positionStart, int itemCount) {
+                mMessageRecycler.smoothScrollToPosition(mMessageAdapter.getItemCount());
+            }
+        });
+
+        // Set the adapter
+        mMessageRecycler.setAdapter(mMessageAdapter);
     }
 
     private void disableAutoOpenEmoji(EmojIconActions emojActions) {
@@ -301,7 +298,7 @@ public class ChatChannel extends Fragment {
                 mVersion,
                 uid);
 
-        mMessagesDatabaseReference.push().setValue(developerMessage).addOnSuccessListener(aVoid -> mMessageRecycler.smoothScrollToPosition(mMessageAdapter.getItemCount()));
+        mMessagesDatabaseReference.push().setValue(developerMessage);
     }
 
     private void onSignedInInitialize(String username) {
@@ -323,9 +320,7 @@ public class ChatChannel extends Fragment {
     }
 
     private void detachDatabaseReadListener() {
-        if (mChildEventListener != null) {
-            mMessageAdapter.stopListening();
-        }
+        mMessageAdapter.stopListening();
     }
 
     @Override
@@ -344,33 +339,22 @@ public class ChatChannel extends Fragment {
     }
 
     public void updateChannel(String channelName) {
-        mMessagesDatabaseReference = mFirebaseDatabase.getReference().child("chat/" + channelName);
         detachDatabaseReadListener();
 
-        FirebaseRecyclerOptions<DeveloperMessage> options =
-                new FirebaseRecyclerOptions.Builder<DeveloperMessage>()
-                        .setQuery(mMessagesDatabaseReference,DeveloperMessage.class)
-                        .setLifecycleOwner(this)
-                        .build();
+        mMessagesDatabaseReference = mFirebaseDatabase.getReference().child("chat/" + channelName);
 
-        mMessageAdapter = new MessageAdapter(getContext(), options) {
-            @Override
-            public void onLoaded() {
-                mProgressBarCheck();
-            }
-        };
-        mMessageRecycler.setAdapter(mMessageAdapter);
-
-        subToChannel();
+        setUpAdapter();
+        subToChannel(channelName);
 
     }
 
-    private void subToChannel() {
-        FirebaseMessaging.getInstance().subscribeToTopic("weather")
+    private void subToChannel(String channelName) {
+        FirebaseMessaging.getInstance().subscribeToTopic(channelName)
                 .addOnCompleteListener(task -> {
                     String msg = "success";
                     if (!task.isSuccessful()) {
                         msg = "failed";
+
                     }
                     Log.d("msg", msg);
                     //    Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
