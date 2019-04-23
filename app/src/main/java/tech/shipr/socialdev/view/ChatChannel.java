@@ -145,7 +145,7 @@ public class ChatChannel extends Fragment {
 
         FirebaseMessaging.getInstance().subscribeToTopic(mChannel);
 
-        // Send button sends a item_message and clears the EditText
+        // Send button sends a message and clears the EditText
         mSendButton.setOnClickListener(view -> {
             sendMessage();
             mEmojiconEditText.setText("");
