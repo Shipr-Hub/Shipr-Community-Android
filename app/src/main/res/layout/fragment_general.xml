@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:emojicon="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -8,7 +8,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/chatBG"
+        android:background="#E3DCF1"
         tools:ignore="UselessParent">
 
         <android.support.v7.widget.RecyclerView
@@ -21,7 +21,8 @@
             android:scrollbars="vertical"
             android:stackFromBottom="true"
             android:transcriptMode="alwaysScroll"
-            tools:listitem="@layout/item_message" />
+            tools:listitem="@layout/item_message"
+            tools:targetApi="m" />
 
         <LinearLayout
             android:id="@+id/linearLayout"
@@ -38,16 +39,15 @@
             <ImageView
                 android:id="@+id/emojiButton"
                 android:layout_marginStart="8dp"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:layout_gravity="center"
                 android:clickable="true"
                 android:contentDescription="@string/emoji_button"
                 android:focusable="true"
                 android:gravity="center"
-                android:src="@drawable/smiley"
-                android:text="@string/send_button"
-                android:textSize="14sp" />
+                app:srcCompat="@drawable/ic_emoji"
+                android:text="@string/send_button" />
 
             <hani.momanii.supernova_emoji_library.Helper.EmojiconEditText
                 android:id="@+id/emojicon_edit_text"
@@ -60,7 +60,7 @@
                 android:background="@android:color/transparent"
                 android:hint="@string/enter_message"
                 android:maxLines="6"
-                emojicon:emojiconSize="28sp" />
+                app:emojiconSize="28sp" />
 
 
             <android.support.design.widget.FloatingActionButton
@@ -72,10 +72,11 @@
                 android:contentDescription="@string/msg_send_button"
                 android:focusable="true"
                 android:gravity="center"
-                android:src="@drawable/ic_action_send_now"
                 android:text="@string/send_button"
-                emojicon:backgroundTint="#009688"
-                emojicon:fabSize="mini" />
+                app:backgroundTint="@color/purple"
+                app:elevation="0dp"
+                app:fabSize="mini"
+                app:srcCompat="@drawable/ic_send" />
         </LinearLayout>
 
         <ProgressBar

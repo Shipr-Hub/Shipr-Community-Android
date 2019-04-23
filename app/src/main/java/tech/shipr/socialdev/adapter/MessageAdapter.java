@@ -71,7 +71,7 @@ public abstract class MessageAdapter extends FirebaseRecyclerAdapter<DeveloperMe
         View messageView;
 
         if (viewType == MESSAGE_TYPE_RIGHT) {
-            messageView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_message_right, parent, false);
+            messageView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_message_sent, parent, false);
         } else {
             messageView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_message, parent, false);
         }
