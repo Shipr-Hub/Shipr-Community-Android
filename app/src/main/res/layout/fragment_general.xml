@@ -11,7 +11,7 @@
         android:background="#E3DCF1"
         tools:ignore="UselessParent">
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/messageRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -30,31 +30,35 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentBottom="true"
-            android:minHeight="48dp"
-            android:layout_margin="3dp"
-            android:padding="1dp"
+            android:layout_marginStart="3dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="3dp"
+            android:layout_toStartOf="@+id/sendButton"
             android:background="@drawable/message_write_background"
-            android:orientation="horizontal">
+            android:minHeight="48dp"
+            android:orientation="horizontal"
+            android:padding="1dp">
 
             <ImageView
                 android:id="@+id/emojiButton"
-                android:layout_marginStart="8dp"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_gravity="center"
+                android:layout_marginStart="8dp"
                 android:clickable="true"
                 android:contentDescription="@string/emoji_button"
                 android:focusable="true"
                 android:gravity="center"
-                app:srcCompat="@drawable/ic_emoji"
-                android:text="@string/send_button" />
+                android:text="@string/send_button"
+                app:srcCompat="@drawable/ic_emoji" />
 
             <hani.momanii.supernova_emoji_library.Helper.EmojiconEditText
                 android:id="@+id/emojicon_edit_text"
                 android:layout_width="0dp"
-                android:layout_marginStart="4dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginStart="4dp"
                 android:layout_marginEnd="16dp"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
@@ -63,22 +67,27 @@
                 app:emojiconSize="28sp" />
 
 
-            <android.support.design.widget.FloatingActionButton
-                android:id="@+id/sendButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="4dp"
-                android:contentDescription="@string/msg_send_button"
-                android:focusable="true"
-                android:gravity="center"
-                android:text="@string/send_button"
-                app:backgroundTint="@color/purple"
-                app:elevation="0dp"
-                app:fabSize="mini"
-                app:srcCompat="@drawable/ic_send" />
         </LinearLayout>
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/sendButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="8dp"
+            android:contentDescription="@string/msg_send_button"
+            android:focusable="true"
+            android:gravity="center"
+            android:text="@string/send_button"
+            app:backgroundTint="@color/purple"
+            app:elevation="0dp"
+            app:fabSize="mini"
+            app:srcCompat="@drawable/ic_send" />
         <ProgressBar
             android:id="@+id/progressBar"
             style="?android:attr/progressBarStyleLarge"
