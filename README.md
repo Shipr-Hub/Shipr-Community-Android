@@ -1,7 +1,5 @@
 # Shipr
 
-# MIGRATING TO FLUTTER
-
 Shipr is a Multi-Platform community where developers can chat on their 
 preferred social media with other developers. It's also useful for 
 students who want to get started in the field of technology and are 
