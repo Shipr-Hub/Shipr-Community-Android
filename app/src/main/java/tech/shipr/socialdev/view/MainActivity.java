@@ -7,8 +7,10 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -41,6 +43,7 @@ import java.util.Objects;
 import java.util.TimeZone;
 
 import tech.shipr.socialdev.BillingActivity;
+import tech.shipr.socialdev.PagerAdapter;
 import tech.shipr.socialdev.PrivacyPolicy;
 import tech.shipr.socialdev.R;
 import tech.shipr.socialdev.model.DeveloperMessage;
@@ -81,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.navigation_chat:
                 FragmentManager frag = getSupportFragmentManager();
                 chatChannel = new ChatChannel();
-                setCategoryLabel(getResources().getString(R.string.general));
+             //   setCategoryLabel(getResources().getString(R.string.general));
                 frag.beginTransaction().replace(R.id.content_frame, chatChannel).commit();
 
                 return true;
@@ -98,20 +101,45 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mt);
+        setContentView(R.layout.activity_home);
 
+        TabLayout tabLayout =  findViewById(R.id.tab_layout);
+        tabLayout.addTab(tabLayout.newTab().setText("Chats"));
+        tabLayout.addTab(tabLayout.newTab().setText("Profile"));
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+
+        final ViewPager viewPager =  findViewById(R.id.pager);
+        final PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
+        viewPager.setAdapter(adapter);
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
         initFirebase();
 
         chatChannel = new ChatChannel();
 
-        BottomNavigationView navigation = findViewById(R.id.navigation);
-        categoryTextView = findViewById(R.id.categoryTextView);
-        toolbar = findViewById(R.id.toolbar);
-        toolbar.setOverflowIcon(getResources().getDrawable(R.drawable.filter));
-        setSupportActionBar(toolbar);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        FragmentManager frag1 = getSupportFragmentManager();
-        frag1.beginTransaction().replace(R.id.content_frame, chatChannel).commit();
+       // BottomNavigationView navigation = findViewById(R.id.navigation);
+     //   categoryTextView = findViewById(R.id.categoryTextView);
+      //  toolbar = findViewById(R.id.toolbar);
+     //   toolbar.setOverflowIcon(getResources().getDrawable(R.drawable.filter));
+     //   setSupportActionBar(toolbar);
+      //  navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+     //   FragmentManager frag1 = getSupportFragmentManager();
+    //    frag1.beginTransaction().replace(R.id.content_frame, chatChannel).commit();
     }
 
     @Override
@@ -121,29 +149,29 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.general:
-                chatChannel.updateChannel(getResources().getStringArray(R.array.chat_channels)[0]);
-                setCategoryLabel(getResources().getString(R.string.general));
-                return true;
-            case R.id.help:
-                chatChannel.updateChannel(getResources().getStringArray(R.array.chat_channels)[1]);
-                setCategoryLabel(getResources().getString(R.string.help));
-                return true;
-            case R.id.android:
-                chatChannel.updateChannel(getResources().getStringArray(R.array.chat_channels)[2]);
-                setCategoryLabel(getResources().getString(R.string.android));
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch (item.getItemId()) {
+//            case R.id.general:
+//                chatChannel.updateChannel(getResources().getStringArray(R.array.chat_channels)[0]);
+//                setCategoryLabel(getResources().getString(R.string.general));
+//                return true;
+//            case R.id.help:
+//                chatChannel.updateChannel(getResources().getStringArray(R.array.chat_channels)[1]);
+//                setCategoryLabel(getResources().getString(R.string.help));
+//                return true;
+//            case R.id.android:
+//                chatChannel.updateChannel(getResources().getStringArray(R.array.chat_channels)[2]);
+//                setCategoryLabel(getResources().getString(R.string.android));
+//                return true;
+//            default:
+//                return super.onOptionsItemSelected(item);
+//        }
+//    }
 
-    private void setCategoryLabel(String categoryLabel) {
-        categoryTextView.setText(categoryLabel);
-    }
+//    private void setCategoryLabel(String categoryLabel) {
+//        categoryTextView.setText(categoryLabel);
+//    }
 
     private void initFirebase() {
         FirebaseApp.initializeApp(this);

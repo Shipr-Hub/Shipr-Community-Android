@@ -19,7 +19,7 @@
             android:layout_height="150dp"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center"
-            android:src="@drawable/ic_account_circle_black_36dp"
+            android:src="@drawable/profile_circle_black_36dp"
             android:contentDescription="@string/profile_image" />
 
 

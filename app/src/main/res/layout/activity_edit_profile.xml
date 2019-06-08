@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffff"
+    tools:context=".EditProfile">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingBottom="15dp">
+
+            <ImageView
+                android:id="@+id/img_profile_userimage"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/round_border"
+                android:padding="0dp"
+                android:transitionName="userImage"
+                app:srcCompat="@drawable/userplaceholder" />
+
+            <EditText
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="25dp"
+                android:background="@drawable/input_message_border"
+                android:ems="10"
+                android:fontFamily="@font/source_sans_pro"
+                android:hint="Name"
+                android:inputType="textPersonName"
+                android:padding="15dp"
+                android:textSize="16sp"
+                android:transitionName="userName" />
+
+            <EditText
+                android:id="@+id/username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="25dp"
+                android:background="@drawable/input_message_border"
+                android:ems="10"
+                android:fontFamily="@font/source_sans_pro"
+                android:hint="Username"
+                android:inputType="textPersonName"
+                android:padding="15dp"
+                android:textSize="16sp"
+                android:transitionName="userName" />
+
+            <EditText
+                android:id="@+id/bio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/input_message_border"
+                android:ems="10"
+                android:fontFamily="@font/source_sans_pro"
+                android:hint="Your Skill"
+                android:inputType="textMultiLine"
+                android:maxLines="10"
+                android:padding="15dp"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/bio2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/input_message_border"
+                android:ems="10"
+                android:fontFamily="@font/source_sans_pro"
+                android:hint="Programming Skills"
+                android:inputType="textMultiLine"
+                android:maxLines="10"
+                android:padding="15dp"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="25dp"
+                android:text="Private Information"
+                android:textColor="@color/black" />
+
+            <EditText
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/input_message_border"
+                android:ems="10"
+                android:enabled="false"
+                android:fontFamily="@font/source_sans_pro"
+                android:hint="Email"
+                android:inputType="textEmailAddress"
+                android:padding="15dp"
+                android:textSize="16sp"
+                android:transitionName="userName" />
+
+            <EditText
+                android:id="@+id/mobileNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/input_message_border"
+                android:ems="10"
+                android:fontFamily="@font/source_sans_pro"
+                android:hint="Mobile Number"
+                android:inputType="phone"
+                android:padding="15dp"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

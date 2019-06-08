@@ -4,10 +4,10 @@ import android.annotation.SuppressLint;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.FirebaseApp;
@@ -76,12 +77,12 @@ public class ChatChannel extends Fragment {
     private EmojIconActions mEmojicon;
 
 
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_general, container, false);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().show();
+        View rootView = inflater.inflate(R.layout.fragment_chat, container, false);
+
+        //    ((AppCompatActivity) getActivity()).getSupportActionBar().show();
 
         mName = ANONYMOUS;
         mChannel = "general";
@@ -90,7 +91,6 @@ public class ChatChannel extends Fragment {
 
 
         // Initialize references to views
-
         mProgressBar = rootView.findViewById(R.id.progressBar);
         mMessageRecycler = rootView.findViewById(R.id.messageRecyclerView);
         mSendButton = rootView.findViewById(R.id.sendButton);
