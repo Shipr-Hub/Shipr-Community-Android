@@ -16,4 +16,8 @@
 
     <color name="materialGrey">#FFF5F5F5</color>
     <color name="colorTextNormal">#FF00838F</color>
+
+    <color name="toolbarColor">#ffffff</color>
+    <color name="white">#ffffff</color>
+    <color name="dark_grey">#d0d3d4</color>
 </resources>
