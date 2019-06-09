@@ -100,7 +100,7 @@ public class NotificationChannel {
         }
 
         int count = messages.size();
-        String summary = Integer.toString(count) + (count > 1 ? " new messages" : " new message");
+        String summary = count + (count > 1 ? " new messages" : " new message");
         inboxStyle.setSummaryText(summary);
         builder = new NotificationCompat.Builder(context, channel_Id)
                 .setSmallIcon(R.mipmap.ic_launcher) //Todo: change the small icon with an xml icon

@@ -21,6 +21,7 @@
         <activity android:name=".view.WelcomeActivity" />
         <activity
             android:name=".view.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar"
             android:label="@string/app_name"
             android:windowSoftInputMode="adjustResize|stateHidden"
             android:launchMode="singleTop">
