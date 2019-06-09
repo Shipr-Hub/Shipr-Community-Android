@@ -122,9 +122,9 @@ public abstract class MessageAdapter extends FirebaseRecyclerAdapter<DeveloperMe
                 if (message.getProfilePic() == null) {
 
 //                    // Set default profile icon as message author profile pic
-//                    Picasso.get()
-//                            .load(R.drawable.profile_circle_black_36dp)
-//                            .into(profileImageView);
+                   Picasso.get()
+                            .load(R.drawable.profile_circle_black_36dp)
+                            .into(profileImageView);
                 } else {
                     Picasso.get().load(message.getProfilePic()).fit().into(profileImageView);
                 }

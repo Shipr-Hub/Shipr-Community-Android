@@ -45,18 +45,18 @@ dependencies {
     implementation 'com.android.support:appcompat-v7:28.0.0'
 
     //FireBase Auth
-    implementation 'com.google.firebase:firebase-auth:16.2.1'
+    implementation 'com.google.firebase:firebase-auth:17.0.0'
     implementation 'com.firebaseui:firebase-ui-auth:4.3.0'
     implementation 'com.google.android.gms:play-services-auth:16.0.1'
 
     //FireBase Database
-    implementation 'com.google.firebase:firebase-database:16.1.0'
+    implementation 'com.google.firebase:firebase-database:17.0.0'
 
     // FirebaseUI for Firebase Realtime Database
     implementation 'com.firebaseui:firebase-ui-database:4.3.2'
 
     //FireBase Core
-    implementation 'com.google.firebase:firebase-core:16.0.8'
+    implementation 'com.google.firebase:firebase-core:16.0.9'
 
     //Firebase Storage
     implementation 'com.google.firebase:firebase-storage:16.1.0'
@@ -88,14 +88,5 @@ dependencies {
     implementation 'com.android.support:cardview-v7:28.0.0'
     implementation 'com.android.support:multidex:1.0.3'
     implementation 'org.jetbrains:annotations-java5:15.0'
-
-
-
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    }
-    androidTestImplementation 'com.android.support.test:rules:1.0.2'
-
-
 }
 apply plugin: 'com.google.gms.google-services'

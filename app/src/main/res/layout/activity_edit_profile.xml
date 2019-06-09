@@ -36,7 +36,7 @@
                 app:srcCompat="@drawable/userplaceholder" />
 
             <EditText
-                android:id="@+id/name"
+                android:id="@+id/nameEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
@@ -52,7 +52,7 @@
                 android:transitionName="userName" />
 
             <EditText
-                android:id="@+id/username"
+                android:id="@+id/usernameEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
@@ -68,23 +68,23 @@
                 android:transitionName="userName" />
 
             <EditText
-                android:id="@+id/bio"
+                android:id="@+id/titleEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
                 android:layout_marginTop="15dp"
+                android:layout_marginRight="20dp"
                 android:background="@drawable/input_message_border"
                 android:ems="10"
                 android:fontFamily="@font/source_sans_pro"
-                android:hint="Your Skill"
+                android:hint="Your Title"
                 android:inputType="textMultiLine"
                 android:maxLines="10"
                 android:padding="15dp"
                 android:textSize="16sp" />
 
             <EditText
-                android:id="@+id/bio2"
+                android:id="@+id/proskillEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
@@ -109,7 +109,7 @@
                 android:textColor="@color/black" />
 
             <EditText
-                android:id="@+id/email"
+                android:id="@+id/emailEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
@@ -126,7 +126,7 @@
                 android:transitionName="userName" />
 
             <EditText
-                android:id="@+id/mobileNumber"
+                android:id="@+id/mobileNumberEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
@@ -137,6 +137,20 @@
                 android:fontFamily="@font/source_sans_pro"
                 android:hint="Mobile Number"
                 android:inputType="phone"
+                android:padding="15dp"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/submitButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:onClick="submit"
+                android:text="Submit"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/input_message_border"
+                android:fontFamily="@font/source_sans_pro"
                 android:padding="15dp"
                 android:textSize="16sp" />
 
