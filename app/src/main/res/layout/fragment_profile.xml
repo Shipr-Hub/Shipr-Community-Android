@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <LinearLayout
+    <View
         android:id="@+id/divider"
         android:layout_width="match_parent"
         android:layout_height="0.2dp"
         android:layout_above="@+id/signoutBtn"
         android:background="@color/dark_grey"
-        android:orientation="vertical"></LinearLayout>
+        android:orientation="vertical"/>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -56,7 +57,7 @@
 
 
                     <TextView
-                        android:id="@+id/textView6"
+                        android:id="@+id/user_profile_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/source_sans_pro_bold"
@@ -65,7 +66,7 @@
                         android:textSize="28sp" />
 
                     <TextView
-                        android:id="@+id/textView2"
+                        android:id="@+id/user_profile_about"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="UI / UX Designer" />
@@ -82,7 +83,7 @@
                             android:layout_height="40dp"
                             android:background="@drawable/round_border"
                             android:padding="10dp"
-                            android:src="@drawable/ic_github_logo" />
+                            app:srcCompat="@drawable/ic_github_logo" />
 
                         <ImageView
                             android:id="@+id/imageView4"
@@ -91,7 +92,7 @@
                             android:layout_marginLeft="15dp"
                             android:background="@drawable/round_border"
                             android:padding="10dp"
-                            android:src="@drawable/ic_twitter" />
+                            app:srcCompat="@drawable/ic_twitter" />
 
                         <ImageView
                             android:id="@+id/imageView5"
@@ -100,7 +101,7 @@
                             android:layout_marginLeft="15dp"
                             android:background="@drawable/round_border"
                             android:padding="10dp"
-                            android:src="@drawable/ic_linkedin_logo" />
+                            app:srcCompat="@drawable/ic_linkedin_logo" />
 
                         <ImageView
                             android:id="@+id/imageView6"
@@ -109,7 +110,7 @@
                             android:layout_marginLeft="15dp"
                             android:background="@drawable/round_border"
                             android:padding="10dp"
-                            android:src="@drawable/ic_instagram" />
+                            app:srcCompat="@drawable/ic_instagram" />
 
                         <Button
                             android:id="@+id/editBtn"

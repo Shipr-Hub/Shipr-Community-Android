@@ -27,8 +27,9 @@ public class ViewProfileActivity extends AppCompatActivity {
     private TextView gitTextView;
     private TextView twitTextView;
     private TextView linkTextView;
-    private String fullName;
+
     private String username;
+    private String profilePic;
     private String age;
     private String languages;
     private String github;
@@ -74,8 +75,10 @@ public class ViewProfileActivity extends AppCompatActivity {
                 Log.d("profile", "onDataChange: " + dataSnapshot);
                 mProfile = dataSnapshot.getValue(Profile.class);
                 if (mProfile != null) {
-                    fullName = mProfile.getFullName();
-                    username = mProfile.getUsername();
+
+                  //  username = mProfile.getUsername();
+                    profilePic = mProfile.getProfilePic();
+
                     age = mProfile.getAge();
                     languages = mProfile.getLanguages();
                     github = mProfile.getGithub();
@@ -83,7 +86,6 @@ public class ViewProfileActivity extends AppCompatActivity {
                     linkedin = mProfile.getLinkedin();
 
 
-                    setTextIfNotEmpty(fullName, nameEdits);
                     setTextIfNotEmpty(username, usernameTextView);
                     setTextIfNotEmpty(age, ageTextView);
                     setTextIfNotEmpty(languages, langTextView);

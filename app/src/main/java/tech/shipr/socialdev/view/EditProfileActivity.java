@@ -118,9 +118,9 @@ public class EditProfileActivity extends Fragment {
 
                 mProfile = dataSnapshot.getValue(Profile.class);
                 if (mProfile != null) {
-                    fullName = mProfile.getFullName();
+                   // fullName = mProfile.getFullName();
                     email = mProfile.getEmail();
-                    username = mProfile.getUsername();
+                    username = mProfile.getFullName();
                     age = mProfile.getAge();
                     languages = mProfile.getLanguages();
                     github = mProfile.getGithub();
@@ -162,13 +162,14 @@ public class EditProfileActivity extends Fragment {
             }
         };
         mprofileDatabaseReference.addListenerForSingleValueEvent(postListener);
-
+String title = null;
         FloatingActionButton button = rootView.findViewById(R.id.submitButton);
         button.setOnClickListener(v -> {
             getVariablesFromEditText();
             mProfile = new Profile(
                     fullName,
                     username,
+                    title,
                     //email,
                     null,
                     age,

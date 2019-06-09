@@ -9,6 +9,9 @@ public class Profile {
 
     private String fullName;
     private String username;
+    private String title;
+    private String profilePic;
+
     private String email;
     private String age;
     private String languages;
@@ -20,12 +23,9 @@ public class Profile {
     public Profile() {
     }
 
+
     public String getFullName() {
         return fullName;
-    }
-
-    public String getUsername() {
-        return username;
     }
 
     public String getEmail() {
@@ -52,24 +52,51 @@ public class Profile {
         return linkedin;
     }
 
-    public Profile(String fullName,
-                            String username,
-                            String email,
-                            String age,
-                            String languages,
-                            String github,
-                            String twitter,
-                            String linkedin) {
+    public Profile(
+            String fullName,
+            String username,
+            String title,
+            String email,
+            String age,
+            String languages,
+            String github,
+            String twitter,
+            String linkedin) {
+
 
         this.fullName = fullName;
-        this.username = username;
         this.email = email;
         this.age = age;
         this.languages = languages;
         this.github = github;
         this.twitter = twitter;
         this.linkedin = linkedin;
+        this.title = title;
+        this.username = username;
     }
 
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getProfilePic() {
+        return profilePic;
+    }
+
+    public void setProfilePic(String profilePic) {
+        this.profilePic = profilePic;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 }
