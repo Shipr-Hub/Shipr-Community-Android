@@ -45,6 +45,7 @@ import tech.shipr.socialdev.PrivacyPolicy;
 import tech.shipr.socialdev.R;
 import tech.shipr.socialdev.model.DeveloperMessage;
 import tech.shipr.socialdev.notification.NotificationService;
+import tech.shipr.socialdev.utils.AppUtil;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -112,6 +113,12 @@ public class MainActivity extends AppCompatActivity {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         FragmentManager frag1 = getSupportFragmentManager();
         frag1.beginTransaction().replace(R.id.content_frame, chatChannel).commit();
+
+        checkForUpdates();
+    }
+
+    private void checkForUpdates() {
+        AppUtil.init(this).checkForUpdate();
     }
 
     @Override
@@ -228,7 +235,7 @@ public class MainActivity extends AppCompatActivity {
                         int year = c.get(Calendar.YEAR);
                         int month = c.get(Calendar.MONTH);
                         int day = c.get(Calendar.DAY_OF_MONTH);
-                        mDate = String.valueOf(day) + "-" + String.valueOf(month) + "-" + String.valueOf(year);
+                        mDate = day + "-" + month + "-" + year;
 
 
                         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
