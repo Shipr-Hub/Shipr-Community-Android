@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="wrap_content">
 
     <LinearLayout
@@ -32,14 +33,21 @@
             android:paddingRight="15dp"
             android:paddingTop="8dp">
 
-
+            <TextView
+                android:id="@+id/authorTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                tools:text="John Doe" />
 
             <TextView
                 android:id="@+id/messageTextView"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/source_sans_pro"
-                android:text="Yash Desai  •  Hi Ganesh ! how are you this is message from shipr   "
+                android:text="Hi Ganesh! how are you? This is a message from shipr   "
                 android:textColor="@color/black"
                 android:textSize="16sp" />
             <TextView

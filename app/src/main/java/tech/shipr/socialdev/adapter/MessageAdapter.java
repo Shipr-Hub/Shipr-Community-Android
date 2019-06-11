@@ -30,6 +30,7 @@ public abstract class MessageAdapter extends FirebaseRecyclerAdapter<DeveloperMe
 
     private final Context mContext;
     private FirebaseUser mUser;
+    private boolean showAuthor;
 
     private static final int MESSAGE_TYPE_RIGHT = 1;
     private static final int MESSAGE_TYPE_LEFT = 2;
@@ -72,8 +73,10 @@ public abstract class MessageAdapter extends FirebaseRecyclerAdapter<DeveloperMe
 
         if (viewType == MESSAGE_TYPE_RIGHT) {
             messageView = LayoutInflater.from(parent.getContext()).inflate(R.layout.msg_layout_send, parent, false);
+            showAuthor = false;
         } else {
             messageView = LayoutInflater.from(parent.getContext()).inflate(R.layout.msg_layout_recieved, parent, false);
+            showAuthor = true;
         }
 
         return new MessageViewHolder(messageView);
@@ -82,7 +85,7 @@ public abstract class MessageAdapter extends FirebaseRecyclerAdapter<DeveloperMe
     @Override
     protected void onBindViewHolder(@NonNull MessageViewHolder holder, int position, @NonNull DeveloperMessage msg) {
         holder.setMessage(msg);
-        if(holder.profileImageView != null) {
+        if (holder.profileImageView != null) {
             holder.profileImageView.setOnClickListener(new ClickHandler(msg));
         }
     }
@@ -95,25 +98,30 @@ public abstract class MessageAdapter extends FirebaseRecyclerAdapter<DeveloperMe
 
     public abstract void onLoaded();
 
-    public static class MessageViewHolder extends RecyclerView.ViewHolder {
+    public class MessageViewHolder extends RecyclerView.ViewHolder {
 
         TextView messageTextView;
-        //     TextView authorTextView;
-           TextView timeTextView;
+        TextView authorTextView;
+        TextView timeTextView;
         ImageView profileImageView;
 
         public MessageViewHolder(@NonNull View itemView) {
             super(itemView);
+            if (showAuthor) {
+                authorTextView = itemView.findViewById(R.id.authorTextView);
+            }
             messageTextView = itemView.findViewById(R.id.messageTextView);
-            timeTextView  = itemView.findViewById(R.id.timeTextView);
+            timeTextView = itemView.findViewById(R.id.timeTextView);
             profileImageView = itemView.findViewById(R.id.profileImageView);
             messageTextView.setMaxWidth(itemView.getResources().getDisplayMetrics().widthPixels - 160);
         }
 
         public void setMessage(DeveloperMessage message) {
             messageTextView.setText(message.getText());
-            //TODO uncomment this     authorTextView.setText(message.getName());
-                 timeTextView.setText(message.getTime());
+            if (showAuthor) {
+                authorTextView.setText(message.getName());
+            }
+            timeTextView.setText(message.getTime());
 
             //Sent Message doesnt have the profile Image View
             if (profileImageView != null) {
@@ -122,14 +130,14 @@ public abstract class MessageAdapter extends FirebaseRecyclerAdapter<DeveloperMe
                 if (message.getProfilePic() == null) {
 
 //                    // Set default profile icon as message author profile pic
-                   Picasso.get()
+                    Picasso.get()
                             .load(R.drawable.profile_circle_black_36dp)
                             .into(profileImageView);
                 } else {
                     Picasso.get().load(message.getProfilePic()).fit().into(profileImageView);
                 }
-            }else{
-                Log.d("pfp", "couldnt load for msg: "+ message.getText());
+            } else {
+                Log.d("pfp", "couldnt load for msg: " + message.getText());
             }
 
             String time = message.getTime();
@@ -142,7 +150,7 @@ public abstract class MessageAdapter extends FirebaseRecyclerAdapter<DeveloperMe
                 //       dateTextView.setText(date.toString());
                 mTime.setTimeZone(TimeZone.getDefault());
                 String formattedTime = mTime.format(date);
-                  timeTextView.setText(formattedTime);
+                timeTextView.setText(formattedTime);
 
             } catch (java.text.ParseException e) {
                 e.printStackTrace();
