@@ -92,4 +92,6 @@ public class BillingActivity extends Activity implements BillingProcessor.IBilli
         billingLogView.append(log);
     }
 
+    public void addNew(View view) {
+    }
 }

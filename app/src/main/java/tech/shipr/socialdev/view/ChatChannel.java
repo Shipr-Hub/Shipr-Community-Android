@@ -3,8 +3,8 @@ package tech.shipr.socialdev.view;
 import android.annotation.SuppressLint;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -20,6 +20,8 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -76,6 +78,11 @@ public class ChatChannel extends Fragment {
     private RecyclerView mMessageRecycler;
     private EmojIconActions mEmojicon;
 
+    private TextView generalButton;
+    private TextView helpButton;
+    private TextView androidButton;
+    private TextView addNew;
+
 
     @Nullable
     @Override
@@ -98,7 +105,61 @@ public class ChatChannel extends Fragment {
         mEmojiconEditText = rootView.findViewById(R.id.emojicon_edit_text);
         mEmojicon = new EmojIconActions(Objects.requireNonNull(getContext()).getApplicationContext(), rootView, mEmojiconEditText, mEmojiButton);
 
+        generalButton = rootView.findViewById(R.id.generalButton);
+        helpButton = rootView.findViewById(R.id.helpButton);
+        androidButton = rootView.findViewById(R.id.androidButton);
+        addNew = rootView.findViewById(R.id.addNew);
+
+        generalButton.setOnClickListener((View v) -> {
+            updateChannel("general");
+            setChannelButtonSelected(0);
+        });
+        helpButton.setOnClickListener((View v) -> {
+            updateChannel("help");
+            setChannelButtonSelected(1);
+        });
+        androidButton.setOnClickListener((View v) -> {
+            updateChannel("android");
+            setChannelButtonSelected(2);
+        });
+
+        addNew.setOnClickListener((View v) -> {
+            Toast.makeText(getContext(), "This feature is coming soon", Toast.LENGTH_SHORT).show();
+        });
+
         return rootView;
+    }
+
+    private void setChannelButtonSelected(int i) {
+
+        generalButton.setBackgroundResource(R.drawable.main_button_design_grey);
+        generalButton.setTextColor(Color.BLACK);
+
+        helpButton.setBackgroundResource(R.drawable.main_button_design_grey);
+        helpButton.setTextColor(Color.BLACK);
+
+        androidButton.setBackgroundResource(R.drawable.main_button_design_grey);
+        androidButton.setTextColor(Color.BLACK);
+
+
+        switch (i) {
+            case 0:
+                generalButton.setBackgroundResource(R.drawable.main_button_design_filled);
+                generalButton.setTextColor(Color.WHITE);
+                break;
+
+            case 1:
+                helpButton.setBackgroundResource(R.drawable.main_button_design_filled);
+                helpButton.setTextColor(Color.WHITE);
+                break;
+
+            case 2:
+                androidButton.setBackgroundResource(R.drawable.main_button_design_filled);
+                androidButton.setTextColor(Color.WHITE);
+                break;
+
+        }
+
     }
 
     @Override
@@ -319,6 +380,7 @@ public class ChatChannel extends Fragment {
         }
     }
 
+
     private void detachDatabaseReadListener() {
         mMessageAdapter.stopListening();
     }
@@ -340,12 +402,9 @@ public class ChatChannel extends Fragment {
 
     public void updateChannel(String channelName) {
         detachDatabaseReadListener();
-
         mMessagesDatabaseReference = mFirebaseDatabase.getReference().child("chat/" + channelName);
-
         setUpAdapter();
         subToChannel(channelName);
-
     }
 
     private void subToChannel(String channelName) {
