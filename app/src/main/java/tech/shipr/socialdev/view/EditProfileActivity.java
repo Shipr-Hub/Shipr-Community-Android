@@ -55,163 +55,164 @@ public class EditProfileActivity extends Fragment {
 
     private static final int RC_PROFILE_PHOTO_PICKER = 4;
 
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_edit_profile, container, false);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
-
-        nameEdits = rootView.findViewById(R.id.nameEdit);
-
-        emailEdit = rootView.findViewById(R.id.emailEdit);
-        usernameEdit = rootView.findViewById(R.id.usernameEdit);
-        ageEditemailEdit = rootView.findViewById(R.id.ageEditemailEdit);
-        langEdit = rootView.findViewById(R.id.langEdit);
-        gitEdit = rootView.findViewById(R.id.gitEdit);
-        twitEdit = rootView.findViewById(R.id.twitEdit);
-        linkEdit = rootView.findViewById(R.id.linkEdit);
-        ImageView profileImageView = rootView.findViewById(R.id.profileImage);
-
-        //    mProgressBar = rootView.findViewById(R.id.pProgressBar);
-
-        FirebaseApp.initializeApp(getActivity());
-
-        FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();
-        FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        assert user != null;
-        String id = user.getUid();
-        mprofileDatabaseReference = mFirebaseDatabase.getReference().child("users" + "/" + id + "/" + "profile");
-        //mProgressBarPresent = true;
-
-
-        {
-            // Name, email address, and profile photo Url
-
-            String username = user.getDisplayName();
-            String email = user.getEmail();
-            Uri photoUri = user.getPhotoUrl();
-
-
-            // Check if user's email is verified
-            boolean emailVerified = user.isEmailVerified();
-            //TODO Add a listener and if false, add verift email button
-
-
-            emailEdit.setText(email);
-            usernameEdit.setText(username);
-            if (photoUri != null && !photoUri.equals(Uri.EMPTY)) {
-                Picasso.get().load(photoUri).fit().into(profileImageView);
-            }
-
-
-        }
-
-
-        //    private Boolean mProgressBarPresent;
-        //    private ProgressBar mProgressBar;
-        ValueEventListener postListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(@NotNull DataSnapshot dataSnapshot) {
-                // Get Post object and use the values to update the UI
-
-                mProfile = dataSnapshot.getValue(Profile.class);
-                if (mProfile != null) {
-                   // fullName = mProfile.getFullName();
-                    email = mProfile.getEmail();
-                    username = mProfile.getFullName();
-                    age = mProfile.getAge();
-                    languages = mProfile.getLanguages();
-                    github = mProfile.getGithub();
-                    twitter = mProfile.getTwitter();
-                    linkedin = mProfile.getLinkedin();
-
-
-                    setEditIfNotEmpty(fullName, nameEdits);
-                    setTextIfNotEmpty(email, emailEdit);
-                    setTextIfNotEmpty(username, usernameEdit);
-                    setEditIfNotEmpty(age, ageEditemailEdit);
-                    setEditIfNotEmpty(languages, langEdit);
-                    setEditIfNotEmpty(github, gitEdit);
-                    setEditIfNotEmpty(twitter, twitEdit);
-                    setEditIfNotEmpty(linkedin, linkEdit);
-                }
-
-                // mProgressBarCheck();
-
-            }
-
-            private void setEditIfNotEmpty(String sstring, EditText editText) {
-                if (sstring != null && !sstring.isEmpty()) {
-                    editText.setText(sstring);
-                }
-            }
-
-            private void setTextIfNotEmpty(String ssstring, TextView seditText) {
-                if (ssstring != null && !ssstring.isEmpty()) {
-                    seditText.setText(ssstring);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NotNull DatabaseError databaseError) {
-                // Getting Post failed, log a message
-                Log.w("ProfileActivity", "loadPost:onCancelled", databaseError.toException());
-                // ...
-            }
-        };
-        mprofileDatabaseReference.addListenerForSingleValueEvent(postListener);
-String title = null;
-        FloatingActionButton button = rootView.findViewById(R.id.submitButton);
-        button.setOnClickListener(v -> {
-            getVariablesFromEditText();
-            mProfile = new Profile(
-                    fullName,
-                    username,
-                    title,
-                    //email,
-                    null,
-                    age,
-                    languages,
-                    github,
-                    twitter,
-                    linkedin
-            );
-            mprofileDatabaseReference.setValue(mProfile);
-        });
-
-        return rootView;
-    }
-
-    private void getVariablesFromEditText() {
-        fullName = nameEdits.getText().toString();
-        email = emailEdit.getText().toString();
-        username = usernameEdit.getText().toString();
-        age = ageEditemailEdit.getText().toString();
-        languages = langEdit.getText().toString();
-        github = gitEdit.getText().toString();
-        twitter = twitEdit.getText().toString();
-        linkedin = linkEdit.getText().toString();
-
-
-    }
-
-    private void clearPic() {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                .setPhotoUri(null)
-                .build();
-
-    }
-
-    public void openImagePicker() {
-        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        intent.setType("image/jpeg");
-        intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
-        startActivityForResult(Intent.createChooser(intent, "Complete action using"), RC_PROFILE_PHOTO_PICKER);
-
-    }
+//    @Override
+//    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
+//                             Bundle savedInstanceState) {
+//        View rootView = inflater.inflate(R.layout.fragment_edit_profile, container, false);
+//        ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
+//
+//        nameEdits = rootView.findViewById(R.id.nameEdit);
+//
+//        emailEdit = rootView.findViewById(R.id.emailEdit);
+//        usernameEdit = rootView.findViewById(R.id.usernameEdit);
+//        ageEditemailEdit = rootView.findViewById(R.id.ageEditemailEdit);
+//        langEdit = rootView.findViewById(R.id.langEdit);
+//        gitEdit = rootView.findViewById(R.id.gitEdit);
+//        twitEdit = rootView.findViewById(R.id.twitEdit);
+//        linkEdit = rootView.findViewById(R.id.linkEdit);
+//        ImageView profileImageView = rootView.findViewById(R.id.profileImage);
+//
+//        //    mProgressBar = rootView.findViewById(R.id.pProgressBar);
+//
+//        FirebaseApp.initializeApp(getActivity());
+//
+//        FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();
+//        FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
+//        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+//        assert user != null;
+//        String id = user.getUid();
+//        mprofileDatabaseReference = mFirebaseDatabase.getReference().child("users" + "/" + id + "/" + "profile");
+//        //mProgressBarPresent = true;
+//
+//
+//        {
+//            // Name, email address, and profile photo Url
+//
+//            String username = user.getDisplayName();
+//            String email = user.getEmail();
+//            Uri photoUri = user.getPhotoUrl();
+//
+//
+//            // Check if user's email is verified
+//            boolean emailVerified = user.isEmailVerified();
+//            //TODO Add a listener and if false, add verift email button
+//
+//
+//            emailEdit.setText(email);
+//            usernameEdit.setText(username);
+//            if (photoUri != null && !photoUri.equals(Uri.EMPTY)) {
+//                Picasso.get().load(photoUri).fit().into(profileImageView);
+//            }
+//
+//
+//        }
+//
+//
+//        //    private Boolean mProgressBarPresent;
+//        //    private ProgressBar mProgressBar;
+//        ValueEventListener postListener = new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NotNull DataSnapshot dataSnapshot) {
+//                // Get Post object and use the values to update the UI
+//
+//                mProfile = dataSnapshot.getValue(Profile.class);
+//                if (mProfile != null) {
+//                   // fullName = mProfile.getFullName();
+//                    email = mProfile.getEmail();
+//                    username = mProfile.getFullName();
+//                    age = mProfile.getAge();
+//                    languages = mProfile.getLanguages();
+//                    github = mProfile.getGithub();
+//                    twitter = mProfile.getTwitter();
+//                    linkedin = mProfile.getLinkedin();
+//
+//
+//                    setEditIfNotEmpty(fullName, nameEdits);
+//                    setTextIfNotEmpty(email, emailEdit);
+//                    setTextIfNotEmpty(username, usernameEdit);
+//                    setEditIfNotEmpty(age, ageEditemailEdit);
+//                    setEditIfNotEmpty(languages, langEdit);
+//                    setEditIfNotEmpty(github, gitEdit);
+//                    setEditIfNotEmpty(twitter, twitEdit);
+//                    setEditIfNotEmpty(linkedin, linkEdit);
+//                }
+//
+//                // mProgressBarCheck();
+//
+//            }
+//
+//            private void setEditIfNotEmpty(String sstring, EditText editText) {
+//                if (sstring != null && !sstring.isEmpty()) {
+//                    editText.setText(sstring);
+//                }
+//            }
+//
+//            private void setTextIfNotEmpty(String ssstring, TextView seditText) {
+//                if (ssstring != null && !ssstring.isEmpty()) {
+//                    seditText.setText(ssstring);
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NotNull DatabaseError databaseError) {
+//                // Getting Post failed, log a message
+//                Log.w("ProfileActivity", "loadPost:onCancelled", databaseError.toException());
+//                // ...
+//            }
+//        };
+//        mprofileDatabaseReference.addListenerForSingleValueEvent(postListener);
+//String title = null;
+//        FloatingActionButton button = rootView.findViewById(R.id.submitButton);
+//        button.setOnClickListener(v -> {
+//            getVariablesFromEditText();
+//            mProfile = new Profile(
+//                    fullName,
+//                    username,
+//                    title,
+//                    //email,
+//                    null,
+//                    age,
+//                    languages,
+//                    github,
+//                    twitter,
+//                    linkedin,
+//                    null
+//            );
+//            mprofileDatabaseReference.setValue(mProfile);
+//        });
+//
+//        return rootView;
+//    }
+//
+//    private void getVariablesFromEditText() {
+//        fullName = nameEdits.getText().toString();
+//        email = emailEdit.getText().toString();
+//        username = usernameEdit.getText().toString();
+//        age = ageEditemailEdit.getText().toString();
+//        languages = langEdit.getText().toString();
+//        github = gitEdit.getText().toString();
+//        twitter = twitEdit.getText().toString();
+//        linkedin = linkEdit.getText().toString();
+//
+//
+//    }
+//
+//    private void clearPic() {
+//        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+//
+//        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+//                .setPhotoUri(null)
+//                .build();
+//
+//    }
+//
+//    public void openImagePicker() {
+//        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+//        intent.setType("image/jpeg");
+//        intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
+//        startActivityForResult(Intent.createChooser(intent, "Complete action using"), RC_PROFILE_PHOTO_PICKER);
+//
+//    }
 
 
  /*   private void mProgressBarCheck(){

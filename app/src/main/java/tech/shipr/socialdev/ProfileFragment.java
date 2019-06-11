@@ -3,6 +3,7 @@ package tech.shipr.socialdev;
 
 import android.app.ActivityOptions;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -13,7 +14,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -25,6 +25,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.Objects;
 
@@ -46,14 +47,18 @@ public class ProfileFragment extends Fragment {
     private String github;
     private String twitter;
     private String linkedin;
+    private String insta;
     private Profile mProfile;
     private TextView nameEdits;
     private TextView ageTextView;
     private TextView langTextView;
-    private TextView gitTextView;
-    private TextView twitTextView;
-    private TextView linkTextView;
 
+    private ImageView gitImageView;
+    private ImageView twitImageView;
+    private ImageView linkImageView;
+    private ImageView instaImageView;
+
+    private TextView progSkillTextView;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -69,21 +74,22 @@ public class ProfileFragment extends Fragment {
         Button editBtn = view.findViewById(R.id.editBtn);
 
 
-
-
         FirebaseApp.initializeApp(Objects.requireNonNull(getContext()));
 
 
         nameTextView = view.findViewById(R.id.user_profile_name);
         titleTextView = view.findViewById(R.id.user_profile_about);
-        final ImageView image = view.findViewById(R.id.user_profile_photo);
+        progSkillTextView = view.findViewById(R.id.progSkillTextView);
+
+        final ImageView profileImageView = view.findViewById(R.id.user_profile_photo);
         //  emailTextView = findViewById(R.id.emailEdit);
 
 //        ageTextView = findViewById(R.id.ageEditemailEdit);
 //        langTextView = findViewById(R.id.langEdit);
-//        gitTextView = findViewById(R.id.gitEdit);
-//        twitTextView = findViewById(R.id.twitEdit);
-//        linkTextView = findViewById(R.id.linkEdit);
+        gitImageView = view.findViewById(R.id.gitImageView);
+        twitImageView = view.findViewById(R.id.twitImageView);
+        instaImageView = view.findViewById(R.id.instaImageView);
+        linkImageView = view.findViewById(R.id.linkedinImageView);
 
 
         FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();
@@ -91,7 +97,8 @@ public class ProfileFragment extends Fragment {
         assert user != null;
         String uid = user.getUid();
         DatabaseReference mprofileDatabaseReference = mFirebaseDatabase.getReference().child("users/" + uid + "/profile");
-Log.d("uid", uid);
+        Log.d("uid", uid);
+        Uri photoUri = user.getPhotoUrl();
 
         //    private Boolean mProgressBarPresent;
         //    private ProgressBar mProgressBar;
@@ -104,17 +111,38 @@ Log.d("uid", uid);
                 if (mProfile != null) {
                     name = mProfile.getFullName();
                     title = mProfile.getTitle();
-//                    languages = mProfile.getLanguages();
-//                    github = mProfile.getGithub();
-//                    twitter = mProfile.getTwitter();
-//                    linkedin = mProfile.getLinkedin();
+                    String progSkill = mProfile.getProgSkill();
+
+                    languages = mProfile.getLanguages();
+                    github = mProfile.getGithub();
+                    twitter = mProfile.getTwitter();
+                    linkedin = mProfile.getLinkedin();
+                    insta = mProfile.getInsta();
 
 
                     setTextIfNotEmpty(name, nameTextView);
                     setTextIfNotEmpty(title, titleTextView);
+                    setTextIfNotEmpty(progSkill, progSkillTextView);
+                    if (!github.isEmpty()) {
+                        gitImageView.setOnClickListener(v -> openLink(github));
+                    }
+                    if (!twitter.isEmpty()) {
+                        twitImageView.setOnClickListener(v -> openLink(twitter));
+                    }
+                    if (!insta.isEmpty()) {
+                        instaImageView.setOnClickListener(v -> openLink(insta));
+                    }
+                    if (!linkedin.isEmpty()) {
+                        linkImageView.setOnClickListener(v -> openLink(linkedin));
+                    }
+
+
 //                    setTextIfNotEmpty(github, gitTextView);
 //                    setTextIfNotEmpty(twitter, twitTextView);
 //                    setTextIfNotEmpty(linkedin, linkTextView);
+                    if (photoUri != null && !photoUri.equals(Uri.EMPTY)) {
+                        Picasso.get().load(photoUri).fit().into(profileImageView);
+                    }
                 }
             }
 
@@ -131,7 +159,7 @@ Log.d("uid", uid);
         editBtn.setOnClickListener(view1 -> {
             Intent i = new Intent(ProfileFragment.this.getContext(), EditProfile.class);
             Pair[] pair = new Pair[1];
-            pair[0] = new Pair<View, String>(image, "userImage");
+            pair[0] = new Pair<View, String>(profileImageView, "userImage");
             ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(ProfileFragment.this.getActivity(),
                     pair);
             Objects.requireNonNull(ProfileFragment.this.getActivity()).startActivity(i, options.toBundle());
@@ -144,6 +172,11 @@ Log.d("uid", uid);
         if (ssstring != null && !ssstring.isEmpty()) {
             seditText.setText(ssstring);
         }
+    }
+
+    private void openLink(String url) {
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+        startActivity(browserIntent);
     }
 
     @Override

@@ -2,8 +2,8 @@ package tech.shipr.socialdev;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -34,26 +34,32 @@ public class EditProfile extends AppCompatActivity {
     private EditText titleEditText;
     private EditText progSkillsEditText;
 
+    private String profilePic;
     private String name;
     private String username;
     private String title;
     private String progSkill;
 
-    private TextView emailEdit;
+    private String email;
+    private String mobilenumber;
+
+
+    private EditText emailEdit;
     private EditText ageEditemailEdit;
     private EditText langEdit;
     private EditText gitEdit;
     private EditText twitEdit;
     private EditText linkEdit;
+    private EditText instaEdit;
+    private EditText mobileNumberEditText;
     private DatabaseReference mprofileDatabaseReference;
 
     private String fullName;
-    private String email;
-    private String age;
     private String languages;
     private String github;
     private String twitter;
     private String linkedin;
+    private String insta;
     private Profile mProfile;
     private static final int RC_PROFILE_PHOTO_PICKER = 4;
 
@@ -63,9 +69,9 @@ public class EditProfile extends AppCompatActivity {
         setContentView(R.layout.activity_edit_profile);
 
         //SETTING TOOLBAR  FOR WALLFRAGMENR
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         TextView toolbarTitle = findViewById(R.id.toolbarTitle);
-        toolbarTitle.setText("Edit Profile");
+        toolbarTitle.setText(getString(R.string.edit_profile));
         //set toolbar appearance
         //for crate home button
         setSupportActionBar(toolbar);
@@ -78,30 +84,32 @@ public class EditProfile extends AppCompatActivity {
         progSkillsEditText = findViewById(R.id.proskillEditText);
 
         emailEdit = findViewById(R.id.emailEditText);
-        langEdit = findViewById(R.id.langEdit);
-        gitEdit = findViewById(R.id.gitEdit);
-        twitEdit = findViewById(R.id.twitEdit);
-        linkEdit = findViewById(R.id.linkEdit);
+        langEdit = findViewById(R.id.LinkedinEditText);
+        gitEdit = findViewById(R.id.GithubEditText);
+        twitEdit = findViewById(R.id.TwitterEditText);
+        linkEdit = findViewById(R.id.LinkedinEditText);
+        instaEdit = findViewById(R.id.InstaEditText);
+        mobileNumberEditText = findViewById(R.id.mobileNumberEditText);
+
         ImageView profileImageView = findViewById(R.id.img_profile_userimage);
 
         //    mProgressBar = findViewById(R.id.pProgressBar);
 
         FirebaseApp.initializeApp(this);
-
         FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();
-
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         assert user != null;
+
         String id = user.getUid();
         mprofileDatabaseReference = mFirebaseDatabase.getReference().child("users" + "/" + id + "/" + "profile");
         //mProgressBarPresent = true;
 
         Uri photoUri = user.getPhotoUrl();
+        String privateEmail = user.getEmail();
+        setEditIfNotEmpty(privateEmail, emailEdit);
         // Check if user's email is verified
         boolean emailVerified = user.isEmailVerified();
         //TODO Add a listener and if false, add verift email button
-
-
 
         ValueEventListener postListener = new ValueEventListener() {
             @Override
@@ -110,30 +118,34 @@ public class EditProfile extends AppCompatActivity {
 
                 mProfile = dataSnapshot.getValue(Profile.class);
                 if (mProfile != null) {
+
                     name = mProfile.getFullName();
                     username = mProfile.getUsername();
                     title = mProfile.getTitle();
-
-
+                    progSkill = mProfile.getProgSkill();
+                    linkedin = mProfile.getLinkedin();
+                    insta = mProfile.getInsta();
+                    twitter = mProfile.getTwitter();
+                    github = mProfile.getGithub();
+                    mobilenumber = mProfile.getMobilenumber();
 
 
                     setEditIfNotEmpty(name, nameEditText);
                     setEditIfNotEmpty(username, usernameEdit);
                     setEditIfNotEmpty(title, titleEditText);
                     setEditIfNotEmpty(progSkill, progSkillsEditText);
-
+                    setEditIfNotEmpty(github, gitEdit);
+                    setEditIfNotEmpty(twitter, twitEdit);
+                    setEditIfNotEmpty(linkedin, linkEdit);
+                    setEditIfNotEmpty(insta, instaEdit);
+                    setEditIfNotEmpty(mobilenumber, mobileNumberEditText);
 
                     if (photoUri != null && !photoUri.equals(Uri.EMPTY)) {
                         Picasso.get().load(photoUri).fit().into(profileImageView);
                     }
-
                 }
-
                 // mProgressBarCheck();
-
             }
-
-
 
             @Override
             public void onCancelled(@NotNull DatabaseError databaseError) {
@@ -143,9 +155,8 @@ public class EditProfile extends AppCompatActivity {
             }
         };
         mprofileDatabaseReference.addListenerForSingleValueEvent(postListener);
-
-
     }
+
     private void setEditIfNotEmpty(String sstring, EditText editText) {
         if (sstring != null && !sstring.isEmpty()) {
             editText.setText(sstring);
@@ -157,26 +168,23 @@ public class EditProfile extends AppCompatActivity {
             seditText.setText(ssstring);
         }
     }
+
     private void getVariablesFromEditText() {
         fullName = nameEditText.getText().toString();
         username = usernameEdit.getText().toString();
-        title=titleEditText.getText().toString();
+        title = titleEditText.getText().toString();
         progSkill = progSkillsEditText.getText().toString();
 //        email = emailEdit.getText().toString();
 
 
-
 //        age = ageEditemailEdit.getText().toString();
 //        languages = langEdit.getText().toString();
-//        github = gitEdit.getText().toString();
-//        twitter = twitEdit.getText().toString();
-//        linkedin = linkEdit.getText().toString();
-
-
+        github = gitEdit.getText().toString();
+        twitter = twitEdit.getText().toString();
+        linkedin = linkEdit.getText().toString();
+        insta = instaEdit.getText().toString();
+        mobilenumber = mobileNumberEditText.getText().toString();
     }
-
-
-
 
 
     public void submit(View v) {
@@ -185,13 +193,15 @@ public class EditProfile extends AppCompatActivity {
                 fullName,
                 username,
                 title,
-                //email,
                 null,
-                age,
+                "",
                 languages,
                 github,
                 twitter,
-                linkedin
+                linkedin,
+                progSkill,
+                insta,
+                mobilenumber
         );
         mprofileDatabaseReference.setValue(mProfile);
         Toast.makeText(this, "Updated Profile", Toast.LENGTH_SHORT).show();

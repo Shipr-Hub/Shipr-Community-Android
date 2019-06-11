@@ -7,17 +7,21 @@ package tech.shipr.socialdev.model;
 public class Profile {
 
 
+    private String profilePic;
     private String fullName;
     private String username;
     private String title;
-    private String profilePic;
+    private String progSkill;
 
     private String email;
+    private String mobilenumber;
+
     private String age;
     private String languages;
     private String github;
     private String twitter;
     private String linkedin;
+    private String insta;
 
 
     public Profile() {
@@ -61,7 +65,8 @@ public class Profile {
             String languages,
             String github,
             String twitter,
-            String linkedin) {
+            String linkedin,
+            String progSkill, String insta, String mobilenumber) {
 
 
         this.fullName = fullName;
@@ -73,6 +78,9 @@ public class Profile {
         this.linkedin = linkedin;
         this.title = title;
         this.username = username;
+        this.progSkill = progSkill;
+        this.insta = insta;
+        this.mobilenumber = mobilenumber;
     }
 
 
@@ -98,5 +106,29 @@ public class Profile {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getProgSkill() {
+        return progSkill;
+    }
+
+    public void setProgSkill(String progSkill) {
+        this.progSkill = progSkill;
+    }
+
+    public String getMobilenumber() {
+        return mobilenumber;
+    }
+
+    public void setMobilenumber(String mobilenumber) {
+        this.mobilenumber = mobilenumber;
+    }
+
+    public String getInsta() {
+        return insta;
+    }
+
+    public void setInsta(String insta) {
+        this.insta = insta;
     }
 }

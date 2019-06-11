@@ -40,8 +40,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
                 android:layout_marginTop="25dp"
+                android:layout_marginRight="20dp"
                 android:background="@drawable/input_message_border"
                 android:ems="10"
                 android:fontFamily="@font/source_sans_pro"
@@ -56,8 +56,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
                 android:layout_marginTop="25dp"
+                android:layout_marginRight="20dp"
                 android:background="@drawable/input_message_border"
                 android:ems="10"
                 android:fontFamily="@font/source_sans_pro"
@@ -88,8 +88,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
                 android:layout_marginTop="15dp"
+                android:layout_marginRight="20dp"
                 android:background="@drawable/input_message_border"
                 android:ems="10"
                 android:fontFamily="@font/source_sans_pro"
@@ -98,6 +98,94 @@
                 android:maxLines="10"
                 android:padding="15dp"
                 android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/textView16"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="25dp"
+                android:text="Social"
+                android:textColor="@color/black" />
+            <EditText
+                android:id="@+id/mobileNumberEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/input_message_border"
+                android:ems="10"
+                android:fontFamily="@font/source_sans_pro"
+                android:hint="Mobile Number"
+                android:inputType="phone"
+                android:padding="15dp"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/GithubEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/input_message_border"
+                android:ems="10"
+                android:fontFamily="@font/source_sans_pro"
+                android:hint="Github Profile URL"
+                android:inputType="textMultiLine"
+                android:maxLines="10"
+                android:padding="15dp"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/TwitterEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/input_message_border"
+                android:ems="10"
+                android:fontFamily="@font/source_sans_pro"
+                android:hint="Twitter Profile URL"
+                android:inputType="textMultiLine"
+                android:maxLines="10"
+                android:padding="15dp"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/LinkedinEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/input_message_border"
+                android:ems="10"
+                android:fontFamily="@font/source_sans_pro"
+                android:hint="LinkedIn Profile URL"
+                android:inputType="textMultiLine"
+                android:maxLines="10"
+                android:padding="15dp"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/InstaEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/input_message_border"
+                android:ems="10"
+                android:fontFamily="@font/source_sans_pro"
+                android:hint="Instagram Profile URL"
+                android:inputType="textMultiLine"
+                android:maxLines="10"
+                android:padding="15dp"
+                android:textSize="16sp" />
+
 
             <TextView
                 android:id="@+id/textView15"
@@ -113,8 +201,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
                 android:layout_marginTop="15dp"
+                android:layout_marginRight="20dp"
                 android:background="@drawable/input_message_border"
                 android:ems="10"
                 android:enabled="false"
@@ -125,33 +213,20 @@
                 android:textSize="16sp"
                 android:transitionName="userName" />
 
-            <EditText
-                android:id="@+id/mobileNumberEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="15dp"
-                android:background="@drawable/input_message_border"
-                android:ems="10"
-                android:fontFamily="@font/source_sans_pro"
-                android:hint="Mobile Number"
-                android:inputType="phone"
-                android:padding="15dp"
-                android:textSize="16sp" />
+
 
             <Button
                 android:id="@+id/submitButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:onClick="submit"
-                android:text="Submit"
                 android:layout_marginTop="15dp"
+                android:layout_marginRight="20dp"
                 android:background="@drawable/input_message_border"
                 android:fontFamily="@font/source_sans_pro"
+                android:onClick="submit"
                 android:padding="15dp"
+                android:text="Submit"
                 android:textSize="16sp" />
 
         </LinearLayout>
