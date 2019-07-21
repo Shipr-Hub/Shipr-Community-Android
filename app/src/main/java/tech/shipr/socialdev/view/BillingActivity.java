@@ -1,4 +1,4 @@
-package tech.shipr.socialdev;
+package tech.shipr.socialdev.view;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,6 +8,9 @@ import android.widget.TextView;
 
 import com.anjlab.android.iab.v3.BillingProcessor;
 import com.anjlab.android.iab.v3.TransactionDetails;
+
+import tech.shipr.socialdev.BuildConfig;
+import tech.shipr.socialdev.R;
 
 public class BillingActivity extends Activity implements BillingProcessor.IBillingHandler {
     BillingProcessor bp;

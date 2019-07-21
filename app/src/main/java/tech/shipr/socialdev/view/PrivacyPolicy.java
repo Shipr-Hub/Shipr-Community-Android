@@ -1,7 +1,10 @@
-package tech.shipr.socialdev;
+package tech.shipr.socialdev.view;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import tech.shipr.socialdev.R;
 
 public class PrivacyPolicy extends AppCompatActivity {
 

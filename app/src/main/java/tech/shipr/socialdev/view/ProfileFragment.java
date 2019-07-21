@@ -1,4 +1,4 @@
-package tech.shipr.socialdev;
+package tech.shipr.socialdev.view;
 
 
 import android.app.ActivityOptions;
@@ -6,8 +6,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
@@ -16,6 +14,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.RequiresApi;
+import androidx.fragment.app.Fragment;
 
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
@@ -29,6 +30,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.Objects;
 
+import tech.shipr.socialdev.R;
 import tech.shipr.socialdev.model.Profile;
 
 
@@ -123,16 +125,16 @@ public class ProfileFragment extends Fragment {
                     setTextIfNotEmpty(name, nameTextView);
                     setTextIfNotEmpty(title, titleTextView);
                     setTextIfNotEmpty(progSkill, progSkillTextView);
-                    if (!github.isEmpty()) {
+                    if (github != null && !github.isEmpty()) {
                         gitImageView.setOnClickListener(v -> openLink(github));
                     }
-                    if (!twitter.isEmpty()) {
+                    if (twitter != null && !twitter.isEmpty()) {
                         twitImageView.setOnClickListener(v -> openLink(twitter));
                     }
-                    if (!insta.isEmpty()) {
+                    if (insta != null && !insta.isEmpty()) {
                         instaImageView.setOnClickListener(v -> openLink(insta));
                     }
-                    if (!linkedin.isEmpty()) {
+                    if (linkedin != null && !linkedin.isEmpty()) {
                         linkImageView.setOnClickListener(v -> openLink(linkedin));
                     }
 
@@ -175,8 +177,9 @@ public class ProfileFragment extends Fragment {
     }
 
     private void openLink(String url) {
-        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-        startActivity(browserIntent);
+        Intent i = new Intent(Intent.ACTION_VIEW);
+        i.setData(Uri.parse(url));
+        startActivity(i);
     }
 
     @Override

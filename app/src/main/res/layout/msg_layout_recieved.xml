@@ -21,6 +21,7 @@
             android:layout_marginEnd="10dp"
             android:layout_weight="1"
             android:background="@color/colorAccent"
+            android:contentDescription="TODO"
             app:srcCompat="@drawable/userplaceholder" />
 
         <LinearLayout

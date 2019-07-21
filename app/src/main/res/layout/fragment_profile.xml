@@ -28,6 +28,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="150dp"
                     android:scaleType="centerCrop"
+                    android:contentDescription="TODO"
                     android:src="@drawable/coverimage" />
 
                 <ImageView
@@ -40,6 +41,7 @@
                     android:layout_marginTop="-100dp"
                     android:scaleType="centerCrop"
                     tools:src="@drawable/userplaceholder"
+                    android:contentDescription="TODO"
                     android:transitionName="userImage" />
 
                 <LinearLayout
@@ -79,6 +81,7 @@
                             android:layout_height="40dp"
                             android:background="@drawable/round_border"
                             android:padding="10dp"
+                            android:contentDescription="TODO"
                             app:srcCompat="@drawable/ic_github_logo" />
 
                         <ImageView
@@ -88,6 +91,7 @@
                             android:layout_marginLeft="15dp"
                             android:background="@drawable/round_border"
                             android:padding="10dp"
+                            android:contentDescription="TODO"
                             app:srcCompat="@drawable/ic_twitter" />
 
                         <ImageView
@@ -97,6 +101,7 @@
                             android:layout_marginLeft="15dp"
                             android:background="@drawable/round_border"
                             android:padding="10dp"
+                            android:contentDescription="TODO"
                             app:srcCompat="@drawable/ic_linkedin_logo" />
 
                         <ImageView
@@ -106,6 +111,7 @@
                             android:layout_marginLeft="15dp"
                             android:background="@drawable/round_border"
                             android:padding="10dp"
+                            android:contentDescription="TODO"
                             app:srcCompat="@drawable/ic_instagram" />
 
                         <Button

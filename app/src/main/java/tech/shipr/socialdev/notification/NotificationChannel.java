@@ -7,8 +7,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
-import android.support.annotation.NonNull;
-import android.support.v4.app.NotificationCompat;
+
+import androidx.annotation.NonNull;
+import androidx.core.app.NotificationCompat;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -31,10 +32,8 @@ public class NotificationChannel {
     private ArrayList<DeveloperMessage> messages;
     private Context context;
     private SharedPreferences sharedPreferences;
-    private String channel_Key;
     private int count;
 
-    private NotificationCompat.Builder builder;
     private NotificationManager notificationManager;
     private ValueEventListener eventListener = new ValueEventListener() {
         @Override
@@ -64,7 +63,7 @@ public class NotificationChannel {
         this.context = context;
         this.channel_Id = channel_Id;
         this.reference = reference.child(channel_Id);
-        channel_Key = context.getString(R.string.shared_preference_key) + channel_Id;
+        String channel_Key = context.getString(R.string.shared_preference_key) + channel_Id;
         sharedPreferences = context.getSharedPreferences(channel_Key, Context.MODE_PRIVATE);
         count = sharedPreferences.getInt("count", 0);
         id = channel_no;
@@ -102,7 +101,8 @@ public class NotificationChannel {
         int count = messages.size();
         String summary = count + (count > 1 ? " new messages" : " new message");
         inboxStyle.setSummaryText(summary);
-        builder = new NotificationCompat.Builder(context, channel_Id)
+        //Todo: change the small icon with an xml icon
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, channel_Id)
                 .setSmallIcon(R.mipmap.ic_launcher) //Todo: change the small icon with an xml icon
                 .setStyle(inboxStyle)
                 .setContentIntent(pendingIntent)

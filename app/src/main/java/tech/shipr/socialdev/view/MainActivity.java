@@ -6,12 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -19,9 +13,14 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.viewpager.widget.ViewPager;
+
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -40,10 +39,8 @@ import java.util.Date;
 import java.util.Objects;
 import java.util.TimeZone;
 
-import tech.shipr.socialdev.BillingActivity;
-import tech.shipr.socialdev.PagerAdapter;
-import tech.shipr.socialdev.PrivacyPolicy;
 import tech.shipr.socialdev.R;
+import tech.shipr.socialdev.adapter.PagerAdapter;
 import tech.shipr.socialdev.model.DeveloperMessage;
 import tech.shipr.socialdev.notification.NotificationService;
 import tech.shipr.socialdev.utils.AppUtil;
@@ -77,70 +74,30 @@ public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth.AuthStateListener mAuthStateListener;
 
-    private final BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = item -> {
-        switch (item.getItemId()) {
-            case R.id.navigation_chat:
-                FragmentManager frag = getSupportFragmentManager();
-                chatChannel = new ChatChannel();
-             //   setCategoryLabel(getResources().getString(R.string.general));
-                frag.beginTransaction().replace(R.id.content_frame, chatChannel).commit();
+//    private final BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+//            = item -> {
+//        switch (item.getItemId()) {
+//            case R.id.navigation_chat:
+//                FragmentManager frag = getSupportFragmentManager();
+//                chatChannel = new ChatChannel();
+//             //   setCategoryLabel(getResources().getString(R.string.general));
+//                frag.beginTransaction().replace(R.id.content_frame, chatChannel).commit();
+//
+//                return true;
+//
+//            case R.id.navigation_profile:
+//                FragmentManager frag2 = getSupportFragmentManager();
+//                frag2.beginTransaction().replace(R.id.content_frame, new EditProfileActivity()).commit();
+//
+//                return true;
+//        }
+//        return false;
+//    };
 
-                return true;
-
-            case R.id.navigation_profile:
-                FragmentManager frag2 = getSupportFragmentManager();
-                frag2.beginTransaction().replace(R.id.content_frame, new EditProfileActivity()).commit();
-
-                return true;
-        }
-        return false;
-    };
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
-
-        TabLayout tabLayout =  findViewById(R.id.tab_layout);
-        tabLayout.addTab(tabLayout.newTab().setText("Chats"));
-        tabLayout.addTab(tabLayout.newTab().setText("Profile"));
-        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
-
-        final ViewPager viewPager =  findViewById(R.id.pager);
-        final PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
-        viewPager.setAdapter(adapter);
-        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                viewPager.setCurrentItem(tab.getPosition());
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
-        initFirebase();
-
-        chatChannel = new ChatChannel();
-
-       // BottomNavigationView navigation = findViewById(R.id.navigation);
-     //   categoryTextView = findViewById(R.id.categoryTextView);
-      //  toolbar = findViewById(R.id.toolbar);
-     //   toolbar.setOverflowIcon(getResources().getDrawable(R.drawable.filter));
-     //   setSupportActionBar(toolbar);
-      //  navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-     //   FragmentManager frag1 = getSupportFragmentManager();
-    //    frag1.beginTransaction().replace(R.id.content_frame, chatChannel).commit();
-        checkForUpdates();
-    }
+    //    private void setCategoryLabel(String categoryLabel) {
+//        categoryTextView.setText(categoryLabel);
+//    }
+    FirebaseDatabase database;
 
     private void checkForUpdates() {
         AppUtil.init(this).checkForUpdate();
@@ -173,18 +130,66 @@ public class MainActivity extends AppCompatActivity {
 //        }
 //    }
 
-//    private void setCategoryLabel(String categoryLabel) {
-//        categoryTextView.setText(categoryLabel);
-//    }
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_home);
+
+        initFirebase();
+        TabLayout tabLayout =  findViewById(R.id.tab_layout);
+        tabLayout.addTab(tabLayout.newTab().setText("Chats"));
+        tabLayout.addTab(tabLayout.newTab().setText("Profile"));
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+
+        final ViewPager viewPager =  findViewById(R.id.pager);
+        final PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
+        viewPager.setAdapter(adapter);
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
+
+        chatChannel = new ChatChannel();
+
+       // BottomNavigationView navigation = findViewById(R.id.navigation);
+     //   categoryTextView = findViewById(R.id.categoryTextView);
+      //  toolbar = findViewById(R.id.toolbar);
+     //   toolbar.setOverflowIcon(getResources().getDrawable(R.drawable.filter));
+     //   setSupportActionBar(toolbar);
+      //  navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+     //   FragmentManager frag1 = getSupportFragmentManager();
+    //    frag1.beginTransaction().replace(R.id.content_frame, chatChannel).commit();
+        checkForUpdates();
+    }
 
     private void initFirebase() {
         FirebaseApp.initializeApp(this);
 
         if (rootRef == null) {
-            FirebaseDatabase database = FirebaseDatabase.getInstance();
-            database.setPersistenceEnabled(true);
+            if (database == null) {
+                database = FirebaseDatabase.getInstance();
+                database.setPersistenceEnabled(true);
+            }
+
+
+
             rootRef = database.getReference();
         }
+
 
         mMessagesDatabaseReference = rootRef.child("chat/general");
 

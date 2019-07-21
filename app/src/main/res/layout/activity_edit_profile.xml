@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffff"
-    tools:context=".EditProfile">
+    tools:context=".view.EditProfile">
 
     <include
         android:id="@+id/toolbar"
@@ -33,7 +33,10 @@
                 android:background="@drawable/round_border"
                 android:padding="0dp"
                 android:transitionName="userImage"
-                app:srcCompat="@drawable/userplaceholder" />
+
+                android:contentDescription="User Image"
+                app:srcCompat="@drawable/userplaceholder"
+                tools:targetApi="lollipop" />
 
             <EditText
                 android:id="@+id/nameEditText"
@@ -99,6 +102,7 @@
                 android:padding="15dp"
                 android:textSize="16sp" />
 
+
             <TextView
                 android:id="@+id/textView16"
                 android:layout_width="match_parent"
@@ -132,7 +136,7 @@
                 android:background="@drawable/input_message_border"
                 android:ems="10"
                 android:fontFamily="@font/source_sans_pro"
-                android:hint="Github Profile URL"
+                android:hint="Github Username"
                 android:inputType="textMultiLine"
                 android:maxLines="10"
                 android:padding="15dp"
@@ -148,7 +152,7 @@
                 android:background="@drawable/input_message_border"
                 android:ems="10"
                 android:fontFamily="@font/source_sans_pro"
-                android:hint="Twitter Profile URL"
+                android:hint="Twitter Username"
                 android:inputType="textMultiLine"
                 android:maxLines="10"
                 android:padding="15dp"
@@ -164,7 +168,7 @@
                 android:background="@drawable/input_message_border"
                 android:ems="10"
                 android:fontFamily="@font/source_sans_pro"
-                android:hint="LinkedIn Profile URL"
+                android:hint="LinkedIn Username"
                 android:inputType="textMultiLine"
                 android:maxLines="10"
                 android:padding="15dp"
@@ -180,7 +184,7 @@
                 android:background="@drawable/input_message_border"
                 android:ems="10"
                 android:fontFamily="@font/source_sans_pro"
-                android:hint="Instagram Profile URL"
+                android:hint="Instagram Username"
                 android:inputType="textMultiLine"
                 android:maxLines="10"
                 android:padding="15dp"

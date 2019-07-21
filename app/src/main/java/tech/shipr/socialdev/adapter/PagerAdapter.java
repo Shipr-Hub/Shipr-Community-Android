@@ -1,13 +1,14 @@
-package tech.shipr.socialdev;
+package tech.shipr.socialdev.adapter;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import tech.shipr.socialdev.view.ChatChannel;
+import tech.shipr.socialdev.view.ProfileFragment;
 
 public class PagerAdapter extends FragmentStatePagerAdapter {
-    int mNumOfTabs;
+    private int mNumOfTabs;
 
     public PagerAdapter(FragmentManager fm, int NumOfTabs) {
         super(fm);
@@ -19,11 +20,9 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
 
         switch (position) {
             case 0:
-                ChatChannel chat = new ChatChannel();
-                return chat;
+                return new ChatChannel();
             case 1:
-                ProfileFragment profile = new ProfileFragment();
-                return profile;
+                return new ProfileFragment();
 
             default:
                 return null;

@@ -15,8 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".BillingActivity" />
-        <activity android:name=".PrivacyPolicy" />
+        <activity android:name=".view.BillingActivity" />
+        <activity android:name=".view.PrivacyPolicy" />
         <activity android:name=".view.ViewProfileActivity" />
         <activity android:name=".view.WelcomeActivity" />
         <activity
@@ -36,7 +36,7 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
-        <activity android:name="tech.shipr.socialdev.EditProfile"/>
+        <activity android:name="tech.shipr.socialdev.view.EditProfile" />
         <service
             android:name=".notification.NotificationService"
             android:enabled="true" />

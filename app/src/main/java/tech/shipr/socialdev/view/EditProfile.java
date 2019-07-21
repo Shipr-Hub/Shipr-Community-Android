@@ -1,16 +1,17 @@
-package tech.shipr.socialdev;
+package tech.shipr.socialdev.view;
 
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
@@ -25,11 +26,13 @@ import com.squareup.picasso.Picasso;
 
 import org.jetbrains.annotations.NotNull;
 
+import tech.shipr.socialdev.R;
 import tech.shipr.socialdev.model.Profile;
 
 public class EditProfile extends AppCompatActivity {
 
-    private EditText nameEditText;
+
+    String githubUrl = "https://github.com/";
     private EditText usernameEdit;
     private EditText titleEditText;
     private EditText progSkillsEditText;
@@ -62,6 +65,25 @@ public class EditProfile extends AppCompatActivity {
     private String insta;
     private Profile mProfile;
     private static final int RC_PROFILE_PHOTO_PICKER = 4;
+    String linkedinUrl = "https://linkedin.com/in/";
+    String twitterUrl = "https://twitter.com/";
+    String instaUrl = "https://instagram.com/";
+    /**
+     * Add support for the following in here
+     * DP
+     * age
+     * languages
+     * prog languages
+     * job status
+     * projecrs
+     * eduction\
+     * about
+     * custom
+     * personal site
+     * resume
+     * role
+     */
+    private EditText nameEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,7 +106,6 @@ public class EditProfile extends AppCompatActivity {
         progSkillsEditText = findViewById(R.id.proskillEditText);
 
         emailEdit = findViewById(R.id.emailEditText);
-        langEdit = findViewById(R.id.LinkedinEditText);
         gitEdit = findViewById(R.id.GithubEditText);
         twitEdit = findViewById(R.id.TwitterEditText);
         linkEdit = findViewById(R.id.LinkedinEditText);
@@ -123,11 +144,12 @@ public class EditProfile extends AppCompatActivity {
                     username = mProfile.getUsername();
                     title = mProfile.getTitle();
                     progSkill = mProfile.getProgSkill();
+                    mobilenumber = mProfile.getMobilenumber();
+
                     linkedin = mProfile.getLinkedin();
                     insta = mProfile.getInsta();
                     twitter = mProfile.getTwitter();
                     github = mProfile.getGithub();
-                    mobilenumber = mProfile.getMobilenumber();
 
 
                     setEditIfNotEmpty(name, nameEditText);
@@ -179,11 +201,30 @@ public class EditProfile extends AppCompatActivity {
 
 //        age = ageEditemailEdit.getText().toString();
 //        languages = langEdit.getText().toString();
+
         github = gitEdit.getText().toString();
         twitter = twitEdit.getText().toString();
         linkedin = linkEdit.getText().toString();
         insta = instaEdit.getText().toString();
         mobilenumber = mobileNumberEditText.getText().toString();
+
+
+        if (linkedin != null && !linkedin.isEmpty() && !linkedin.contains("http")) {
+            linkedin = linkedinUrl + linkedin;
+        }
+
+        if (insta != null && !insta.isEmpty() && !insta.contains("http")) {
+            insta = instaUrl + insta;
+        }
+
+        if (twitter != null && !twitter.isEmpty() && !twitter.contains("http")) {
+            twitter = twitterUrl + twitter;
+        }
+
+        if (github != null && !github.isEmpty() && !github.contains("http")) {
+            github = githubUrl + github;
+        }
+
     }
 
 

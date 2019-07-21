@@ -4,11 +4,11 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.net.Uri;
-import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.Window;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
