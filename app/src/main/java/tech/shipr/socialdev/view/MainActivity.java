@@ -33,6 +33,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
@@ -65,38 +66,16 @@ public class MainActivity extends AppCompatActivity {
     private Uri downloadUri;
     private String uid;
     private DatabaseReference mMessagesDatabaseReference;
+    // Firebase instance variable
+    FirebaseStorage mFirebaseStorage;
+    private FirebaseAuth mFirebaseAuth;
     private static DatabaseReference rootRef;
     private Intent service;
     private Toolbar toolbar;
     private ChatChannel chatChannel;
     private TextView categoryTextView;
-    // Firebase instance variable
-
     private FirebaseAuth.AuthStateListener mAuthStateListener;
 
-//    private final BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-//            = item -> {
-//        switch (item.getItemId()) {
-//            case R.id.navigation_chat:
-//                FragmentManager frag = getSupportFragmentManager();
-//                chatChannel = new ChatChannel();
-//             //   setCategoryLabel(getResources().getString(R.string.general));
-//                frag.beginTransaction().replace(R.id.content_frame, chatChannel).commit();
-//
-//                return true;
-//
-//            case R.id.navigation_profile:
-//                FragmentManager frag2 = getSupportFragmentManager();
-//                frag2.beginTransaction().replace(R.id.content_frame, new EditProfileActivity()).commit();
-//
-//                return true;
-//        }
-//        return false;
-//    };
-
-    //    private void setCategoryLabel(String categoryLabel) {
-//        categoryTextView.setText(categoryLabel);
-//    }
     FirebaseDatabase database;
 
     private void checkForUpdates() {
@@ -110,38 +89,19 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        switch (item.getItemId()) {
-//            case R.id.general:
-//                chatChannel.updateChannel(getResources().getStringArray(R.array.chat_channels)[0]);
-//                setCategoryLabel(getResources().getString(R.string.general));
-//                return true;
-//            case R.id.help:
-//                chatChannel.updateChannel(getResources().getStringArray(R.array.chat_channels)[1]);
-//                setCategoryLabel(getResources().getString(R.string.help));
-//                return true;
-//            case R.id.android:
-//                chatChannel.updateChannel(getResources().getStringArray(R.array.chat_channels)[2]);
-//                setCategoryLabel(getResources().getString(R.string.android));
-//                return true;
-//            default:
-//                return super.onOptionsItemSelected(item);
-//        }
-//    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
         initFirebase();
-        TabLayout tabLayout =  findViewById(R.id.tab_layout);
+
+        TabLayout tabLayout = findViewById(R.id.tab_layout);
         tabLayout.addTab(tabLayout.newTab().setText("Chats"));
         tabLayout.addTab(tabLayout.newTab().setText("Profile"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
-        final ViewPager viewPager =  findViewById(R.id.pager);
+        final ViewPager viewPager = findViewById(R.id.pager);
         final PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(adapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
@@ -162,29 +122,51 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
         chatChannel = new ChatChannel();
 
-       // BottomNavigationView navigation = findViewById(R.id.navigation);
-     //   categoryTextView = findViewById(R.id.categoryTextView);
-      //  toolbar = findViewById(R.id.toolbar);
-     //   toolbar.setOverflowIcon(getResources().getDrawable(R.drawable.filter));
-     //   setSupportActionBar(toolbar);
-      //  navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-     //   FragmentManager frag1 = getSupportFragmentManager();
-    //    frag1.beginTransaction().replace(R.id.content_frame, chatChannel).commit();
         checkForUpdates();
+    }
+
+    private void authStateCheck() {
+        mAuthStateListener = firebaseAuth -> {
+            FirebaseUser user = firebaseAuth.getCurrentUser();
+            if (user != null) {
+                //User is signed in
+                //onSignedInInitialize(user.getDisplayName());
+            } else {
+                // User is signed out
+                //  onSignedOutCleanup();
+                startActivityForResult(
+                        AuthUI.getInstance()
+                                .createSignInIntentBuilder()
+                                .setLogo(R.mipmap.ic_launcher)
+                                .setTheme(R.style.AppTheme)
+                                .setAvailableProviders(
+                                        Arrays.asList(
+                                                new AuthUI.IdpConfig.EmailBuilder().build(),
+                                                new AuthUI.IdpConfig.GoogleBuilder().build()
+                                                //new AuthUI.IdpConfig.GitHubBuilder().build()
+                                        ))
+                                .build(),
+                        RC_SIGN_IN);
+
+
+            }
+
+        };
     }
 
     private void initFirebase() {
         FirebaseApp.initializeApp(this);
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        authStateCheck();
 
+        mFirebaseStorage = FirebaseStorage.getInstance();
         if (rootRef == null) {
             if (database == null) {
                 database = FirebaseDatabase.getInstance();
                 database.setPersistenceEnabled(true);
             }
-
 
 
             rootRef = database.getReference();
@@ -193,10 +175,7 @@ public class MainActivity extends AppCompatActivity {
 
         mMessagesDatabaseReference = rootRef.child("chat/general");
 
-        FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
 
-
-        FirebaseStorage mFirebaseStorage = FirebaseStorage.getInstance();
         mProfileStroageReference = mFirebaseStorage.getReference().child("profile_pic");
 
 
@@ -212,12 +191,8 @@ public class MainActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 // Successfully signed in
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                // ...
             } else {
-                // Sign in failed. If response is null the user canceled the
-                // sign-in flow using the back button. Otherwise check
-                // response.getError().getErrorCode() and handle the error.
-                // ...
+                // Sign in failed.
                 Log.d("Error Code", String.valueOf(Objects.requireNonNull(Objects.requireNonNull(response).getError()).getErrorCode()));
                 Log.d("Error Message", Objects.requireNonNull(response.getError()).getMessage());
             }
@@ -307,13 +282,13 @@ public class MainActivity extends AppCompatActivity {
             }
     }
 
-    public void profileImageEdit(View view) {
-        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        intent.setType("image/jpeg");
-        intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
-        startActivityForResult(Intent.createChooser(intent, "Complete action using"), 4);
-
-    }
+//    public void profileImageEdit(View view) {
+//        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+//        intent.setType("image/jpeg");
+//        intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
+//        startActivityForResult(Intent.createChooser(intent, "Complete action using"), 4);
+//
+//    }
 
     private void updateProfilePic(Uri profilePicString) {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();

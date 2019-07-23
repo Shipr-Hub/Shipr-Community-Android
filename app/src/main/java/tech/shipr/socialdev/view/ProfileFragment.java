@@ -18,6 +18,7 @@ import android.widget.TextView;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
+import com.firebase.ui.auth.AuthUI;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -28,6 +29,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 import tech.shipr.socialdev.R;
@@ -59,8 +61,16 @@ public class ProfileFragment extends Fragment {
     private ImageView twitImageView;
     private ImageView linkImageView;
     private ImageView instaImageView;
-
     private TextView progSkillTextView;
+
+    private ImageView profileImageView;
+    private Button editBtn;
+
+    private FirebaseUser user;
+    private FirebaseDatabase mFirebaseDatabase;
+
+    private FirebaseAuth mFirebaseAuth;
+    private FirebaseAuth.AuthStateListener mAuthStateListener;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -68,34 +78,70 @@ public class ProfileFragment extends Fragment {
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
-        Button editBtn = view.findViewById(R.id.editBtn);
 
-
-        FirebaseApp.initializeApp(Objects.requireNonNull(getContext()));
-
-
+        editBtn = view.findViewById(R.id.editBtn);
         nameTextView = view.findViewById(R.id.user_profile_name);
         titleTextView = view.findViewById(R.id.user_profile_about);
         progSkillTextView = view.findViewById(R.id.progSkillTextView);
-
-        final ImageView profileImageView = view.findViewById(R.id.user_profile_photo);
-        //  emailTextView = findViewById(R.id.emailEdit);
-
-//        ageTextView = findViewById(R.id.ageEditemailEdit);
-//        langTextView = findViewById(R.id.langEdit);
+        profileImageView = view.findViewById(R.id.user_profile_photo);
         gitImageView = view.findViewById(R.id.gitImageView);
         twitImageView = view.findViewById(R.id.twitImageView);
         instaImageView = view.findViewById(R.id.instaImageView);
         linkImageView = view.findViewById(R.id.linkedinImageView);
 
+        initFirebase();
 
-        FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        return view;
+    }
+
+    private void authStateCheck() {
+        mAuthStateListener = firebaseAuth -> {
+            FirebaseUser user = firebaseAuth.getCurrentUser();
+            if (user != null) {
+                //User is signed in
+                //onSignedInInitialize(user.getDisplayName());
+                loadProfile();
+            } else {
+                // User is signed out
+                //  onSignedOutCleanup();
+                startActivityForResult(
+                        AuthUI.getInstance()
+                                .createSignInIntentBuilder()
+                                .setLogo(R.mipmap.ic_launcher)
+                                .setTheme(R.style.AppTheme)
+                                .setAvailableProviders(
+                                        Arrays.asList(
+                                                new AuthUI.IdpConfig.EmailBuilder().build(),
+                                                new AuthUI.IdpConfig.GoogleBuilder().build()
+                                                //new AuthUI.IdpConfig.GitHubBuilder().build()
+                                        ))
+                                .build(),
+                        1);
+
+
+            }
+
+        };
+    }
+
+    private void initFirebase() {
+        FirebaseApp.initializeApp(getContext());
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        authStateCheck();
+
+    }
+
+    private void setTextIfNotEmpty(String ssstring, TextView seditText) {
+        if (ssstring != null && !ssstring.isEmpty()) {
+            seditText.setText(ssstring);
+        }
+    }
+
+    private void loadProfile() {
         assert user != null;
         String uid = user.getUid();
         DatabaseReference mprofileDatabaseReference = mFirebaseDatabase.getReference().child("users/" + uid + "/profile");
@@ -162,18 +208,13 @@ public class ProfileFragment extends Fragment {
             Intent i = new Intent(ProfileFragment.this.getContext(), EditProfile.class);
             Pair[] pair = new Pair[1];
             pair[0] = new Pair<View, String>(profileImageView, "userImage");
-            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(ProfileFragment.this.getActivity(),
-                    pair);
+            ActivityOptions options = null;
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                options = ActivityOptions.makeSceneTransitionAnimation(ProfileFragment.this.getActivity(),
+                        pair);
+            }
             Objects.requireNonNull(ProfileFragment.this.getActivity()).startActivity(i, options.toBundle());
         });
-
-        return view;
-    }
-
-    private void setTextIfNotEmpty(String ssstring, TextView seditText) {
-        if (ssstring != null && !ssstring.isEmpty()) {
-            seditText.setText(ssstring);
-        }
     }
 
     private void openLink(String url) {
